@@ -243,6 +243,29 @@ input.goed{border-color:var(--ok); color:var(--ok)} input.fout{border-color:var(
   background:linear-gradient(150deg,color-mix(in srgb,var(--paars) 18%,var(--surface)),var(--surface));
   box-shadow:0 0 18px -6px var(--paars); font-weight:700; font-size:14px; color:var(--paars);
   letter-spacing:.5px}
+
+/* ---------- op een groot scherm: zijbalk in plaats van de tabrij ---------- */
+@media (min-width:980px){
+  .app{max-width:1080px; display:grid; gap:16px 30px;
+    grid-template-columns:262px minmax(0,1fr);
+    grid-template-rows:auto auto 1fr;
+    grid-template-areas:"kop kop" "nav hoofd" "vul hoofd";
+    padding:28px 32px calc(30px + env(safe-area-inset-bottom))}
+  .top{grid-area:kop; padding-bottom:11px; border-bottom:1px solid var(--line)}
+  .tabs{grid-area:nav; flex-direction:column; gap:4px; align-self:start; overflow:visible;
+    margin:0; padding:0; -webkit-mask-image:none; mask-image:none}
+  .view{grid-area:hoofd; min-width:0}
+  .tab{width:100%; text-align:left; border-radius:10px; padding:11px 14px; font-size:14px;
+    background:transparent; border-color:transparent; white-space:normal}
+  .tab:hover{background:var(--ink2)}
+  .tab[aria-selected="true"]{background:var(--surface); border-color:var(--line2); color:var(--text)}
+  .tt h1{font-size:26px}
+  .tabs{position:sticky; top:calc(20px + env(safe-area-inset-top))}
+  .ogknoppen{grid-template-columns:repeat(4,1fr)}
+  .ogknop{padding:15px 10px; font-size:19px}
+  .vraagtegel .formule{font-size:clamp(40px,4vw,58px)}
+  #tabelBody>div, #svBody>div{grid-template-columns:1fr 1fr; align-items:start}
+}
 </style>
 </head>
 <body>
@@ -316,7 +339,7 @@ input.goed{border-color:var(--ok); color:var(--ok)} input.fout{border-color:var(
   </section>
 </div>
 
-<div class="bijwerkvoet">Laatst bijgewerkt <b data-bijgewerkt>16 september 2026 · 22:26</b></div>
+<div class="bijwerkvoet">Laatst bijgewerkt <b data-bijgewerkt>16 september 2026 · 22:50</b></div>
 
 <div class="kiezer" id="kiesApp" hidden style="--kc:var(--paars)">
   <div class="kbox">

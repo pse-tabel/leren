@@ -297,6 +297,45 @@ input.wrong{border-color:var(--bad); color:var(--bad)}
   background:var(--bc); border:0; transition:transform .16s var(--sp)}
 .bswitch:active{transform:scale(.98)}
 .bswitch.uit{background:transparent; color:var(--muted2); border:1px solid var(--line); cursor:default}
+
+/* ---------- tussenmaat: tablet en klein laptopscherm ---------- */
+@media (min-width:660px){
+  .app{max-width:720px; padding-left:26px; padding-right:26px}
+  .tabs{flex-wrap:wrap; overflow:visible; margin:0; padding:0;
+    -webkit-mask-image:none; mask-image:none}
+  .opts{grid-template-columns:1fr 1fr}
+  .mgrid{grid-template-columns:repeat(4,1fr)}
+  .cardwrap{min-height:320px; max-height:min(62dvh,520px)}
+  .card{min-height:320px}
+}
+
+/* ---------- op een groot scherm: zijbalk in plaats van de tabrij ---------- */
+@media (min-width:980px){
+  .app{max-width:1080px; display:grid; gap:16px 30px;
+    grid-template-columns:262px minmax(0,1fr);
+    grid-template-rows:auto auto auto 1fr auto;
+    grid-template-areas:"kop kop" "nav hoofd" "pan hoofd" "vul hoofd" "ins ins";
+    padding:28px 32px calc(30px + env(safe-area-inset-bottom))}
+  .top{grid-area:kop; padding-bottom:11px; border-bottom:1px solid var(--line)}
+  .tabs{grid-area:nav; flex-direction:column; gap:4px; align-self:start; overflow:visible;
+    margin:0; padding:0; -webkit-mask-image:none; mask-image:none}
+  .view{grid-area:hoofd; min-width:0}
+  .panel{grid-area:pan} .install{grid-area:ins}
+  .tab{width:100%; text-align:left; border-radius:10px; padding:11px 14px; font-size:14px;
+    background:transparent; border-color:transparent; white-space:normal}
+  .tab:hover{background:var(--ink2)}
+  .tab[aria-selected="true"]{background:var(--surface); border-color:var(--line2); color:var(--text)}
+  .tt h1{font-size:26px}
+  .cardwrap{min-height:380px; max-height:min(56dvh,470px)}
+  .card{min-height:400px}
+  .face .sym{font-size:clamp(84px,7vw,128px)}
+  .face .nm{font-size:clamp(38px,3.4vw,56px)}
+  .opts{grid-template-columns:1fr 1fr}
+  .mgrid{grid-template-columns:repeat(5,1fr)}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .pgrid{grid-template-columns:repeat(auto-fill,minmax(56px,1fr))}
+  .panel{position:sticky; top:20px}
+}
 </style>
 
 <div class="statusbar"></div>
@@ -986,7 +1025,7 @@ drawStats();
 setMode(S.mode&&INIT[S.mode]?S.mode:"cards");
 })();
 </script>
-<div class="bijwerkvoet">Laatst bijgewerkt <b data-bijgewerkt>16 september 2026 · 22:26</b></div>
+<div class="bijwerkvoet">Laatst bijgewerkt <b data-bijgewerkt>16 september 2026 · 22:50</b></div>
 <script>
 /* ---------- de twee chemie-apps: kiezen via het logo linksboven ---------- */
 (function(){
