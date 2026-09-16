@@ -1,0 +1,17 @@
+{
+ "name": "Leren Neglet — al mijn oefenapps",
+ "short_name": "Leren Neglet",
+ "description": "Scheikunde, Frans en wat er nog bij komt: elke app apart, offline te gebruiken.",
+ "lang": "nl",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#07080f",
+ "theme_color": "#07080f",
+ "icons": [
+  {"src": "icon-180.png", "sizes": "180x180", "type": "image/png"},
+  {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+  {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+ ]
+}

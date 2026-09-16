@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07080f">
+<meta name="description" content="Al mijn oefenapps op één plek: scheikunde, Frans en wat er nog bij komt.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Leren Neglet">
+<title>Leren Neglet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --ink:#07080f; --ink2:#0c0e1a; --surface:#121525; --line:#232842; --line2:#333a5c;
+  --text:#e7eaf7; --muted:#8b92b0; --muted2:#616888;
+  --hub:#b9c3ff;
+  --fd:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --fu:"Manrope",ui-sans-serif,system-ui,sans-serif;
+  --fm:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;
+  --sp:cubic-bezier(.2,.9,.25,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ink); color:var(--text); font-family:var(--fu); min-height:100dvh;
+  -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent; overflow-x:hidden}
+img{max-width:100%}
+[hidden]{display:none!important}
+.glow{position:fixed; inset:-30% -20% auto -20%; height:70vh; z-index:0; pointer-events:none;
+  background:radial-gradient(42% 38% at 26% 24%, color-mix(in srgb,var(--hub) 16%,transparent) 0%, transparent 70%),
+             radial-gradient(34% 30% at 78% 8%, color-mix(in srgb,#4d8cff 12%,transparent) 0%, transparent 70%);
+  filter:blur(34px)}
+.statusbar{position:fixed; top:0; left:0; right:0; height:env(safe-area-inset-top); z-index:20;
+  pointer-events:none; background:color-mix(in srgb,var(--ink) 78%,transparent);
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px)}
+.wrap{position:relative; z-index:1; max-width:640px; margin:0 auto; min-height:100dvh;
+  display:flex; flex-direction:column; gap:18px;
+  padding:calc(30px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right))
+          calc(34px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left));}
+
+header{display:grid; gap:9px}
+.eyebrow{font-family:var(--fm); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted2)}
+h1{font-family:var(--fd); font-size:clamp(30px,7vw,40px); font-weight:700; margin:0; line-height:1.03;
+  letter-spacing:-.015em}
+header p{margin:0; color:var(--muted); font-size:14.5px; max-width:46ch}
+
+.vakken{display:grid; gap:12px}
+.vak{display:block; text-decoration:none; color:inherit; border-radius:18px; padding:20px;
+  border:1px solid color-mix(in srgb,var(--c) 36%,transparent);
+  background:linear-gradient(158deg,color-mix(in srgb,var(--c) 11%,var(--surface)) 0%,var(--surface) 62%,var(--ink2) 100%);
+  box-shadow:0 22px 50px -34px var(--c);
+  transition:transform .2s var(--sp), box-shadow .25s var(--sp)}
+a.vak:hover{transform:translateY(-3px); box-shadow:0 26px 60px -30px var(--c)}
+a.vak:focus-visible{outline:2px solid var(--c); outline-offset:3px}
+.vakkop{display:flex; align-items:center; gap:13px}
+.merk{width:46px; height:46px; flex:none; display:grid; place-items:center; border-radius:14px;
+  border:1px solid color-mix(in srgb,var(--c) 45%,transparent);
+  background:linear-gradient(150deg,color-mix(in srgb,var(--c) 20%,var(--surface)),var(--surface));
+  box-shadow:0 0 22px -8px var(--c);
+  font-family:var(--fd); font-weight:700; font-size:19px; color:var(--c)}
+.vaktitel{flex:1; min-width:0}
+.vaktitel b{display:block; font-family:var(--fd); font-size:20px; font-weight:700; line-height:1.1}
+.vaktitel span{font-family:var(--fm); font-size:10px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--muted2)}
+.pijl{flex:none; font-size:19px; color:var(--c); opacity:.75}
+.vak p{margin:13px 0 0; color:var(--muted); font-size:13.5px; line-height:1.55}
+.vak .tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:12px}
+.vak .tags span{font-family:var(--fm); font-size:10.5px; color:color-mix(in srgb,var(--c) 75%,var(--muted));
+  border:1px solid color-mix(in srgb,var(--c) 30%,transparent); border-radius:7px; padding:4px 9px}
+
+.vak.straks{border-style:dashed; box-shadow:none; opacity:.72}
+.vak.straks .merk{box-shadow:none}
+.vak.straks:hover{transform:none}
+
+.voet{margin-top:6px; padding-top:18px; border-top:1px solid var(--line); display:grid; gap:7px}
+.voet p{margin:0; font-size:12.5px; color:var(--muted2); line-height:1.6}
+.voet code{font-family:var(--fm); font-size:.9em; background:var(--surface); border:1px solid var(--line);
+  border-radius:5px; padding:1.5px 6px; color:var(--hub)}
+@media (min-width:720px){
+  .vakken{grid-template-columns:1fr 1fr}
+  .vak.breed{grid-column:1 / -1}
+}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="statusbar"></div>
+<div class="glow"></div>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">4e middelbaar · 2026-2027</span>
+    <h1>Leren Neglet</h1>
+    <p>Kies een vak. Elke app werkt op zichzelf, offline, en onthoudt je eigen voortgang.</p>
+  </header>
+
+  <div class="vakken" id="vakken"></div>
+
+  <div class="voet">
+    <p>Zet deze pagina op je beginscherm, dan heb je alles achter één icoon.</p>
+  </div>
+</div>
+
+<script>
+/* Een vak bijzetten = één regel hieronder + een submap met dezelfde naam. */
+var VAKKEN = [
+  {
+    map: "chemie",
+    merk: "Ne",
+    naam: "Neon Elementen",
+    vak: "Scheikunde",
+    kleur: "#00e0ff",
+    tekst: "De 45 elementen die je moet blijven kennen: symbool, naam en groep.",
+    tags: ["45 elementen", "kaarten", "leren", "matchen", "toets"]
+  },
+  {
+    map: "frans",
+    merk: "M",
+    naam: "Mot à Mot",
+    vak: "Frans",
+    kleur: "#4d8cff",
+    tekst: "Het hele leerplan van het 5e leerjaar tot het 4de middelbaar, plus je toetsstof van dit moment.",
+    tags: ["91 thema's", "1330 woorden", "parcours", "zinsbouw", "vervoegen"]
+  },
+  {
+    map: null,
+    merk: "D",
+    naam: "Duits",
+    vak: "Binnenkort",
+    kleur: "#8b92b0",
+    tekst: "Nog niet gebouwd. Stuur je woordenlijsten en bladen door, dan komt hij hier te staan.",
+    tags: ["in voorbereiding"]
+  }
+];
+
+(function () {
+  var box = document.getElementById("vakken");
+  VAKKEN.forEach(function (v) {
+    var kaart = document.createElement(v.map ? "a" : "div");
+    kaart.className = "vak" + (v.map ? "" : " straks");
+    kaart.style.setProperty("--c", v.kleur);
+    if (v.map) { kaart.href = v.map + "/"; }
+
+    var kop = document.createElement("div");
+    kop.className = "vakkop";
+
+    var merk = document.createElement("div");
+    merk.className = "merk";
+    merk.textContent = v.merk;
+
+    var titel = document.createElement("div");
+    titel.className = "vaktitel";
+    var b = document.createElement("b"); b.textContent = v.naam;
+    var s = document.createElement("span"); s.textContent = v.vak;
+    titel.appendChild(b); titel.appendChild(s);
+
+    kop.appendChild(merk);
+    kop.appendChild(titel);
+    if (v.map) {
+      var pijl = document.createElement("span");
+      pijl.className = "pijl"; pijl.textContent = "→";
+      kop.appendChild(pijl);
+    }
+    kaart.appendChild(kop);
+
+    var p = document.createElement("p");
+    p.textContent = v.tekst;
+    kaart.appendChild(p);
+
+    var tags = document.createElement("div");
+    tags.className = "tags";
+    v.tags.forEach(function (t) {
+      var el = document.createElement("span"); el.textContent = t; tags.appendChild(el);
+    });
+    kaart.appendChild(tags);
+
+    box.appendChild(kaart);
+  });
+})();
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function () {});
+  });
+}
+</script>
+</body>
+</html>
