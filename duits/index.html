@@ -1,0 +1,1305 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0906">
+<meta name="description" content="Duitse woordenschat oefenen: vertaling, der/die/das en het meervoud.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Wortschatz">
+<title>Wortschatz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --ink:#0b0906; --ink2:#120f0a; --surface:#1a1610; --surface2:#221d15;
+  --line:#332c20; --line2:#4a4030;
+  --text:#f3ece1; --muted:#a39682; --muted2:#756a59;
+  --goud:#ffb545; --der:#4d8cff; --die:#ff4d6a; --das:#2fe6a0;
+  --ok:#2fe6a0; --bad:#ff4d6a;
+  --c:var(--goud);
+  --fd:"Archivo",ui-sans-serif,system-ui,sans-serif;
+  --fu:"Manrope",ui-sans-serif,system-ui,sans-serif;
+  --fm:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;
+  --sp:cubic-bezier(.2,.9,.25,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ink); color:var(--text); font-family:var(--fu); min-height:100dvh;
+  -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent; overflow-x:hidden}
+img{max-width:100%}
+[hidden]{display:none!important}
+.glow{position:fixed; inset:-25% -20% auto -20%; height:74vh; z-index:0; pointer-events:none;
+  background:radial-gradient(44% 40% at 24% 24%, color-mix(in srgb,var(--c) 22%,transparent) 0%, transparent 70%),
+             radial-gradient(34% 30% at 80% 8%, color-mix(in srgb,var(--die) 12%,transparent) 0%, transparent 70%);
+  filter:blur(32px); transition:background .9s ease}
+.statusbar{position:fixed; top:0; left:0; right:0; height:env(safe-area-inset-top); z-index:20;
+  pointer-events:none; background:color-mix(in srgb,var(--ink) 78%,transparent);
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px)}
+.app{position:relative; z-index:1; max-width:540px; margin:0 auto; min-height:100dvh;
+  display:flex; flex-direction:column; gap:13px;
+  padding:calc(14px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right))
+          calc(20px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left));}
+
+/* ---------- kop ---------- */
+.top{display:flex; align-items:center; gap:11px}
+.mark{width:40px; height:40px; flex:none; display:grid; place-items:center; border-radius:12px;
+  border:1px solid color-mix(in srgb,var(--goud) 45%,transparent);
+  background:linear-gradient(150deg,color-mix(in srgb,var(--goud) 18%,var(--surface)),var(--surface));
+  box-shadow:0 0 20px -7px var(--goud); font-family:var(--fd); font-weight:700; font-size:18px;
+  color:var(--goud)}
+.tt{flex:1; min-width:0}
+.tt h1{font-family:var(--fd); font-size:20px; font-weight:700; margin:0; letter-spacing:-.01em; line-height:1.05}
+.tt p{margin:2px 0 0; font-size:10.5px; color:var(--muted2); letter-spacing:.1em; text-transform:uppercase;
+  font-family:var(--fm); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.gear{width:40px; height:40px; flex:none; border-radius:12px; border:1px solid var(--line);
+  background:var(--surface); color:var(--muted); font-size:17px; cursor:pointer; transition:.2s var(--sp)}
+.gear[aria-expanded="true"]{color:var(--goud); border-color:color-mix(in srgb,var(--goud) 50%,transparent)}
+
+/* ---------- tabs ---------- */
+.tabs{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; margin:0 -16px; padding:1px 16px 3px;
+  -webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 30px),transparent);
+  mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 30px),transparent)}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none; font-family:var(--fu); font-size:13px; font-weight:600; padding:8px 13px; border-radius:99px;
+  border:1px solid var(--line); background:var(--ink2); color:var(--muted); cursor:pointer;
+  transition:.22s var(--sp); white-space:nowrap}
+.tab:hover{color:var(--text)}
+.tab[aria-selected="true"]{color:var(--ink); background:var(--text); border-color:var(--text)}
+
+/* ---------- selectiebalk ---------- */
+.selbar{display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px;
+  border:1px solid var(--line); background:var(--ink2)}
+.selbar .info{flex:1; min-width:0}
+.selbar .info b{display:block; font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.selbar .info span{font-family:var(--fm); font-size:10px; color:var(--muted2); letter-spacing:.08em; text-transform:uppercase}
+.selbar button{flex:none; font-family:var(--fu); font-size:12px; font-weight:600; color:var(--goud);
+  background:color-mix(in srgb,var(--goud) 12%,transparent);
+  border:1px solid color-mix(in srgb,var(--goud) 40%,transparent);
+  border-radius:9px; padding:8px 12px; cursor:pointer}
+
+/* ---------- instellingen ---------- */
+.panel{border:1px solid var(--line); background:var(--ink2); border-radius:14px; padding:13px; display:grid; gap:13px}
+.fset{display:grid; gap:7px}
+.flabel{font-family:var(--fm); font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted2)}
+.seg{display:flex; border:1px solid var(--line); border-radius:10px; overflow:hidden; background:var(--surface)}
+.seg button{flex:1; font-family:var(--fu); font-size:12px; font-weight:600; padding:9px 5px; border:0;
+  background:transparent; color:var(--muted); cursor:pointer}
+.seg button[aria-pressed="true"]{background:color-mix(in srgb,var(--goud) 16%,transparent); color:var(--goud)}
+.reset{justify-self:start; font-size:12px; font-family:var(--fu); color:var(--bad); background:transparent;
+  border:1px solid color-mix(in srgb,var(--bad) 35%,transparent); border-radius:9px; padding:7px 12px; cursor:pointer}
+
+/* ---------- kiezer ---------- */
+.kiezer{position:fixed; inset:0; z-index:30; background:color-mix(in srgb,var(--ink) 94%,transparent);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); display:flex; flex-direction:column;
+  animation:fade .25s var(--sp) both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.kbox{width:100%; max-width:540px; margin:0 auto; display:flex; flex-direction:column; flex:1; min-height:0;
+  padding:calc(14px + env(safe-area-inset-top)) 16px calc(14px + env(safe-area-inset-bottom)); gap:11px}
+.kkop{display:flex; align-items:center; justify-content:space-between; gap:10px}
+.kkop h2{font-family:var(--fd); font-size:19px; margin:0; font-weight:700}
+.kklaar{font-family:var(--fu); font-size:13px; font-weight:700; color:var(--ink); background:var(--goud);
+  border:0; border-radius:10px; padding:10px 16px; cursor:pointer}
+.klijst{flex:1; overflow-y:auto; display:grid; gap:1px; background:var(--line);
+  border:1px solid var(--line); border-radius:12px; align-content:start}
+.krij{background:var(--ink2); display:flex; align-items:center; gap:6px; padding-right:10px}
+.kkies{flex:1; min-width:0; display:flex; align-items:center; gap:11px; padding:11px 13px; cursor:pointer;
+  border:0; background:transparent; text-align:left; font-family:var(--fu); color:var(--text)}
+.kvink{flex:none; width:19px; height:19px; border-radius:6px; border:1.5px solid var(--line2);
+  display:grid; place-items:center; transition:.18s var(--sp)}
+.kkies[aria-pressed="true"] .kvink{background:var(--goud); border-color:var(--goud)}
+.kkies[aria-pressed="true"] .kvink::after{content:""; width:5px; height:9px; border:solid var(--ink);
+  border-width:0 2px 2px 0; transform:rotate(42deg) translate(-1px,-1px)}
+.kmid{flex:1; min-width:0}
+.kmid b{display:block; font-size:13.5px; font-weight:600; line-height:1.3}
+.kmid span{font-family:var(--fm); font-size:10px; color:var(--muted2)}
+.koefen{flex:none; font-family:var(--fu); font-size:11px; font-weight:700; color:var(--goud); cursor:pointer;
+  background:color-mix(in srgb,var(--goud) 12%,transparent); border-radius:8px; padding:7px 11px;
+  border:1px solid color-mix(in srgb,var(--goud) 40%,transparent)}
+.kvoet{display:flex; gap:8px}
+.kvoet button{flex:1; font-family:var(--fu); font-size:12.5px; font-weight:600; color:var(--muted);
+  background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:10px; cursor:pointer}
+
+/* ---------- gedeeld ---------- */
+.view{display:flex; flex-direction:column; gap:13px; flex:1}
+.view.in{animation:vin .34s var(--sp) both}
+@keyframes vin{from{opacity:0; transform:translateY(9px)}to{opacity:1; transform:none}}
+.meta{display:flex; align-items:center; justify-content:space-between; gap:10px}
+.counter{font-family:var(--fm); font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums}
+.counter b{color:var(--text); font-weight:500}
+.mini{font-family:var(--fu); font-size:11.5px; font-weight:600; color:var(--muted); background:transparent;
+  border:1px solid var(--line); border-radius:8px; padding:6px 10px; cursor:pointer}
+.mini:hover{color:var(--text); border-color:var(--line2)}
+.track{height:3px; background:var(--line); border-radius:99px; overflow:hidden}
+.bar{height:100%; width:0%; background:var(--c); box-shadow:0 0 12px -2px var(--c); border-radius:99px;
+  transition:width .45s var(--sp)}
+.hint{margin:0; text-align:center; font-size:11.5px; color:var(--muted2)}
+.btn{font-family:var(--fu); font-size:14.5px; font-weight:700; padding:14px 18px; border-radius:12px;
+  border:1px solid var(--line); background:var(--surface); color:var(--text); cursor:pointer;
+  transition:transform .16s var(--sp), background .2s var(--sp)}
+.btn:active{transform:scale(.975)}
+.btn.pri{color:var(--ink); background:var(--c); border-color:var(--c)}
+.btn.ok{color:var(--ok); border-color:color-mix(in srgb,var(--ok) 42%,transparent); background:color-mix(in srgb,var(--ok) 9%,var(--surface))}
+.btn.bad{color:var(--bad); border-color:color-mix(in srgb,var(--bad) 42%,transparent); background:color-mix(in srgb,var(--bad) 9%,var(--surface))}
+.row2{display:grid; grid-template-columns:1fr 1fr; gap:9px}
+.linkbtn{justify-self:start; background:transparent; border:0; color:var(--muted); font-size:12px;
+  text-decoration:underline; text-underline-offset:3px; cursor:pointer; padding:2px 0}
+:focus-visible{outline:2px solid var(--c); outline-offset:3px; border-radius:6px}
+
+/* ---------- tegel ---------- */
+.tegel{position:relative; border-radius:18px; border:1px solid color-mix(in srgb,var(--c) 34%,transparent);
+  background:linear-gradient(158deg,color-mix(in srgb,var(--c) 11%,var(--surface)) 0%,var(--surface) 60%,var(--ink2) 100%);
+  box-shadow:0 24px 56px -34px var(--c); overflow:hidden}
+.badge{position:absolute; top:12px; left:15px; font-family:var(--fm); font-size:9.5px; letter-spacing:.13em;
+  text-transform:uppercase; color:color-mix(in srgb,var(--c) 70%,var(--muted)); z-index:1}
+.thema{position:absolute; top:12px; right:15px; max-width:52%; font-family:var(--fm); font-size:9.5px;
+  color:var(--muted2); text-align:right; z-index:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.woord{font-family:var(--fd); font-weight:700; line-height:1.1; letter-spacing:-.01em; text-align:center}
+.lid{font-weight:700}
+.lid.der{color:var(--der)} .lid.die{color:var(--die)} .lid.das{color:var(--das)}
+.mv{font-family:var(--fm); font-size:12px; color:var(--muted2); margin-top:2px}
+
+/* ---------- kaarten ---------- */
+.kaartwrap{flex:1; min-height:250px; display:grid; touch-action:pan-y}
+.kaartmove{perspective:1400px}
+.kaart{position:relative; width:100%; height:100%; min-height:250px; transform-style:preserve-3d;
+  transition:transform .55s var(--sp); cursor:pointer}
+.kaart.draai{transform:rotateY(180deg)}
+.vlak{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; padding:44px 22px}
+.vlak.b{transform:rotateY(180deg)}
+.vlak .woord{font-size:clamp(25px,7.6vw,40px)}
+.rol{position:absolute; bottom:14px; font-family:var(--fm); font-size:9.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted2)}
+
+/* ---------- vraag ---------- */
+.vraagtegel{min-height:132px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:6px; padding:38px 20px 26px}
+.vraagtegel .woord{font-size:clamp(23px,6.8vw,34px)}
+.vraag{margin:0; text-align:center; font-family:var(--fm); font-size:10px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted2)}
+.opts{display:grid; gap:8px}
+.opt{font-family:var(--fu); font-size:15px; font-weight:600; text-align:left; padding:14px 16px; border-radius:11px;
+  border:1px solid var(--line); background:var(--surface); color:var(--text); cursor:pointer;
+  display:flex; gap:11px; align-items:center; transition:.18s var(--sp)}
+.opt .k{font-family:var(--fm); font-size:10.5px; color:var(--muted2); min-width:12px}
+.opt:hover:not(:disabled){border-color:color-mix(in srgb,var(--c) 50%,transparent)}
+.opt.goed{border-color:var(--ok); color:var(--ok); background:color-mix(in srgb,var(--ok) 11%,var(--surface))}
+.opt.fout{border-color:var(--bad); color:var(--bad); background:color-mix(in srgb,var(--bad) 11%,var(--surface))}
+input[type=text]{font-family:var(--fu); font-size:17px; font-weight:600; padding:14px 16px; border-radius:11px;
+  border:1px solid var(--line); background:var(--surface); color:var(--text); width:100%}
+input[type=text]::placeholder{color:var(--muted2); font-weight:400}
+input[type=text]:focus{outline:none; border-color:var(--c)}
+input.goed{border-color:var(--ok); color:var(--ok)} input.fout{border-color:var(--bad); color:var(--bad)}
+.typewrap{display:grid; gap:8px}
+.fb{display:grid; gap:9px; padding:13px 15px; border-radius:12px; animation:vin .26s var(--sp) both}
+.fb.g{border:1px solid color-mix(in srgb,var(--ok) 40%,transparent); background:color-mix(in srgb,var(--ok) 8%,var(--surface))}
+.fb.b{border:1px solid color-mix(in srgb,var(--bad) 40%,transparent); background:color-mix(in srgb,var(--bad) 8%,var(--surface))}
+.fb.a{border:1px solid color-mix(in srgb,var(--goud) 40%,transparent); background:color-mix(in srgb,var(--goud) 8%,var(--surface))}
+.fbt{font-family:var(--fd); font-size:14.5px; font-weight:700}
+.fb.g .fbt{color:var(--ok)} .fb.b .fbt{color:var(--bad)} .fb.a .fbt{color:var(--goud)}
+.fbs{font-size:13px; color:var(--muted); line-height:1.5}
+.fbs b{color:var(--text); font-weight:700}
+.shake{animation:shake .32s}
+@keyframes shake{20%{transform:translateX(-6px)}45%{transform:translateX(5px)}70%{transform:translateX(-3px)}100%{transform:none}}
+
+/* ---------- lidwoorden ---------- */
+.lidknoppen{display:grid; grid-template-columns:repeat(3,1fr); gap:9px}
+.lidknop{font-family:var(--fd); font-size:19px; font-weight:700; padding:18px 8px; border-radius:13px;
+  cursor:pointer; background:var(--surface); color:var(--lc); border:1px solid color-mix(in srgb,var(--lc) 45%,transparent);
+  transition:.18s var(--sp)}
+.lidknop:hover:not(:disabled){background:color-mix(in srgb,var(--lc) 14%,var(--surface)); transform:translateY(-2px)}
+.lidknop.goed{background:color-mix(in srgb,var(--ok) 18%,var(--surface)); border-color:var(--ok); color:var(--ok)}
+.lidknop.fout{background:color-mix(in srgb,var(--bad) 16%,var(--surface)); border-color:var(--bad); color:var(--bad)}
+.lidlegenda{display:flex; justify-content:center; gap:14px; font-family:var(--fm); font-size:10px;
+  color:var(--muted2)}
+.lidlegenda i{display:inline-block; width:8px; height:8px; border-radius:2px; margin-right:5px; vertical-align:-1px}
+
+/* ---------- matchen ---------- */
+.mgrid{display:grid; grid-template-columns:repeat(2,1fr); gap:7px}
+.mt{min-height:62px; border-radius:11px; border:1px solid var(--line); background:var(--surface); color:var(--text);
+  font-family:var(--fu); font-size:13px; font-weight:600; cursor:pointer; display:grid; place-items:center;
+  padding:8px; text-align:center; line-height:1.2; transition:.2s var(--sp)}
+.mt.de{color:var(--goud)}
+.mt.sel{border-color:var(--goud); background:color-mix(in srgb,var(--goud) 13%,var(--surface)); transform:translateY(-2px)}
+.mt.mis{border-color:var(--bad); color:var(--bad); animation:shake .32s}
+.mt.weg{opacity:0; transform:scale(.85); pointer-events:none}
+
+/* ---------- klaar ---------- */
+.klaar{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+  padding:38px 22px; text-align:center}
+.klaar h2{font-family:var(--fd); font-size:24px; margin:0; color:var(--c); font-weight:700}
+.klaar p{margin:0; color:var(--muted); font-size:13.5px; max-width:36ch}
+.score{font-family:var(--fd); font-size:52px; font-weight:700; color:var(--c); line-height:1; font-variant-numeric:tabular-nums}
+.fouten{display:grid; gap:6px; width:100%}
+.frij{display:grid; grid-template-columns:1fr auto; gap:10px; padding:9px 12px; border-radius:10px;
+  border:1px solid var(--line); background:var(--ink2); text-align:left; align-items:center}
+.frij .l{font-size:13px; font-weight:600}
+.frij .r{font-size:13px; color:var(--c); font-weight:600}
+
+/* ---------- voortgang ---------- */
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:8px}
+.stat{padding:12px 13px; border-radius:12px; border:1px solid var(--line); background:var(--ink2)}
+.stat b{display:block; font-family:var(--fd); font-size:22px; font-weight:700; line-height:1.1; font-variant-numeric:tabular-nums}
+.stat span{font-family:var(--fm); font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted2)}
+.tlijst{display:grid; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden}
+.trij{background:var(--ink2); display:grid; grid-template-columns:1fr auto; gap:10px; padding:10px 13px; align-items:center}
+.trij b{font-size:13px; font-weight:600}
+.trij span{font-family:var(--fm); font-size:10px; color:var(--muted2)}
+.trij .pb{width:56px; height:4px; border-radius:99px; background:var(--line2); overflow:hidden}
+.trij .pb i{display:block; height:100%; background:var(--c); border-radius:99px}
+.note{font-size:11.5px; color:var(--muted2); line-height:1.55; margin:0}
+
+/* ---------- samenvatting ---------- */
+.slijst{display:grid; gap:12px}
+.svak{border:1px solid var(--line); border-radius:13px; overflow:hidden; background:var(--ink2)}
+.skop{padding:11px 14px 9px; border-bottom:1px solid var(--line);
+  background:linear-gradient(160deg,color-mix(in srgb,var(--goud) 9%,var(--ink2)),var(--ink2))}
+.skop b{display:block; font-family:var(--fd); font-size:15px; font-weight:700; line-height:1.25}
+.skop span{font-family:var(--fm); font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted2)}
+.srij{display:grid; grid-template-columns:1.15fr 1fr; gap:12px; padding:7px 14px; font-size:13.5px;
+  border-bottom:1px solid color-mix(in srgb,var(--line) 55%,transparent)}
+.srij:last-child{border-bottom:0}
+.srij .de{font-weight:700}
+.srij .nl{color:var(--muted)}
+.srij .mvk{font-family:var(--fm); font-size:11px; color:var(--muted2)}
+
+/* ---------- installeren ---------- */
+.install{display:flex; align-items:center; gap:11px; padding:12px 13px; border-radius:13px;
+  border:1px solid color-mix(in srgb,var(--goud) 34%,transparent);
+  background:linear-gradient(150deg,color-mix(in srgb,var(--goud) 10%,var(--ink2)),var(--ink2))}
+.itxt{flex:1; min-width:0; display:grid; gap:2px}
+.itxt b{font-family:var(--fd); font-size:13.5px; font-weight:700}
+.itxt span{font-size:11.5px; color:var(--muted); line-height:1.45}
+.install .btn{flex:none; padding:10px 15px; font-size:13px}
+.ix{flex:none; width:28px; height:28px; border-radius:8px; border:1px solid var(--line); background:transparent;
+  color:var(--muted2); font-size:15px; cursor:pointer}
+
+@media print{
+  .glow,.statusbar,.tabs,.selbar,.panel,.install,.gear,.mark,.meta{display:none!important}
+  body{background:#fff; color:#000}
+  .app{max-width:none; padding:0; display:block}
+  .tt h1{color:#000; font-size:20px} .tt p{color:#555}
+  .top{border-bottom:1px solid #999; padding-bottom:6px; margin-bottom:10px}
+  .slijst{columns:2; column-gap:22px; display:block}
+  .svak{break-inside:avoid; border:1px solid #bbb; background:#fff; margin:0 0 10px; border-radius:6px}
+  .skop{background:#f2f2f2; border-bottom:1px solid #bbb}
+  .skop b{color:#000; font-size:13px} .skop span{color:#555}
+  .srij{border-bottom:1px solid #e4e4e4; font-size:11px; padding:4px 9px}
+  .srij .de{color:#000} .srij .nl,.srij .mvk{color:#333}
+  .lid.der,.lid.die,.lid.das{color:#000}
+}
+@media (min-width:660px){
+  .app{max-width:720px; padding-left:26px; padding-right:26px}
+  .tabs{flex-wrap:wrap; overflow:visible; margin:0; padding:0; -webkit-mask-image:none; mask-image:none}
+  .opts{grid-template-columns:1fr 1fr}
+  .mgrid{grid-template-columns:repeat(4,1fr)}
+  .kaartwrap,.kaart,.vlak{min-height:290px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important; transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="statusbar"></div>
+<div class="glow" id="glow"></div>
+
+<div class="app">
+  <header class="top">
+    <div class="mark">W</div>
+    <div class="tt">
+      <h1>Wortschatz</h1>
+      <p id="subkop">Duits · woordenschat</p>
+    </div>
+    <button class="gear" id="gear" aria-expanded="false" aria-controls="panel" aria-label="Instellingen">⚙</button>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Oefenmodus">
+    <button class="tab" role="tab" data-m="kaarten" aria-selected="true">Kaarten</button>
+    <button class="tab" role="tab" data-m="leren" aria-selected="false">Leren</button>
+    <button class="tab" role="tab" data-m="schrijven" aria-selected="false">Schrijven</button>
+    <button class="tab" role="tab" data-m="lidwoord" aria-selected="false">der/die/das</button>
+    <button class="tab" role="tab" data-m="meervoud" aria-selected="false">Meervoud</button>
+    <button class="tab" role="tab" data-m="matchen" aria-selected="false">Matchen</button>
+    <button class="tab" role="tab" data-m="toets" aria-selected="false">Toets</button>
+    <button class="tab" role="tab" data-m="voortgang" aria-selected="false">Voortgang</button>
+    <button class="tab" role="tab" data-m="samenvatting" aria-selected="false">Samenvatting</button>
+  </nav>
+
+  <div class="selbar">
+    <div class="info"><b id="selTitel">Alle thema's</b><span id="selAantal">0 woorden</span></div>
+    <button id="btnKiezer">Thema's</button>
+  </div>
+
+  <div class="panel" id="panel" hidden>
+    <div class="fset">
+      <span class="flabel">Vraagrichting</span>
+      <div class="seg" id="richting">
+        <button data-d="de" aria-pressed="true">Duits → Nederlands</button>
+        <button data-d="nl" aria-pressed="false">Nederlands → Duits</button>
+        <button data-d="mix" aria-pressed="false">Door elkaar</button>
+      </div>
+    </div>
+    <div class="fset">
+      <span class="flabel">Lidwoord meetypen</span>
+      <div class="seg" id="lidEis">
+        <button data-l="ja" aria-pressed="true">Ja, hoort erbij</button>
+        <button data-l="nee" aria-pressed="false">Nee, alleen het woord</button>
+      </div>
+    </div>
+    <button class="reset" id="btnReset">Voortgang wissen</button>
+  </div>
+
+  <section class="view in" id="v-kaarten" role="tabpanel">
+    <div class="meta">
+      <span class="counter"><b id="kPos">1</b> / <span id="kTot">0</span></span>
+      <div style="display:flex;gap:6px">
+        <button class="mini" id="btnSchud">⇄ schudden</button>
+        <button class="mini" id="btnMoeilijk">moeilijke</button>
+      </div>
+    </div>
+    <div class="kaartwrap"><div class="kaartmove" id="kaartMove"><div class="kaart" id="kaart" tabindex="0" role="button" aria-label="Kaart, tik om te draaien">
+      <div class="vlak f tegel">
+        <span class="badge" id="fbadge">duits</span><span class="thema" id="fthema"></span>
+        <div class="woord" id="fwoord"></div>
+        <div class="mv" id="fmv"></div>
+        <span class="rol" id="frol">duits</span>
+      </div>
+      <div class="vlak b tegel">
+        <span class="badge" id="bbadge">nederlands</span><span class="thema" id="bthema"></span>
+        <div class="woord" id="bwoord"></div>
+        <div class="mv" id="bmv"></div>
+        <span class="rol">antwoord</span>
+      </div>
+    </div></div></div>
+    <div class="track"><div class="bar" id="kBar"></div></div>
+    <div class="row2">
+      <button class="btn bad" id="btnNogLeren">Nog leren</button>
+      <button class="btn ok" id="btnKen">Ik ken dit</button>
+    </div>
+    <p class="hint">Tik om te draaien · veeg voor de volgende</p>
+  </section>
+
+  <section class="view" id="v-leren" role="tabpanel" hidden>
+    <div class="meta"><span class="counter">Ronde <b id="lRonde">1</b></span>
+      <span class="counter"><b id="lKlaar">0</b> / <span id="lLen">8</span></span></div>
+    <div class="track"><div class="bar" id="lBar"></div></div>
+    <div id="lBody"></div>
+  </section>
+
+  <section class="view" id="v-schrijven" role="tabpanel" hidden>
+    <div class="meta"><span class="counter"><b id="sPos">1</b> / <span id="sTot">0</span></span>
+      <span class="counter">goed <b id="sGoed">0</b></span></div>
+    <div class="track"><div class="bar" id="sBar"></div></div>
+    <div id="sBody"></div>
+  </section>
+
+  <section class="view" id="v-lidwoord" role="tabpanel" hidden>
+    <div class="meta"><span class="counter"><b id="aPos">1</b> / <span id="aTot">0</span></span>
+      <span class="counter">goed <b id="aGoed">0</b></span></div>
+    <div class="track"><div class="bar" id="aBar"></div></div>
+    <div id="aBody"></div>
+    <div class="lidlegenda">
+      <span><i style="background:var(--der)"></i>der</span>
+      <span><i style="background:var(--die)"></i>die</span>
+      <span><i style="background:var(--das)"></i>das</span>
+    </div>
+  </section>
+
+  <section class="view" id="v-meervoud" role="tabpanel" hidden>
+    <div class="meta"><span class="counter"><b id="pPos">1</b> / <span id="pTot">0</span></span>
+      <span class="counter">goed <b id="pGoed">0</b></span></div>
+    <div class="track"><div class="bar" id="pBar"></div></div>
+    <div id="pBody"></div>
+  </section>
+
+  <section class="view" id="v-matchen" role="tabpanel" hidden>
+    <div class="meta"><span class="counter">tijd <b id="mTijd">0.0</b>s · record <b id="mBest">–</b></span>
+      <button class="mini" id="btnMNieuw">nieuw spel</button></div>
+    <div class="mgrid" id="mGrid"></div>
+    <p class="hint">Koppel elk Duits woord aan de juiste vertaling</p>
+  </section>
+
+  <section class="view" id="v-toets" role="tabpanel" hidden>
+    <div class="meta"><span class="counter"><b id="tPos">1</b> / <span id="tTot">20</span></span>
+      <button class="mini" id="btnTNieuw">nieuwe toets</button></div>
+    <div class="track"><div class="bar" id="tBar"></div></div>
+    <div id="tBody"></div>
+  </section>
+
+  <section class="view" id="v-voortgang" role="tabpanel" hidden>
+    <div class="stats">
+      <div class="stat"><b id="vKen" style="color:var(--ok)">0</b><span>beheerst</span></div>
+      <div class="stat"><b id="vBezig" style="color:var(--goud)">0</b><span>bezig</span></div>
+      <div class="stat"><b id="vNieuw" style="color:var(--muted)">0</b><span>nieuw</span></div>
+    </div>
+    <div style="display:grid;gap:7px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <span class="flabel">Beheersing van je selectie</span>
+        <span id="vPct" style="font-family:var(--fd);font-weight:700;font-size:15px">0%</span>
+      </div>
+      <div class="track"><div class="bar" id="vBar" style="background:var(--ok)"></div></div>
+    </div>
+    <div class="tlijst" id="vLijst"></div>
+    <p class="note">Elk thema vult zich naarmate je de woorden goed hebt (5 keer goed = vol). Fout zet een
+      stap terug, zodat de lastige woorden blijven terugkomen in <b>Leren</b>.</p>
+  </section>
+
+  <section class="view" id="v-samenvatting" role="tabpanel" hidden>
+    <div class="meta">
+      <span class="counter" id="svInfo">—</span>
+      <button class="mini" id="btnPrint">afdrukken</button>
+    </div>
+    <div id="svBody"></div>
+  </section>
+
+  <div class="install" id="install" hidden>
+    <div class="itxt"><b>Zet 'm op je beginscherm</b><span id="ihow"></span></div>
+    <button class="btn pri" id="iBtn" hidden>Installeren</button>
+    <button class="ix" id="iSluit" aria-label="Melding sluiten">&times;</button>
+  </div>
+</div>
+
+<div class="kiezer" id="kiezer" hidden>
+  <div class="kbox">
+    <div class="kkop"><h2>Wat wil je oefenen?</h2><button class="kklaar" id="kKlaar">Klaar</button></div>
+    <div class="klijst" id="kLijst"></div>
+    <div class="kvoet">
+      <button id="kAlles">Alles</button>
+      <button id="kNiets">Wissen</button>
+      <button id="kZwak">Alleen zwakke</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* woord, nederlands, lidwoord ("" = geen zelfstandig naamwoord), meervoud */
+var DATA=[
+ {t:"Identiteit (die Identität)", w:[
+  ["Name","de naam","der","die Namen"],
+  ["Familienname","de familienaam","der","die Familiennamen"],
+  ["Vorname","de voornaam","der","die Vornamen"]
+ ]},
+ {t:"Woonplaats (der Wohnort)", w:[
+  ["Belgien","België","",""],
+  ["Deutschland","Duitsland","",""],
+  ["Frankreich","Frankrijk","",""],
+  ["Land","het land","das","die Länder"],
+  ["Stadt","de stad","die","die Städte"],
+  ["Adresse","het adres","die","die Adressen"],
+  ["Wohnort","de woonplaats","der","die Wohnorte"],
+  ["Zimmer","de kamer","das","die Zimmer"]
+ ]},
+ {t:"Taal (die Sprache)", w:[
+  ["Deutsch","Duits","",""],
+  ["Englisch","Engels","",""],
+  ["Französisch","Frans","",""],
+  ["Niederländisch","Nederlands","",""],
+  ["Muttersprache","de moedertaal","die","die Muttersprachen"],
+  ["Sprache","de taal","die","die Sprachen"]
+ ]},
+ {t:"Familie (die Familie)", w:[
+  ["Bruder","de broer","der","die Brüder"],
+  ["Familie","de familie","die","die Familien"],
+  ["Großmutter","de grootmoeder","die","die Großmütter"],
+  ["Großvater","de grootvader","der","die Großväter"],
+  ["Kind","het kind","das","die Kinder"],
+  ["Mutter","de moeder","die","die Mütter"],
+  ["Schwester","de zus","die","die Schwestern"],
+  ["Sohn","de zoon","der","die Söhne"],
+  ["Tochter","de dochter","die","die Töchter"],
+  ["Vater","de vader","der","die Väter"],
+  ["Eltern","de ouders (alleen meervoud)","die",""],
+  ["Geschwister","de broers en zussen (alleen meervoud)","die",""],
+  ["Großeltern","de grootouders (alleen meervoud)","die",""]
+ ]},
+ {t:"Tijd (die Zeit)", w:[
+  ["Tag","de dag","der","die Tage"],
+  ["Woche","de week","die","die Wochen"],
+  ["Jahr","het jaar","das","die Jahre"],
+  ["Zeit","de tijd","die","die Zeiten"]
+ ]},
+ {t:"Communicatie (das Kommunikationsmittel)", w:[
+  ["Handy","de gsm / mobiel","das","die Handys"],
+  ["Handynummer","het gsm-nummer","die","die Handynummern"],
+  ["Nummer","het nummer","die","die Nummern"],
+  ["Telefon","de telefoon","das","die Telefone"],
+  ["Telefonbuch","het telefoonboek","das","die Telefonbücher"],
+  ["Telefonnummer","het telefoonnummer","die","die Telefonnummern"]
+ ]},
+ {t:"Bekenden (die Bekannten)", w:[
+  ["Freund","de vriend","der","die Freunde"],
+  ["Freundin","de vriendin","die","die Freundinnen"],
+  ["Bewohner","de bewoner","der","die Bewohner"],
+  ["Bewohnerin","de bewoonster","die","die Bewohnerinnen"],
+  ["Mitbewohner","de medebewoner","der","die Mitbewohner"],
+  ["Mitbewohnerin","de medebewoonster","die","die Mitbewohnerinnen"]
+ ]},
+ {t:"Werkwoorden (Verben)", w:[
+  ["besuchen","bezoeken","",""],["bleiben","blijven","",""],["heißen","heten","",""],
+  ["kommen","komen","",""],["schreiben","schrijven","",""],["sein","zijn","",""],
+  ["sprechen","spreken","",""],["wohnen","wonen","",""],["haben","hebben","",""],
+  ["hören","luisteren naar / horen","",""],["kochen","koken","",""],["suchen","zoeken","",""],
+  ["begrüßen","begroeten","",""],["gehen","gaan","",""],["kennen","kennen","",""],
+  ["lernen","leren","",""],["sagen","zeggen","",""],["spielen","spelen","",""],
+  ["studieren","studeren","",""],["zuhören","luisteren","",""]
+ ]},
+ {t:"Vraagwoorden (Fragewörter)", w:[
+  ["was","wat","",""],["wer","wie","",""],["wie","hoe","",""],
+  ["wo","waar","",""],["woher","waar... vandaan","",""],["wohin","waar... naartoe","",""]
+ ]},
+ {t:"Duits in het alledaagse leven (Deutsch im Alltag)", w:[
+  ["Angenehm!","Aangenaam!","",""],
+  ["Auf Wiedersehen!","Tot ziens!","",""],
+  ["Entschuldigung!","Excuseer! / Sorry!","",""],
+  ["Guten Tag!","Goeiedag!","",""],
+  ["Tschüss!","Tot ziens! / Doei!","",""],
+  ["Vielen Dank!","Dank je wel! / Dank u wel!","",""],
+  ["Wie bitte?","Wat zeg je? / Wat zegt u?","",""],
+  ["Wie geht's?","Hoe gaat het?","",""],
+  ["bitte","alstublieft","",""],
+  ["gut","goed","",""],
+  ["prima","prima / uitstekend","",""],
+  ["gern(e)","graag","",""],
+  ["schon","al","",""],
+  ["Das macht Spaß.","Dat is leuk.","",""],
+  ["Ich habe Durst.","Ik heb dorst.","",""],
+  ["Ich habe Hunger.","Ik heb honger.","",""]
+ ]},
+ {t:"Nog meer woorden (Noch mehr Wörter)", w:[
+  ["Buch","het boek","das","die Bücher"],
+  ["Geburtstag","de verjaardag","der","die Geburtstage"],
+  ["Leute","de mensen (alleen meervoud)","die",""],
+  ["Mitschüler","de medeleerling (m)","der","die Mitschüler"],
+  ["Mitschülerin","de medeleerling (v)","die","die Mitschülerinnen"],
+  ["Zahl","het getal","die","die Zahlen"],
+  ["eigentlich","eigenlijk","",""],
+  ["selbstverständlich","vanzelfsprekend","",""],
+  ["vielleicht","misschien","",""],
+  ["zusammen","samen","",""]
+ ]}
+];
+</script>
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+
+var SETS=DATA.map(function(g,i){
+  return {id:"g"+i, titel:g.t, items:g.w.map(function(w){
+    return {de:w[0], nl:w[1], lid:w[2], mv:w[3]};
+  })};
+});
+
+/* ---------- opslag ---------- */
+var KEY="wortschatz-v1";
+function def(){return {mode:"kaarten",richting:"de",lidEis:"ja",sel:null,prog:{},best:null}}
+var S=def();
+try{var r=JSON.parse(localStorage.getItem(KEY)||"null");
+  if(r&&typeof r==="object"){S=Object.assign(def(),r); S.prog=r.prog||{}}
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+/* ---------- hulp ---------- */
+function rnd(n){return Math.floor(Math.random()*n)}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=rnd(i+1);var t=a[i];a[i]=a[j];a[j]=t}return a}
+function el(t,c,x){var n=document.createElement(t); if(c)n.className=c; if(x!=null)n.textContent=x; return n}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+
+/* Duitse spelling soepel vergelijken: ß = ss, ä = ae enzovoort. */
+function omzet(s){
+  return s.toLowerCase()
+    .replace(/ß/g,"ss").replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue")
+    .replace(/[^a-z0-9' ]/g," ").replace(/\s+/g," ").trim();
+}
+function plat(s){return (s||"").replace(/\s+/g," ").trim()}
+
+function volleDuits(k){return k.lid?k.lid+" "+k.de:k.de}
+function vraagTekst(k,d){return d==="de"?volleDuits(k):k.nl}
+function antwoordTekst(k,d){return d==="de"?k.nl:volleDuits(k)}
+
+/* 1 = goed, 2 = bijna (met melding), 0 = fout */
+function beoordeel(doel,gegeven,k,richting){
+  var g=plat(gegeven); if(!g)return [0,""];
+  var d=plat(doel);
+  if(g===d)return [1,""];
+  if(g.toLowerCase()===d.toLowerCase())return [2,"Let op de hoofdletter: "+d];
+  /* lidwoord vergeten of te veel */
+  if(richting==="nl"&&k.lid){
+    if(plat(g).toLowerCase()===k.de.toLowerCase())
+      return [S.lidEis==="ja"?2:1, S.lidEis==="ja"?"Vergeet het lidwoord niet: "+d:""];
+    if(omzet(g)===omzet(k.de))return [2,"Bijna: "+d];
+  }
+  if(omzet(g)===omzet(d))return [2,"Let op de spelling: "+d];
+  return [0,""];
+}
+
+function gekozenSets(){
+  if(!S.sel)return SETS;
+  var m={}; S.sel.forEach(function(id){m[id]=1});
+  var uit=SETS.filter(function(s){return m[s.id]});
+  return uit.length?uit:SETS;
+}
+function woorden(){
+  var uit=[];
+  gekozenSets().forEach(function(s){
+    s.items.forEach(function(k){uit.push({sid:s.id,titel:s.titel,de:k.de,nl:k.nl,lid:k.lid,mv:k.mv})});
+  });
+  return uit;
+}
+function P(k){var id=k.sid+"|"+k.de; if(!S.prog[id])S.prog[id]={b:0}; return S.prog[id]}
+function merk(k,goed){var p=P(k); p.b=goed?Math.min(5,p.b+1):Math.max(0,p.b-1); save();
+  if(S.mode==="voortgang")tekenVoortgang()}
+function richtingVan(){return S.richting==="mix"?(Math.random()<.5?"de":"nl"):S.richting}
+
+function woordHTML(k,metLid){
+  if(metLid&&k.lid)
+    return '<span class="lid '+k.lid+'">'+k.lid+'</span> '+esc(k.de);
+  return esc(k.de);
+}
+
+/* ---------- vraagbouwer ---------- */
+function maakVraag(q,cfg){
+  var wrap=el("div"); wrap.style.display="grid"; wrap.style.gap="13px";
+  var tg=el("div","tegel vraagtegel");
+  var kop=q.d==="de"?'<div class="woord">'+woordHTML(q.k,true)+'</div>'
+                    :'<div class="woord">'+esc(q.k.nl)+'</div>';
+  tg.innerHTML='<span class="badge">'+(q.d==="de"?"duits":"nederlands")+'</span>'+
+    '<span class="thema">'+esc(q.k.titel.replace(/\s*\(.*$/,""))+'</span>'+kop;
+  wrap.appendChild(tg);
+  wrap.appendChild(el("p","vraag",q.d==="de"?"Wat betekent dit?":"Hoe zeg je dat in het Duits?"));
+  var af=false;
+
+  if(q.type==="mc"){
+    var opties=shuffle([q.k].concat(afleiders(q.k,q.d,3)));
+    var box=el("div","opts");
+    opties.forEach(function(o,i){
+      var b=el("button","opt"); b.type="button";
+      b.innerHTML='<span class="k">'+(i+1)+'</span><span>'+esc(antwoordTekst(o,q.d))+'</span>';
+      b.addEventListener("click",function(){
+        if(af)return; af=true;
+        var goed=antwoordTekst(o,q.d)===antwoordTekst(q.k,q.d);
+        if(cfg.direct){
+          $$(".opt",box).forEach(function(c){c.disabled=true});
+          b.classList.add(goed?"goed":"fout");
+          if(!goed)$$(".opt",box).forEach(function(c){
+            if(c.lastChild.textContent===antwoordTekst(q.k,q.d))c.classList.add("goed")});
+          toon(wrap,q,goed?1:0,"",cfg);
+        } else cfg.klaar(goed?1:0);
+      });
+      box.appendChild(b);
+    });
+    wrap.appendChild(box);
+  } else {
+    var tw=el("div","typewrap");
+    var inp=document.createElement("input"); inp.type="text";
+    inp.placeholder=q.d==="de"?"vertaling in het Nederlands…"
+      :(q.k.lid&&S.lidEis==="ja"?"met lidwoord, bv. der Name":"het Duitse woord…");
+    inp.setAttribute("autocapitalize","off"); inp.setAttribute("autocorrect","off");
+    inp.setAttribute("autocomplete","off"); inp.setAttribute("spellcheck","false");
+    inp.setAttribute("enterkeyhint","go"); inp.setAttribute("aria-label","Jouw antwoord");
+    var go=el("button","btn pri","Nakijken"); go.type="button";
+    var wnw=el("button","linkbtn","Weet ik niet"); wnw.type="button";
+    function nakijk(){
+      if(af)return;
+      var v=inp.value.trim(); if(!v)return;
+      var u=beoordeel(antwoordTekst(q.k,q.d),v,q.k,q.d);
+      af=true; inp.disabled=true; go.remove(); wnw.remove();
+      inp.classList.add(u[0]?"goed":"fout"); if(!u[0])inp.classList.add("shake");
+      if(cfg.direct)toon(wrap,q,u[0],u[1],cfg); else cfg.klaar(u[0]);
+    }
+    go.addEventListener("click",nakijk);
+    inp.addEventListener("keydown",function(e){if(e.key==="Enter")nakijk()});
+    wnw.addEventListener("click",function(){
+      if(af)return; af=true; inp.disabled=true; go.remove(); wnw.remove(); inp.classList.add("fout");
+      if(cfg.direct)toon(wrap,q,0,"",cfg); else cfg.klaar(0);
+    });
+    tw.appendChild(inp); tw.appendChild(go); tw.appendChild(wnw);
+    wrap.appendChild(tw);
+    setTimeout(function(){if(cfg.focus!==false)inp.focus()},240);
+  }
+  return wrap;
+}
+
+function toon(wrap,q,uitslag,melding,cfg){
+  var juist=antwoordTekst(q.k,q.d);
+  var fb=el("div","fb "+(uitslag===1?"g":uitslag===2?"a":"b"));
+  fb.appendChild(el("div","fbt",uitslag===1?"Juist":uitslag===2?"Bijna":"Fout"));
+  var s=el("div","fbs");
+  var extra=q.k.mv?"<br><span style=\"color:var(--muted2)\">meervoud: "+esc(q.k.mv)+"</span>":"";
+  s.innerHTML=(uitslag?(melding?esc(melding)+"<br>":""):"Het juiste antwoord is <b>"+esc(juist)+"</b>.<br>")+
+    volleDuits(q.k)+" — "+esc(q.k.nl)+extra;
+  fb.appendChild(s);
+  wrap.appendChild(fb);
+  if(uitslag===1){setTimeout(function(){cfg.klaar(1)},620)}
+  else{
+    var nx=el("button","btn pri","Volgende"); nx.type="button";
+    nx.addEventListener("click",function(){cfg.klaar(uitslag)});
+    fb.appendChild(nx); setTimeout(function(){nx.focus()},50);
+  }
+}
+
+function afleiders(k,d,n){
+  var zelfde=shuffle(woorden().filter(function(x){return x.sid===k.sid&&x.de!==k.de}));
+  var rest=shuffle(woorden().filter(function(x){return x.sid!==k.sid}));
+  var alles=zelfde.concat(rest), uit=[], zien={}; zien[antwoordTekst(k,d)]=1;
+  for(var i=0;i<alles.length&&uit.length<n;i++){
+    var v=antwoordTekst(alles[i],d);
+    if(!zien[v]){zien[v]=1; uit.push(alles[i])}
+  }
+  return uit;
+}
+
+/* ---------- KAARTEN ---------- */
+var stapel=[],ki=0,om=false;
+function kaartenStart(moeilijk){
+  var p=woorden();
+  if(moeilijk){var h=p.filter(function(k){return P(k).b<3}); if(h.length)p=h}
+  stapel=shuffle(p).map(function(k){return {k:k,d:richtingVan()}});
+  ki=0; om=false; $("#kTot").textContent=stapel.length; tekenKaart();
+}
+function tekenKaart(){
+  var kaart=$("#kaart");
+  if($("#kKlaarBlok"))$("#kKlaarBlok").remove();
+  $("#kaartMove").style.display="";
+  kaart.classList.toggle("draai",om);
+  if(!stapel.length||ki>=stapel.length){kaartenKlaar();return}
+  var q=stapel[ki], k=q.k;
+  $("#fbadge").textContent=q.d==="de"?"duits":"nederlands";
+  $("#bbadge").textContent=q.d==="de"?"nederlands":"duits";
+  var thema=k.titel.replace(/\s*\(.*$/,"");
+  $("#fthema").textContent=thema; $("#bthema").textContent=thema;
+  if(q.d==="de"){
+    $("#fwoord").innerHTML=woordHTML(k,true); $("#fmv").textContent=k.mv?"mv. "+k.mv:"";
+    $("#bwoord").textContent=k.nl; $("#bmv").textContent="";
+  } else {
+    $("#fwoord").textContent=k.nl; $("#fmv").textContent="";
+    $("#bwoord").innerHTML=woordHTML(k,true); $("#bmv").textContent=k.mv?"mv. "+k.mv:"";
+  }
+  $("#frol").textContent=q.d==="de"?"duits":"nederlands";
+  $("#kPos").textContent=Math.min(ki+1,stapel.length);
+  $("#kBar").style.width=(ki/stapel.length*100)+"%";
+}
+function kaartenKlaar(){
+  $("#kaartMove").style.display="none";
+  if($("#kKlaarBlok"))return;
+  var d=el("div","tegel klaar"); d.id="kKlaarBlok";
+  d.appendChild(el("h2",null,stapel.length?"Stapel uit":"Niets te oefenen"));
+  d.appendChild(el("p",null,stapel.length?"Je hebt "+stapel.length+" kaarten gehad.":"Kies eerst een thema."));
+  var b=el("button","btn pri","Opnieuw schudden"); b.type="button";
+  b.addEventListener("click",function(){kaartenStart(false)});
+  d.appendChild(b); $(".kaartwrap").appendChild(d);
+  $("#kBar").style.width="100%";
+}
+function verder(kant,goed){
+  if(ki>=stapel.length)return;
+  if(goed!=null)merk(stapel[ki].k,goed);
+  var mv=$("#kaartMove");
+  mv.style.transition="transform .25s ease-in, opacity .25s ease-in";
+  mv.style.transform="translateX("+(kant*115)+"%) rotate("+(kant*9)+"deg)"; mv.style.opacity="0";
+  setTimeout(function(){
+    ki++; om=false; tekenKaart();
+    mv.style.transition="none"; mv.style.transform="translateX("+(kant*-32)+"%)"; mv.style.opacity="0";
+    requestAnimationFrame(function(){
+      mv.style.transition="transform .32s var(--sp), opacity .32s var(--sp)";
+      mv.style.transform=""; mv.style.opacity="1";
+    });
+  },250);
+}
+function terug(){
+  if(ki===0)return; var mv=$("#kaartMove"); ki--; om=false; tekenKaart();
+  mv.style.transition="none"; mv.style.transform="translateX(-28%)"; mv.style.opacity="0";
+  requestAnimationFrame(function(){mv.style.transition="transform .32s var(--sp), opacity .32s var(--sp)";
+    mv.style.transform=""; mv.style.opacity="1"});
+}
+(function(){
+  var mv=$("#kaartMove"), x0=0,y0=0,dx=0,dy=0,neer=false,ver=0,as="";
+  mv.addEventListener("pointerdown",function(e){
+    if(ki>=stapel.length)return;
+    neer=true; x0=e.clientX; y0=e.clientY; dx=dy=ver=0; as="";
+    mv.style.transition="none"; if(mv.setPointerCapture)mv.setPointerCapture(e.pointerId);
+  });
+  mv.addEventListener("pointermove",function(e){
+    if(!neer)return;
+    dx=e.clientX-x0; dy=e.clientY-y0; ver=Math.max(ver,Math.abs(dx),Math.abs(dy));
+    if(!as&&ver>8)as=Math.abs(dx)>Math.abs(dy)?"x":"y";
+    if(as!=="x")return;
+    e.preventDefault();
+    mv.style.transform="translateX("+dx+"px) rotate("+(dx*.04)+"deg)";
+    mv.style.opacity=String(Math.max(.35,1-Math.abs(dx)/460));
+  });
+  function los(){
+    if(!neer)return; neer=false;
+    function veer(){mv.style.transition="transform .32s var(--sp), opacity .32s var(--sp)";
+      mv.style.transform=""; mv.style.opacity="1"}
+    if(as!=="x"){ if(ver<9){om=!om; $("#kaart").classList.toggle("draai",om)} veer(); return }
+    if(dx<-70)verder(-1,null); else if(dx>70&&ki>0)terug(); else veer();
+  }
+  mv.addEventListener("pointerup",los); mv.addEventListener("pointercancel",los);
+})();
+$("#kaart").addEventListener("keydown",function(e){
+  if(e.key===" "||e.key==="Enter"){e.preventDefault(); om=!om; $("#kaart").classList.toggle("draai",om)}
+});
+$("#btnSchud").addEventListener("click",function(){kaartenStart(false)});
+$("#btnMoeilijk").addEventListener("click",function(){kaartenStart(true)});
+$("#btnKen").addEventListener("click",function(){verder(-1,true)});
+$("#btnNogLeren").addEventListener("click",function(){verder(-1,false)});
+
+/* ---------- LEREN ---------- */
+var L={ronde:1,q:[],i:0};
+function lerenStart(){
+  var p=shuffle(woorden()).sort(function(a,b){return P(a).b-P(b).b}).slice(0,8);
+  L.q=p.map(function(k){return {k:k,d:richtingVan(),type:P(k).b<2?"mc":"type"}});
+  L.i=0; $("#lRonde").textContent=L.ronde; $("#lLen").textContent=L.q.length; lerenStap();
+}
+function lerenStap(){
+  var body=$("#lBody"); body.innerHTML="";
+  $("#lKlaar").textContent=Math.min(L.i,L.q.length); $("#lLen").textContent=L.q.length;
+  $("#lBar").style.width=(L.q.length?L.i/L.q.length*100:0)+"%";
+  if(!L.q.length){body.appendChild(leegBlok());return}
+  if(L.i>=L.q.length){
+    var d=el("div","tegel klaar");
+    d.appendChild(el("h2",null,"Ronde "+L.ronde+" rond"));
+    d.appendChild(el("p",null,"Wat je fout had, komt terug in de volgende ronde."));
+    var b=el("button","btn pri","Volgende ronde"); b.type="button";
+    b.addEventListener("click",function(){L.ronde++; lerenStart()});
+    d.appendChild(b); body.appendChild(d); return;
+  }
+  var q=L.q[L.i];
+  body.appendChild(maakVraag(q,{direct:true,klaar:function(u){
+    merk(q.k,u===1);
+    if(u!==1)L.q.push({k:q.k,d:q.d,type:"mc"});
+    L.i++; lerenStap();
+  }}));
+}
+
+/* ---------- SCHRIJVEN ---------- */
+var W={q:[],i:0,goed:0};
+function schrijvenStart(){
+  W.q=shuffle(woorden()).map(function(k){return {k:k,d:richtingVan(),type:"type"}});
+  W.i=0; W.goed=0; $("#sTot").textContent=W.q.length; schrijvenStap();
+}
+function schrijvenStap(){
+  var body=$("#sBody"); body.innerHTML="";
+  $("#sPos").textContent=Math.min(W.i+1,W.q.length); $("#sGoed").textContent=W.goed;
+  $("#sBar").style.width=(W.q.length?W.i/W.q.length*100:0)+"%";
+  if(!W.q.length){body.appendChild(leegBlok());return}
+  if(W.i>=W.q.length){
+    var d=el("div","tegel klaar");
+    d.appendChild(el("h2",null,"Klaar"));
+    d.appendChild(el("div","score",W.goed+"/"+W.q.length));
+    var b=el("button","btn pri","Opnieuw"); b.type="button";
+    b.addEventListener("click",schrijvenStart); d.appendChild(b); body.appendChild(d); return;
+  }
+  var q=W.q[W.i];
+  body.appendChild(maakVraag(q,{direct:true,klaar:function(u){
+    merk(q.k,u===1); if(u)W.goed++; W.i++; schrijvenStap();
+  }}));
+}
+
+/* ---------- DER / DIE / DAS ---------- */
+var A={q:[],i:0,goed:0};
+function lidStart(){
+  A.q=shuffle(woorden().filter(function(k){return k.lid}));
+  A.i=0; A.goed=0; $("#aTot").textContent=A.q.length; lidStap();
+}
+function lidStap(){
+  var body=$("#aBody"); body.innerHTML="";
+  $("#aPos").textContent=Math.min(A.i+1,A.q.length); $("#aGoed").textContent=A.goed;
+  $("#aBar").style.width=(A.q.length?A.i/A.q.length*100:0)+"%";
+  if(!A.q.length){body.appendChild(leegBlok("Geen zelfstandige naamwoorden in je selectie."));return}
+  if(A.i>=A.q.length){
+    var d=el("div","tegel klaar");
+    d.appendChild(el("h2",null,"Klaar"));
+    d.appendChild(el("div","score",A.goed+"/"+A.q.length));
+    var b=el("button","btn pri","Opnieuw"); b.type="button";
+    b.addEventListener("click",lidStart); d.appendChild(b); body.appendChild(d); return;
+  }
+  var k=A.q[A.i];
+  var wrap=el("div"); wrap.style.display="grid"; wrap.style.gap="13px";
+  var tg=el("div","tegel vraagtegel");
+  tg.innerHTML='<span class="badge">lidwoord</span>'+
+    '<span class="thema">'+esc(k.titel.replace(/\s*\(.*$/,""))+'</span>'+
+    '<div class="woord">'+esc(k.de)+'</div>'+
+    '<div class="mv">'+esc(k.nl)+'</div>';
+  wrap.appendChild(tg);
+  wrap.appendChild(el("p","vraag","Welk lidwoord hoort hierbij?"));
+  var box=el("div","lidknoppen"); var af=false;
+  ["der","die","das"].forEach(function(l){
+    var b=el("button","lidknop",l); b.type="button";
+    b.style.setProperty("--lc","var(--"+l+")");
+    b.addEventListener("click",function(){
+      if(af)return; af=true;
+      var goed=(l===k.lid);
+      $$(".lidknop",box).forEach(function(x){x.disabled=true});
+      b.classList.add(goed?"goed":"fout");
+      if(!goed)$$(".lidknop",box).forEach(function(x){if(x.textContent===k.lid)x.classList.add("goed")});
+      merk(k,goed); if(goed)A.goed++;
+      var fb=el("div","fb "+(goed?"g":"b"));
+      fb.appendChild(el("div","fbt",goed?"Juist":"Fout"));
+      var s=el("div","fbs");
+      s.innerHTML="<b>"+k.lid+" "+esc(k.de)+"</b> — "+esc(k.nl)+
+        (k.mv?"<br><span style=\"color:var(--muted2)\">meervoud: "+esc(k.mv)+"</span>":"");
+      fb.appendChild(s);
+      if(goed){wrap.appendChild(fb); setTimeout(function(){A.i++; lidStap()},650)}
+      else{
+        var nx=el("button","btn pri","Volgende"); nx.type="button";
+        nx.addEventListener("click",function(){A.i++; lidStap()});
+        fb.appendChild(nx); wrap.appendChild(fb);
+      }
+    });
+    box.appendChild(b);
+  });
+  wrap.appendChild(box);
+  body.appendChild(wrap);
+}
+
+/* ---------- MEERVOUD ---------- */
+var M2={q:[],i:0,goed:0};
+function mvStart(){
+  M2.q=shuffle(woorden().filter(function(k){return k.mv}));
+  M2.i=0; M2.goed=0; $("#pTot").textContent=M2.q.length; mvStap();
+}
+function mvStap(){
+  var body=$("#pBody"); body.innerHTML="";
+  $("#pPos").textContent=Math.min(M2.i+1,M2.q.length); $("#pGoed").textContent=M2.goed;
+  $("#pBar").style.width=(M2.q.length?M2.i/M2.q.length*100:0)+"%";
+  if(!M2.q.length){body.appendChild(leegBlok("Geen woorden met een meervoud in je selectie."));return}
+  if(M2.i>=M2.q.length){
+    var d=el("div","tegel klaar");
+    d.appendChild(el("h2",null,"Klaar"));
+    d.appendChild(el("div","score",M2.goed+"/"+M2.q.length));
+    var b=el("button","btn pri","Opnieuw"); b.type="button";
+    b.addEventListener("click",mvStart); d.appendChild(b); body.appendChild(d); return;
+  }
+  var k=M2.q[M2.i];
+  var wrap=el("div"); wrap.style.display="grid"; wrap.style.gap="13px";
+  var tg=el("div","tegel vraagtegel");
+  tg.innerHTML='<span class="badge">meervoud</span>'+
+    '<span class="thema">'+esc(k.titel.replace(/\s*\(.*$/,""))+'</span>'+
+    '<div class="woord">'+woordHTML(k,true)+'</div>'+
+    '<div class="mv">'+esc(k.nl)+'</div>';
+  wrap.appendChild(tg);
+  wrap.appendChild(el("p","vraag","Wat is het meervoud?"));
+  var tw=el("div","typewrap"); var af=false;
+  var inp=document.createElement("input"); inp.type="text"; inp.placeholder="die …";
+  inp.setAttribute("autocapitalize","off"); inp.setAttribute("autocorrect","off");
+  inp.setAttribute("autocomplete","off"); inp.setAttribute("spellcheck","false");
+  inp.setAttribute("aria-label","Het meervoud");
+  var go=el("button","btn pri","Nakijken"); go.type="button";
+  var wnw=el("button","linkbtn","Weet ik niet"); wnw.type="button";
+  function af2(u,melding){
+    af=true; inp.disabled=true; go.remove(); wnw.remove();
+    inp.classList.add(u?"goed":"fout"); if(!u)inp.classList.add("shake");
+    merk(k,u===1); if(u)M2.goed++;
+    var fb=el("div","fb "+(u===1?"g":u===2?"a":"b"));
+    fb.appendChild(el("div","fbt",u===1?"Juist":u===2?"Bijna":"Fout"));
+    var s=el("div","fbs");
+    s.innerHTML=(melding?esc(melding)+"<br>":"")+"<b>"+esc(k.mv)+"</b> — enkelvoud: "+volleDuits(k);
+    fb.appendChild(s);
+    if(u===1){wrap.appendChild(fb); setTimeout(function(){M2.i++; mvStap()},650)}
+    else{
+      var nx=el("button","btn pri","Volgende"); nx.type="button";
+      nx.addEventListener("click",function(){M2.i++; mvStap()});
+      fb.appendChild(nx); wrap.appendChild(fb);
+    }
+  }
+  function nakijk(){
+    if(af)return; var v=inp.value.trim(); if(!v)return;
+    var u=beoordeel(k.mv,v,k,"nl");
+    /* zonder "die" ervoor mag ook */
+    if(!u[0]&&omzet(v)===omzet(k.mv.replace(/^die\s+/,"")))u=[2,"Zet er 'die' voor: "+k.mv];
+    af2(u[0],u[1]);
+  }
+  go.addEventListener("click",nakijk);
+  inp.addEventListener("keydown",function(e){if(e.key==="Enter")nakijk()});
+  wnw.addEventListener("click",function(){if(!af)af2(0,"")});
+  tw.appendChild(inp); tw.appendChild(go); tw.appendChild(wnw);
+  wrap.appendChild(tw); body.appendChild(wrap);
+  setTimeout(function(){inp.focus()},240);
+}
+
+/* ---------- MATCHEN ---------- */
+var M={t:[],sel:null,over:0,t0:0,timer:null,slot:false};
+function matchenStart(){
+  clearInterval(M.timer);
+  var p=shuffle(woorden()).sort(function(a,b){return P(a).b-P(b).b}).slice(0,5);
+  p=shuffle(p);
+  var g=$("#mGrid"); g.innerHTML="";
+  if(!p.length){g.appendChild(leegBlok());return}
+  var arr=[];
+  p.forEach(function(k,i){arr.push({id:i,k:k,t:"de",txt:volleDuits(k)});
+                          arr.push({id:i,k:k,t:"nl",txt:k.nl})});
+  M.t=shuffle(arr); M.sel=null; M.over=p.length; M.slot=false; M.t0=0;
+  M.t.forEach(function(t){
+    var b=el("button","mt "+t.t,t.txt); b.type="button";
+    b.addEventListener("click",function(){matchTik(b,t)});
+    t.node=b; g.appendChild(b);
+  });
+  $("#mBest").textContent=S.best?S.best.toFixed(1)+"s":"–";
+  $("#mTijd").textContent="0.0";
+}
+function matchTik(node,t){
+  if(M.slot||node.classList.contains("weg"))return;
+  if(!M.t0){M.t0=Date.now(); M.timer=setInterval(function(){
+    $("#mTijd").textContent=((Date.now()-M.t0)/1000).toFixed(1)},100)}
+  if(M.sel&&M.sel.node===node){node.classList.remove("sel"); M.sel=null; return}
+  if(!M.sel){node.classList.add("sel"); M.sel=t; return}
+  var a=M.sel,b=t;
+  if(a.id===b.id&&a.t!==b.t){
+    a.node.classList.remove("sel"); a.node.classList.add("weg"); b.node.classList.add("weg");
+    merk(a.k,true); M.sel=null; M.over--;
+    if(!M.over)matchKlaar();
+  } else {
+    M.slot=true; merk(b.k,false);
+    a.node.classList.remove("sel"); a.node.classList.add("mis"); b.node.classList.add("mis");
+    setTimeout(function(){a.node.classList.remove("mis"); b.node.classList.remove("mis");
+      M.sel=null; M.slot=false},400);
+  }
+}
+function matchKlaar(){
+  clearInterval(M.timer);
+  var t=(Date.now()-M.t0)/1000; $("#mTijd").textContent=t.toFixed(1);
+  var rec=!S.best||t<S.best; if(rec){S.best=t; save()}
+  $("#mBest").textContent=S.best.toFixed(1)+"s";
+  var g=$("#mGrid"); g.innerHTML="";
+  var d=el("div","tegel klaar"); d.style.gridColumn="1 / -1";
+  d.appendChild(el("h2",null,rec?"Nieuw record":"Alles gekoppeld"));
+  d.appendChild(el("div","score",t.toFixed(1)+"s"));
+  var b=el("button","btn pri","Nog een keer"); b.type="button";
+  b.addEventListener("click",matchenStart); d.appendChild(b); g.appendChild(d);
+}
+$("#btnMNieuw").addEventListener("click",matchenStart);
+
+/* ---------- TOETS ---------- */
+var T={q:[],i:0,ant:[]};
+function toetsStart(){
+  var p=shuffle(woorden()); var n=Math.min(20,p.length);
+  T.q=p.slice(0,n).map(function(k,i){return {k:k,d:richtingVan(),type:i%2?"type":"mc"}});
+  T.i=0; T.ant=[]; $("#tTot").textContent=n; toetsStap();
+}
+function toetsStap(){
+  var body=$("#tBody"); body.innerHTML="";
+  $("#tPos").textContent=Math.min(T.i+1,T.q.length);
+  $("#tBar").style.width=(T.q.length?T.i/T.q.length*100:0)+"%";
+  if(!T.q.length){body.appendChild(leegBlok());return}
+  if(T.i>=T.q.length){toetsUitslag();return}
+  var q=T.q[T.i];
+  body.appendChild(maakVraag(q,{direct:false,klaar:function(u){
+    merk(q.k,u===1); T.ant.push({q:q,u:u}); T.i++; toetsStap();
+  }}));
+}
+function toetsUitslag(){
+  var body=$("#tBody"); body.innerHTML="";
+  var goed=T.ant.filter(function(a){return a.u}).length, n=T.ant.length;
+  var pct=Math.round(goed/n*100);
+  var d=el("div","tegel klaar");
+  d.appendChild(el("h2",null,pct>=90?"Bijna vlekkeloos":pct>=70?"Goed bezig":"Nog even oefenen"));
+  d.appendChild(el("div","score",goed+"/"+n));
+  d.appendChild(el("p",null,pct+"% goed"));
+  var fout=T.ant.filter(function(a){return !a.u});
+  if(fout.length){
+    var lijst=el("div","fouten");
+    fout.forEach(function(a){
+      var r=el("div","frij");
+      r.appendChild(el("span","l",vraagTekst(a.q.k,a.q.d)));
+      r.appendChild(el("span","r",antwoordTekst(a.q.k,a.q.d)));
+      lijst.appendChild(r);
+    });
+    d.appendChild(lijst);
+  }
+  var b=el("button","btn pri","Nieuwe toets"); b.type="button";
+  b.addEventListener("click",toetsStart); d.appendChild(b); body.appendChild(d);
+  $("#tBar").style.width="100%"; $("#tPos").textContent=n;
+}
+$("#btnTNieuw").addEventListener("click",toetsStart);
+
+/* ---------- VOORTGANG ---------- */
+function tekenVoortgang(){
+  var p=woorden(), ken=0,bezig=0,som=0;
+  p.forEach(function(k){var b=P(k).b; som+=b; if(b>=4)ken++; else if(b)bezig++});
+  $("#vKen").textContent=ken; $("#vBezig").textContent=bezig; $("#vNieuw").textContent=p.length-ken-bezig;
+  var pct=p.length?Math.round(som/(p.length*5)*100):0;
+  $("#vPct").textContent=pct+"%"; $("#vBar").style.width=pct+"%";
+  var lijst=$("#vLijst"); lijst.innerHTML="";
+  gekozenSets().forEach(function(st){
+    var s=0; st.items.forEach(function(it){s+=P({sid:st.id,de:it.de}).b});
+    var d=Math.round(s/(st.items.length*5)*100);
+    var r=el("div","trij");
+    var m=el("div"); m.appendChild(el("b",null,st.titel.replace(/\s*\(.*$/,"")));
+    m.appendChild(el("span",null,st.items.length+" woorden · "+d+"%"));
+    var pb=el("div","pb"); var i=el("i"); i.style.width=d+"%"; pb.appendChild(i);
+    r.appendChild(m); r.appendChild(pb); lijst.appendChild(r);
+  });
+}
+
+/* ---------- SAMENVATTING ---------- */
+function tekenSamenvatting(){
+  var body=$("#svBody"); body.innerHTML="";
+  var sets=gekozenSets(), n=0;
+  sets.forEach(function(s){n+=s.items.length});
+  $("#svInfo").textContent=sets.length+" thema"+(sets.length===1?"":"'s")+" · "+n+" woorden";
+  var wrap=el("div","slijst");
+  sets.forEach(function(st){
+    var vak=el("div","svak");
+    var kop=el("div","skop");
+    kop.appendChild(el("b",null,st.titel));
+    kop.appendChild(el("span",null,st.items.length+" woorden"));
+    vak.appendChild(kop);
+    st.items.forEach(function(k){
+      var r=el("div","srij");
+      var de=el("span","de");
+      de.innerHTML=woordHTML(k,true)+(k.mv?' <span class="mvk">· '+esc(k.mv)+'</span>':"");
+      r.appendChild(de);
+      r.appendChild(el("span","nl",k.nl));
+      vak.appendChild(r);
+    });
+    wrap.appendChild(vak);
+  });
+  body.appendChild(wrap);
+}
+$("#btnPrint").addEventListener("click",function(){window.print()});
+
+/* ---------- themakiezer ---------- */
+function isGekozen(id){return !S.sel||S.sel.indexOf(id)>=0}
+function tekenKiezer(){
+  var lijst=$("#kLijst"); lijst.innerHTML="";
+  SETS.forEach(function(st){
+    var s=0; st.items.forEach(function(it){s+=P({sid:st.id,de:it.de}).b});
+    var d=Math.round(s/(st.items.length*5)*100);
+    var rij=el("div","krij");
+    var kies=el("button","kkies"); kies.type="button";
+    kies.setAttribute("aria-pressed",String(isGekozen(st.id)));
+    kies.innerHTML='<span class="kvink"></span><span class="kmid"><b>'+esc(st.titel)+
+      '</b><span>'+st.items.length+' woorden · '+d+'% beheerst</span></span>';
+    kies.addEventListener("click",function(){
+      if(!S.sel)S.sel=SETS.map(function(x){return x.id});
+      var p=S.sel.indexOf(st.id);
+      if(p>=0)S.sel.splice(p,1); else S.sel.push(st.id);
+      kies.setAttribute("aria-pressed",String(p<0));
+      save(); werkSelbarBij();
+    });
+    var oef=el("button","koefen","oefen"); oef.type="button";
+    oef.addEventListener("click",function(){
+      S.sel=[st.id]; save(); $("#kiezer").hidden=true; werkSelbarBij(); zetModus("kaarten");
+    });
+    rij.appendChild(kies); rij.appendChild(oef);
+    lijst.appendChild(rij);
+  });
+  werkSelbarBij();
+}
+function werkSelbarBij(){
+  var st=gekozenSets(), n=0;
+  st.forEach(function(s){n+=s.items.length});
+  $("#selTitel").textContent=(!S.sel||st.length===SETS.length)?"Alle thema's"
+    :(st.length===1?st[0].titel:st.length+" thema's gekozen");
+  $("#selAantal").textContent=n+" woorden · "+st.length+" thema"+(st.length===1?"":"'s");
+  $("#subkop").textContent="Duits · "+n+" woorden";
+}
+$("#btnKiezer").addEventListener("click",function(){$("#kiezer").hidden=false; tekenKiezer()});
+$("#kKlaar").addEventListener("click",function(){$("#kiezer").hidden=true; save(); ververs()});
+$("#kAlles").addEventListener("click",function(){S.sel=null; save(); tekenKiezer()});
+$("#kNiets").addEventListener("click",function(){S.sel=[]; save(); tekenKiezer()});
+$("#kZwak").addEventListener("click",function(){
+  S.sel=SETS.filter(function(st){
+    var s=0; st.items.forEach(function(it){s+=P({sid:st.id,de:it.de}).b});
+    return s/(st.items.length*5)<0.6;
+  }).map(function(x){return x.id});
+  if(!S.sel.length)S.sel=null;
+  save(); tekenKiezer();
+});
+
+/* ---------- modus ---------- */
+var START={kaarten:function(){kaartenStart(false)},leren:lerenStart,schrijven:schrijvenStart,
+  lidwoord:lidStart,meervoud:mvStart,matchen:matchenStart,toets:toetsStart,
+  voortgang:tekenVoortgang,samenvatting:tekenSamenvatting};
+function leegBlok(tekst){
+  var d=el("div","tegel klaar");
+  d.appendChild(el("h2",null,"Niets te oefenen"));
+  d.appendChild(el("p",null,tekst||"Er zitten geen woorden in je huidige selectie."));
+  var b=el("button","btn pri","Thema's kiezen"); b.type="button";
+  b.addEventListener("click",function(){$("#kiezer").hidden=false; tekenKiezer()});
+  d.appendChild(b);
+  return d;
+}
+function zetModus(m){
+  S.mode=m; save();
+  $$(".tab").forEach(function(b){b.setAttribute("aria-selected",String(b.dataset.m===m))});
+  $$(".view").forEach(function(v){v.hidden=(v.id!=="v-"+m)});
+  var v=$("#v-"+m); v.classList.remove("in"); void v.offsetWidth; v.classList.add("in");
+  if(m==="kaarten"&&$("#kKlaarBlok"))$("#kKlaarBlok").remove();
+  START[m]();
+}
+function ververs(){werkSelbarBij(); START[S.mode]()}
+$$(".tab").forEach(function(b){b.addEventListener("click",function(){zetModus(b.dataset.m)})});
+$("#gear").addEventListener("click",function(){
+  var p=$("#panel"), open=p.hidden; p.hidden=!open;
+  $("#gear").setAttribute("aria-expanded",String(open));
+});
+$$("#richting button").forEach(function(b){
+  b.addEventListener("click",function(){
+    S.richting=b.dataset.d; save();
+    $$("#richting button").forEach(function(x){x.setAttribute("aria-pressed",String(x.dataset.d===S.richting))});
+    ververs();
+  });
+});
+$$("#lidEis button").forEach(function(b){
+  b.addEventListener("click",function(){
+    S.lidEis=b.dataset.l; save();
+    $$("#lidEis button").forEach(function(x){x.setAttribute("aria-pressed",String(x.dataset.l===S.lidEis))});
+  });
+});
+$("#btnReset").addEventListener("click",function(){
+  if(!confirm("Alle voortgang en je matchrecord wissen?"))return;
+  S.prog={}; S.best=null; save(); ververs();
+});
+document.addEventListener("keydown",function(e){
+  if(S.mode!=="kaarten"||!$("#kiezer").hidden)return;
+  if(e.target&&e.target.tagName==="INPUT")return;
+  if(e.key==="ArrowRight"){e.preventDefault(); verder(-1,null)}
+  if(e.key==="ArrowLeft"){e.preventDefault(); terug()}
+});
+
+/* ---------- installeren ---------- */
+(function(){
+  var box=$("#install"), hoe=$("#ihow"), btn=$("#iBtn"), sluit=$("#iSluit"), uitgesteld=null;
+  var app=(window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches)||window.navigator.standalone===true;
+  var weg=false; try{weg=localStorage.getItem("wortschatz-install-weg")==="1"}catch(e){}
+  if(app||weg)return;
+  var ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+  function toonBalk(txt,metKnop){hoe.textContent=txt; btn.hidden=!metKnop; box.hidden=false}
+  window.addEventListener("beforeinstallprompt",function(e){
+    e.preventDefault(); uitgesteld=e;
+    toonBalk("Installeren duurt een seconde. Daarna werkt de app offline.",true);
+  });
+  btn.addEventListener("click",function(){
+    if(!uitgesteld)return;
+    uitgesteld.prompt(); uitgesteld.userChoice.then(function(){uitgesteld=null; box.hidden=true});
+  });
+  sluit.addEventListener("click",function(){
+    box.hidden=true; try{localStorage.setItem("wortschatz-install-weg","1")}catch(e){}
+  });
+  window.addEventListener("appinstalled",function(){box.hidden=true});
+  if(ios)toonBalk("Tik in Safari op de deelknop onderin en kies “Zet op beginscherm”.",false);
+})();
+
+/* ---------- start ---------- */
+$$("#richting button").forEach(function(x){x.setAttribute("aria-pressed",String(x.dataset.d===S.richting))});
+$$("#lidEis button").forEach(function(x){x.setAttribute("aria-pressed",String(x.dataset.l===S.lidEis))});
+werkSelbarBij();
+zetModus(S.mode&&START[S.mode]?S.mode:"kaarten");
+})();
+</script>
+<script>
+if("serviceWorker" in navigator){window.addEventListener("load",function(){
+  navigator.serviceWorker.register("sw.js").catch(function(){});
+})}
+</script>
+</body>
+</html>

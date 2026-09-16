@@ -1,0 +1,31 @@
+{
+ "name": "Mot à Mot — Frans oefenen",
+ "short_name": "Mot à Mot",
+ "description": "Woordenschat, grammatica, werkwoorden en zinsbouw Frans, van het 5e leerjaar tot het 4de middelbaar (B1).",
+ "lang": "nl",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#05060f",
+ "theme_color": "#05060f",
+ "icons": [
+  {
+   "src": "icon-180.png",
+   "sizes": "180x180",
+   "type": "image/png"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}

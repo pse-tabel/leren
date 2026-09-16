@@ -1,0 +1,17 @@
+﻿{
+ "name": "Wortschatz — Duitse woordenschat",
+ "short_name": "Wortschatz",
+ "description": "Duitse woordenschat oefenen: vertaling, der/die/das en het meervoud.",
+ "lang": "nl",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#0b0906",
+ "theme_color": "#0b0906",
+ "icons": [
+  {"src": "icon-180.png", "sizes": "180x180", "type": "image/png"},
+  {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+  {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+ ]
+}
