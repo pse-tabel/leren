@@ -1,0 +1,17 @@
+{
+  "name": "Neon Elementen",
+  "short_name": "Elementen",
+  "description": "Oefen de 45 elementen die je uit je hoofd moet kennen: metalen, niet-metalen en edelgassen.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#06070d",
+  "theme_color": "#06070d",
+  "lang": "nl",
+  "icons": [
+    { "src": "icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

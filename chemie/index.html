@@ -2,927 +2,142 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#06070d">
-<meta name="description" content="Flashcards voor de 45 elementen die je uit je hoofd moet kennen: metalen, niet-metalen en edelgassen.">
+<meta name="description" content="Scheikunde: de elementen kennen en oefenen op oxidatiegetallen en formules.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Elementen">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icon-180.png">
-<link rel="icon" href="icon-180.png">
-<style>html,body{margin:0;background:#06070d}img{max-width:100%}[hidden]{display:none!important}</style>
-</head>
-<body>
-<title>Neon Elementen</title>
+<meta name="apple-mobile-web-app-title" content="Chemie">
+<title>Chemie</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <style>
 :root{
   color-scheme:dark;
-  --ink:#06070d; --ink2:#0a0c16; --surface:#10131f; --surface2:#171b2c;
-  --line:#242a44; --text:#e2e6f5; --muted:#848bA8; --muted2:#5c6382;
-  --metaal:#00e0ff; --nietmetaal:#ff2fd0; --edelgas:#ff8a3d;
-  --ok:#31ffb0; --bad:#ff3d5e;
-  --c:var(--metaal);
+  --ink:#06070d; --ink2:#0a0c16; --surface:#10131f; --line:#242a44; --line2:#333b60;
+  --text:#e2e6f5; --muted:#848ba8; --muted2:#5c6382;
+  --cyan:#00e0ff; --paars:#b06bff;
   --fd:"Chakra Petch",ui-sans-serif,system-ui,sans-serif;
   --fu:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
   --fm:"IBM Plex Mono",ui-monospace,SFMono-Regular,monospace;
   --sp:cubic-bezier(.2,.9,.25,1);
 }
 *{box-sizing:border-box}
-body{
-  background:var(--ink); color:var(--text); font-family:var(--fu);
-  margin:0; min-height:100dvh; -webkit-text-size-adjust:100%;
-  -webkit-tap-highlight-color:transparent; overflow-x:hidden;
-}
-.glow{position:fixed; inset:-30% -20% auto -20%; height:80vh; z-index:0; pointer-events:none;
-  background:
-    radial-gradient(45% 40% at 22% 30%, color-mix(in srgb,var(--c) 30%, transparent) 0%, transparent 70%),
-    radial-gradient(38% 34% at 82% 12%, color-mix(in srgb,var(--c) 18%, transparent) 0%, transparent 70%);
-  filter:blur(28px); opacity:.75; transition:background .9s ease, opacity .9s ease;
-}
-.grid-bg{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.35;
+html,body{margin:0}
+body{background:var(--ink); color:var(--text); font-family:var(--fu); min-height:100dvh;
+  -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent; overflow-x:hidden}
+[hidden]{display:none!important}
+.glow{position:fixed; inset:-28% -20% auto -20%; height:70vh; z-index:0; pointer-events:none;
+  background:radial-gradient(42% 38% at 26% 24%, color-mix(in srgb,var(--cyan) 18%,transparent) 0%, transparent 70%),
+             radial-gradient(34% 30% at 78% 8%, color-mix(in srgb,var(--paars) 12%,transparent) 0%, transparent 70%);
+  filter:blur(34px)}
+.grid-bg{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.3;
   background-image:linear-gradient(color-mix(in srgb,var(--line) 55%,transparent) 1px,transparent 1px),
                    linear-gradient(90deg,color-mix(in srgb,var(--line) 55%,transparent) 1px,transparent 1px);
-  background-size:56px 56px;
-  -webkit-mask-image:radial-gradient(70% 55% at 50% 22%,#000,transparent 78%);
-  mask-image:radial-gradient(70% 55% at 50% 22%,#000,transparent 78%);
-}
-.app{position:relative; z-index:1; max-width:520px; margin:0 auto; min-height:100dvh;
-  display:flex; flex-direction:column; gap:14px;
-  padding:calc(14px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right))
-          calc(20px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left));}
-/* strook onder de klok en het batterij-icoon, 0px hoog in een gewone browser */
-.statusbar{position:fixed; top:0; left:0; right:0; height:env(safe-area-inset-top); z-index:9;
+  background-size:54px 54px;
+  -webkit-mask-image:radial-gradient(70% 55% at 50% 20%,#000,transparent 78%);
+  mask-image:radial-gradient(70% 55% at 50% 20%,#000,transparent 78%)}
+.statusbar{position:fixed; top:0; left:0; right:0; height:env(safe-area-inset-top); z-index:20;
   pointer-events:none; background:color-mix(in srgb,var(--ink) 78%,transparent);
   -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px)}
+.wrap{position:relative; z-index:1; max-width:620px; margin:0 auto; min-height:100dvh;
+  display:flex; flex-direction:column; gap:17px;
+  padding:calc(22px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right))
+          calc(30px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left));}
 
-/* ---------- header ---------- */
-.top{display:flex; align-items:center; gap:10px}
-.mark{width:38px; height:38px; flex:none; display:grid; place-items:center; border-radius:11px;
-  border:1px solid color-mix(in srgb,var(--metaal) 45%,transparent);
-  background:linear-gradient(150deg,color-mix(in srgb,var(--metaal) 16%,var(--surface)),var(--surface));
-  box-shadow:0 0 18px -6px var(--metaal), inset 0 0 12px -6px var(--metaal);
-  font-family:var(--fd); font-weight:700; font-size:15px; color:var(--metaal); letter-spacing:.5px}
-.tt{flex:1; min-width:0}
-.tt h1{font-family:var(--fd); font-size:19px; font-weight:600; margin:0; letter-spacing:.2px; line-height:1.1}
-.tt p{margin:1px 0 0; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; font-family:var(--fm)}
-.gear{width:38px; height:38px; flex:none; border-radius:11px; border:1px solid var(--line);
-  background:var(--surface); color:var(--muted); font-size:17px; cursor:pointer; transition:.2s var(--sp)}
-.gear[aria-expanded="true"]{color:var(--metaal); border-color:color-mix(in srgb,var(--metaal) 50%,transparent); box-shadow:0 0 16px -6px var(--metaal)}
+.kop{display:flex; align-items:flex-start; gap:12px}
+.terug{width:40px; height:40px; flex:none; display:grid; place-items:center; border-radius:12px;
+  border:1px solid var(--line); background:var(--surface); color:var(--muted); font-size:18px;
+  text-decoration:none; transition:.2s var(--sp); margin-top:4px}
+.terug:hover{color:var(--cyan); border-color:color-mix(in srgb,var(--cyan) 50%,transparent)}
+.kop .tekst{flex:1; min-width:0; display:grid; gap:6px}
+.eyebrow{font-family:var(--fm); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted2)}
+h1{font-family:var(--fd); font-size:clamp(28px,6.6vw,36px); font-weight:700; margin:0; line-height:1.04}
+.kop p{margin:0; color:var(--muted); font-size:14px; max-width:44ch}
 
-/* ---------- tabs ---------- */
-.tabs{display:flex; gap:7px; overflow-x:auto; scrollbar-width:none; margin:0 -16px; padding:1px 16px 3px;
-  -webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 34px),transparent 100%);
-  mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 34px),transparent 100%)}
-.tabs::-webkit-scrollbar{display:none}
-.tab{flex:none; font-family:var(--fd); font-size:13.5px; font-weight:500; letter-spacing:.02em;
-  padding:8px 14px; border-radius:99px; border:1px solid var(--line); background:var(--ink2);
-  color:var(--muted); cursor:pointer; transition:.24s var(--sp); white-space:nowrap}
-.tab:hover{color:var(--text); border-color:var(--muted2)}
-.tab[aria-selected="true"]{color:var(--ink); background:var(--metaal); border-color:var(--metaal);
-  box-shadow:0 0 22px -6px var(--metaal); font-weight:600}
-
-/* ---------- settings ---------- */
-.panel{border:1px solid var(--line); background:var(--ink2); border-radius:16px; padding:14px; display:grid; gap:14px}
-.panel[hidden]{display:none}
-.fset{display:grid; gap:8px}
-.flabel{font-family:var(--fm); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted2)}
-.chips{display:flex; flex-wrap:wrap; gap:7px}
-.chip{font-size:13px; font-family:var(--fd); font-weight:500; padding:7px 12px; border-radius:9px;
-  border:1px solid var(--line); background:var(--surface); color:var(--muted); cursor:pointer; transition:.22s var(--sp)}
-.chip[aria-pressed="true"]{color:var(--cc,var(--text)); border-color:color-mix(in srgb,var(--cc,var(--text)) 55%,transparent);
-  background:color-mix(in srgb,var(--cc,var(--text)) 12%,var(--surface)); box-shadow:0 0 18px -8px var(--cc,var(--text))}
-.seg{display:flex; gap:0; border:1px solid var(--line); border-radius:10px; overflow:hidden; background:var(--surface)}
-.seg button{flex:1; font-family:var(--fd); font-size:12.5px; padding:9px 6px; border:0; background:transparent;
-  color:var(--muted); cursor:pointer; transition:.2s var(--sp)}
-.seg button[aria-pressed="true"]{background:color-mix(in srgb,var(--metaal) 15%,transparent); color:var(--metaal)}
-.reset{justify-self:start; font-size:12.5px; font-family:var(--fu); color:var(--bad); background:transparent;
-  border:1px solid color-mix(in srgb,var(--bad) 35%,transparent); border-radius:9px; padding:7px 12px; cursor:pointer}
-
-/* ---------- shared ---------- */
-.view{display:flex; flex-direction:column; gap:14px; flex:1}
-.view[hidden]{display:none}
-.view.in{animation:vin .38s var(--sp) both}
-@keyframes vin{from{opacity:0; transform:translateY(10px)}to{opacity:1; transform:none}}
-.meta{display:flex; align-items:center; justify-content:space-between; gap:10px}
-.counter{font-family:var(--fm); font-size:12px; color:var(--muted); letter-spacing:.06em; font-variant-numeric:tabular-nums}
-.counter b{color:var(--text); font-weight:600}
-.mbtns{display:flex; gap:7px}
-.mini{font-family:var(--fu); font-size:11.5px; color:var(--muted); background:transparent; border:1px solid var(--line);
-  border-radius:8px; padding:6px 10px; cursor:pointer; transition:.2s var(--sp)}
-.mini:hover{color:var(--text); border-color:var(--muted2)}
-.track{height:3px; background:var(--line); border-radius:99px; overflow:hidden}
-.bar{height:100%; width:0%; border-radius:99px; background:var(--c);
-  box-shadow:0 0 14px -2px var(--c); transition:width .5s var(--sp)}
-.hint{margin:0; text-align:center; font-size:11.5px; color:var(--muted2); letter-spacing:.02em}
-.btn{font-family:var(--fd); font-size:14.5px; font-weight:600; padding:14px 18px; border-radius:13px;
-  border:1px solid var(--line); background:var(--surface); color:var(--text); cursor:pointer;
-  transition:transform .18s var(--sp), box-shadow .22s var(--sp), background .22s var(--sp)}
-.btn:active{transform:scale(.97)}
-.row2{display:grid; grid-template-columns:1fr 1fr; gap:10px}
-.btn.ok{color:var(--ok); border-color:color-mix(in srgb,var(--ok) 42%,transparent);
-  background:color-mix(in srgb,var(--ok) 9%,var(--surface)); box-shadow:0 0 22px -12px var(--ok)}
-.btn.bad{color:var(--bad); border-color:color-mix(in srgb,var(--bad) 42%,transparent);
-  background:color-mix(in srgb,var(--bad) 9%,var(--surface)); box-shadow:0 0 22px -12px var(--bad)}
-.btn.pri{color:var(--ink); background:var(--c); border-color:var(--c); box-shadow:0 0 26px -10px var(--c)}
-:focus-visible{outline:2px solid var(--c); outline-offset:3px; border-radius:6px}
-
-/* ---------- element tile ---------- */
-.tile{position:relative; border-radius:20px; border:1px solid color-mix(in srgb,var(--c) 40%,transparent);
-  background:linear-gradient(158deg, color-mix(in srgb,var(--c) 13%,var(--surface)) 0%, var(--surface) 58%, var(--ink2) 100%);
-  box-shadow:0 26px 60px -34px var(--c), inset 0 1px 0 color-mix(in srgb,var(--c) 22%,transparent);
-  overflow:hidden}
-.tile::after{content:""; position:absolute; inset:0; pointer-events:none;
-  background:radial-gradient(70% 50% at 50% 0%, color-mix(in srgb,var(--c) 14%,transparent), transparent 70%)}
-.z{position:absolute; top:12px; left:15px; font-family:var(--fm); font-size:12px; font-weight:500;
-  color:color-mix(in srgb,var(--c) 75%,var(--text)); letter-spacing:.04em; z-index:1}
-.cat{position:absolute; top:12px; right:15px; font-family:var(--fm); font-size:9.5px; letter-spacing:.14em;
-  text-transform:uppercase; color:color-mix(in srgb,var(--c) 70%,var(--muted)); z-index:1}
-.sym{font-family:var(--fd); font-weight:700; color:var(--c); letter-spacing:.01em; line-height:1;
-  text-shadow:0 0 26px color-mix(in srgb,var(--c) 70%,transparent), 0 0 60px color-mix(in srgb,var(--c) 35%,transparent)}
-.nm{font-family:var(--fd); font-weight:600; line-height:1.05; letter-spacing:.01em;
-  text-shadow:0 0 30px color-mix(in srgb,var(--c) 30%,transparent)}
-
-/* ---------- flashcards ---------- */
-.cardwrap{flex:1; min-height:270px; max-height:min(58dvh,470px); display:grid; touch-action:pan-y}
-.cardmove{perspective:1400px; will-change:transform}
-.card{position:relative; width:100%; height:100%; min-height:290px; transform-style:preserve-3d;
-  transition:transform .58s var(--sp); cursor:pointer}
-.card.flip{transform:rotateY(180deg)}
-.face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:34px 22px; text-align:center}
-.face.b{transform:rotateY(180deg)}
-.face .sym{font-size:clamp(64px,23vw,116px)}
-.face .nm{font-size:clamp(30px,10vw,50px)}
-.latin{font-family:var(--fm); font-size:13px; color:var(--muted); letter-spacing:.05em}
-.role{position:absolute; bottom:16px; font-family:var(--fm); font-size:9.5px; letter-spacing:.15em;
-  text-transform:uppercase; color:var(--muted2)}
-.done{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; padding:40px 24px; text-align:center}
-.done h2{font-family:var(--fd); font-size:26px; margin:0; color:var(--c); text-shadow:0 0 30px color-mix(in srgb,var(--c) 60%,transparent)}
-.done p{margin:0; color:var(--muted); font-size:14px; max-width:34ch}
-.score{font-family:var(--fd); font-size:56px; font-weight:700; color:var(--c); line-height:1;
-  font-variant-numeric:tabular-nums; text-shadow:0 0 34px color-mix(in srgb,var(--c) 55%,transparent)}
-
-/* ---------- quiz ---------- */
-.qtile{min-height:150px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:34px 20px 26px}
-.qtile .sym{font-size:clamp(52px,17vw,84px)}
-.qtile .nm{font-size:clamp(26px,8vw,40px)}
-.qask{margin:0; text-align:center; font-family:var(--fm); font-size:10.5px; letter-spacing:.14em;
-  text-transform:uppercase; color:var(--muted2)}
-.opts{display:grid; gap:9px}
-.opt{font-family:var(--fd); font-size:16px; font-weight:500; text-align:left; padding:15px 17px; border-radius:12px;
-  border:1px solid var(--line); background:var(--surface); color:var(--text); cursor:pointer;
-  transition:.2s var(--sp); display:flex; align-items:center; gap:12px}
-.opt .key{font-family:var(--fm); font-size:11px; color:var(--muted2); min-width:14px}
-.opt:hover:not(:disabled){border-color:color-mix(in srgb,var(--c) 55%,transparent); background:color-mix(in srgb,var(--c) 8%,var(--surface))}
-.opt:disabled{cursor:default}
-.opt.good{border-color:var(--ok); color:var(--ok); background:color-mix(in srgb,var(--ok) 12%,var(--surface)); box-shadow:0 0 26px -12px var(--ok)}
-.opt.wrong{border-color:var(--bad); color:var(--bad); background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
-.typewrap{display:grid; gap:9px}
-input[type=text]{font-family:var(--fd); font-size:18px; font-weight:500; padding:15px 17px; border-radius:12px;
-  border:1px solid var(--line); background:var(--surface); color:var(--text); width:100%; transition:.2s var(--sp)}
-input[type=text]::placeholder{color:var(--muted2); font-weight:400}
-input[type=text]:focus{outline:none; border-color:var(--c); box-shadow:0 0 24px -12px var(--c)}
-input.good{border-color:var(--ok); color:var(--ok)}
-input.wrong{border-color:var(--bad); color:var(--bad)}
-.fb{display:grid; gap:10px; padding:14px 16px; border-radius:13px; animation:vin .3s var(--sp) both}
-.fb.g{border:1px solid color-mix(in srgb,var(--ok) 40%,transparent); background:color-mix(in srgb,var(--ok) 8%,var(--surface))}
-.fb.b{border:1px solid color-mix(in srgb,var(--bad) 40%,transparent); background:color-mix(in srgb,var(--bad) 8%,var(--surface))}
-.fb .fbt{font-family:var(--fd); font-size:14.5px; font-weight:600}
-.fb.g .fbt{color:var(--ok)} .fb.b .fbt{color:var(--bad)}
-.fb .fbs{font-size:13px; color:var(--muted)}
-.fb .fbs b{color:var(--text); font-family:var(--fd); font-size:15px}
-.linkbtn{justify-self:start; background:transparent; border:0; color:var(--muted); font-size:12px;
-  text-decoration:underline; text-underline-offset:3px; cursor:pointer; padding:2px 0}
-.shake{animation:shake .34s}
-@keyframes shake{20%{transform:translateX(-7px)}45%{transform:translateX(6px)}70%{transform:translateX(-3px)}100%{transform:none}}
-
-/* ---------- match ---------- */
-.mgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px}
-.mt{position:relative; aspect-ratio:1/1.12; border-radius:13px; border:1px solid var(--line); background:var(--surface);
-  color:var(--text); font-family:var(--fd); font-weight:600; cursor:pointer; display:grid; place-items:center;
-  padding:6px; text-align:center; line-height:1.1; transition:.22s var(--sp); word-break:break-word}
-.mt.sy{font-size:26px}
-.mt.na{font-size:14px}
-.mt:hover{border-color:var(--muted2)}
-.mt.sel{border-color:var(--c); color:var(--c); background:color-mix(in srgb,var(--c) 12%,var(--surface));
-  box-shadow:0 0 24px -10px var(--c); transform:translateY(-2px)}
-.mt.miss{border-color:var(--bad); color:var(--bad); animation:shake .34s}
-.mt.gone{opacity:0; transform:scale(.82); pointer-events:none}
-
-/* ---------- stats ---------- */
-.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:9px}
-.stat{padding:13px 14px; border-radius:13px; border:1px solid var(--line); background:var(--ink2)}
-.stat b{display:block; font-family:var(--fd); font-size:24px; font-weight:700; line-height:1.1; font-variant-numeric:tabular-nums}
-.stat span{font-family:var(--fm); font-size:9.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--muted2)}
-.mastery{display:grid; gap:8px}
-.mastery .top2{display:flex; justify-content:space-between; align-items:baseline}
-.mastery .pct{font-family:var(--fd); font-size:15px; font-weight:600}
-.pgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(48px,1fr)); gap:6px}
-.pcell{position:relative; aspect-ratio:1/1; border-radius:9px; display:grid; place-items:center;
-  font-family:var(--fd); font-weight:600; font-size:14px; border:1px solid color-mix(in srgb,var(--c) 30%,transparent);
-  background:color-mix(in srgb,var(--c) calc(var(--m) * 1%), var(--ink2));
-  color:color-mix(in srgb,var(--c) 85%,var(--text)); transition:.3s var(--sp)}
-.pcell small{position:absolute; top:3px; left:5px; font-family:var(--fm); font-size:7.5px; opacity:.55; font-weight:400}
-.legend{display:flex; flex-wrap:wrap; gap:12px; font-size:11px; color:var(--muted)}
-.legend i{display:inline-block; width:9px; height:9px; border-radius:3px; margin-right:5px; vertical-align:-1px;
-  background:var(--c); box-shadow:0 0 10px -1px var(--c)}
-.note{font-size:11.5px; color:var(--muted2); line-height:1.55; margin:0}
-.wrongs{display:grid; gap:7px; width:100%}
-.wrow{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 13px;
-  border-radius:11px; border:1px solid var(--line); background:var(--ink2); text-align:left}
-.wrow .l{font-family:var(--fd); font-size:14px; color:var(--text)}
-.wrow .r{font-family:var(--fd); font-size:14px; color:var(--c)}
-.wrow .g{font-family:var(--fu); font-size:11.5px; color:var(--bad); text-decoration:line-through}
-/* ---------- installeren ---------- */
-.install{display:flex; align-items:center; gap:11px; padding:12px 13px; border-radius:14px;
-  border:1px solid color-mix(in srgb,var(--metaal) 34%,transparent);
-  background:linear-gradient(150deg,color-mix(in srgb,var(--metaal) 10%,var(--ink2)),var(--ink2));
-  box-shadow:0 0 32px -20px var(--metaal); animation:vin .4s var(--sp) both}
-.install[hidden]{display:none}
-.itxt{flex:1; min-width:0; display:grid; gap:2px}
-.itxt b{font-family:var(--fd); font-size:13.5px; font-weight:600; color:var(--text)}
-.itxt span{font-size:11.5px; color:var(--muted); line-height:1.45}
-.install .btn{--c:var(--metaal); flex:none; padding:10px 15px; font-size:13px}
-.ix{flex:none; width:28px; height:28px; border-radius:8px; border:1px solid var(--line);
-  background:transparent; color:var(--muted2); font-size:15px; line-height:1; cursor:pointer}
-.ix:hover{color:var(--text); border-color:var(--muted2)}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important}
-}
+.opties{display:grid; gap:12px}
+.optie{display:block; text-decoration:none; color:inherit; border-radius:18px; padding:19px;
+  border:1px solid color-mix(in srgb,var(--c) 36%,transparent);
+  background:linear-gradient(158deg,color-mix(in srgb,var(--c) 11%,var(--surface)) 0%,var(--surface) 62%,var(--ink2) 100%);
+  box-shadow:0 22px 50px -34px var(--c); transition:transform .2s var(--sp), box-shadow .25s var(--sp)}
+a.optie:hover{transform:translateY(-3px); box-shadow:0 26px 60px -30px var(--c)}
+a.optie:focus-visible{outline:2px solid var(--c); outline-offset:3px}
+.okop{display:flex; align-items:center; gap:12px}
+.merk{width:46px; height:46px; flex:none; display:grid; place-items:center; border-radius:14px;
+  border:1px solid color-mix(in srgb,var(--c) 45%,transparent);
+  background:linear-gradient(150deg,color-mix(in srgb,var(--c) 20%,var(--surface)),var(--surface));
+  box-shadow:0 0 22px -8px var(--c); font-family:var(--fd); font-weight:700; font-size:17px; color:var(--c)}
+.otitel{flex:1; min-width:0}
+.otitel b{display:block; font-family:var(--fd); font-size:19px; font-weight:700; line-height:1.12}
+.otitel span{font-family:var(--fm); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted2)}
+.datum{flex:none; font-family:var(--fm); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--paars); border:1px solid color-mix(in srgb,var(--paars) 45%,transparent);
+  background:color-mix(in srgb,var(--paars) 12%,transparent); border-radius:8px; padding:4px 8px}
+.pijl{flex:none; font-size:19px; color:var(--c); opacity:.75}
+.optie p{margin:12px 0 0; color:var(--muted); font-size:13.5px; line-height:1.55}
+.tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:11px}
+.tags span{font-family:var(--fm); font-size:10.5px; color:color-mix(in srgb,var(--c) 75%,var(--muted));
+  border:1px solid color-mix(in srgb,var(--c) 30%,transparent); border-radius:7px; padding:4px 9px}
+.voet{margin-top:4px; padding-top:16px; border-top:1px solid var(--line)}
+.voet p{margin:0; font-size:12.5px; color:var(--muted2); line-height:1.6}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
 </style>
-
+</head>
+<body>
 <div class="statusbar"></div>
-<div class="glow" id="glow"></div>
+<div class="glow"></div>
 <div class="grid-bg"></div>
 
-<div class="app">
-  <header class="top">
-    <div class="mark">Ne</div>
-    <div class="tt">
-      <h1>Neon Elementen</h1>
-      <p><span id="poolCount">45</span> elementen te kennen</p>
+<div class="wrap">
+  <header class="kop">
+    <a class="terug" href="../" aria-label="Terug naar het hoofdmenu" title="Hoofdmenu">←</a>
+    <div class="tekst">
+      <span class="eyebrow">Scheikunde · 4e middelbaar</span>
+      <h1>Chemie</h1>
+      <p>Twee dingen om te oefenen. Kies waar je mee bezig bent.</p>
     </div>
-    <button class="gear" id="gear" aria-expanded="false" aria-controls="panel" aria-label="Instellingen">⚙</button>
   </header>
 
-  <nav class="tabs" role="tablist" aria-label="Oefenmodus">
-    <button class="tab" role="tab" data-m="cards" aria-selected="true">Kaarten</button>
-    <button class="tab" role="tab" data-m="learn" aria-selected="false">Leren</button>
-    <button class="tab" role="tab" data-m="write" aria-selected="false">Schrijven</button>
-    <button class="tab" role="tab" data-m="match" aria-selected="false">Matchen</button>
-    <button class="tab" role="tab" data-m="test" aria-selected="false">Toets</button>
-    <button class="tab" role="tab" data-m="stats" aria-selected="false">Voortgang</button>
-  </nav>
+  <div class="opties">
+    <a class="optie" href="toets/" style="--c:#b06bff">
+      <div class="okop">
+        <div class="merk">OG</div>
+        <div class="otitel"><b>Kruisregel</b><span>Oxidatiegetallen en formules</span></div>
+        <span class="datum">Toets 17/09</span>
+      </div>
+      <p>OG bepalen in een formule, formules vormen met de kruisregel, stofklassen en bindingen
+        herkennen, plus de begrippen uit je samenvatting.</p>
+      <div class="tags"><span>OG bepalen</span><span>kruisregel</span><span>stofklassen</span>
+        <span>bindingen</span><span>OG-tabel</span></div>
+    </a>
 
-  <div class="panel" id="panel" hidden>
-    <div class="fset">
-      <span class="flabel">Groepen</span>
-      <div class="chips" id="catChips">
-        <button class="chip" data-cat="metaal" style="--cc:var(--metaal)" aria-pressed="true">Metalen</button>
-        <button class="chip" data-cat="nietmetaal" style="--cc:var(--nietmetaal)" aria-pressed="true">Niet-metalen</button>
-        <button class="chip" data-cat="edelgas" style="--cc:var(--edelgas)" aria-pressed="true">Edelgassen</button>
+    <a class="optie" href="elementen/" style="--c:#00e0ff">
+      <div class="okop">
+        <div class="merk">Ne</div>
+        <div class="otitel"><b>Neon Elementen</b><span>Symbolen en namen</span></div>
+        <span class="pijl">→</span>
       </div>
-    </div>
-    <div class="fset">
-      <span class="flabel">Vraagrichting</span>
-      <div class="seg" id="dirSeg">
-        <button data-d="name" aria-pressed="true">Symbool → naam</button>
-        <button data-d="sym" aria-pressed="false">Naam → symbool</button>
-        <button data-d="mix" aria-pressed="false">Door elkaar</button>
-      </div>
-    </div>
-    <div class="fset">
-      <span class="flabel">Extra</span>
-      <div class="chips">
-        <button class="chip" id="optChip" style="--cc:var(--metaal)" aria-pressed="true">Elementen tussen haakjes (Ge, U, Pu)</button>
-      </div>
-    </div>
-    <button class="reset" id="btnReset">Voortgang wissen</button>
+      <p>De 45 elementen die je moet blijven kennen: symbool, naam en groep — metalen,
+        niet-metalen en edelgassen.</p>
+      <div class="tags"><span>45 elementen</span><span>kaarten</span><span>leren</span>
+        <span>matchen</span><span>toets</span></div>
+    </a>
   </div>
 
-  <!-- KAARTEN -->
-  <section class="view in" id="v-cards" role="tabpanel">
-    <div class="meta">
-      <span class="counter"><b id="cPos">1</b> / <span id="cTot">45</span></span>
-      <div class="mbtns">
-        <button class="mini" id="btnShuffle">⇄ schudden</button>
-        <button class="mini" id="btnHard">moeilijke</button>
-      </div>
-    </div>
-    <div class="cardwrap"><div class="cardmove" id="cardMove"><div class="card" id="card" tabindex="0" role="button" aria-label="Kaart, tik om te draaien">
-      <div class="face f tile">
-        <span class="z" id="fz">26</span><span class="cat" id="fcat">metaal</span>
-        <div id="fmain" class="sym">Fe</div>
-        <span class="role" id="frole">symbool</span>
-      </div>
-      <div class="face b tile">
-        <span class="z" id="bz">26</span><span class="cat" id="bcat">metaal</span>
-        <div id="bmain" class="nm">ijzer</div>
-        <div class="latin" id="blatin">ferrum</div>
-        <span class="role">antwoord</span>
-      </div>
-    </div></div></div>
-    <div class="track"><div class="bar" id="cBar"></div></div>
-    <div class="row2">
-      <button class="btn bad" id="btnLearnMore">Nog leren</button>
-      <button class="btn ok" id="btnKnow">Ik ken dit</button>
-    </div>
-    <p class="hint">Tik op de kaart om te draaien · veeg naar links of rechts</p>
-  </section>
-
-  <!-- LEREN -->
-  <section class="view" id="v-learn" role="tabpanel" hidden>
-    <div class="meta">
-      <span class="counter">Ronde <b id="lRound">1</b></span>
-      <span class="counter"><b id="lDone">0</b> / <span id="lLen">7</span></span>
-    </div>
-    <div class="track"><div class="bar" id="lBar"></div></div>
-    <div id="lBody"></div>
-  </section>
-
-  <!-- SCHRIJVEN -->
-  <section class="view" id="v-write" role="tabpanel" hidden>
-    <div class="meta">
-      <span class="counter"><b id="wPos">1</b> / <span id="wTot">45</span></span>
-      <span class="counter">goed <b id="wRight">0</b></span>
-    </div>
-    <div class="track"><div class="bar" id="wBar"></div></div>
-    <div id="wBody"></div>
-  </section>
-
-  <!-- MATCHEN -->
-  <section class="view" id="v-match" role="tabpanel" hidden>
-    <div class="meta">
-      <span class="counter">tijd <b id="mTime">0.0</b>s · record <b id="mBest">–</b></span>
-      <button class="mini" id="btnMatchNew">nieuw spel</button>
-    </div>
-    <div class="mgrid" id="mGrid"></div>
-    <p class="hint">Koppel elke naam aan het juiste symbool</p>
-  </section>
-
-  <!-- TOETS -->
-  <section class="view" id="v-test" role="tabpanel" hidden>
-    <div class="meta">
-      <span class="counter"><b id="tPos">1</b> / <span id="tTot">20</span></span>
-      <button class="mini" id="btnTestNew">nieuwe toets</button>
-    </div>
-    <div class="track"><div class="bar" id="tBar"></div></div>
-    <div id="tBody"></div>
-  </section>
-
-  <!-- VOORTGANG -->
-  <section class="view" id="v-stats" role="tabpanel" hidden>
-    <div class="stats">
-      <div class="stat" style="--c:var(--ok)"><b id="sKnown" style="color:var(--ok)">0</b><span>beheerst</span></div>
-      <div class="stat" style="--c:var(--edelgas)"><b id="sBusy" style="color:var(--edelgas)">0</b><span>bezig</span></div>
-      <div class="stat"><b id="sNew" style="color:var(--muted)">45</b><span>nieuw</span></div>
-    </div>
-    <div class="mastery">
-      <div class="top2"><span class="flabel">Beheersing</span><span class="pct" id="sPct">0%</span></div>
-      <div class="track" style="--c:var(--ok)"><div class="bar" id="sBar" style="background:var(--ok); box-shadow:0 0 14px -2px var(--ok)"></div></div>
-    </div>
-    <div class="pgrid" id="pGrid"></div>
-    <div class="legend">
-      <span style="--c:var(--metaal)"><i></i>metalen</span>
-      <span style="--c:var(--nietmetaal)"><i></i>niet-metalen</span>
-      <span style="--c:var(--edelgas)"><i></i>edelgassen</span>
-    </div>
-    <p class="note">Elk vakje vult zich naarmate je het element vaker goed hebt (5 keer goed = vol). Fout beantwoorden zet het weer een stap terug — zo blijven de lastige elementen terugkomen in <b>Leren</b>.</p>
-  </section>
-
-  <div class="install" id="install" hidden>
-    <div class="itxt"><b>Zet 'm op je beginscherm</b><span id="ihow"></span></div>
-    <button class="btn pri" id="iBtn" hidden>Installeren</button>
-    <button class="ix" id="iClose" aria-label="Melding sluiten">&times;</button>
+  <div class="voet">
+    <p>Je hebt je PSE nodig bij een deel van de oefeningen. De gewone oxidatiegetallen staan ook
+      in de app zelf, onder het tabblad OG-tabel.</p>
   </div>
 </div>
 
 <script>
-(function(){
-"use strict";
-var $=function(s,r){return (r||document).querySelector(s)};
-
-/* naam, symbool, atoomnummer, groep, latijnse naam, optioneel(tussen haakjes in de lijst) */
-var DATA=[
- ["lithium","Li",3,"metaal"],["beryllium","Be",4,"metaal"],
- ["natrium","Na",11,"metaal"],["magnesium","Mg",12,"metaal"],["aluminium","Al",13,"metaal"],
- ["kalium","K",19,"metaal"],["calcium","Ca",20,"metaal"],["chroom","Cr",24,"metaal"],
- ["mangaan","Mn",25,"metaal"],["ijzer","Fe",26,"metaal","ferrum"],["kobalt","Co",27,"metaal"],
- ["nikkel","Ni",28,"metaal"],["koper","Cu",29,"metaal","cuprum"],["zink","Zn",30,"metaal"],
- ["germanium","Ge",32,"metaal","",1],
- ["zilver","Ag",47,"metaal","argentum"],["cadmium","Cd",48,"metaal"],["tin","Sn",50,"metaal","stannum"],
- ["antimoon","Sb",51,"metaal","stibium"],["barium","Ba",56,"metaal"],["platina","Pt",78,"metaal"],
- ["goud","Au",79,"metaal","aurum"],["kwik","Hg",80,"metaal","hydrargyrum"],["lood","Pb",82,"metaal","plumbum"],
- ["uraan","U",92,"metaal","",1],["plutonium","Pu",94,"metaal","",1],
- ["waterstof","H",1,"nietmetaal","hydrogenium"],["boor","B",5,"nietmetaal"],
- ["koolstof","C",6,"nietmetaal","carboneum"],["stikstof","N",7,"nietmetaal","nitrogenium"],
- ["zuurstof","O",8,"nietmetaal","oxygenium"],["fluor","F",9,"nietmetaal"],
- ["silicium","Si",14,"nietmetaal"],["fosfor","P",15,"nietmetaal","phosphorus"],
- ["zwavel","S",16,"nietmetaal","sulfur"],["chloor","Cl",17,"nietmetaal"],
- ["arseen","As",33,"nietmetaal"],["broom","Br",35,"nietmetaal"],["jood","I",53,"nietmetaal","iodium"],
- ["helium","He",2,"edelgas"],["neon","Ne",10,"edelgas"],["argon","Ar",18,"edelgas"],
- ["krypton","Kr",36,"edelgas"],["xenon","Xe",54,"edelgas"],["radon","Rn",86,"edelgas"]
-];
-var EL=DATA.map(function(d){return {name:d[0],sym:d[1],z:d[2],cat:d[3],alt:d[4]||"",opt:!!d[5]}});
-var CATL={metaal:"metaal",nietmetaal:"niet-metaal",edelgas:"edelgas"};
-
-/* ---------- state ---------- */
-var KEY="neon-elementen-v1";
-function def(){return {v:2,mode:"cards",dir:"name",cats:{metaal:true,nietmetaal:true,edelgas:true},opt:true,prog:{},best:null}}
-var S=def();
-try{var raw=JSON.parse(localStorage.getItem(KEY)||"null");
-  if(raw&&typeof raw==="object"){S=Object.assign(def(),raw); S.cats=Object.assign(def().cats,raw.cats||{}); S.prog=raw.prog||{}}
-  if(!S.v){S.v=2; S.dir="name"}   /* kaarten tonen standaard het symbool, de naam staat achterop */
-}catch(e){}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
-
-/* ---------- helpers ---------- */
-function rnd(n){return Math.floor(Math.random()*n)}
-function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=rnd(i+1);var t=a[i];a[i]=a[j];a[j]=t}return a}
-function norm(s){return (s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z]/g,"")}
-function ansOf(e,k){return k==="sym"?e.sym:e.name}
-function askOf(e,k){return k==="sym"?e.name:e.sym}
-function isOk(e,k,v){return k==="sym"?norm(v)===norm(e.sym):(norm(v)===norm(e.name)||(!!e.alt&&norm(v)===norm(e.alt)))}
-function pool(){return EL.filter(function(e){return S.cats[e.cat]&&(S.opt||!e.opt)})}
-function pickK(){return S.dir==="mix"?(Math.random()<.5?"sym":"name"):S.dir}
-function P(sym){if(!S.prog[sym])S.prog[sym]={b:0,r:0,w:0};return S.prog[sym]}
-function mark(e,good){var p=P(e.sym); if(good){p.r++;p.b=Math.min(5,p.b+1)}else{p.w++;p.b=Math.max(0,p.b-1)} save(); drawStats()}
-function setC(node,cat){node.style.setProperty("--c","var(--"+cat+")")}
-function glow(cat){$("#glow").style.setProperty("--c","var(--"+cat+")")}
-function el(tag,cls,txt){var n=document.createElement(tag); if(cls)n.className=cls; if(txt!=null)n.textContent=txt; return n}
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-
-/* ---------- tile markup ---------- */
-function tileNode(e,k,cls){
-  var t=el("div","tile qtile "+(cls||"")); setC(t,e.cat);
-  t.innerHTML='<span class="z">'+e.z+'</span><span class="cat">'+CATL[e.cat]+'</span>'+
-    '<div class="'+(k==="sym"?"nm":"sym")+'">'+esc(askOf(e,k))+'</div>';
-  return t;
-}
-
-/* ---------- question builder (gebruikt door Leren, Schrijven en Toets) ---------- */
-function makeQuestion(q,cfg){
-  var wrap=el("div"); wrap.style.display="grid"; wrap.style.gap="14px";
-  setC(wrap,q.e.cat); glow(q.e.cat);
-  wrap.appendChild(tileNode(q.e,q.k));
-  wrap.appendChild(el("p","qask",q.k==="sym"?"Wat is het symbool?":"Welk element is dit?"));
-  var settled=false;
-  function finish(good,given){ if(settled)return; settled=true; cfg.onDone(good,given) }
-
-  if(q.kind==="mc"){
-    var opts=shuffle([q.e].concat(distract(q.e,q.k,3)));
-    var box=el("div","opts");
-    opts.forEach(function(o,i){
-      var b=el("button","opt"); b.type="button";
-      b.innerHTML='<span class="key">'+(i+1)+'</span><span>'+esc(ansOf(o,q.k))+'</span>';
-      b.addEventListener("click",function(){
-        if(settled)return;
-        var good=ansOf(o,q.k)===ansOf(q.e,q.k);
-        if(cfg.immediate){
-          settled=true;
-          Array.prototype.forEach.call(box.children,function(c){c.disabled=true});
-          b.classList.add(good?"good":"wrong");
-          if(!good){Array.prototype.forEach.call(box.children,function(c){
-            if(c.textContent.slice(1)===ansOf(q.e,q.k))c.classList.add("good")})}
-          reveal(wrap,q,good,ansOf(o,q.k),cfg);
-        } else { settled=true; cfg.onDone(good,ansOf(o,q.k)) }
-      });
-      box.appendChild(b);
-    });
-    wrap.appendChild(box);
-  } else {
-    var tw=el("div","typewrap");
-    var inp=document.createElement("input"); inp.type="text";
-    inp.placeholder=q.k==="sym"?"symbool…":"naam van het element…";
-    inp.setAttribute("autocapitalize","off"); inp.setAttribute("autocorrect","off");
-    inp.setAttribute("autocomplete","off"); inp.setAttribute("spellcheck","false");
-    inp.setAttribute("enterkeyhint","go"); inp.setAttribute("aria-label","Jouw antwoord");
-    var go=el("button","btn pri","Nakijken"); go.type="button";
-    var skip=el("button","linkbtn","Weet ik niet"); skip.type="button";
-    function submit(){
-      if(settled)return;
-      var v=inp.value.trim(); if(!v)return;
-      var good=isOk(q.e,q.k,v);
-      if(cfg.immediate){
-        settled=true; inp.disabled=true; go.remove(); skip.remove();
-        inp.classList.add(good?"good":"wrong");
-        if(!good)inp.classList.add("shake");
-        reveal(wrap,q,good,v,cfg);
-      } else { settled=true; cfg.onDone(good,v) }
-    }
-    go.addEventListener("click",submit);
-    inp.addEventListener("keydown",function(ev){if(ev.key==="Enter")submit()});
-    skip.addEventListener("click",function(){
-      if(settled)return;
-      if(cfg.immediate){settled=true; inp.disabled=true; go.remove(); skip.remove(); inp.classList.add("wrong"); reveal(wrap,q,false,"",cfg)}
-      else{settled=true; cfg.onDone(false,"")}
-    });
-    tw.appendChild(inp); tw.appendChild(go); tw.appendChild(skip);
-    wrap.appendChild(tw);
-    setTimeout(function(){if(cfg.focus!==false)inp.focus()},260);
-  }
-  return wrap;
-}
-
-function reveal(wrap,q,good,given,cfg){
-  var fb=el("div","fb "+(good?"g":"b"));
-  fb.appendChild(el("div","fbt",good?"Goed":"Fout"));
-  var s=el("div","fbs");
-  s.innerHTML=(good?"":"Het juiste antwoord is <b>"+esc(ansOf(q.e,q.k))+"</b>. ")+
-    esc(q.e.name)+" · "+esc(q.e.sym)+" · nr "+q.e.z+(q.e.alt?" · "+esc(q.e.alt):"");
-  fb.appendChild(s);
-  if(!good && q.kind==="type" && given){
-    var ov=el("button","linkbtn","Toch goed rekenen"); ov.type="button";
-    ov.addEventListener("click",function(){cfg.onDone(true,given)});
-    fb.appendChild(ov);
-  }
-  if(good){
-    wrap.appendChild(fb);
-    setTimeout(function(){cfg.onDone(true,given)},620);
-  } else {
-    var nx=el("button","btn pri","Volgende"); nx.type="button";
-    nx.addEventListener("click",function(){cfg.onDone(false,given)});
-    fb.appendChild(nx);
-    wrap.appendChild(fb);
-    setTimeout(function(){nx.focus()},60);
-  }
-}
-
-function distract(e,k,n){
-  var same=shuffle(EL.filter(function(x){return x.cat===e.cat&&x.sym!==e.sym}));
-  var rest=shuffle(EL.filter(function(x){return x.cat!==e.cat&&x.sym!==e.sym}));
-  var all=same.concat(rest), out=[], seen={}; seen[ansOf(e,k)]=1;
-  for(var i=0;i<all.length&&out.length<n;i++){var v=ansOf(all[i],k); if(!seen[v]){seen[v]=1;out.push(all[i])}}
-  return out;
-}
-
-/* ---------- KAARTEN ---------- */
-var deck=[],ci=0,flipped=false;
-function cardsInit(hard){
-  var p=pool();
-  if(hard){var h=p.filter(function(e){return P(e.sym).b<3}); if(h.length)p=h}
-  deck=shuffle(p).map(function(e){return {e:e,k:pickK()}});
-  ci=0; flipped=false; $("#cTot").textContent=deck.length; drawCard();
-}
-function drawCard(){
-  var card=$("#card"), wrap=card.parentNode.parentNode;
-  card.classList.toggle("flip",flipped);
-  if(ci>=deck.length){ cardsDone(); return }
-  if($("#cardsDone"))$("#cardsDone").remove();
-  card.parentNode.style.display="";
-  var q=deck[ci], e=q.e;
-  setC(card,e.cat); glow(e.cat);
-  $("#fz").textContent=e.z; $("#bz").textContent=e.z;
-  $("#fcat").textContent=CATL[e.cat]; $("#bcat").textContent=CATL[e.cat];
-  var fm=$("#fmain"), bm=$("#bmain");
-  fm.textContent=askOf(e,q.k); fm.className=q.k==="sym"?"nm":"sym";
-  bm.textContent=ansOf(e,q.k); bm.className=q.k==="sym"?"sym":"nm";
-  $("#frole").textContent=q.k==="sym"?"naam":"symbool";
-  $("#blatin").textContent=e.alt?e.alt+" · nr "+e.z:"nr "+e.z;
-  $("#cPos").textContent=Math.min(ci+1,deck.length);
-  $("#cBar").style.width=(ci/deck.length*100)+"%";
-  $("#cBar").style.setProperty("--c","var(--"+e.cat+")");
-}
-function cardsDone(){
-  var mv=$("#cardMove"); mv.style.display="none";
-  if($("#cardsDone"))return;
-  var d=el("div","tile done"); d.id="cardsDone"; d.style.setProperty("--c","var(--ok)");
-  var n=deck.length;
-  d.appendChild(el("h2",null,"Stapel uit"));
-  d.appendChild(el("p",null,"Je hebt "+n+" kaarten gehad. Pak de moeilijke er nog eens uit, of schud opnieuw."));
-  var b=el("button","btn pri","Opnieuw schudden"); b.type="button";
-  b.addEventListener("click",function(){cardsInit(false)});
-  var b2=el("button","linkbtn","Alleen de moeilijke"); b2.type="button";
-  b2.addEventListener("click",function(){cardsInit(true)});
-  d.appendChild(b); d.appendChild(b2);
-  $(".cardwrap").appendChild(d);
-  $("#cBar").style.width="100%"; $("#cPos").textContent=n;
-}
-function advance(sign,good){
-  if(ci>=deck.length)return;
-  if(good!=null)mark(deck[ci].e,good);
-  var mv=$("#cardMove");
-  mv.style.transition="transform .26s ease-in, opacity .26s ease-in";
-  mv.style.transform="translateX("+(sign*115)+"%) rotate("+(sign*10)+"deg)";
-  mv.style.opacity="0";
-  setTimeout(function(){
-    ci++; flipped=false; drawCard();
-    mv.style.transition="none";
-    mv.style.transform="translateX("+(sign*-34)+"%)"; mv.style.opacity="0";
-    requestAnimationFrame(function(){
-      mv.style.transition="transform .34s var(--sp), opacity .34s var(--sp)";
-      mv.style.transform=""; mv.style.opacity="1";
-    });
-  },260);
-}
-function back(){ if(ci===0)return; var mv=$("#cardMove"); ci--; flipped=false; drawCard();
-  mv.style.transition="none"; mv.style.transform="translateX(-30%)"; mv.style.opacity="0";
-  requestAnimationFrame(function(){mv.style.transition="transform .34s var(--sp), opacity .34s var(--sp)"; mv.style.transform=""; mv.style.opacity="1"});
-}
-(function swipe(){
-  var mv=$("#cardMove"), x0=0,y0=0,dx=0,dy=0,down=false,moved=0,lock="";
-  mv.addEventListener("pointerdown",function(e){
-    if(ci>=deck.length)return;
-    down=true; x0=e.clientX; y0=e.clientY; dx=0; dy=0; moved=0; lock="";
-    mv.style.transition="none"; mv.setPointerCapture&&mv.setPointerCapture(e.pointerId);
-  });
-  mv.addEventListener("pointermove",function(e){
-    if(!down)return;
-    dx=e.clientX-x0; dy=e.clientY-y0; moved=Math.max(moved,Math.abs(dx),Math.abs(dy));
-    if(!lock&&moved>8)lock=Math.abs(dx)>Math.abs(dy)?"x":"y";
-    if(lock!=="x")return;
-    e.preventDefault();
-    mv.style.transform="translateX("+dx+"px) rotate("+(dx*.045)+"deg)";
-    mv.style.opacity=String(Math.max(.35,1-Math.abs(dx)/460));
-  });
-  function up(e){
-    if(!down)return; down=false;
-    if(lock!=="x"){
-      if(moved<9){flipped=!flipped; $("#card").classList.toggle("flip",flipped)}
-      mv.style.transition="transform .34s var(--sp), opacity .34s var(--sp)"; mv.style.transform=""; mv.style.opacity="1";
-      return;
-    }
-    if(dx<-70){advance(-1,null)}
-    else if(dx>70){ if(ci>0){back()} else {mv.style.transition="transform .34s var(--sp), opacity .34s var(--sp)"; mv.style.transform=""; mv.style.opacity="1"} }
-    else {mv.style.transition="transform .34s var(--sp), opacity .34s var(--sp)"; mv.style.transform=""; mv.style.opacity="1"}
-  }
-  mv.addEventListener("pointerup",up); mv.addEventListener("pointercancel",up);
-})();
-$("#card").addEventListener("keydown",function(e){
-  if(e.key===" "||e.key==="Enter"){e.preventDefault(); flipped=!flipped; $("#card").classList.toggle("flip",flipped)}
-});
-$("#btnShuffle").addEventListener("click",function(){cardsInit(false)});
-$("#btnHard").addEventListener("click",function(){cardsInit(true)});
-$("#btnKnow").addEventListener("click",function(){advance(-1,true)});
-$("#btnLearnMore").addEventListener("click",function(){advance(-1,false)});
-
-/* ---------- LEREN ---------- */
-var L={round:1,q:[],i:0,len:0};
-function learnInit(){
-  var p=shuffle(pool()).sort(function(a,b){return P(a.sym).b-P(b.sym).b}).slice(0,7);
-  L.q=p.map(function(e){return {e:e,k:pickK(),kind:P(e.sym).b<2?"mc":"type"}});
-  L.i=0; L.len=L.q.length; $("#lRound").textContent=L.round; $("#lLen").textContent=L.len;
-  learnStep();
-}
-function learnStep(){
-  var body=$("#lBody"); body.innerHTML="";
-  $("#lDone").textContent=Math.min(L.i,L.len);
-  $("#lBar").style.width=(L.len?L.i/L.len*100:0)+"%";
-  if(L.i>=L.q.length){
-    var d=el("div","tile done"); d.style.setProperty("--c","var(--ok)");
-    d.appendChild(el("h2",null,"Ronde "+L.round+" rond"));
-    d.appendChild(el("p",null,"De elementen die je fout had komen terug in de volgende ronde."));
-    var b=el("button","btn pri","Volgende ronde"); b.type="button";
-    b.addEventListener("click",function(){L.round++; learnInit()});
-    d.appendChild(b); body.appendChild(d);
-    glow("edelgas"); return;
-  }
-  var q=L.q[L.i];
-  $("#lBar").style.setProperty("--c","var(--"+q.e.cat+")");
-  body.appendChild(makeQuestion(q,{immediate:true,onDone:function(good){
-    mark(q.e,good);
-    if(!good)L.q.push({e:q.e,k:q.k,kind:"mc"});
-    L.i++; $("#lLen").textContent=L.q.length; L.len=L.q.length; learnStep();
-  }}));
-}
-
-/* ---------- SCHRIJVEN ---------- */
-var W={q:[],i:0,right:0};
-function writeInit(){
-  W.q=shuffle(pool()).map(function(e){return {e:e,k:pickK(),kind:"type"}});
-  W.i=0; W.right=0; $("#wTot").textContent=W.q.length; writeStep();
-}
-function writeStep(){
-  var body=$("#wBody"); body.innerHTML="";
-  $("#wPos").textContent=Math.min(W.i+1,W.q.length);
-  $("#wRight").textContent=W.right;
-  $("#wBar").style.width=(W.q.length?W.i/W.q.length*100:0)+"%";
-  if(W.i>=W.q.length){
-    var d=el("div","tile done"); d.style.setProperty("--c","var(--ok)");
-    d.appendChild(el("h2",null,"Klaar"));
-    d.appendChild(el("div","score",W.right+"/"+W.q.length));
-    d.appendChild(el("p",null,"Alles ingetypt. Nog een rondje?"));
-    var b=el("button","btn pri","Opnieuw"); b.type="button";
-    b.addEventListener("click",writeInit); d.appendChild(b); body.appendChild(d); return;
-  }
-  var q=W.q[W.i];
-  $("#wBar").style.setProperty("--c","var(--"+q.e.cat+")");
-  body.appendChild(makeQuestion(q,{immediate:true,onDone:function(good){
-    mark(q.e,good); if(good)W.right++; W.i++; writeStep();
-  }}));
-}
-
-/* ---------- MATCHEN ---------- */
-var M={tiles:[],sel:null,left:0,t0:0,timer:null,lock:false};
-function matchInit(){
-  clearInterval(M.timer);
-  var p=shuffle(pool()).sort(function(a,b){return P(a.sym).b-P(b.sym).b}).slice(0,6);
-  p=shuffle(p);
-  var arr=[];
-  p.forEach(function(e,i){arr.push({id:i,e:e,t:"na",txt:e.name}); arr.push({id:i,e:e,t:"sy",txt:e.sym})});
-  M.tiles=shuffle(arr); M.sel=null; M.left=p.length; M.lock=false;
-  var g=$("#mGrid"); g.innerHTML="";
-  M.tiles.forEach(function(t){
-    var b=el("button","mt "+t.t,t.txt); b.type="button"; setC(b,t.e.cat);
-    b.addEventListener("click",function(){matchTap(b,t)});
-    t.node=b; g.appendChild(b);
-  });
-  $("#mBest").textContent=S.best?S.best.toFixed(1)+"s":"–";
-  $("#mTime").textContent="0.0";
-  M.t0=0;
-  glow(p[0]?p[0].cat:"metaal");
-}
-function matchTap(node,t){
-  if(M.lock||node.classList.contains("gone"))return;
-  if(!M.t0){M.t0=Date.now(); M.timer=setInterval(function(){$("#mTime").textContent=((Date.now()-M.t0)/1000).toFixed(1)},100)}
-  if(M.sel&&M.sel.node===node){node.classList.remove("sel"); M.sel=null; return}
-  if(!M.sel){node.classList.add("sel"); M.sel=t; return}
-  var a=M.sel, b=t;
-  if(a.id===b.id&&a.t!==b.t){
-    a.node.classList.remove("sel");
-    a.node.classList.add("gone"); b.node.classList.add("gone");
-    mark(a.e,true); M.sel=null; M.left--;
-    if(M.left===0)matchDone();
-  } else {
-    M.lock=true; mark(b.e,false);
-    a.node.classList.remove("sel"); a.node.classList.add("miss"); b.node.classList.add("miss");
-    setTimeout(function(){a.node.classList.remove("miss"); b.node.classList.remove("miss"); M.sel=null; M.lock=false},420);
-  }
-}
-function matchDone(){
-  clearInterval(M.timer);
-  var t=(Date.now()-M.t0)/1000;
-  $("#mTime").textContent=t.toFixed(1);
-  var rec=!S.best||t<S.best;
-  if(rec){S.best=t; save()}
-  $("#mBest").textContent=S.best.toFixed(1)+"s";
-  var g=$("#mGrid"); g.innerHTML="";
-  var d=el("div","tile done"); d.style.gridColumn="1 / -1"; d.style.setProperty("--c","var(--ok)");
-  d.appendChild(el("h2",null,rec?"Nieuw record":"Alles gekoppeld"));
-  d.appendChild(el("div","score",t.toFixed(1)+"s"));
-  var b=el("button","btn pri","Nog een keer"); b.type="button";
-  b.addEventListener("click",matchInit); d.appendChild(b); g.appendChild(d);
-}
-$("#btnMatchNew").addEventListener("click",matchInit);
-
-/* ---------- TOETS ---------- */
-var T={q:[],i:0,ans:[]};
-function testInit(){
-  var p=shuffle(pool()); var n=Math.min(20,p.length);
-  T.q=p.slice(0,n).map(function(e,i){return {e:e,k:pickK(),kind:i%2?"type":"mc"}});
-  T.i=0; T.ans=[]; $("#tTot").textContent=n; testStep();
-}
-function testStep(){
-  var body=$("#tBody"); body.innerHTML="";
-  $("#tPos").textContent=Math.min(T.i+1,T.q.length);
-  $("#tBar").style.width=(T.q.length?T.i/T.q.length*100:0)+"%";
-  if(T.i>=T.q.length){testResult();return}
-  var q=T.q[T.i];
-  $("#tBar").style.setProperty("--c","var(--"+q.e.cat+")");
-  body.appendChild(makeQuestion(q,{immediate:false,onDone:function(good,given){
-    mark(q.e,good); T.ans.push({q:q,good:good,given:given}); T.i++; testStep();
-  }}));
-}
-function testResult(){
-  var body=$("#tBody"); body.innerHTML="";
-  var right=T.ans.filter(function(a){return a.good}).length, n=T.ans.length;
-  var pct=Math.round(right/n*100);
-  var d=el("div","tile done"); d.style.setProperty("--c",pct>=70?"var(--ok)":"var(--edelgas)");
-  d.appendChild(el("h2",null,pct>=90?"Bijna vlekkeloos":pct>=70?"Goed bezig":"Nog even oefenen"));
-  d.appendChild(el("div","score",right+"/"+n));
-  d.appendChild(el("p",null,pct+"% goed"));
-  var wrongs=T.ans.filter(function(a){return !a.good});
-  if(wrongs.length){
-    var list=el("div","wrongs");
-    wrongs.forEach(function(a){
-      var r=el("div","wrow");
-      var l=el("span","l",askOf(a.q.e,a.q.k));
-      var right2=el("span","r",ansOf(a.q.e,a.q.k)); right2.style.setProperty("color","var(--"+a.q.e.cat+")");
-      var g=el("span","g",a.given||"leeg");
-      var box=el("span"); box.style.display="flex"; box.style.gap="10px"; box.style.alignItems="baseline";
-      box.appendChild(g); box.appendChild(right2);
-      r.appendChild(l); r.appendChild(box); list.appendChild(r);
-    });
-    d.appendChild(list);
-  }
-  var b=el("button","btn pri","Nieuwe toets"); b.type="button";
-  b.addEventListener("click",testInit); d.appendChild(b);
-  body.appendChild(d);
-  $("#tBar").style.width="100%"; $("#tPos").textContent=n;
-  glow(pct>=70?"metaal":"nietmetaal");
-}
-$("#btnTestNew").addEventListener("click",testInit);
-
-/* ---------- VOORTGANG ---------- */
-function drawStats(){
-  var p=pool(), known=0, busy=0, sum=0;
-  p.forEach(function(e){var b=P(e.sym).b; sum+=b; if(b>=4)known++; else if(b>0)busy++});
-  $("#sKnown").textContent=known; $("#sBusy").textContent=busy; $("#sNew").textContent=p.length-known-busy;
-  var pct=p.length?Math.round(sum/(p.length*5)*100):0;
-  $("#sPct").textContent=pct+"%"; $("#sBar").style.width=pct+"%";
-  $("#poolCount").textContent=p.length;
-  var g=$("#pGrid"); g.innerHTML="";
-  p.forEach(function(e){
-    var b=P(e.sym).b;
-    var c=el("div","pcell"); setC(c,e.cat);
-    c.style.setProperty("--m",String(10+b*17));
-    c.title=e.name+" · "+e.sym+" · "+b+"/5";
-    c.innerHTML='<small>'+e.z+'</small>'+esc(e.sym);
-    g.appendChild(c);
-  });
-}
-
-/* ---------- modus & instellingen ---------- */
-var INIT={cards:function(){cardsInit(false)},learn:learnInit,write:writeInit,match:matchInit,test:testInit,stats:drawStats};
-function setMode(m){
-  S.mode=m; save();
-  Array.prototype.forEach.call(document.querySelectorAll(".tab"),function(b){
-    b.setAttribute("aria-selected",String(b.dataset.m===m));
-  });
-  Array.prototype.forEach.call(document.querySelectorAll(".view"),function(v){v.hidden=(v.id!=="v-"+m)});
-  var v=$("#v-"+m); v.classList.remove("in"); void v.offsetWidth; v.classList.add("in");
-  if(m==="cards"){$("#cardMove").style.display=""; if($("#cardsDone"))$("#cardsDone").remove()}
-  INIT[m]();
-}
-Array.prototype.forEach.call(document.querySelectorAll(".tab"),function(b){
-  b.addEventListener("click",function(){setMode(b.dataset.m)});
-});
-$("#gear").addEventListener("click",function(){
-  var p=$("#panel"), open=p.hidden;
-  p.hidden=!open; $("#gear").setAttribute("aria-expanded",String(open));
-});
-function refresh(){ drawStats(); INIT[S.mode]() }
-Array.prototype.forEach.call(document.querySelectorAll("#catChips .chip"),function(b){
-  b.addEventListener("click",function(){
-    var c=b.dataset.cat, on=!S.cats[c];
-    var count=Object.keys(S.cats).filter(function(k){return S.cats[k]}).length;
-    if(!on&&count<=1)return;
-    S.cats[c]=on; b.setAttribute("aria-pressed",String(on)); save(); refresh();
-  });
-});
-Array.prototype.forEach.call(document.querySelectorAll("#dirSeg button"),function(b){
-  b.addEventListener("click",function(){
-    S.dir=b.dataset.d; save();
-    Array.prototype.forEach.call(document.querySelectorAll("#dirSeg button"),function(x){
-      x.setAttribute("aria-pressed",String(x.dataset.d===S.dir))});
-    refresh();
-  });
-});
-$("#optChip").addEventListener("click",function(){
-  S.opt=!S.opt; $("#optChip").setAttribute("aria-pressed",String(S.opt)); save(); refresh();
-});
-$("#btnReset").addEventListener("click",function(){
-  if(!confirm("Alle voortgang en je matchrecord wissen?"))return;
-  S.prog={}; S.best=null; save(); refresh();
-});
-document.addEventListener("keydown",function(e){
-  if(S.mode!=="cards")return;
-  if(e.target&&e.target.tagName==="INPUT")return;
-  if(e.key==="ArrowRight"){e.preventDefault();advance(-1,null)}
-  if(e.key==="ArrowLeft"){e.preventDefault();back()}
-});
-
-/* ---------- installeren op het beginscherm ---------- */
-(function(){
-  var box=$("#install"), how=$("#ihow"), btn=$("#iBtn"), shut=$("#iClose"), deferred=null;
-  var standalone=(window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches)||window.navigator.standalone===true;
-  var hidden=false; try{hidden=localStorage.getItem("neon-install-weg")==="1"}catch(e){}
-  if(standalone||hidden)return;
-  var ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
-  function show(txt,metKnop){how.textContent=txt; btn.hidden=!metKnop; box.hidden=false}
-  window.addEventListener("beforeinstallprompt",function(e){
-    e.preventDefault(); deferred=e;
-    show("Installeren duurt een seconde. Daarna werkt de app offline en staat hij tussen je andere apps.",true);
-  });
-  btn.addEventListener("click",function(){
-    if(!deferred)return;
-    deferred.prompt();
-    deferred.userChoice.then(function(){deferred=null; box.hidden=true});
-  });
-  shut.addEventListener("click",function(){
-    box.hidden=true; try{localStorage.setItem("neon-install-weg","1")}catch(e){}
-  });
-  window.addEventListener("appinstalled",function(){box.hidden=true});
-  if(ios)show("Tik in Safari op de deelknop onderin en kies “Zet op beginscherm”.",false);
-})();
-
-/* ---------- start ---------- */
-Array.prototype.forEach.call(document.querySelectorAll("#catChips .chip"),function(b){
-  b.setAttribute("aria-pressed",String(!!S.cats[b.dataset.cat]))});
-Array.prototype.forEach.call(document.querySelectorAll("#dirSeg button"),function(x){
-  x.setAttribute("aria-pressed",String(x.dataset.d===S.dir))});
-$("#optChip").setAttribute("aria-pressed",String(S.opt));
-drawStats();
-setMode(S.mode&&INIT[S.mode]?S.mode:"cards");
-})();
-</script>
-<script>
-if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}
+if("serviceWorker" in navigator){window.addEventListener("load",function(){
+  navigator.serviceWorker.register("sw.js").catch(function(){});
+})}
 </script>
 </body>
 </html>

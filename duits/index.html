@@ -49,6 +49,10 @@ img{max-width:100%}
 
 /* ---------- kop ---------- */
 .top{display:flex; align-items:center; gap:11px}
+.terug{width:40px; height:40px; flex:none; display:grid; place-items:center; border-radius:12px;
+  border:1px solid var(--line); background:var(--surface); color:var(--muted); font-size:18px;
+  text-decoration:none; transition:.2s var(--sp)}
+.terug:hover{color:var(--goud); border-color:color-mix(in srgb,var(--goud) 50%,transparent)}
 .mark{width:40px; height:40px; flex:none; display:grid; place-items:center; border-radius:12px;
   border:1px solid color-mix(in srgb,var(--goud) 45%,transparent);
   background:linear-gradient(150deg,color-mix(in srgb,var(--goud) 18%,var(--surface)),var(--surface));
@@ -311,6 +315,7 @@ input.goed{border-color:var(--ok); color:var(--ok)} input.fout{border-color:var(
 
 <div class="app">
   <header class="top">
+    <a class="terug" href="../" aria-label="Terug naar het hoofdmenu" title="Hoofdmenu">←</a>
     <div class="mark">W</div>
     <div class="tt">
       <h1>Wortschatz</h1>

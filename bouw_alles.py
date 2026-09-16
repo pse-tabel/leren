@@ -11,9 +11,11 @@ HIER = os.path.dirname(os.path.abspath(__file__))
 BRON = os.path.dirname(HIER)
 
 VAKKEN = [
-    ("chemie", os.path.join(BRON, "neon-elementen")),
-    ("frans",  os.path.join(BRON, "frans")),
-    ("duits",  os.path.join(BRON, "duits")),
+    ("chemie",           os.path.join(BRON, "chemie-menu")),
+    ("chemie/elementen", os.path.join(BRON, "neon-elementen")),
+    ("chemie/toets",     os.path.join(BRON, "chemie-toets")),
+    ("frans",            os.path.join(BRON, "frans")),
+    ("duits",            os.path.join(BRON, "duits")),
 ]
 
 BESTANDEN = ["index.html", "manifest.webmanifest", "sw.js", "icon-180.png", "icon-512.png"]

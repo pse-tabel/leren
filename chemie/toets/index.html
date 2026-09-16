@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06070d">
+<meta name="description" content="Oefenen op oxidatiegetallen, de kruisregel, stofklassen en bindingen.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kruisregel">
+<title>Kruisregel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --ink:#06070d; --ink2:#0a0c16; --surface:#10131f; --surface2:#171b2c;
+  --line:#242a44; --line2:#333b60;
+  --text:#e2e6f5; --muted:#848ba8; --muted2:#5c6382;
+  --cyan:#00e0ff; --pos:#ff8a3d; --neg:#4d8cff; --paars:#b06bff;
+  --ok:#31ffb0; --bad:#ff3d5e;
+  --c:var(--cyan);
+  --fd:"Chakra Petch",ui-sans-serif,system-ui,sans-serif;
+  --fu:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --fm:"IBM Plex Mono",ui-monospace,SFMono-Regular,monospace;
+  --sp:cubic-bezier(.2,.9,.25,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ink); color:var(--text); font-family:var(--fu); min-height:100dvh;
+  -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent; overflow-x:hidden}
+[hidden]{display:none!important}
+.glow{position:fixed; inset:-28% -20% auto -20%; height:76vh; z-index:0; pointer-events:none;
+  background:radial-gradient(44% 40% at 24% 26%, color-mix(in srgb,var(--c) 24%,transparent) 0%, transparent 70%),
+             radial-gradient(34% 30% at 80% 8%, color-mix(in srgb,var(--paars) 14%,transparent) 0%, transparent 70%);
+  filter:blur(32px); transition:background .9s ease}
+.grid-bg{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.3;
+  background-image:linear-gradient(color-mix(in srgb,var(--line) 55%,transparent) 1px,transparent 1px),
+                   linear-gradient(90deg,color-mix(in srgb,var(--line) 55%,transparent) 1px,transparent 1px);
+  background-size:54px 54px;
+  -webkit-mask-image:radial-gradient(70% 55% at 50% 20%,#000,transparent 78%);
+  mask-image:radial-gradient(70% 55% at 50% 20%,#000,transparent 78%)}
+.statusbar{position:fixed; top:0; left:0; right:0; height:env(safe-area-inset-top); z-index:20;
+  pointer-events:none; background:color-mix(in srgb,var(--ink) 78%,transparent);
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px)}
+.app{position:relative; z-index:1; max-width:540px; margin:0 auto; min-height:100dvh;
+  display:flex; flex-direction:column; gap:13px;
+  padding:calc(14px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right))
+          calc(20px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left));}
+
+.top{display:flex; align-items:center; gap:10px}
+.terug{width:40px; height:40px; flex:none; display:grid; place-items:center; border-radius:12px;
+  border:1px solid var(--line); background:var(--surface); color:var(--muted); font-size:18px;
+  text-decoration:none; transition:.2s var(--sp)}
+.terug:hover{color:var(--cyan); border-color:color-mix(in srgb,var(--cyan) 50%,transparent)}
+.tt{flex:1; min-width:0}
+.tt h1{font-family:var(--fd); font-size:20px; font-weight:700; margin:0; line-height:1.05}
+.tt p{margin:2px 0 0; font-size:10.5px; color:var(--muted2); letter-spacing:.1em; text-transform:uppercase;
+  font-family:var(--fm); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.datum{flex:none; font-family:var(--fm); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--paars); border:1px solid color-mix(in srgb,var(--paars) 45%,transparent);
+  background:color-mix(in srgb,var(--paars) 12%,transparent); border-radius:8px; padding:5px 9px}
+
+.tabs{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; margin:0 -16px; padding:1px 16px 3px;
+  -webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 30px),transparent);
+  mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 30px),transparent)}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none; font-family:var(--fu); font-size:13px; font-weight:600; padding:8px 13px; border-radius:99px;
+  border:1px solid var(--line); background:var(--ink2); color:var(--muted); cursor:pointer;
+  transition:.22s var(--sp); white-space:nowrap}
+.tab:hover{color:var(--text)}
+.tab[aria-selected="true"]{color:var(--ink); background:var(--text); border-color:var(--text)}
+
+.view{display:flex; flex-direction:column; gap:13px; flex:1}
+.view.in{animation:vin .34s var(--sp) both}
+@keyframes vin{from{opacity:0; transform:translateY(9px)}to{opacity:1; transform:none}}
+.meta{display:flex; align-items:center; justify-content:space-between; gap:10px}
+.counter{font-family:var(--fm); font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums}
+.counter b{color:var(--text); font-weight:600}
+.mini{font-family:var(--fu); font-size:11.5px; font-weight:600; color:var(--muted); background:transparent;
+  border:1px solid var(--line); border-radius:8px; padding:6px 10px; cursor:pointer}
+.mini:hover{color:var(--text); border-color:var(--line2)}
+.track{height:3px; background:var(--line); border-radius:99px; overflow:hidden}
+.bar{height:100%; width:0%; background:var(--c); box-shadow:0 0 12px -2px var(--c); border-radius:99px;
+  transition:width .45s var(--sp)}
+.btn{font-family:var(--fd); font-size:14.5px; font-weight:700; padding:14px 18px; border-radius:12px;
+  border:1px solid var(--line); background:var(--surface); color:var(--text); cursor:pointer;
+  transition:transform .16s var(--sp)}
+.btn:active{transform:scale(.975)}
+.btn.pri{color:var(--ink); background:var(--c); border-color:var(--c)}
+.linkbtn{justify-self:start; background:transparent; border:0; color:var(--muted); font-size:12px;
+  text-decoration:underline; text-underline-offset:3px; cursor:pointer; padding:2px 0}
+:focus-visible{outline:2px solid var(--c); outline-offset:3px; border-radius:6px}
+
+.tegel{position:relative; border-radius:18px; border:1px solid color-mix(in srgb,var(--c) 36%,transparent);
+  background:linear-gradient(158deg,color-mix(in srgb,var(--c) 11%,var(--surface)) 0%,var(--surface) 60%,var(--ink2) 100%);
+  box-shadow:0 24px 56px -34px var(--c); overflow:hidden}
+.badge{position:absolute; top:12px; left:15px; font-family:var(--fm); font-size:9.5px; letter-spacing:.13em;
+  text-transform:uppercase; color:color-mix(in srgb,var(--c) 70%,var(--muted)); z-index:1}
+.vraagtegel{min-height:140px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:9px; padding:40px 20px 26px; text-align:center}
+.formule{font-family:var(--fd); font-weight:700; font-size:clamp(30px,9vw,46px); letter-spacing:.01em;
+  color:var(--c); line-height:1.1}
+.formule sub{font-size:.62em; vertical-align:-.18em; margin-left:.02em}
+.formule sup{font-size:.58em; vertical-align:.4em}
+.onder{font-family:var(--fm); font-size:12.5px; color:var(--muted)}
+.vraag{margin:0; text-align:center; font-family:var(--fm); font-size:10px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted2)}
+
+.opts{display:grid; gap:8px}
+.opt{font-family:var(--fu); font-size:15px; font-weight:600; text-align:left; padding:14px 16px; border-radius:11px;
+  border:1px solid var(--line); background:var(--surface); color:var(--text); cursor:pointer;
+  display:flex; gap:11px; align-items:center; transition:.18s var(--sp)}
+.opt .k{font-family:var(--fm); font-size:10.5px; color:var(--muted2); min-width:12px}
+.opt:hover:not(:disabled){border-color:color-mix(in srgb,var(--c) 50%,transparent)}
+.opt.goed{border-color:var(--ok); color:var(--ok); background:color-mix(in srgb,var(--ok) 11%,var(--surface))}
+.opt.fout{border-color:var(--bad); color:var(--bad); background:color-mix(in srgb,var(--bad) 11%,var(--surface))}
+input[type=text]{font-family:var(--fd); font-size:19px; font-weight:700; padding:14px 16px; border-radius:11px;
+  border:1px solid var(--line); background:var(--surface); color:var(--text); width:100%; text-align:center}
+input[type=text]::placeholder{color:var(--muted2); font-weight:400; font-size:15px}
+input[type=text]:focus{outline:none; border-color:var(--c)}
+input.goed{border-color:var(--ok); color:var(--ok)} input.fout{border-color:var(--bad); color:var(--bad)}
+.typewrap{display:grid; gap:8px}
+.fb{display:grid; gap:9px; padding:13px 15px; border-radius:12px; animation:vin .26s var(--sp) both}
+.fb.g{border:1px solid color-mix(in srgb,var(--ok) 40%,transparent); background:color-mix(in srgb,var(--ok) 8%,var(--surface))}
+.fb.b{border:1px solid color-mix(in srgb,var(--bad) 40%,transparent); background:color-mix(in srgb,var(--bad) 8%,var(--surface))}
+.fbt{font-family:var(--fd); font-size:14.5px; font-weight:700}
+.fb.g .fbt{color:var(--ok)} .fb.b .fbt{color:var(--bad)}
+.fbs{font-size:13px; color:var(--muted); line-height:1.6}
+.fbs b{color:var(--text)}
+.shake{animation:shake .32s}
+@keyframes shake{20%{transform:translateX(-6px)}45%{transform:translateX(5px)}70%{transform:translateX(-3px)}100%{transform:none}}
+
+/* rekenregel zoals in je schrift */
+.rekenrij{display:flex; justify-content:center; gap:0; margin-top:4px;
+  font-family:var(--fm); font-size:14px; border:1px solid var(--line2); border-radius:9px; overflow:hidden}
+.rekenrij div{padding:7px 11px; border-right:1px solid var(--line2); min-width:46px; text-align:center}
+.rekenrij div:last-child{border-right:0}
+.rekenrij .kop{color:var(--muted2); font-size:11px}
+.rekenrij .og{color:var(--text); font-weight:600}
+.rk{display:grid; gap:2px; margin-top:8px}
+.rk .som{font-family:var(--fm); font-size:13px; color:var(--muted)}
+.rk .som b{color:var(--ok)}
+
+/* OG-knoppen */
+.ogknoppen{display:grid; grid-template-columns:repeat(4,1fr); gap:7px}
+.ogknop{font-family:var(--fd); font-size:16px; font-weight:700; padding:14px 4px; border-radius:11px;
+  cursor:pointer; background:var(--surface); border:1px solid var(--line); color:var(--text);
+  transition:.16s var(--sp)}
+.ogknop.pos{color:var(--pos); border-color:color-mix(in srgb,var(--pos) 35%,transparent)}
+.ogknop.neg{color:var(--neg); border-color:color-mix(in srgb,var(--neg) 35%,transparent)}
+.ogknop:hover:not(:disabled){transform:translateY(-2px)}
+.ogknop.goed{background:color-mix(in srgb,var(--ok) 18%,var(--surface)); border-color:var(--ok); color:var(--ok)}
+.ogknop.fout{background:color-mix(in srgb,var(--bad) 16%,var(--surface)); border-color:var(--bad); color:var(--bad)}
+
+/* tabel */
+.tblok{border:1px solid var(--line); border-radius:13px; overflow:hidden; background:var(--ink2)}
+.tkop{padding:11px 14px 9px; border-bottom:1px solid var(--line);
+  background:linear-gradient(160deg,color-mix(in srgb,var(--c) 10%,var(--ink2)),var(--ink2))}
+.tkop b{display:block; font-family:var(--fd); font-size:15px; font-weight:700}
+.tkop span{font-family:var(--fm); font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted2)}
+.trij{display:grid; grid-template-columns:1fr auto; gap:12px; padding:7px 14px; font-size:13.5px;
+  border-bottom:1px solid color-mix(in srgb,var(--line) 55%,transparent)}
+.trij:last-child{border-bottom:0}
+.trij .l{color:var(--text)}
+.trij .r{font-family:var(--fm); font-weight:600}
+.trij .r.pos{color:var(--pos)} .trij .r.neg{color:var(--neg)}
+.tgrid{display:flex; flex-wrap:wrap; gap:6px; padding:11px 14px}
+.tgrid span{font-family:var(--fm); font-size:12px; padding:5px 9px; border-radius:7px;
+  border:1px solid var(--line2); background:var(--surface)}
+.tgrid span b{color:var(--pos); font-weight:600}
+.tgrid span.n b{color:var(--neg)}
+.note{font-size:11.5px; color:var(--muted2); line-height:1.55; margin:0}
+
+.klaar{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+  padding:38px 22px; text-align:center}
+.klaar h2{font-family:var(--fd); font-size:24px; margin:0; color:var(--c); font-weight:700}
+.klaar p{margin:0; color:var(--muted); font-size:13.5px; max-width:36ch}
+.score{font-family:var(--fd); font-size:52px; font-weight:700; color:var(--c); line-height:1; font-variant-numeric:tabular-nums}
+
+@media print{
+  .glow,.grid-bg,.statusbar,.tabs,.meta,.terug,.datum{display:none!important}
+  body{background:#fff; color:#000}
+  .app{max-width:none; padding:0; display:block}
+  .tt h1{color:#000} .tt p{color:#555}
+  .tblok{break-inside:avoid; border:1px solid #bbb; background:#fff; margin:0 0 10px}
+  .tkop{background:#f2f2f2; border-bottom:1px solid #bbb} .tkop b{color:#000} .tkop span{color:#555}
+  .trij{border-bottom:1px solid #e4e4e4; font-size:11px} .trij .l{color:#000} .trij .r{color:#000}
+  .tgrid span{border:1px solid #ccc; background:#fff} .tgrid span b{color:#000}
+}
+@media (min-width:660px){
+  .app{max-width:720px; padding-left:26px; padding-right:26px}
+  .tabs{flex-wrap:wrap; overflow:visible; margin:0; padding:0; -webkit-mask-image:none; mask-image:none}
+  .opts{grid-template-columns:1fr 1fr}
+  .ogknoppen{grid-template-columns:repeat(8,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important; transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="statusbar"></div>
+<div class="glow" id="glow"></div>
+<div class="grid-bg"></div>
+
+<div class="app">
+  <header class="top">
+    <a class="terug" href="../" aria-label="Terug naar het hoofdmenu" title="Hoofdmenu">←</a>
+    <div class="tt">
+      <h1>Kruisregel</h1>
+      <p id="subkop">Chemie · oxidatiegetallen en formules</p>
+    </div>
+    <span class="datum">Toets 17/09</span>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Oefenmodus">
+    <button class="tab" role="tab" data-m="og" aria-selected="true">OG bepalen</button>
+    <button class="tab" role="tab" data-m="kruis" aria-selected="false">Kruisregel</button>
+    <button class="tab" role="tab" data-m="klasse" aria-selected="false">Stofklassen</button>
+    <button class="tab" role="tab" data-m="binding" aria-selected="false">Bindingen</button>
+    <button class="tab" role="tab" data-m="begrip" aria-selected="false">Begrippen</button>
+    <button class="tab" role="tab" data-m="tabel" aria-selected="false">OG-tabel</button>
+    <button class="tab" role="tab" data-m="samenvatting" aria-selected="false">Samenvatting</button>
+  </nav>
+
+  <section class="view in" id="v-og" role="tabpanel">
+    <div class="meta"><span class="counter"><b id="ogPos">1</b> · goed <b id="ogGoed">0</b></span>
+      <button class="mini" id="ogNieuw">andere oefening</button></div>
+    <div id="ogBody"></div>
+  </section>
+
+  <section class="view" id="v-kruis" role="tabpanel" hidden>
+    <div class="meta"><span class="counter"><b id="krPos">1</b> · goed <b id="krGoed">0</b></span>
+      <button class="mini" id="krNieuw">andere oefening</button></div>
+    <div id="krBody"></div>
+  </section>
+
+  <section class="view" id="v-klasse" role="tabpanel" hidden>
+    <div class="meta"><span class="counter"><b id="klPos">1</b> / <span id="klTot">0</span> · goed <b id="klGoed">0</b></span>
+      <button class="mini" id="klNieuw">opnieuw</button></div>
+    <div class="track"><div class="bar" id="klBar"></div></div>
+    <div id="klBody"></div>
+  </section>
+
+  <section class="view" id="v-binding" role="tabpanel" hidden>
+    <div class="meta"><span class="counter"><b id="biPos">1</b> / <span id="biTot">0</span> · goed <b id="biGoed">0</b></span>
+      <button class="mini" id="biNieuw">opnieuw</button></div>
+    <div class="track"><div class="bar" id="biBar"></div></div>
+    <div id="biBody"></div>
+  </section>
+
+  <section class="view" id="v-begrip" role="tabpanel" hidden>
+    <div class="meta"><span class="counter"><b id="bgPos">1</b> / <span id="bgTot">0</span> · goed <b id="bgGoed">0</b></span>
+      <button class="mini" id="bgNieuw">opnieuw</button></div>
+    <div class="track"><div class="bar" id="bgBar"></div></div>
+    <div id="bgBody"></div>
+  </section>
+
+  <section class="view" id="v-tabel" role="tabpanel" hidden>
+    <div id="tabelBody"></div>
+  </section>
+
+  <section class="view" id="v-samenvatting" role="tabpanel" hidden>
+    <div class="meta"><span class="counter">samenvatting</span>
+      <button class="mini" id="btnPrint">afdrukken</button></div>
+    <div id="svBody"></div>
+  </section>
+</div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function el(t,c,x){var n=document.createElement(t); if(c)n.className=c; if(x!=null)n.textContent=x; return n}
+function rnd(n){return Math.floor(Math.random()*n)}
+function kies(a){return a[rnd(a.length)]}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=rnd(i+1);var t=a[i];a[i]=a[j];a[j]=t}return a}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+
+/* romeinse cijfers zoals in de les */
+var ROM=["0","I","II","III","IV","V","VI","VII","VIII"];
+function rom(n){var t=Math.abs(n); return (n<0?"−":"+")+(ROM[t]||t)}
+function getal(n){return n===0?"0":(n<0?"−":"+")+Math.abs(n)}
+
+function formuleHTML(delen){
+  return delen.map(function(d){
+    return d.el+(d.n>1?"<sub>"+d.n+"</sub>":"");
+  }).join("");
+}
+
+/* ---------- OG bepalen ---------- */
+var OGOEF=[
+ {d:[["H",1,1],["Cl",1,null],["O",4,-2]], lading:0, vraag:"Cl"},
+ {d:[["H",1,1],["Cl",1,null],["O",3,-2]], lading:0, vraag:"Cl"},
+ {d:[["H",1,1],["Cl",1,null],["O",2,-2]], lading:0, vraag:"Cl"},
+ {d:[["H",1,1],["Cl",1,null],["O",1,-2]], lading:0, vraag:"Cl"},
+ {d:[["H",1,1],["Cl",1,null]], lading:0, vraag:"Cl"},
+ {d:[["H",2,1],["S",1,null],["O",4,-2]], lading:0, vraag:"S"},
+ {d:[["H",2,1],["S",1,null],["O",3,-2]], lading:0, vraag:"S"},
+ {d:[["S",1,null],["O",4,-2]], lading:-2, vraag:"S"},
+ {d:[["S",1,null],["O",3,-2]], lading:-2, vraag:"S"},
+ {d:[["N",1,null],["O",3,-2]], lading:-1, vraag:"N"},
+ {d:[["N",1,null],["O",2,-2]], lading:-1, vraag:"N"},
+ {d:[["Na",3,1],["P",1,null],["O",4,-2]], lading:0, vraag:"P"},
+ {d:[["K",1,1],["Mn",1,null],["O",4,-2]], lading:0, vraag:"Mn"},
+ {d:[["K",2,1],["Cr",2,null],["O",7,-2]], lading:0, vraag:"Cr"},
+ {d:[["Ca",1,2],["C",1,null],["O",3,-2]], lading:0, vraag:"C"},
+ {d:[["N",1,null],["H",3,1]], lading:0, vraag:"N"},
+ {d:[["C",1,null],["H",4,1]], lading:0, vraag:"C"},
+ {d:[["Al",2,null],["O",3,-2]], lading:0, vraag:"Al"},
+ {d:[["Fe",2,null],["O",3,-2]], lading:0, vraag:"Fe"},
+ {d:[["Fe",1,null],["O",1,-2]], lading:0, vraag:"Fe"},
+ {d:[["Cu",2,null],["O",1,-2]], lading:0, vraag:"Cu"},
+ {d:[["Mn",1,null],["O",2,-2]], lading:0, vraag:"Mn"},
+ {d:[["Sn",1,null],["O",2,-2]], lading:0, vraag:"Sn"},
+ {d:[["Pb",1,null],["O",2,-2]], lading:0, vraag:"Pb"},
+ {d:[["H",2,1],["C",1,null],["O",3,-2]], lading:0, vraag:"C"},
+ {d:[["K",1,1],["N",1,null],["O",3,-2]], lading:0, vraag:"N"},
+ {d:[["Na",2,1],["S",1,null],["O",4,-2]], lading:0, vraag:"S"},
+ {d:[["P",1,null],["O",4,-2]], lading:-3, vraag:"P"}
+];
+function ogLos(o){
+  var som=0, onbek=0;
+  o.d.forEach(function(x){ if(x[2]===null)onbek+=x[1]; else som+=x[1]*x[2] });
+  return (o.lading-som)/onbek;
+}
+var OG={i:0,goed:0};
+function ogStap(){
+  var body=$("#ogBody"); body.innerHTML="";
+  $("#ogPos").textContent=OG.i+1; $("#ogGoed").textContent=OG.goed;
+  $("#glow").style.setProperty("--c","var(--cyan)");
+  var o=kies(OGOEF), antw=ogLos(o);
+  var delen=o.d.map(function(x){return {el:x[0], n:x[1], og:x[2]}});
+  var wrap=el("div"); wrap.style.display="grid"; wrap.style.gap="13px";
+  var tg=el("div","tegel vraagtegel");
+  var lad=o.lading?'<sup>'+(Math.abs(o.lading)>1?Math.abs(o.lading):"")+(o.lading<0?"−":"+")+'</sup>':"";
+  tg.innerHTML='<span class="badge">oxidatiegetal</span>'+
+    '<div class="formule">'+formuleHTML(delen)+lad+'</div>'+
+    '<div class="onder">som van de OG\'s = '+getal(o.lading)+'</div>';
+  wrap.appendChild(tg);
+  wrap.appendChild(el("p","vraag","Wat is het OG van "+o.vraag+"?"));
+
+  var box=el("div","ogknoppen"); var af=false;
+  var keuzes=[-4,-3,-2,-1,1,2,3,4,5,6,7,8].filter(function(v){return v!==antw});
+  var opties=shuffle(shuffle(keuzes).slice(0,7).concat([antw]));
+  opties.sort(function(a,b){return a-b});
+  opties.forEach(function(v){
+    var b=el("button","ogknop "+(v<0?"neg":"pos"),rom(v)); b.type="button";
+    b.addEventListener("click",function(){
+      if(af)return; af=true;
+      var goed=(v===antw);
+      $$(".ogknop",box).forEach(function(x){x.disabled=true});
+      b.classList.add(goed?"goed":"fout");
+      if(!goed)$$(".ogknop",box).forEach(function(x){if(x.textContent===rom(antw))x.classList.add("goed")});
+      if(goed)OG.goed++;
+      wrap.appendChild(ogUitleg(o,delen,antw,goed));
+    });
+    box.appendChild(b);
+  });
+  wrap.appendChild(box);
+  body.appendChild(wrap);
+}
+function ogUitleg(o,delen,antw,goed){
+  var fb=el("div","fb "+(goed?"g":"b"));
+  fb.appendChild(el("div","fbt",goed?"Juist":"Fout — "+rom(antw)));
+  /* de controleregel zoals je die op papier zet */
+  var rij=el("div","rekenrij");
+  delen.forEach(function(d){
+    var c=el("div");
+    c.innerHTML='<div class="kop">'+d.el+(d.n>1?"<sub>"+d.n+"</sub>":"")+'</div>'+
+                '<div class="og">'+rom(d.og===null?antw:d.og)+'</div>';
+    rij.appendChild(c);
+  });
+  var rk=el("div","rk");
+  var stukken=delen.map(function(d){
+    var og=(d.og===null?antw:d.og);
+    return getal(d.n*og);
+  });
+  rk.appendChild(rij);
+  var som=el("div","som");
+  som.innerHTML=stukken.join(" ")+" = <b>"+getal(o.lading)+"</b>";
+  rk.appendChild(som);
+  fb.appendChild(rk);
+  var nx=el("button","btn pri","Volgende"); nx.type="button";
+  nx.addEventListener("click",function(){OG.i++; ogStap()});
+  fb.appendChild(nx);
+  return fb;
+}
+$("#ogNieuw").addEventListener("click",function(){OG.i++; ogStap()});
+
+/* ---------- kruisregel ---------- */
+/* Derde waarde 1 = dit deeltje komt alleen met zuurstof voor. Zo krijg je
+   N2O5 en SO3, en nooit onbestaande dingen zoals NCl5 of SCl6. */
+var POS=[["Na",1],["K",1],["Li",1],["H",1],["Ag",1],["Mg",2],["Ca",2],["Ba",2],["Zn",2],
+         ["Al",3],["Fe",2],["Fe",3],["Cu",1],["Cu",2],["Sn",2],["Sn",4],["Pb",2],["Pb",4],
+         ["Mn",2],["Mn",4],["Mn",6,1],["Mn",7,1],["Cr",3],["Cr",6,1],["N",5,1],["N",3,1],
+         ["C",4,1],["S",4,1],["S",6,1],["P",5,1]];
+var NEG=[["O",-2],["S",-2],["F",-1],["Cl",-1],["Br",-1],["I",-1],["N",-3],["P",-3]];
+function ggd(a,b){return b?ggd(b,a%b):a}
+function kruis(a,b){
+  var x=Math.abs(b[1]), y=Math.abs(a[1]);
+  var g=ggd(x,y); x/=g; y/=g;
+  return [{el:a[0],n:x},{el:b[0],n:y}];
+}
+function normFormule(s){
+  return s.replace(/\s+/g,"")
+    .replace(/[₀₁₂₃₄₅₆₇₈₉]/g,function(c){return "₀₁₂₃₄₅₆₇₈₉".indexOf(c)})
+    .replace(/_/g,"");
+}
+var KR={i:0,goed:0};
+function krStap(){
+  var body=$("#krBody"); body.innerHTML="";
+  $("#krPos").textContent=KR.i+1; $("#krGoed").textContent=KR.goed;
+  $("#glow").style.setProperty("--c","var(--pos)");
+  var a=kies(POS), b=a[2]?["O",-2]:kies(NEG);
+  while(a[0]===b[0])b=kies(NEG);
+  var delen=kruis(a,b);
+  var juist=delen.map(function(d){return d.el+(d.n>1?d.n:"")}).join("");
+  var wrap=el("div"); wrap.style.display="grid"; wrap.style.gap="13px";
+  var tg=el("div","tegel vraagtegel"); tg.style.setProperty("--c","var(--pos)");
+  tg.innerHTML='<span class="badge">kruisregel</span>'+
+    '<div class="formule" style="color:var(--pos)">'+a[0]+' <span style="color:var(--muted2)">+</span> '+b[0]+'</div>'+
+    '<div class="onder">OG '+rom(a[1])+' en '+rom(b[1])+'</div>';
+  wrap.appendChild(tg);
+  wrap.appendChild(el("p","vraag","Vorm de formule"));
+  var tw=el("div","typewrap"); var af=false;
+  var inp=document.createElement("input"); inp.type="text";
+  inp.placeholder="bv. Al2S3"; inp.setAttribute("autocapitalize","off");
+  inp.setAttribute("autocorrect","off"); inp.setAttribute("autocomplete","off");
+  inp.setAttribute("spellcheck","false"); inp.setAttribute("aria-label","De formule");
+  var go=el("button","btn pri","Nakijken"); go.type="button"; go.style.setProperty("--c","var(--pos)");
+  var wnw=el("button","linkbtn","Weet ik niet"); wnw.type="button";
+  function toon(goed,gegeven){
+    af=true; inp.disabled=true; go.remove(); wnw.remove();
+    inp.classList.add(goed?"goed":"fout"); if(!goed)inp.classList.add("shake");
+    if(goed)KR.goed++;
+    var fb=el("div","fb "+(goed?"g":"b"));
+    fb.appendChild(el("div","fbt",goed?"Juist":"Fout"));
+    var s=el("div","fbs");
+    var ruw=Math.abs(b[1])+" en "+Math.abs(a[1]);
+    var vereenvoudigd=(Math.abs(b[1])!==delen[0].n||Math.abs(a[1])!==delen[1].n);
+    s.innerHTML="<b>"+formuleHTML(delen)+"</b><br>"+
+      "Kruis de OG's: "+a[0]+" krijgt index "+Math.abs(b[1])+", "+b[0]+" krijgt index "+Math.abs(a[1])+"."+
+      (vereenvoudigd?"<br>Daarna vereenvoudigen: "+a[0]+"<sub>"+Math.abs(b[1])+"</sub>"+b[0]+"<sub>"+Math.abs(a[1])+"</sub> wordt "+formuleHTML(delen)+".":"")+
+      "<br><span style=\"color:var(--muted2)\">Index 1 schrijf je niet.</span>";
+    fb.appendChild(s);
+    var nx=el("button","btn pri","Volgende"); nx.type="button";
+    nx.addEventListener("click",function(){KR.i++; krStap()});
+    fb.appendChild(nx); wrap.appendChild(fb);
+  }
+  function nakijk(){
+    if(af)return; var v=inp.value.trim(); if(!v)return;
+    toon(normFormule(v)===juist, v);
+  }
+  go.addEventListener("click",nakijk);
+  inp.addEventListener("keydown",function(e){if(e.key==="Enter")nakijk()});
+  wnw.addEventListener("click",function(){if(!af)toon(false,"")});
+  tw.appendChild(inp); tw.appendChild(go); tw.appendChild(wnw);
+  wrap.appendChild(tw); body.appendChild(wrap);
+  setTimeout(function(){inp.focus()},220);
+}
+$("#krNieuw").addEventListener("click",function(){KR.i++; krStap()});
+
+/* ---------- stofklassen ---------- */
+var KLASSEN=["metaaloxide","niet-metaaloxide","base","binair zuur","ternair zuur",
+             "binair zout","ternair zout"];
+var STOFFEN=[
+ ["Na<sub>2</sub>O","metaaloxide"],["CaO","metaaloxide"],["Fe<sub>2</sub>O<sub>3</sub>","metaaloxide"],
+ ["K<sub>2</sub>O","metaaloxide"],["MgO","metaaloxide"],
+ ["CO<sub>2</sub>","niet-metaaloxide"],["SO<sub>3</sub>","niet-metaaloxide"],
+ ["N<sub>2</sub>O<sub>5</sub>","niet-metaaloxide"],["P<sub>2</sub>O<sub>5</sub>","niet-metaaloxide"],
+ ["NaOH","base"],["KOH","base"],["Ca(OH)<sub>2</sub>","base"],["Al(OH)<sub>3</sub>","base"],
+ ["HCl","binair zuur"],["H<sub>2</sub>S","binair zuur"],["HBr","binair zuur"],["HF","binair zuur"],
+ ["H<sub>2</sub>SO<sub>4</sub>","ternair zuur"],["HNO<sub>3</sub>","ternair zuur"],
+ ["H<sub>3</sub>PO<sub>4</sub>","ternair zuur"],["H<sub>2</sub>CO<sub>3</sub>","ternair zuur"],
+ ["NaCl","binair zout"],["CaF<sub>2</sub>","binair zout"],["Al<sub>2</sub>S<sub>3</sub>","binair zout"],
+ ["MgBr<sub>2</sub>","binair zout"],["KI","binair zout"],
+ ["Na<sub>3</sub>PO<sub>4</sub>","ternair zout"],["CaCO<sub>3</sub>","ternair zout"],
+ ["KNO<sub>3</sub>","ternair zout"],["Na<sub>2</sub>SO<sub>4</sub>","ternair zout"]
+];
+var KL={q:[],i:0,goed:0};
+function klStart(){
+  KL.q=shuffle(STOFFEN); KL.i=0; KL.goed=0; $("#klTot").textContent=KL.q.length; klStap();
+}
+function klStap(){
+  var body=$("#klBody"); body.innerHTML="";
+  $("#klPos").textContent=Math.min(KL.i+1,KL.q.length); $("#klGoed").textContent=KL.goed;
+  $("#klBar").style.width=(KL.i/KL.q.length*100)+"%";
+  $("#glow").style.setProperty("--c","var(--paars)");
+  if(KL.i>=KL.q.length){body.appendChild(eind(KL.goed,KL.q.length,klStart));return}
+  var s=KL.q[KL.i];
+  var wrap=el("div"); wrap.style.display="grid"; wrap.style.gap="13px";
+  var tg=el("div","tegel vraagtegel"); tg.style.setProperty("--c","var(--paars)");
+  tg.innerHTML='<span class="badge">stofklasse</span><div class="formule" style="color:var(--paars)">'+s[0]+'</div>';
+  wrap.appendChild(tg);
+  wrap.appendChild(el("p","vraag","Tot welke stofklasse hoort deze stof?"));
+  var fout=shuffle(KLASSEN.filter(function(k){return k!==s[1]})).slice(0,3);
+  var opties=shuffle([s[1]].concat(fout));
+  var box=el("div","opts"); var af=false;
+  opties.forEach(function(o,i){
+    var b=el("button","opt"); b.type="button";
+    b.innerHTML='<span class="k">'+(i+1)+'</span><span>'+o+'</span>';
+    b.addEventListener("click",function(){
+      if(af)return; af=true;
+      var goed=(o===s[1]);
+      $$(".opt",box).forEach(function(x){x.disabled=true});
+      b.classList.add(goed?"goed":"fout");
+      if(!goed)$$(".opt",box).forEach(function(x){if(x.lastChild.textContent===s[1])x.classList.add("goed")});
+      if(goed)KL.goed++;
+      var fb=el("div","fb "+(goed?"g":"b"));
+      fb.appendChild(el("div","fbt",goed?"Juist":"Fout"));
+      fb.appendChild(el("div","fbs",s[1]+" — "+BOUW[s[1]]));
+      var nx=el("button","btn pri","Volgende"); nx.type="button";
+      nx.addEventListener("click",function(){KL.i++; klStap()});
+      fb.appendChild(nx); wrap.appendChild(fb);
+    });
+    box.appendChild(b);
+  });
+  wrap.appendChild(box); body.appendChild(wrap);
+}
+var BOUW={"metaaloxide":"metaal + zuurstof (M, O)","niet-metaaloxide":"niet-metaal + zuurstof (nM, O)",
+ "base":"metaal + zuurstof + waterstof (M, O, H)","binair zuur":"waterstof + niet-metaal (H, nM)",
+ "ternair zuur":"waterstof + niet-metaal + zuurstof (H, nM, O)",
+ "binair zout":"metaal + niet-metaal (M, nM)","ternair zout":"metaal + niet-metaal + zuurstof (M, nM, O)"};
+$("#klNieuw").addEventListener("click",klStart);
+
+/* ---------- bindingen ---------- */
+var BIND=[
+ ["NaCl","ionbinding"],["MgO","ionbinding"],["KBr","ionbinding"],["CaF<sub>2</sub>","ionbinding"],
+ ["Al<sub>2</sub>O<sub>3</sub>","ionbinding"],["LiF","ionbinding"],
+ ["H<sub>2</sub>O","covalente binding"],["CO<sub>2</sub>","covalente binding"],
+ ["NH<sub>3</sub>","covalente binding"],["CH<sub>4</sub>","covalente binding"],
+ ["O<sub>2</sub>","covalente binding"],["Cl<sub>2</sub>","covalente binding"],
+ ["Fe","metaalbinding"],["Cu","metaalbinding"],["Al","metaalbinding"],
+ ["Zn","metaalbinding"],["Na","metaalbinding"]
+];
+var BINDUIT={"ionbinding":"metaal + niet-metaal (M + nM)",
+ "covalente binding":"niet-metaal + niet-metaal (nM + nM), ook atoombinding genoemd",
+ "metaalbinding":"alleen metaalatomen onderling"};
+var BI={q:[],i:0,goed:0};
+function biStart(){BI.q=shuffle(BIND); BI.i=0; BI.goed=0; $("#biTot").textContent=BI.q.length; biStap()}
+function biStap(){
+  var body=$("#biBody"); body.innerHTML="";
+  $("#biPos").textContent=Math.min(BI.i+1,BI.q.length); $("#biGoed").textContent=BI.goed;
+  $("#biBar").style.width=(BI.i/BI.q.length*100)+"%";
+  $("#glow").style.setProperty("--c","var(--neg)");
+  if(BI.i>=BI.q.length){body.appendChild(eind(BI.goed,BI.q.length,biStart));return}
+  var s=BI.q[BI.i];
+  var wrap=el("div"); wrap.style.display="grid"; wrap.style.gap="13px";
+  var tg=el("div","tegel vraagtegel"); tg.style.setProperty("--c","var(--neg)");
+  tg.innerHTML='<span class="badge">binding</span><div class="formule" style="color:var(--neg)">'+s[0]+'</div>';
+  wrap.appendChild(tg);
+  wrap.appendChild(el("p","vraag","Welke binding zit er in deze stof?"));
+  var box=el("div","opts"); var af=false;
+  shuffle(["ionbinding","covalente binding","metaalbinding"]).forEach(function(o,i){
+    var b=el("button","opt"); b.type="button";
+    b.innerHTML='<span class="k">'+(i+1)+'</span><span>'+o+'</span>';
+    b.addEventListener("click",function(){
+      if(af)return; af=true;
+      var goed=(o===s[1]);
+      $$(".opt",box).forEach(function(x){x.disabled=true});
+      b.classList.add(goed?"goed":"fout");
+      if(!goed)$$(".opt",box).forEach(function(x){if(x.lastChild.textContent===s[1])x.classList.add("goed")});
+      if(goed)BI.goed++;
+      var fb=el("div","fb "+(goed?"g":"b"));
+      fb.appendChild(el("div","fbt",goed?"Juist":"Fout"));
+      fb.appendChild(el("div","fbs",s[1]+" — "+BINDUIT[s[1]]));
+      var nx=el("button","btn pri","Volgende"); nx.type="button";
+      nx.addEventListener("click",function(){BI.i++; biStap()});
+      fb.appendChild(nx); wrap.appendChild(fb);
+    });
+    box.appendChild(b);
+  });
+  wrap.appendChild(box); body.appendChild(wrap);
+}
+$("#biNieuw").addEventListener("click",biStart);
+
+/* ---------- begrippen ---------- */
+var BEGRIPPEN=[
+ ["zuivere stof","heeft specifieke, constante stofeigenschappen"],
+ ["enkelvoudige stof","bestaat uit één soort atomen"],
+ ["samengestelde stof","bestaat uit verschillende soorten atomen"],
+ ["analyse","een samengestelde stof ontleden in enkelvoudige stoffen (S → E)"],
+ ["synthese","uit enkelvoudige stoffen een samengestelde stof maken (E → S)"],
+ ["covalente binding","atoombinding tussen twee niet-metalen (nM + nM)"],
+ ["ionbinding","binding tussen een metaal en een niet-metaal (M + nM)"],
+ ["metaalbinding","binding tussen metaalatomen onderling"],
+ ["anorganische verbinding","minerale verbinding, uit de levenloze natuur"],
+ ["organische verbinding","koolstofverbinding, uit de levende natuur en afgestorven wezens"],
+ ["functionele groep","hetzelfde atoom of dezelfde atomen die de stofklasse bepalen"],
+ ["stofklasse","groep stoffen met dezelfde chemische eigenschappen"],
+ ["OG van waterstof","+I"],
+ ["OG van zuurstof","−II"],
+ ["kruisregel","het OG van het ene element wordt de index van het andere"],
+ ["som van de OG's in een neutrale stof","nul"],
+ ["eerste atoom in een formule","heeft altijd een positief OG"],
+ ["laatste atoom in een formule","heeft altijd een negatief OG"],
+ ["index 1","schrijf je niet"],
+ ["indices na de kruisregel","moeten zo klein mogelijk zijn, dus vereenvoudigen"]
+];
+var BG={q:[],i:0,goed:0};
+function bgStart(){BG.q=shuffle(BEGRIPPEN); BG.i=0; BG.goed=0; $("#bgTot").textContent=BG.q.length; bgStap()}
+function bgStap(){
+  var body=$("#bgBody"); body.innerHTML="";
+  $("#bgPos").textContent=Math.min(BG.i+1,BG.q.length); $("#bgGoed").textContent=BG.goed;
+  $("#bgBar").style.width=(BG.i/BG.q.length*100)+"%";
+  $("#glow").style.setProperty("--c","var(--cyan)");
+  if(BG.i>=BG.q.length){body.appendChild(eind(BG.goed,BG.q.length,bgStart));return}
+  var s=BG.q[BG.i];
+  var wrap=el("div"); wrap.style.display="grid"; wrap.style.gap="13px";
+  var tg=el("div","tegel vraagtegel");
+  tg.innerHTML='<span class="badge">begrip</span>'+
+    '<div class="formule" style="font-size:clamp(20px,5.6vw,28px)">'+esc(s[0])+'</div>';
+  wrap.appendChild(tg);
+  wrap.appendChild(el("p","vraag","Wat hoort hierbij?"));
+  var fout=shuffle(BEGRIPPEN.filter(function(b){return b[1]!==s[1]})).slice(0,3).map(function(b){return b[1]});
+  var opties=shuffle([s[1]].concat(fout));
+  var box=el("div","opts"); var af=false;
+  opties.forEach(function(o,i){
+    var b=el("button","opt"); b.type="button";
+    b.innerHTML='<span class="k">'+(i+1)+'</span><span>'+esc(o)+'</span>';
+    b.addEventListener("click",function(){
+      if(af)return; af=true;
+      var goed=(o===s[1]);
+      $$(".opt",box).forEach(function(x){x.disabled=true});
+      b.classList.add(goed?"goed":"fout");
+      if(!goed)$$(".opt",box).forEach(function(x){if(x.lastChild.textContent===s[1])x.classList.add("goed")});
+      if(goed)BG.goed++;
+      var fb=el("div","fb "+(goed?"g":"b"));
+      fb.appendChild(el("div","fbt",goed?"Juist":"Fout"));
+      fb.appendChild(el("div","fbs",s[0]+" — "+s[1]));
+      var nx=el("button","btn pri","Volgende"); nx.type="button";
+      nx.addEventListener("click",function(){BG.i++; bgStap()});
+      fb.appendChild(nx); wrap.appendChild(fb);
+    });
+    box.appendChild(b);
+  });
+  wrap.appendChild(box); body.appendChild(wrap);
+}
+$("#bgNieuw").addEventListener("click",bgStart);
+
+function eind(goed,n,opnieuw){
+  var d=el("div","tegel klaar");
+  var pct=Math.round(goed/n*100);
+  d.appendChild(el("h2",null,pct>=90?"Bijna vlekkeloos":pct>=70?"Goed bezig":"Nog even oefenen"));
+  d.appendChild(el("div","score",goed+"/"+n));
+  d.appendChild(el("p",null,pct+"% goed"));
+  var b=el("button","btn pri","Opnieuw"); b.type="button";
+  b.addEventListener("click",opnieuw); d.appendChild(b);
+  return d;
+}
+
+/* ---------- OG-tabel ---------- */
+var TABEL=[
+ {t:"Altijd hetzelfde", u:"deze twee moet je uit het hoofd kennen", r:[
+   ["waterstof H","+I"],["zuurstof O","−II"]]},
+ {t:"Metalen met één OG", u:"groep 1, 2 en aluminium", r:[
+   ["Li, Na, K, Ag","+I"],["Mg, Ca, Ba, Zn","+II"],["Al","+III"]]},
+ {t:"Metalen met meerdere OG's", u:"staat erbij in de opgave", r:[
+   ["Fe","+II of +III"],["Cu","+I of +II"],["Sn, Pb","+II of +IV"],
+   ["Cr","+III of +VI"],["Mn","+II, +IV, +VI of +VII"]]},
+ {t:"Niet-metalen als laatste atoom", u:"dan is het OG negatief", r:[
+   ["F, Cl, Br, I","−I"],["O, S","−II"],["N, P","−III"],["C","−IV"]]}
+];
+function tekenTabel(){
+  var body=$("#tabelBody"); body.innerHTML="";
+  $("#glow").style.setProperty("--c","var(--cyan)");
+  var wrap=el("div"); wrap.style.display="grid"; wrap.style.gap="12px";
+  TABEL.forEach(function(g){
+    var b=el("div","tblok");
+    var k=el("div","tkop");
+    k.appendChild(el("b",null,g.t)); k.appendChild(el("span",null,g.u));
+    b.appendChild(k);
+    g.r.forEach(function(r){
+      var rij=el("div","trij");
+      rij.appendChild(el("span","l",r[0]));
+      var w=el("span","r "+(r[1].indexOf("−")===0?"neg":"pos"),r[1]);
+      rij.appendChild(w); b.appendChild(rij);
+    });
+    wrap.appendChild(b);
+  });
+  var n=el("p","note","Op de toets zoek je deze OG's op in je PSE. Staat een element hier met "+
+    "meerdere mogelijkheden, dan zegt de opgave welk OG je moet gebruiken — zoals « Mn (+VI) ».");
+  wrap.appendChild(n);
+  body.appendChild(wrap);
+}
+
+/* ---------- samenvatting ---------- */
+var SV=[
+ {t:"Zuivere stoffen", r:[
+  ["zuivere stof","specifieke, constante stofeigenschappen"],
+  ["enkelvoudig","één soort atomen — covalente binding of metaalbinding"],
+  ["samengesteld","verschillende soorten atomen — atoombinding of ionbinding"],
+  ["analyse","S → E"],["synthese","E → S"]]},
+ {t:"Bindingen", r:[
+  ["covalente binding (atoombinding)","nM + nM"],
+  ["ionbinding","M + nM"],
+  ["metaalbinding","metalen onderling"]]},
+ {t:"Indeling van stoffen", r:[
+  ["bevat een metaal?","ja → anorganisch"],
+  ["geen metaal, bevat het C?","ja → organisch · nee → anorganisch"],
+  ["anorganisch of mineraal","levenloze natuur"],
+  ["organisch of koolstofverbinding","levende natuur en afgestorven wezens"],
+  ["functionele groep","hetzelfde atoom of dezelfde atomen"],
+  ["stofklasse","zelfde chemische eigenschappen, zelfde functionele groep"]]},
+ {t:"Anorganische stofklassen", r:[
+  ["metaaloxide","M, O"],["niet-metaaloxide","nM, O"],["base","M, O, H"],
+  ["binair zuur","H, nM"],["ternair zuur","H, nM, O"],
+  ["binair zout","M, nM"],["ternair zout","M, nM, O"]]},
+ {t:"Oxidatiegetallen", r:[
+  ["OG(H)","+I"],["OG(O)","−II"],
+  ["som van alle OG's","nul in een neutrale stof, gelijk aan de lading bij een ion"],
+  ["eerste atoom","positief OG"],["laatste atoom","negatief OG"]]},
+ {t:"Kruisregel", r:[
+  ["stap 1","schrijf de OG's boven de elementen"],
+  ["stap 2","kruis ze diagonaal: het OG van het ene wordt de index van het andere"],
+  ["stap 3","index 1 schrijf je niet"],
+  ["stap 4","vereenvoudig de indices — Sn₂O₄ wordt SnO₂"]]}
+];
+function tekenSV(){
+  var body=$("#svBody"); body.innerHTML="";
+  $("#glow").style.setProperty("--c","var(--cyan)");
+  var wrap=el("div"); wrap.style.display="grid"; wrap.style.gap="12px";
+  SV.forEach(function(g){
+    var b=el("div","tblok");
+    var k=el("div","tkop"); k.appendChild(el("b",null,g.t));
+    k.appendChild(el("span",null,g.r.length+" regels"));
+    b.appendChild(k);
+    g.r.forEach(function(r){
+      var rij=el("div","trij");
+      rij.appendChild(el("span","l",r[0]));
+      rij.appendChild(el("span","r",r[1]));
+      b.appendChild(rij);
+    });
+    wrap.appendChild(b);
+  });
+  body.appendChild(wrap);
+}
+$("#btnPrint").addEventListener("click",function(){window.print()});
+
+/* ---------- modus ---------- */
+var START={og:function(){OG.i=0;OG.goed=0;ogStap()}, kruis:function(){KR.i=0;KR.goed=0;krStap()},
+  klasse:klStart, binding:biStart, begrip:bgStart, tabel:tekenTabel, samenvatting:tekenSV};
+function zetModus(m){
+  $$(".tab").forEach(function(b){b.setAttribute("aria-selected",String(b.dataset.m===m))});
+  $$(".view").forEach(function(v){v.hidden=(v.id!=="v-"+m)});
+  var v=$("#v-"+m); v.classList.remove("in"); void v.offsetWidth; v.classList.add("in");
+  START[m]();
+  try{sessionStorage.setItem("kruisregel-mode",m)}catch(e){}
+}
+$$(".tab").forEach(function(b){b.addEventListener("click",function(){zetModus(b.dataset.m)})});
+
+var start="og";
+try{var m=sessionStorage.getItem("kruisregel-mode"); if(m&&START[m])start=m}catch(e){}
+zetModus(start);
+})();
+</script>
+<script>
+if("serviceWorker" in navigator){window.addEventListener("load",function(){
+  navigator.serviceWorker.register("sw.js").catch(function(){});
+})}
+</script>
+</body>
+</html>

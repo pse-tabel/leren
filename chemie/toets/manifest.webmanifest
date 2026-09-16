@@ -1,7 +1,7 @@
 ﻿{
- "name": "Chemie — scheikunde oefenen",
- "short_name": "Chemie",
- "description": "De elementen kennen en oefenen op oxidatiegetallen, de kruisregel en stofklassen.",
+ "name": "Kruisregel — oxidatiegetallen en formules",
+ "short_name": "Kruisregel",
+ "description": "Oefenen op OG bepalen, de kruisregel, stofklassen en bindingen.",
  "lang": "nl",
  "start_url": "./",
  "scope": "./",
