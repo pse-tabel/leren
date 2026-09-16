@@ -307,6 +307,11 @@ input.goed{border-color:var(--ok); color:var(--ok)} input.fout{border-color:var(
   .kaartwrap,.kaart,.vlak{min-height:290px}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important; transition-duration:.01ms!important}}
+.bijwerkvoet{position:relative; z-index:1; max-width:760px; margin:0 auto; text-align:center;
+  padding:0 20px calc(24px + env(safe-area-inset-bottom));
+  font-family:var(--fm); font-size:11px; letter-spacing:.07em; color:var(--muted2); opacity:.9}
+.bijwerkvoet b{font-weight:500; color:var(--muted)}
+@media print{.bijwerkvoet{display:none}}
 </style>
 </head>
 <body>
@@ -481,6 +486,8 @@ input.goed{border-color:var(--ok); color:var(--ok)} input.fout{border-color:var(
     </div>
   </div>
 </div>
+
+<div class="bijwerkvoet">Laatst bijgewerkt <b data-bijgewerkt>16 september 2026 · 22:26</b></div>
 
 <script>
 /* woord, nederlands, lidwoord ("" = geen zelfstandig naamwoord), meervoud */
