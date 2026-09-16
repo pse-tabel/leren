@@ -480,108 +480,33 @@ input.goed{border-color:var(--ok); color:var(--ok)} input.fout{border-color:var(
 <script>
 /* woord, nederlands, lidwoord ("" = geen zelfstandig naamwoord), meervoud */
 var DATA=[
- {t:"Identiteit (die Identität)", w:[
-  ["Name","de naam","der","die Namen"],
-  ["Familienname","de familienaam","der","die Familiennamen"],
-  ["Vorname","de voornaam","der","die Vornamen"]
+ {t:"A · die Identität", w:[
+  ["Name","de naam","der","die Namen",""],
+  ["Familienname","de familienaam","der","die Familiennamen",""],
+  ["Vorname","de voornaam","der","die Vornamen",""]
  ]},
- {t:"Woonplaats (der Wohnort)", w:[
-  ["Belgien","België","",""],
-  ["Deutschland","Duitsland","",""],
-  ["Frankreich","Frankrijk","",""],
-  ["Land","het land","das","die Länder"],
-  ["Stadt","de stad","die","die Städte"],
-  ["Adresse","het adres","die","die Adressen"],
-  ["Wohnort","de woonplaats","der","die Wohnorte"],
-  ["Zimmer","de kamer","das","die Zimmer"]
+ {t:"B1 · der Wohnort", w:[
+  ["Belgien","België","","",""],
+  ["Deutschland","Duitsland","","",""],
+  ["Frankreich","Frankrijk","","",""],
+  ["Land","het land","das","die Länder",""],
+  ["Stadt","de stad","die","die Städte",""]
  ]},
- {t:"Taal (die Sprache)", w:[
-  ["Deutsch","Duits","",""],
-  ["Englisch","Engels","",""],
-  ["Französisch","Frans","",""],
-  ["Niederländisch","Nederlands","",""],
-  ["Muttersprache","de moedertaal","die","die Muttersprachen"],
-  ["Sprache","de taal","die","die Sprachen"]
+ {t:"C · die Sprache", w:[
+  ["Deutsch","Duits","","",""],
+  ["Englisch","Engels","","",""],
+  ["Französisch","Frans","","",""],
+  ["Niederländisch","Nederlands","","",""],
+  ["Muttersprache","de moedertaal","die","die Muttersprachen",""],
+  ["Sprache","de taal","die","die Sprachen",""]
  ]},
- {t:"Familie (die Familie)", w:[
-  ["Bruder","de broer","der","die Brüder"],
-  ["Familie","de familie","die","die Familien"],
-  ["Großmutter","de grootmoeder","die","die Großmütter"],
-  ["Großvater","de grootvader","der","die Großväter"],
-  ["Kind","het kind","das","die Kinder"],
-  ["Mutter","de moeder","die","die Mütter"],
-  ["Schwester","de zus","die","die Schwestern"],
-  ["Sohn","de zoon","der","die Söhne"],
-  ["Tochter","de dochter","die","die Töchter"],
-  ["Vater","de vader","der","die Väter"],
-  ["Eltern","de ouders (alleen meervoud)","die",""],
-  ["Geschwister","de broers en zussen (alleen meervoud)","die",""],
-  ["Großeltern","de grootouders (alleen meervoud)","die",""]
- ]},
- {t:"Tijd (die Zeit)", w:[
-  ["Tag","de dag","der","die Tage"],
-  ["Woche","de week","die","die Wochen"],
-  ["Jahr","het jaar","das","die Jahre"],
-  ["Zeit","de tijd","die","die Zeiten"]
- ]},
- {t:"Communicatie (das Kommunikationsmittel)", w:[
-  ["Handy","de gsm / mobiel","das","die Handys"],
-  ["Handynummer","het gsm-nummer","die","die Handynummern"],
-  ["Nummer","het nummer","die","die Nummern"],
-  ["Telefon","de telefoon","das","die Telefone"],
-  ["Telefonbuch","het telefoonboek","das","die Telefonbücher"],
-  ["Telefonnummer","het telefoonnummer","die","die Telefonnummern"]
- ]},
- {t:"Bekenden (die Bekannten)", w:[
-  ["Freund","de vriend","der","die Freunde"],
-  ["Freundin","de vriendin","die","die Freundinnen"],
-  ["Bewohner","de bewoner","der","die Bewohner"],
-  ["Bewohnerin","de bewoonster","die","die Bewohnerinnen"],
-  ["Mitbewohner","de medebewoner","der","die Mitbewohner"],
-  ["Mitbewohnerin","de medebewoonster","die","die Mitbewohnerinnen"]
- ]},
- {t:"Werkwoorden (Verben)", w:[
-  ["besuchen","bezoeken","",""],["bleiben","blijven","",""],["heißen","heten","",""],
-  ["kommen","komen","",""],["schreiben","schrijven","",""],["sein","zijn","",""],
-  ["sprechen","spreken","",""],["wohnen","wonen","",""],["haben","hebben","",""],
-  ["hören","luisteren naar / horen","",""],["kochen","koken","",""],["suchen","zoeken","",""],
-  ["begrüßen","begroeten","",""],["gehen","gaan","",""],["kennen","kennen","",""],
-  ["lernen","leren","",""],["sagen","zeggen","",""],["spielen","spelen","",""],
-  ["studieren","studeren","",""],["zuhören","luisteren","",""]
- ]},
- {t:"Vraagwoorden (Fragewörter)", w:[
-  ["was","wat","",""],["wer","wie","",""],["wie","hoe","",""],
-  ["wo","waar","",""],["woher","waar... vandaan","",""],["wohin","waar... naartoe","",""]
- ]},
- {t:"Duits in het alledaagse leven (Deutsch im Alltag)", w:[
-  ["Angenehm!","Aangenaam!","",""],
-  ["Auf Wiedersehen!","Tot ziens!","",""],
-  ["Entschuldigung!","Excuseer! / Sorry!","",""],
-  ["Guten Tag!","Goeiedag!","",""],
-  ["Tschüss!","Tot ziens! / Doei!","",""],
-  ["Vielen Dank!","Dank je wel! / Dank u wel!","",""],
-  ["Wie bitte?","Wat zeg je? / Wat zegt u?","",""],
-  ["Wie geht's?","Hoe gaat het?","",""],
-  ["bitte","alstublieft","",""],
-  ["gut","goed","",""],
-  ["prima","prima / uitstekend","",""],
-  ["gern(e)","graag","",""],
-  ["schon","al","",""],
-  ["Das macht Spaß.","Dat is leuk.","",""],
-  ["Ich habe Durst.","Ik heb dorst.","",""],
-  ["Ich habe Hunger.","Ik heb honger.","",""]
- ]},
- {t:"Nog meer woorden (Noch mehr Wörter)", w:[
-  ["Buch","het boek","das","die Bücher"],
-  ["Geburtstag","de verjaardag","der","die Geburtstage"],
-  ["Leute","de mensen (alleen meervoud)","die",""],
-  ["Mitschüler","de medeleerling (m)","der","die Mitschüler"],
-  ["Mitschülerin","de medeleerling (v)","die","die Mitschülerinnen"],
-  ["Zahl","het getal","die","die Zahlen"],
-  ["eigentlich","eigenlijk","",""],
-  ["selbstverständlich","vanzelfsprekend","",""],
-  ["vielleicht","misschien","",""],
-  ["zusammen","samen","",""]
+ {t:"I · Fragewörter", w:[
+  ["was","wat","","","Was sagst du?"],
+  ["wer","wie","","","Wer ist das?"],
+  ["wie","hoe","","","Wie alt bist du?"],
+  ["wo","waar","","","Wo wohnt dein Freund?"],
+  ["woher","waar... vandaan","","","Woher kommt deine Freundin?"],
+  ["wohin","waar... naartoe","","","Wohin fährst du?"]
  ]}
 ];
 </script>
@@ -593,7 +518,7 @@ var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelect
 
 var SETS=DATA.map(function(g,i){
   return {id:"g"+i, titel:g.t, items:g.w.map(function(w){
-    return {de:w[0], nl:w[1], lid:w[2], mv:w[3]};
+    return {de:w[0], nl:w[1], lid:w[2], mv:w[3], vb:w[4]||""};
   })};
 });
 
@@ -649,7 +574,8 @@ function gekozenSets(){
 function woorden(){
   var uit=[];
   gekozenSets().forEach(function(s){
-    s.items.forEach(function(k){uit.push({sid:s.id,titel:s.titel,de:k.de,nl:k.nl,lid:k.lid,mv:k.mv})});
+    s.items.forEach(function(k){uit.push({sid:s.id,titel:s.titel,de:k.de,nl:k.nl,
+      lid:k.lid,mv:k.mv,vb:k.vb})});
   });
   return uit;
 }
@@ -732,7 +658,8 @@ function toon(wrap,q,uitslag,melding,cfg){
   var fb=el("div","fb "+(uitslag===1?"g":uitslag===2?"a":"b"));
   fb.appendChild(el("div","fbt",uitslag===1?"Juist":uitslag===2?"Bijna":"Fout"));
   var s=el("div","fbs");
-  var extra=q.k.mv?"<br><span style=\"color:var(--muted2)\">meervoud: "+esc(q.k.mv)+"</span>":"";
+  var extra=(q.k.mv?"<br><span style=\"color:var(--muted2)\">meervoud: "+esc(q.k.mv)+"</span>":"")+
+    (q.k.vb?"<br><span style=\"color:var(--muted2)\">„"+esc(q.k.vb)+"”</span>":"");
   s.innerHTML=(uitslag?(melding?esc(melding)+"<br>":""):"Het juiste antwoord is <b>"+esc(juist)+"</b>.<br>")+
     volleDuits(q.k)+" — "+esc(q.k.nl)+extra;
   fb.appendChild(s);
@@ -775,12 +702,14 @@ function tekenKaart(){
   $("#bbadge").textContent=q.d==="de"?"nederlands":"duits";
   var thema=k.titel.replace(/\s*\(.*$/,"");
   $("#fthema").textContent=thema; $("#bthema").textContent=thema;
+  var extra=(k.mv?"mv. "+esc(k.mv):"")+
+            (k.vb?(k.mv?"<br>":"")+"„"+esc(k.vb)+"”":"");
   if(q.d==="de"){
-    $("#fwoord").innerHTML=woordHTML(k,true); $("#fmv").textContent=k.mv?"mv. "+k.mv:"";
-    $("#bwoord").textContent=k.nl; $("#bmv").textContent="";
+    $("#fwoord").innerHTML=woordHTML(k,true); $("#fmv").innerHTML="";
+    $("#bwoord").textContent=k.nl; $("#bmv").innerHTML=extra;
   } else {
-    $("#fwoord").textContent=k.nl; $("#fmv").textContent="";
-    $("#bwoord").innerHTML=woordHTML(k,true); $("#bmv").textContent=k.mv?"mv. "+k.mv:"";
+    $("#fwoord").textContent=k.nl; $("#fmv").innerHTML="";
+    $("#bwoord").innerHTML=woordHTML(k,true); $("#bmv").innerHTML=extra;
   }
   $("#frol").textContent=q.d==="de"?"duits":"nederlands";
   $("#kPos").textContent=Math.min(ki+1,stapel.length);
@@ -1155,7 +1084,8 @@ function tekenSamenvatting(){
     st.items.forEach(function(k){
       var r=el("div","srij");
       var de=el("span","de");
-      de.innerHTML=woordHTML(k,true)+(k.mv?' <span class="mvk">· '+esc(k.mv)+'</span>':"");
+      de.innerHTML=woordHTML(k,true)+(k.mv?' <span class="mvk">· '+esc(k.mv)+'</span>':"")+
+        (k.vb?'<br><span class="mvk">„'+esc(k.vb)+'”</span>':"");
       r.appendChild(de);
       r.appendChild(el("span","nl",k.nl));
       vak.appendChild(r);
