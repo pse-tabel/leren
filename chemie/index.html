@@ -93,7 +93,711 @@ a.optie:focus-visible{outline:2px solid var(--c); outline-offset:3px}
 .bijwerk{margin:0; padding-top:10px; font-family:var(--fm); font-size:11px;
   letter-spacing:.07em; color:var(--muted2); opacity:.9}
 .bijwerk b{font-weight:500; color:var(--muted)}
+/*thema-css-start*/
+/* de thema's van de site: neutralen en accenten in één keer */
+:root[data-thema="synthwave"]{
+  color-scheme:dark;
+  --ink:#0d0420;
+  --ink2:#140a2e;
+  --surface:#1c1040;
+  --surface2:#241553;
+  --line:#33206b;
+  --line2:#4a2f91;
+  --text:#f7e9ff;
+  --muted:#b49ad6;
+  --muted2:#7f6aa3;
+  --hub:#ff2e97;
+  --cyan:#ff2e97;
+  --voc:#ff2e97;
+  --metaal:#ff2e97;
+  --goud:#ff2e97;
+  --vak1:#ff2e97;
+  --paars:#b14bff;
+  --gram:#b14bff;
+  --nietmetaal:#b14bff;
+  --vak2:#b14bff;
+  --werkw:#23e0ff;
+  --edelgas:#23e0ff;
+  --vak3:#23e0ff;
+  --zin:#ffd23f;
+  --ok:#2bf5a0;
+  --bad:#ff3b5c;
+}
+:root[data-thema="synthwave"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="neonijs"]{
+  color-scheme:dark;
+  --ink:#020813;
+  --ink2:#05101f;
+  --surface:#0a1a2e;
+  --surface2:#0f2340;
+  --line:#163455;
+  --line2:#204a78;
+  --text:#e6f6ff;
+  --muted:#86b6d6;
+  --muted2:#5d859f;
+  --hub:#22e6ff;
+  --cyan:#22e6ff;
+  --voc:#22e6ff;
+  --metaal:#22e6ff;
+  --goud:#22e6ff;
+  --vak1:#22e6ff;
+  --paars:#63b3ff;
+  --gram:#63b3ff;
+  --nietmetaal:#63b3ff;
+  --vak2:#63b3ff;
+  --werkw:#9df0ff;
+  --edelgas:#9df0ff;
+  --vak3:#9df0ff;
+  --zin:#c6a8ff;
+  --ok:#3df5c0;
+  --bad:#ff5c7a;
+}
+:root[data-thema="neonijs"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="gifgroen"]{
+  color-scheme:dark;
+  --ink:#060a04;
+  --ink2:#0b1207;
+  --surface:#111c0c;
+  --surface2:#182611;
+  --line:#21351a;
+  --line2:#304c26;
+  --text:#eaffd9;
+  --muted:#9dc27e;
+  --muted2:#6d8c56;
+  --hub:#aaff1a;
+  --cyan:#aaff1a;
+  --voc:#aaff1a;
+  --metaal:#aaff1a;
+  --goud:#aaff1a;
+  --vak1:#aaff1a;
+  --paars:#4fe3ff;
+  --gram:#4fe3ff;
+  --nietmetaal:#4fe3ff;
+  --vak2:#4fe3ff;
+  --werkw:#ffe83d;
+  --edelgas:#ffe83d;
+  --vak3:#ffe83d;
+  --zin:#c77dff;
+  --ok:#3dff88;
+  --bad:#ff4d4d;
+}
+:root[data-thema="gifgroen"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="magenta"]{
+  color-scheme:dark;
+  --ink:#0f0413;
+  --ink2:#17081d;
+  --surface:#200c2a;
+  --surface2:#2a1136;
+  --line:#3a1a4a;
+  --line2:#532768;
+  --text:#ffe9fb;
+  --muted:#c898d6;
+  --muted2:#8f6b9d;
+  --hub:#ff3df0;
+  --cyan:#ff3df0;
+  --voc:#ff3df0;
+  --metaal:#ff3df0;
+  --goud:#ff3df0;
+  --vak1:#ff3df0;
+  --paars:#a24bff;
+  --gram:#a24bff;
+  --nietmetaal:#a24bff;
+  --vak2:#a24bff;
+  --werkw:#ff8ac0;
+  --edelgas:#ff8ac0;
+  --vak3:#ff8ac0;
+  --zin:#63e8ff;
+  --ok:#38f5b0;
+  --bad:#ff4f6e;
+}
+:root[data-thema="magenta"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="vuur"]{
+  color-scheme:dark;
+  --ink:#120503;
+  --ink2:#1a0906;
+  --surface:#260d08;
+  --surface2:#32120c;
+  --line:#451a12;
+  --line2:#62281b;
+  --text:#ffece2;
+  --muted:#d1a091;
+  --muted2:#9c7365;
+  --hub:#ff6a1a;
+  --cyan:#ff6a1a;
+  --voc:#ff6a1a;
+  --metaal:#ff6a1a;
+  --goud:#ff6a1a;
+  --vak1:#ff6a1a;
+  --paars:#ff3d9e;
+  --gram:#ff3d9e;
+  --nietmetaal:#ff3d9e;
+  --vak2:#ff3d9e;
+  --werkw:#ffc53d;
+  --edelgas:#ffc53d;
+  --vak3:#ffc53d;
+  --zin:#ffa06b;
+  --ok:#4ade80;
+  --bad:#ff2e2e;
+}
+:root[data-thema="vuur"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="terminal"]{
+  color-scheme:dark;
+  --ink:#000000;
+  --ink2:#050a05;
+  --surface:#0a120a;
+  --surface2:#0f1a0f;
+  --line:#1b2e1b;
+  --line2:#2c452c;
+  --text:#b9ffb9;
+  --muted:#5fa85f;
+  --muted2:#3d6f3d;
+  --hub:#39ff5f;
+  --cyan:#39ff5f;
+  --voc:#39ff5f;
+  --metaal:#39ff5f;
+  --goud:#39ff5f;
+  --vak1:#39ff5f;
+  --paars:#8affa8;
+  --gram:#8affa8;
+  --nietmetaal:#8affa8;
+  --vak2:#8affa8;
+  --werkw:#00e6c3;
+  --edelgas:#00e6c3;
+  --vak3:#00e6c3;
+  --zin:#c8ff3f;
+  --ok:#00ffa0;
+  --bad:#ff5f56;
+}
+:root[data-thema="terminal"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="middernacht"]{
+  color-scheme:dark;
+  --ink:#000000;
+  --ink2:#0a0a0c;
+  --surface:#131317;
+  --surface2:#1a1b20;
+  --line:#27272e;
+  --line2:#3b3b46;
+  --text:#ededf1;
+  --muted:#8f8f99;
+  --muted2:#62626d;
+  --hub:#8ab4ff;
+  --cyan:#8ab4ff;
+  --voc:#8ab4ff;
+  --metaal:#8ab4ff;
+  --goud:#8ab4ff;
+  --vak1:#8ab4ff;
+  --paars:#c79bff;
+  --gram:#c79bff;
+  --nietmetaal:#c79bff;
+  --vak2:#c79bff;
+  --werkw:#6fe3c4;
+  --edelgas:#6fe3c4;
+  --vak3:#6fe3c4;
+  --zin:#ffb86b;
+  --ok:#4ade80;
+  --bad:#ff6b6b;
+}
+:root[data-thema="middernacht"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="middernacht"] .glow{display:none}
+:root[data-thema="middernacht"] .grid-bg{opacity:.12}
+:root[data-thema="middernacht"] .sym,
+:root[data-thema="middernacht"] .nm,
+:root[data-thema="middernacht"] .woord,
+:root[data-thema="middernacht"] .done h2{text-shadow:none}
+:root[data-thema="middernacht"] .mark,
+:root[data-thema="middernacht"] .mark.tijdelijk,
+:root[data-thema="middernacht"] .mark:hover,
+:root[data-thema="middernacht"] .merk,
+:root[data-thema="middernacht"] .bar,
+:root[data-thema="middernacht"] .btn.pri,
+:root[data-thema="middernacht"] .btn.ok,
+:root[data-thema="middernacht"] .btn.bad,
+:root[data-thema="middernacht"] .kklaar,
+:root[data-thema="middernacht"] .knoop.nu,
+:root[data-thema="middernacht"] .kroontjes i.aan,
+:root[data-thema="middernacht"] .legend i,
+:root[data-thema="middernacht"] .chip[aria-pressed="true"],
+:root[data-thema="middernacht"] .gear[aria-expanded="true"],
+:root[data-thema="middernacht"] .tab[aria-selected="true"],
+:root[data-thema="middernacht"] .mt.sel,
+:root[data-thema="middernacht"] .opt.good,
+:root[data-thema="middernacht"] .score,
+:root[data-thema="middernacht"] .install,
+:root[data-thema="middernacht"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="leisteen"]{
+  color-scheme:dark;
+  --ink:#14171c;
+  --ink2:#191d24;
+  --surface:#21262f;
+  --surface2:#29303a;
+  --line:#343c48;
+  --line2:#47515f;
+  --text:#e4e8ee;
+  --muted:#97a1af;
+  --muted2:#6c7683;
+  --hub:#6f9bc9;
+  --cyan:#6f9bc9;
+  --voc:#6f9bc9;
+  --metaal:#6f9bc9;
+  --goud:#6f9bc9;
+  --vak1:#6f9bc9;
+  --paars:#a08cc0;
+  --gram:#a08cc0;
+  --nietmetaal:#a08cc0;
+  --vak2:#a08cc0;
+  --werkw:#79b09a;
+  --edelgas:#79b09a;
+  --vak3:#79b09a;
+  --zin:#c9a37a;
+  --ok:#6aab7e;
+  --bad:#cc7b7b;
+}
+:root[data-thema="leisteen"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="leisteen"] .glow{display:none}
+:root[data-thema="leisteen"] .grid-bg{opacity:.12}
+:root[data-thema="leisteen"] .sym,
+:root[data-thema="leisteen"] .nm,
+:root[data-thema="leisteen"] .woord,
+:root[data-thema="leisteen"] .done h2{text-shadow:none}
+:root[data-thema="leisteen"] .mark,
+:root[data-thema="leisteen"] .mark.tijdelijk,
+:root[data-thema="leisteen"] .mark:hover,
+:root[data-thema="leisteen"] .merk,
+:root[data-thema="leisteen"] .bar,
+:root[data-thema="leisteen"] .btn.pri,
+:root[data-thema="leisteen"] .btn.ok,
+:root[data-thema="leisteen"] .btn.bad,
+:root[data-thema="leisteen"] .kklaar,
+:root[data-thema="leisteen"] .knoop.nu,
+:root[data-thema="leisteen"] .kroontjes i.aan,
+:root[data-thema="leisteen"] .legend i,
+:root[data-thema="leisteen"] .chip[aria-pressed="true"],
+:root[data-thema="leisteen"] .gear[aria-expanded="true"],
+:root[data-thema="leisteen"] .tab[aria-selected="true"],
+:root[data-thema="leisteen"] .mt.sel,
+:root[data-thema="leisteen"] .opt.good,
+:root[data-thema="leisteen"] .score,
+:root[data-thema="leisteen"] .install,
+:root[data-thema="leisteen"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="indigo"]{
+  color-scheme:light;
+  --ink:#f6f7fb;
+  --ink2:#eceef6;
+  --surface:#ffffff;
+  --surface2:#fafbfd;
+  --line:#dde1ed;
+  --line2:#bfc7db;
+  --text:#0a092d;
+  --muted:#565f7e;
+  --muted2:#7c86a0;
+  --hub:#4255ff;
+  --cyan:#4255ff;
+  --voc:#4255ff;
+  --metaal:#4255ff;
+  --goud:#4255ff;
+  --vak1:#4255ff;
+  --paars:#9333ea;
+  --gram:#9333ea;
+  --nietmetaal:#9333ea;
+  --vak2:#9333ea;
+  --werkw:#0d9488;
+  --edelgas:#0d9488;
+  --vak3:#0d9488;
+  --zin:#db2777;
+  --ok:#15a163;
+  --bad:#dc2626;
+}
+:root[data-thema="indigo"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="indigo"] .glow{display:none}
+:root[data-thema="indigo"] .grid-bg{opacity:.12}
+:root[data-thema="indigo"] .sym,
+:root[data-thema="indigo"] .nm,
+:root[data-thema="indigo"] .woord,
+:root[data-thema="indigo"] .done h2{text-shadow:none}
+:root[data-thema="indigo"] .mark,
+:root[data-thema="indigo"] .mark.tijdelijk,
+:root[data-thema="indigo"] .mark:hover,
+:root[data-thema="indigo"] .merk,
+:root[data-thema="indigo"] .bar,
+:root[data-thema="indigo"] .btn.pri,
+:root[data-thema="indigo"] .btn.ok,
+:root[data-thema="indigo"] .btn.bad,
+:root[data-thema="indigo"] .kklaar,
+:root[data-thema="indigo"] .knoop.nu,
+:root[data-thema="indigo"] .kroontjes i.aan,
+:root[data-thema="indigo"] .legend i,
+:root[data-thema="indigo"] .chip[aria-pressed="true"],
+:root[data-thema="indigo"] .gear[aria-expanded="true"],
+:root[data-thema="indigo"] .tab[aria-selected="true"],
+:root[data-thema="indigo"] .mt.sel,
+:root[data-thema="indigo"] .opt.good,
+:root[data-thema="indigo"] .score,
+:root[data-thema="indigo"] .install,
+:root[data-thema="indigo"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="indigonacht"]{
+  color-scheme:dark;
+  --ink:#0a092d;
+  --ink2:#111038;
+  --surface:#1a1947;
+  --surface2:#232159;
+  --line:#2f2d6b;
+  --line2:#423f8c;
+  --text:#f2f3fb;
+  --muted:#a2a5cc;
+  --muted2:#7477a3;
+  --hub:#6b7bff;
+  --cyan:#6b7bff;
+  --voc:#6b7bff;
+  --metaal:#6b7bff;
+  --goud:#6b7bff;
+  --vak1:#6b7bff;
+  --paars:#b566ff;
+  --gram:#b566ff;
+  --nietmetaal:#b566ff;
+  --vak2:#b566ff;
+  --werkw:#22d3c5;
+  --edelgas:#22d3c5;
+  --vak3:#22d3c5;
+  --zin:#ff6fae;
+  --ok:#34d399;
+  --bad:#ff5a5a;
+}
+:root[data-thema="indigonacht"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="indigonacht"] .glow{display:none}
+:root[data-thema="indigonacht"] .grid-bg{opacity:.12}
+:root[data-thema="indigonacht"] .sym,
+:root[data-thema="indigonacht"] .nm,
+:root[data-thema="indigonacht"] .woord,
+:root[data-thema="indigonacht"] .done h2{text-shadow:none}
+:root[data-thema="indigonacht"] .mark,
+:root[data-thema="indigonacht"] .mark.tijdelijk,
+:root[data-thema="indigonacht"] .mark:hover,
+:root[data-thema="indigonacht"] .merk,
+:root[data-thema="indigonacht"] .bar,
+:root[data-thema="indigonacht"] .btn.pri,
+:root[data-thema="indigonacht"] .btn.ok,
+:root[data-thema="indigonacht"] .btn.bad,
+:root[data-thema="indigonacht"] .kklaar,
+:root[data-thema="indigonacht"] .knoop.nu,
+:root[data-thema="indigonacht"] .kroontjes i.aan,
+:root[data-thema="indigonacht"] .legend i,
+:root[data-thema="indigonacht"] .chip[aria-pressed="true"],
+:root[data-thema="indigonacht"] .gear[aria-expanded="true"],
+:root[data-thema="indigonacht"] .tab[aria-selected="true"],
+:root[data-thema="indigonacht"] .mt.sel,
+:root[data-thema="indigonacht"] .opt.good,
+:root[data-thema="indigonacht"] .score,
+:root[data-thema="indigonacht"] .install,
+:root[data-thema="indigonacht"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="mist"]{
+  color-scheme:light;
+  --ink:#eef1f4;
+  --ink2:#e5e9ee;
+  --surface:#ffffff;
+  --surface2:#f7f9fb;
+  --line:#d7dde4;
+  --line2:#b6c0cb;
+  --text:#1f242b;
+  --muted:#5d6773;
+  --muted2:#838e9b;
+  --hub:#3f6d99;
+  --cyan:#3f6d99;
+  --voc:#3f6d99;
+  --metaal:#3f6d99;
+  --goud:#3f6d99;
+  --vak1:#3f6d99;
+  --paars:#7a5f9e;
+  --gram:#7a5f9e;
+  --nietmetaal:#7a5f9e;
+  --vak2:#7a5f9e;
+  --werkw:#3f8a72;
+  --edelgas:#3f8a72;
+  --vak3:#3f8a72;
+  --zin:#9a6b3a;
+  --ok:#2f7d52;
+  --bad:#b04242;
+}
+:root[data-thema="mist"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="mist"] .glow{display:none}
+:root[data-thema="mist"] .grid-bg{opacity:.12}
+:root[data-thema="mist"] .sym,
+:root[data-thema="mist"] .nm,
+:root[data-thema="mist"] .woord,
+:root[data-thema="mist"] .done h2{text-shadow:none}
+:root[data-thema="mist"] .mark,
+:root[data-thema="mist"] .mark.tijdelijk,
+:root[data-thema="mist"] .mark:hover,
+:root[data-thema="mist"] .merk,
+:root[data-thema="mist"] .bar,
+:root[data-thema="mist"] .btn.pri,
+:root[data-thema="mist"] .btn.ok,
+:root[data-thema="mist"] .btn.bad,
+:root[data-thema="mist"] .kklaar,
+:root[data-thema="mist"] .knoop.nu,
+:root[data-thema="mist"] .kroontjes i.aan,
+:root[data-thema="mist"] .legend i,
+:root[data-thema="mist"] .chip[aria-pressed="true"],
+:root[data-thema="mist"] .gear[aria-expanded="true"],
+:root[data-thema="mist"] .tab[aria-selected="true"],
+:root[data-thema="mist"] .mt.sel,
+:root[data-thema="mist"] .opt.good,
+:root[data-thema="mist"] .score,
+:root[data-thema="mist"] .install,
+:root[data-thema="mist"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="grasgroen"]{
+  color-scheme:light;
+  --ink:#ffffff;
+  --ink2:#f7f7f7;
+  --surface:#ffffff;
+  --surface2:#fbfbfb;
+  --line:#e5e5e5;
+  --line2:#cfcfcf;
+  --text:#3c3c3c;
+  --muted:#777777;
+  --muted2:#a3a3a3;
+  --hub:#58a700;
+  --cyan:#58a700;
+  --voc:#58a700;
+  --metaal:#58a700;
+  --goud:#58a700;
+  --vak1:#58a700;
+  --paars:#1899d6;
+  --gram:#1899d6;
+  --nietmetaal:#1899d6;
+  --vak2:#1899d6;
+  --werkw:#8549ba;
+  --edelgas:#8549ba;
+  --vak3:#8549ba;
+  --zin:#e07b00;
+  --ok:#17803d;
+  --bad:#ea2b2b;
+}
+:root[data-thema="grasgroen"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="grasgroen"] .glow{display:none}
+:root[data-thema="grasgroen"] .grid-bg{opacity:.12}
+:root[data-thema="grasgroen"] .sym,
+:root[data-thema="grasgroen"] .nm,
+:root[data-thema="grasgroen"] .woord,
+:root[data-thema="grasgroen"] .done h2{text-shadow:none}
+:root[data-thema="grasgroen"] .mark,
+:root[data-thema="grasgroen"] .mark.tijdelijk,
+:root[data-thema="grasgroen"] .mark:hover,
+:root[data-thema="grasgroen"] .merk,
+:root[data-thema="grasgroen"] .bar,
+:root[data-thema="grasgroen"] .btn.pri,
+:root[data-thema="grasgroen"] .btn.ok,
+:root[data-thema="grasgroen"] .btn.bad,
+:root[data-thema="grasgroen"] .kklaar,
+:root[data-thema="grasgroen"] .knoop.nu,
+:root[data-thema="grasgroen"] .kroontjes i.aan,
+:root[data-thema="grasgroen"] .legend i,
+:root[data-thema="grasgroen"] .chip[aria-pressed="true"],
+:root[data-thema="grasgroen"] .gear[aria-expanded="true"],
+:root[data-thema="grasgroen"] .tab[aria-selected="true"],
+:root[data-thema="grasgroen"] .mt.sel,
+:root[data-thema="grasgroen"] .opt.good,
+:root[data-thema="grasgroen"] .score,
+:root[data-thema="grasgroen"] .install,
+:root[data-thema="grasgroen"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="notitieblok"]{
+  color-scheme:light;
+  --ink:#f7f3e8;
+  --ink2:#efe9da;
+  --surface:#fffdf7;
+  --surface2:#f8f4ea;
+  --line:#ded5c0;
+  --line2:#bfb49b;
+  --text:#2b2a26;
+  --muted:#6d6659;
+  --muted2:#938a78;
+  --hub:#2d5bd7;
+  --cyan:#2d5bd7;
+  --voc:#2d5bd7;
+  --metaal:#2d5bd7;
+  --goud:#2d5bd7;
+  --vak1:#2d5bd7;
+  --paars:#8e44ad;
+  --gram:#8e44ad;
+  --nietmetaal:#8e44ad;
+  --vak2:#8e44ad;
+  --werkw:#0e7490;
+  --edelgas:#0e7490;
+  --vak3:#0e7490;
+  --zin:#b7791f;
+  --ok:#1f7a4d;
+  --bad:#c0392b;
+}
+:root[data-thema="notitieblok"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="notitieblok"] .glow{display:none}
+:root[data-thema="notitieblok"] .grid-bg{opacity:.12}
+:root[data-thema="notitieblok"] .sym,
+:root[data-thema="notitieblok"] .nm,
+:root[data-thema="notitieblok"] .woord,
+:root[data-thema="notitieblok"] .done h2{text-shadow:none}
+:root[data-thema="notitieblok"] .mark,
+:root[data-thema="notitieblok"] .mark.tijdelijk,
+:root[data-thema="notitieblok"] .mark:hover,
+:root[data-thema="notitieblok"] .merk,
+:root[data-thema="notitieblok"] .bar,
+:root[data-thema="notitieblok"] .btn.pri,
+:root[data-thema="notitieblok"] .btn.ok,
+:root[data-thema="notitieblok"] .btn.bad,
+:root[data-thema="notitieblok"] .kklaar,
+:root[data-thema="notitieblok"] .knoop.nu,
+:root[data-thema="notitieblok"] .kroontjes i.aan,
+:root[data-thema="notitieblok"] .legend i,
+:root[data-thema="notitieblok"] .chip[aria-pressed="true"],
+:root[data-thema="notitieblok"] .gear[aria-expanded="true"],
+:root[data-thema="notitieblok"] .tab[aria-selected="true"],
+:root[data-thema="notitieblok"] .mt.sel,
+:root[data-thema="notitieblok"] .opt.good,
+:root[data-thema="notitieblok"] .score,
+:root[data-thema="notitieblok"] .install,
+:root[data-thema="notitieblok"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="sepia"]{
+  color-scheme:light;
+  --ink:#ece3d6;
+  --ink2:#e3d8c7;
+  --surface:#f7f1e6;
+  --surface2:#efe7d9;
+  --line:#d4c7b0;
+  --line2:#b6a68b;
+  --text:#2f2920;
+  --muted:#6f6350;
+  --muted2:#948570;
+  --hub:#96591f;
+  --cyan:#96591f;
+  --voc:#96591f;
+  --metaal:#96591f;
+  --goud:#96591f;
+  --vak1:#96591f;
+  --paars:#7d4f6b;
+  --gram:#7d4f6b;
+  --nietmetaal:#7d4f6b;
+  --vak2:#7d4f6b;
+  --werkw:#3f6b63;
+  --edelgas:#3f6b63;
+  --vak3:#3f6b63;
+  --zin:#8a6f2c;
+  --ok:#4a7a4a;
+  --bad:#a8452f;
+}
+:root[data-thema="sepia"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="sepia"] .glow{display:none}
+:root[data-thema="sepia"] .grid-bg{opacity:.12}
+:root[data-thema="sepia"] .sym,
+:root[data-thema="sepia"] .nm,
+:root[data-thema="sepia"] .woord,
+:root[data-thema="sepia"] .done h2{text-shadow:none}
+:root[data-thema="sepia"] .mark,
+:root[data-thema="sepia"] .mark.tijdelijk,
+:root[data-thema="sepia"] .mark:hover,
+:root[data-thema="sepia"] .merk,
+:root[data-thema="sepia"] .bar,
+:root[data-thema="sepia"] .btn.pri,
+:root[data-thema="sepia"] .btn.ok,
+:root[data-thema="sepia"] .btn.bad,
+:root[data-thema="sepia"] .kklaar,
+:root[data-thema="sepia"] .knoop.nu,
+:root[data-thema="sepia"] .kroontjes i.aan,
+:root[data-thema="sepia"] .legend i,
+:root[data-thema="sepia"] .chip[aria-pressed="true"],
+:root[data-thema="sepia"] .gear[aria-expanded="true"],
+:root[data-thema="sepia"] .tab[aria-selected="true"],
+:root[data-thema="sepia"] .mt.sel,
+:root[data-thema="sepia"] .opt.good,
+:root[data-thema="sepia"] .score,
+:root[data-thema="sepia"] .install,
+:root[data-thema="sepia"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="zonsopgang"]{
+  color-scheme:light;
+  --ink:#fff6ee;
+  --ink2:#fbe9da;
+  --surface:#ffffff;
+  --surface2:#fffaf5;
+  --line:#f0dbc8;
+  --line2:#d8bda4;
+  --text:#2a1f18;
+  --muted:#7a6455;
+  --muted2:#a08b79;
+  --hub:#d24d14;
+  --cyan:#d24d14;
+  --voc:#d24d14;
+  --metaal:#d24d14;
+  --goud:#d24d14;
+  --vak1:#d24d14;
+  --paars:#b02a5f;
+  --gram:#b02a5f;
+  --nietmetaal:#b02a5f;
+  --vak2:#b02a5f;
+  --werkw:#0f7b8a;
+  --edelgas:#0f7b8a;
+  --vak3:#0f7b8a;
+  --zin:#8a5cd6;
+  --ok:#157f4f;
+  --bad:#c0281e;
+}
+:root[data-thema="zonsopgang"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="zonsopgang"] .glow{display:none}
+:root[data-thema="zonsopgang"] .grid-bg{opacity:.12}
+:root[data-thema="zonsopgang"] .sym,
+:root[data-thema="zonsopgang"] .nm,
+:root[data-thema="zonsopgang"] .woord,
+:root[data-thema="zonsopgang"] .done h2{text-shadow:none}
+:root[data-thema="zonsopgang"] .mark,
+:root[data-thema="zonsopgang"] .mark.tijdelijk,
+:root[data-thema="zonsopgang"] .mark:hover,
+:root[data-thema="zonsopgang"] .merk,
+:root[data-thema="zonsopgang"] .bar,
+:root[data-thema="zonsopgang"] .btn.pri,
+:root[data-thema="zonsopgang"] .btn.ok,
+:root[data-thema="zonsopgang"] .btn.bad,
+:root[data-thema="zonsopgang"] .kklaar,
+:root[data-thema="zonsopgang"] .knoop.nu,
+:root[data-thema="zonsopgang"] .kroontjes i.aan,
+:root[data-thema="zonsopgang"] .legend i,
+:root[data-thema="zonsopgang"] .chip[aria-pressed="true"],
+:root[data-thema="zonsopgang"] .gear[aria-expanded="true"],
+:root[data-thema="zonsopgang"] .tab[aria-selected="true"],
+:root[data-thema="zonsopgang"] .mt.sel,
+:root[data-thema="zonsopgang"] .opt.good,
+:root[data-thema="zonsopgang"] .score,
+:root[data-thema="zonsopgang"] .install,
+:root[data-thema="zonsopgang"] input[type=text]:focus{box-shadow:none}
+
+.themabalk{position:relative; z-index:1; max-width:760px; margin:0 auto;
+  padding:18px 20px 4px; display:flex; flex-wrap:wrap; align-items:center;
+  justify-content:center; gap:9px}
+.themabalk .tlabel{font-family:var(--fm); font-size:10px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--muted2); margin-right:3px}
+.themaknop{width:28px; height:28px; padding:0; border-radius:50%; cursor:pointer;
+  border:1px solid var(--line2); position:relative; overflow:hidden;
+  transition:transform .16s ease; background:var(--tb)}
+.themaknop::after{content:""; position:absolute; inset:0;
+  background:linear-gradient(135deg,var(--ts) 0 48%,transparent 48%)}
+.themaknop:hover{transform:scale(1.12)}
+.themaknop[aria-pressed="true"]{outline:2px solid var(--text); outline-offset:2px}
+.themaknop:focus-visible{outline:2px solid var(--text); outline-offset:2px}
+.tsplit{width:1px; height:20px; background:var(--line2); opacity:.7; margin:0 2px}
+.themanaam{font-family:var(--fm); font-size:10px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted); min-width:104px; text-align:center}
+.themabalk.inline{max-width:none; margin:0; padding:0; justify-content:flex-start;
+  gap:10px}
+.themabalk.inline .themanaam{min-width:0; margin-left:2px; text-align:left}
+@media print{.themabalk{display:none}}
+/*thema-css-eind*/
 </style>
+<!--thema-kop-start-->
+<script>
+/* Het thema staat in localStorage; alle apps op deze map delen die opslag. */
+(function(){
+  try{
+    var t=localStorage.getItem("leren-thema");
+    if(t&&t!=="standaard")document.documentElement.setAttribute("data-thema",t);
+  }catch(e){}
+})();
+</script>
+<!--thema-kop-eind-->
 </head>
 <body>
 <div class="statusbar"></div>
@@ -111,7 +815,7 @@ a.optie:focus-visible{outline:2px solid var(--c); outline-offset:3px}
   </header>
 
   <div class="opties">
-    <a class="optie" href="toets/" style="--c:#b06bff">
+    <a class="optie" href="toets/" style="--c:var(--paars)">
       <div class="okop">
         <div class="merk">OG</div>
         <div class="otitel"><b>Kruisregel</b><span>Oxidatiegetallen en formules</span></div>
@@ -123,7 +827,7 @@ a.optie:focus-visible{outline:2px solid var(--c); outline-offset:3px}
         <span>bindingen</span><span>OG-tabel</span></div>
     </a>
 
-    <a class="optie" href="elementen/" style="--c:#00e0ff">
+    <a class="optie" href="elementen/" style="--c:var(--cyan)">
       <div class="okop">
         <div class="merk">Ne</div>
         <div class="otitel"><b>Neon Elementen</b><span>Symbolen en namen</span></div>
@@ -139,7 +843,29 @@ a.optie:focus-visible{outline:2px solid var(--c); outline-offset:3px}
   <div class="voet">
     <p>Je hebt je PSE nodig bij een deel van de oefeningen. De gewone oxidatiegetallen staan ook
       in de app zelf, onder het tabblad OG-tabel.</p>
-      <p class="bijwerk">Laatst bijgewerkt <b data-bijgewerkt>16 september 2026 · 22:57</b></p>
+      <!--thema-balk-start-->
+<div class="themabalk inline" id="themabalk">
+    <button class="themaknop" type="button" data-thema="standaard" style="--tb:#0b0d18; --ts:#b9c3ff" title="Neon — zoals de app bedoeld is" aria-label="Thema Neon"></button>
+    <button class="themaknop" type="button" data-thema="synthwave" style="--tb:#0d0420; --ts:#ff2e97" title="Synthwave — neon roze en cyaan op paars" aria-label="Thema Synthwave"></button>
+    <button class="themaknop" type="button" data-thema="neonijs" style="--tb:#020813; --ts:#22e6ff" title="Neon ijs — fel cyaan op diepblauw" aria-label="Thema Neon ijs"></button>
+    <button class="themaknop" type="button" data-thema="gifgroen" style="--tb:#060a04; --ts:#aaff1a" title="Gifgroen — fel limoen op zwart" aria-label="Thema Gifgroen"></button>
+    <button class="themaknop" type="button" data-thema="magenta" style="--tb:#0f0413; --ts:#ff3df0" title="Magenta — neon roze en violet" aria-label="Thema Magenta"></button>
+    <button class="themaknop" type="button" data-thema="vuur" style="--tb:#120503; --ts:#ff6a1a" title="Vuur — neon oranje en rood" aria-label="Thema Vuur"></button>
+    <button class="themaknop" type="button" data-thema="terminal" style="--tb:#000000; --ts:#39ff5f" title="Terminal — zwart met groen, zoals een shell" aria-label="Thema Terminal"></button>
+    <span class="tsplit" aria-hidden="true"></span>
+    <button class="themaknop" type="button" data-thema="middernacht" style="--tb:#000000; --ts:#8ab4ff" title="Middernacht — diep zwart, rustig" aria-label="Thema Middernacht"></button>
+    <button class="themaknop" type="button" data-thema="leisteen" style="--tb:#14171c; --ts:#6f9bc9" title="Leisteen — donkergrijs, gedempte kleuren" aria-label="Thema Leisteen"></button>
+    <button class="themaknop" type="button" data-thema="indigo" style="--tb:#f6f7fb; --ts:#4255ff" title="Indigo — licht en strak, blauwpaars" aria-label="Thema Indigo"></button>
+    <button class="themaknop" type="button" data-thema="indigonacht" style="--tb:#0a092d; --ts:#6b7bff" title="Indigo nacht — hetzelfde, maar donker" aria-label="Thema Indigo nacht"></button>
+    <button class="themaknop" type="button" data-thema="mist" style="--tb:#eef1f4; --ts:#3f6d99" title="Mist — licht grijsblauw, heel rustig" aria-label="Thema Mist"></button>
+    <button class="themaknop" type="button" data-thema="grasgroen" style="--tb:#ffffff; --ts:#58cc02" title="Grasgroen — licht en vrolijk, groen" aria-label="Thema Grasgroen"></button>
+    <button class="themaknop" type="button" data-thema="notitieblok" style="--tb:#f7f3e8; --ts:#2d5bd7" title="Notitieblok — papier met balpen" aria-label="Thema Notitieblok"></button>
+    <button class="themaknop" type="button" data-thema="sepia" style="--tb:#ece3d6; --ts:#96591f" title="Sepia — oud papier, gedempt warm" aria-label="Thema Sepia"></button>
+    <button class="themaknop" type="button" data-thema="zonsopgang" style="--tb:#fff6ee; --ts:#e2571d" title="Zonsopgang — warm licht, oranje" aria-label="Thema Zonsopgang"></button>
+    <span class="themanaam" id="themanaam"></span>
+  </div>
+<!--thema-balk-eind-->
+<p class="bijwerk">Laatst bijgewerkt <b data-bijgewerkt>21 september 2026 · 00:07</b></p>
   </div>
 </div>
 
@@ -148,5 +874,47 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){
   navigator.serviceWorker.register("sw.js").catch(function(){});
 })}
 </script>
+<!--thema-js-start-->
+<script>
+/* ---------- themakiezer ---------- */
+(function(){
+  var NAMEN={"standaard":"Neon", "synthwave":"Synthwave", "neonijs":"Neon ijs", "gifgroen":"Gifgroen", "magenta":"Magenta", "vuur":"Vuur", "terminal":"Terminal", "middernacht":"Middernacht", "leisteen":"Leisteen", "indigo":"Indigo", "indigonacht":"Indigo nacht", "mist":"Mist", "grasgroen":"Grasgroen", "notitieblok":"Notitieblok", "sepia":"Sepia", "zonsopgang":"Zonsopgang"};
+  var balk=document.getElementById("themabalk");
+  if(!balk)return;
+  var knoppen=[].slice.call(balk.querySelectorAll(".themaknop"));
+  var naamvak=document.getElementById("themanaam");
+
+  function huidig(){
+    try{return localStorage.getItem("leren-thema")||"standaard"}catch(e){return "standaard"}
+  }
+  function toon(t){
+    if(t==="standaard")document.documentElement.removeAttribute("data-thema");
+    else document.documentElement.setAttribute("data-thema",t);
+    var meta=document.querySelector('meta[name="theme-color"]');
+    if(meta){
+      var kleur=getComputedStyle(document.documentElement)
+        .getPropertyValue("--ink").trim();
+      if(kleur)meta.setAttribute("content",kleur);
+    }
+    knoppen.forEach(function(b){
+      b.setAttribute("aria-pressed",String(b.dataset.thema===t));
+    });
+    if(naamvak)naamvak.textContent=NAMEN[t]||"";
+  }
+  function kies(t){
+    try{localStorage.setItem("leren-thema",t)}catch(e){}
+    toon(t);
+  }
+  knoppen.forEach(function(b){
+    b.addEventListener("click",function(){kies(b.dataset.thema)});
+  });
+  /* een andere tab of app in dezelfde map heeft het thema gewijzigd */
+  window.addEventListener("storage",function(e){
+    if(e.key==="leren-thema")toon(huidig());
+  });
+  toon(huidig());
+})();
+</script>
+<!--thema-js-eind-->
 </body>
 </html>

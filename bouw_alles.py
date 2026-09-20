@@ -7,6 +7,8 @@ in index.html.
 """
 import io, os, re, shutil, datetime
 
+import thema
+
 HIER = os.path.dirname(os.path.abspath(__file__))
 BRON = os.path.dirname(HIER)
 
@@ -51,10 +53,14 @@ for map_naam, bronmap in VAKKEN:
         extra = ""
         if naam == "index.html":
             extra = "  (datum gezet)" if stempel_erin(naar) else "  (GEEN datumregel)"
+            thema.zet_erin(naar)
+            extra += " + themakiezer"
         print("   %-24s %7d bytes%s" % (naam, os.path.getsize(naar), extra))
 
 if stempel_erin(os.path.join(HIER, "index.html")):
     print("\nhoofdmenu: datum gezet op %s" % STEMPEL)
+thema.zet_erin(os.path.join(HIER, "index.html"))
+print("themakiezer: %d thema's in elke pagina" % len(thema.THEMAS))
 
 print("\nklaar. Wat online gaat:")
 for pad, _, namen in os.walk(HIER):
