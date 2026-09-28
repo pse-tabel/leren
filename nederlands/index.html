@@ -1,0 +1,2272 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06070d">
+<meta name="description" content="Gevorderde woordenschat Nederlands: betekenis, synoniemen en het woord in een zin.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Woordkracht">
+<title>Woordkracht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --ink:#06070d; --ink2:#0a0c16; --surface:#10131f; --surface2:#171b2b;
+  --line:#242a44; --line2:#333b60;
+  --text:#e2e6f5; --muted:#848ba8; --muted2:#5c6382;
+  --ok:#31ffb0; --bad:#ff3d5e;
+  --ned:#4ade80; --ned2:#38bdf8; --ned3:#c084fc;
+  --fd:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --fu:"Manrope",ui-sans-serif,system-ui,sans-serif;
+  --fm:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;
+  --sp:cubic-bezier(.2,.9,.25,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ink); color:var(--text); font-family:var(--fu); min-height:100dvh;
+  -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent; overflow-x:hidden}
+[hidden]{display:none!important}
+button{font-family:inherit}
+.glow{position:fixed; inset:-28% -20% auto -20%; height:70vh; z-index:0; pointer-events:none;
+  background:radial-gradient(42% 38% at 26% 22%, color-mix(in srgb,var(--c,var(--ned)) 18%,transparent) 0%, transparent 70%),
+             radial-gradient(34% 30% at 78% 8%, color-mix(in srgb,var(--ned3) 12%,transparent) 0%, transparent 70%);
+  filter:blur(34px); transition:background .5s var(--sp)}
+.statusbar{position:fixed; top:0; left:0; right:0; height:env(safe-area-inset-top); z-index:20;
+  pointer-events:none; background:color-mix(in srgb,var(--ink) 78%,transparent);
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px)}
+.app{position:relative; z-index:1; max-width:560px; margin:0 auto; min-height:100dvh;
+  display:flex; flex-direction:column; gap:14px;
+  padding:calc(18px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right))
+          calc(24px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left));}
+
+.top{display:flex; align-items:center; gap:10px}
+.terug{width:40px; height:40px; flex:none; display:grid; place-items:center; border-radius:12px;
+  border:1px solid var(--line); background:var(--surface); color:var(--muted); font-size:18px;
+  text-decoration:none; transition:.2s var(--sp)}
+.terug:hover{color:var(--ned); border-color:color-mix(in srgb,var(--ned) 50%,transparent)}
+.mark{width:40px; height:40px; flex:none; display:grid; place-items:center; border-radius:12px;
+  border:1px solid color-mix(in srgb,var(--ned) 45%,transparent);
+  background:linear-gradient(150deg,color-mix(in srgb,var(--ned) 18%,var(--surface)),var(--surface));
+  box-shadow:0 0 18px -6px var(--ned);
+  font-family:var(--fd); font-weight:700; font-size:16px; color:var(--ned)}
+.tt{flex:1; min-width:0}
+.tt h1{font-family:var(--fd); font-size:21px; font-weight:700; margin:0; line-height:1.1}
+.tt p{margin:2px 0 0; font-family:var(--fm); font-size:10px; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--muted2)}
+.gear{width:40px; height:40px; flex:none; border-radius:12px; border:1px solid var(--line);
+  background:var(--surface); color:var(--muted); font-size:16px; cursor:pointer}
+.gear[aria-expanded="true"]{color:var(--ned); border-color:color-mix(in srgb,var(--ned) 50%,transparent)}
+
+.tabs{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; margin:0 -16px; padding:1px 16px 3px;
+  -webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 30px),transparent);
+  mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 30px),transparent)}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none; font-size:13px; font-weight:600; padding:8px 13px; border-radius:99px;
+  border:1px solid var(--line); background:var(--ink2); color:var(--muted); cursor:pointer;
+  transition:.22s var(--sp); white-space:nowrap}
+.tab:hover{color:var(--text)}
+.tab[aria-selected="true"]{color:var(--ink); background:var(--text); border-color:var(--text)}
+
+.panel{display:grid; gap:12px; padding:14px; border-radius:14px; border:1px solid var(--line);
+  background:var(--ink2)}
+.fset{display:grid; gap:7px}
+.flabel{font-family:var(--fm); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--muted2)}
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{font-size:12px; font-weight:600; padding:7px 11px; border-radius:8px; border:1px solid var(--line);
+  background:var(--surface); color:var(--muted); cursor:pointer; transition:.2s var(--sp)}
+.chip[aria-pressed="true"]{color:var(--ned); border-color:color-mix(in srgb,var(--ned) 55%,transparent);
+  background:color-mix(in srgb,var(--ned) 13%,var(--surface))}
+.reset{justify-self:start; font-size:12px; color:var(--bad); background:transparent;
+  border:1px solid color-mix(in srgb,var(--bad) 35%,transparent); border-radius:9px;
+  padding:7px 12px; cursor:pointer}
+
+.view{display:flex; flex-direction:column; gap:13px; flex:1}
+.view.in{animation:vin .34s var(--sp) both}
+@keyframes vin{from{opacity:0; transform:translateY(9px)}to{opacity:1; transform:none}}
+.meta{display:flex; align-items:center; justify-content:space-between; gap:10px}
+.counter{font-family:var(--fm); font-size:11px; color:var(--muted2); letter-spacing:.08em}
+.counter b{color:var(--text)}
+.mini{font-size:12px; color:var(--muted); background:transparent; border:1px solid var(--line);
+  border-radius:8px; padding:6px 10px; cursor:pointer}
+.mini:hover{color:var(--text)}
+.track{height:4px; border-radius:99px; background:var(--surface); overflow:hidden}
+.bar{height:100%; width:0; border-radius:99px; background:var(--c,var(--ned));
+  box-shadow:0 0 12px -2px var(--c,var(--ned)); transition:width .3s var(--sp)}
+
+.tegel{border-radius:16px; padding:22px 18px; border:1px solid color-mix(in srgb,var(--c,var(--ned)) 32%,transparent);
+  background:linear-gradient(158deg,color-mix(in srgb,var(--c,var(--ned)) 10%,var(--surface)) 0%,var(--surface) 62%,var(--ink2) 100%);
+  box-shadow:0 22px 50px -34px var(--c,var(--ned)); display:grid; gap:9px; text-align:center}
+.badge{font-family:var(--fm); font-size:9.5px; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--muted2)}
+.woord{font-family:var(--fd); font-size:clamp(28px,7.5vw,40px); font-weight:700; line-height:1.1;
+  color:var(--c,var(--ned)); word-break:break-word}
+.onder{font-size:13px; color:var(--muted); line-height:1.5}
+.soortje{font-family:var(--fm); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted2)}
+.vraag{margin:0; text-align:center; font-family:var(--fm); font-size:10.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted2)}
+
+.zinvak{border-radius:14px; padding:18px 16px; border:1px solid var(--line); background:var(--ink2);
+  font-size:17px; line-height:1.65; text-align:center}
+.gat{display:inline-block; min-width:96px; border-bottom:2px solid var(--c,var(--ned));
+  color:var(--c,var(--ned)); font-weight:700; padding:0 6px}
+.gat.leeg{color:var(--muted2)}
+
+.opts{display:grid; gap:9px}
+.opt{text-align:left; font-size:14.5px; font-weight:600; padding:13px 15px; border-radius:12px;
+  border:1px solid var(--line); background:var(--ink2); color:var(--text); cursor:pointer;
+  transition:.18s var(--sp); display:flex; gap:11px; align-items:center}
+.opt:hover:not(:disabled){border-color:var(--line2); background:var(--surface)}
+.opt i{flex:none; width:22px; height:22px; border-radius:7px; display:grid; place-items:center;
+  font-style:normal; font-family:var(--fm); font-size:11px; color:var(--muted2);
+  border:1px solid var(--line)}
+.opt.good{border-color:color-mix(in srgb,var(--ok) 55%,transparent);
+  background:color-mix(in srgb,var(--ok) 12%,var(--ink2)); color:var(--ok)}
+.opt.wrong{border-color:color-mix(in srgb,var(--bad) 55%,transparent);
+  background:color-mix(in srgb,var(--bad) 12%,var(--ink2)); color:var(--bad)}
+
+.typewrap{display:grid; gap:9px}
+.typewrap input{width:100%; font-family:var(--fu); font-size:16px; padding:13px 15px; border-radius:12px;
+  border:1px solid var(--line); background:var(--surface); color:var(--text)}
+.typewrap input:focus{outline:none; border-color:var(--c,var(--ned))}
+.typewrap input.goed{border-color:var(--ok); color:var(--ok)}
+.typewrap input.fout{border-color:var(--bad); color:var(--bad)}
+.shake{animation:shake .32s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.btn{font-size:14px; font-weight:700; padding:13px; border-radius:11px; border:0; cursor:pointer;
+  color:var(--ink); background:var(--c,var(--ned)); transition:transform .16s var(--sp)}
+.btn:active{transform:scale(.98)}
+.linkbtn{font-size:12.5px; color:var(--muted2); background:transparent; border:0; cursor:pointer;
+  text-decoration:underline; padding:4px}
+.row2{display:grid; grid-template-columns:1fr 1fr; gap:9px}
+
+.fb{display:grid; gap:9px; padding:15px; border-radius:13px; border:1px solid var(--line);
+  background:var(--ink2)}
+.fb.g{border-color:color-mix(in srgb,var(--ok) 40%,transparent)}
+.fb.b{border-color:color-mix(in srgb,var(--bad) 40%,transparent)}
+.fbt{font-family:var(--fd); font-size:17px; font-weight:700}
+.fb.g .fbt{color:var(--ok)} .fb.b .fbt{color:var(--bad)}
+.fbs{font-size:13.5px; color:var(--muted); line-height:1.6}
+.fbs b{color:var(--text)}
+
+/* kaarten */
+.kaartwrap{flex:1; min-height:260px; max-height:min(58dvh,460px); display:grid; touch-action:pan-y}
+.kaart{position:relative; width:100%; height:100%; min-height:260px; transform-style:preserve-3d;
+  transition:transform .55s var(--sp); cursor:pointer}
+.kaart.om{transform:rotateY(180deg)}
+.vlak{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  border-radius:18px; padding:22px; display:flex; flex-direction:column; justify-content:center;
+  gap:11px; text-align:center; overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--c,var(--ned)) 30%,transparent);
+  background:linear-gradient(158deg,color-mix(in srgb,var(--c,var(--ned)) 9%,var(--surface)) 0%,var(--surface) 60%,var(--ink2) 100%);
+  box-shadow:0 24px 56px -34px var(--c,var(--ned))}
+.vlak.b{transform:rotateY(180deg)}
+.vlak .groot{font-family:var(--fd); font-size:clamp(26px,7vw,38px); font-weight:700; line-height:1.15;
+  color:var(--c,var(--ned))}
+.vlak .uitleg{font-size:15px; color:var(--text); line-height:1.55}
+.vlak .synrij{display:flex; flex-wrap:wrap; gap:6px; justify-content:center}
+.vlak .synrij span{font-size:12px; color:var(--muted); border:1px solid var(--line);
+  border-radius:7px; padding:4px 9px}
+.hint{margin:0; text-align:center; font-size:11.5px; color:var(--muted2)}
+
+/* matchen */
+.mgrid{display:grid; grid-template-columns:repeat(2,1fr); gap:7px}
+.mt{font-size:12.5px; font-weight:600; padding:12px 8px; border-radius:10px; border:1px solid var(--line);
+  background:var(--ink2); color:var(--text); cursor:pointer; min-height:62px; line-height:1.35;
+  transition:.16s var(--sp)}
+.mt.sel{border-color:var(--ned); box-shadow:0 0 18px -8px var(--ned)}
+.mt.weg{opacity:0; pointer-events:none}
+
+/* voortgang */
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:8px}
+.stat{padding:13px 10px; border-radius:12px; border:1px solid var(--line); background:var(--ink2);
+  text-align:center}
+.stat b{display:block; font-family:var(--fd); font-size:22px; font-weight:700}
+.stat span{font-family:var(--fm); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--muted2)}
+.pgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(52px,1fr)); gap:6px}
+.pcel{height:34px; border-radius:8px; border:1px solid var(--line); background:var(--ink2);
+  display:grid; place-items:center; font-size:9.5px; color:var(--muted2); overflow:hidden;
+  position:relative}
+.pcel i{position:absolute; inset:auto 0 0 0; background:var(--ned); opacity:.55}
+.pcel span{position:relative; z-index:1; padding:0 3px; text-align:center; line-height:1.1;
+  word-break:break-word}
+
+/* samenvatting */
+.slijst{display:grid; gap:12px}
+.svak{border:1px solid var(--line); border-radius:13px; overflow:hidden; background:var(--ink2)}
+.skop{padding:11px 14px; background:color-mix(in srgb,var(--c,var(--ned)) 10%,transparent);
+  border-bottom:1px solid var(--line); display:flex; justify-content:space-between;
+  align-items:baseline; gap:10px}
+.skop b{font-family:var(--fd); font-size:15px; font-weight:700}
+.skop span{font-family:var(--fm); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted2)}
+.srij{padding:11px 14px; border-bottom:1px solid var(--line); display:grid; gap:4px}
+.srij:last-child{border-bottom:0}
+.srij .w{font-weight:700; font-size:14.5px; color:var(--c,var(--ned))}
+.srij .w em{font-style:normal; font-family:var(--fm); font-size:9.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted2); margin-left:7px}
+.srij .b{font-size:13.5px; color:var(--text); line-height:1.5}
+.srij .s{font-size:12.5px; color:var(--muted)}
+.srij .z{font-size:12.5px; color:var(--muted2); font-style:italic}
+
+@media (min-width:660px){
+  .app{max-width:720px; padding-left:26px; padding-right:26px}
+  .tabs{flex-wrap:wrap; overflow:visible; margin:0; padding:0; -webkit-mask-image:none; mask-image:none}
+  .opts{grid-template-columns:1fr 1fr}
+  .mgrid{grid-template-columns:repeat(4,1fr)}
+  .kaartwrap{min-height:300px}
+  .kaart{min-height:300px}
+}
+/* ---------- op een groot scherm: zijbalk in plaats van de tabrij ---------- */
+@media (min-width:980px){
+  .app{max-width:1080px; display:grid; gap:16px 30px;
+    grid-template-columns:262px minmax(0,1fr);
+    grid-template-rows:auto auto auto 1fr;
+    grid-template-areas:"kop kop" "nav hoofd" "pan hoofd" "vul hoofd";
+    padding:28px 32px calc(30px + env(safe-area-inset-bottom))}
+  .top{grid-area:kop; padding-bottom:11px; border-bottom:1px solid var(--line)}
+  .tabs{grid-area:nav; flex-direction:column; gap:4px; align-self:start; overflow:visible;
+    margin:0; padding:0; -webkit-mask-image:none; mask-image:none}
+  .panel{grid-area:pan}
+  .view{grid-area:hoofd; min-width:0}
+  .tab{width:100%; text-align:left; border-radius:10px; padding:11px 14px; font-size:14px;
+    background:transparent; border-color:transparent; white-space:normal}
+  .tab:hover{background:var(--ink2)}
+  .tab[aria-selected="true"]{background:var(--surface); border-color:var(--line2); color:var(--text)}
+  .tt h1{font-size:26px}
+  .kaartwrap{min-height:380px; max-height:min(56dvh,470px)}
+  .opts{grid-template-columns:1fr 1fr}
+  .mgrid{grid-template-columns:repeat(4,1fr)}
+  #svBody>div{grid-template-columns:1fr 1fr; align-items:start}
+}
+@media print{
+  .glow,.statusbar,.tabs,.panel,.top .terug,.top .gear,.meta{display:none!important}
+  body{background:#fff; color:#000}
+  .app{max-width:none; padding:0}
+  .svak{break-inside:avoid; border:1px solid #bbb; background:#fff; margin:0 0 10px}
+  .skop{background:#f2f2f2}
+  .srij .w{color:#000}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important; transition-duration:.01ms!important}}
+/*thema-css-start*/
+/* de thema's van de site: neutralen en accenten in één keer */
+:root[data-thema="synthwave"]{
+  color-scheme:dark;
+  --ink:#0d0420;
+  --ink2:#140a2e;
+  --surface:#1c1040;
+  --surface2:#241553;
+  --line:#33206b;
+  --line2:#4a2f91;
+  --text:#f7e9ff;
+  --muted:#b49ad6;
+  --muted2:#7f6aa3;
+  --hub:#ff2e97;
+  --cyan:#ff2e97;
+  --voc:#ff2e97;
+  --metaal:#ff2e97;
+  --goud:#ff2e97;
+  --vak1:#ff2e97;
+  --ned:#ff2e97;
+  --paars:#b14bff;
+  --gram:#b14bff;
+  --nietmetaal:#b14bff;
+  --vak2:#b14bff;
+  --ned2:#b14bff;
+  --werkw:#23e0ff;
+  --edelgas:#23e0ff;
+  --vak3:#23e0ff;
+  --ned3:#23e0ff;
+  --zin:#ffd23f;
+  --vak4:#ffd23f;
+  --ok:#2bf5a0;
+  --bad:#ff3b5c;
+}
+:root[data-thema="synthwave"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="neonijs"]{
+  color-scheme:dark;
+  --ink:#020813;
+  --ink2:#05101f;
+  --surface:#0a1a2e;
+  --surface2:#0f2340;
+  --line:#163455;
+  --line2:#204a78;
+  --text:#e6f6ff;
+  --muted:#86b6d6;
+  --muted2:#5d859f;
+  --hub:#22e6ff;
+  --cyan:#22e6ff;
+  --voc:#22e6ff;
+  --metaal:#22e6ff;
+  --goud:#22e6ff;
+  --vak1:#22e6ff;
+  --ned:#22e6ff;
+  --paars:#63b3ff;
+  --gram:#63b3ff;
+  --nietmetaal:#63b3ff;
+  --vak2:#63b3ff;
+  --ned2:#63b3ff;
+  --werkw:#9df0ff;
+  --edelgas:#9df0ff;
+  --vak3:#9df0ff;
+  --ned3:#9df0ff;
+  --zin:#c6a8ff;
+  --vak4:#c6a8ff;
+  --ok:#3df5c0;
+  --bad:#ff5c7a;
+}
+:root[data-thema="neonijs"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="gifgroen"]{
+  color-scheme:dark;
+  --ink:#060a04;
+  --ink2:#0b1207;
+  --surface:#111c0c;
+  --surface2:#182611;
+  --line:#21351a;
+  --line2:#304c26;
+  --text:#eaffd9;
+  --muted:#9dc27e;
+  --muted2:#6d8c56;
+  --hub:#aaff1a;
+  --cyan:#aaff1a;
+  --voc:#aaff1a;
+  --metaal:#aaff1a;
+  --goud:#aaff1a;
+  --vak1:#aaff1a;
+  --ned:#aaff1a;
+  --paars:#4fe3ff;
+  --gram:#4fe3ff;
+  --nietmetaal:#4fe3ff;
+  --vak2:#4fe3ff;
+  --ned2:#4fe3ff;
+  --werkw:#ffe83d;
+  --edelgas:#ffe83d;
+  --vak3:#ffe83d;
+  --ned3:#ffe83d;
+  --zin:#c77dff;
+  --vak4:#c77dff;
+  --ok:#3dff88;
+  --bad:#ff4d4d;
+}
+:root[data-thema="gifgroen"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="magenta"]{
+  color-scheme:dark;
+  --ink:#0f0413;
+  --ink2:#17081d;
+  --surface:#200c2a;
+  --surface2:#2a1136;
+  --line:#3a1a4a;
+  --line2:#532768;
+  --text:#ffe9fb;
+  --muted:#c898d6;
+  --muted2:#8f6b9d;
+  --hub:#ff3df0;
+  --cyan:#ff3df0;
+  --voc:#ff3df0;
+  --metaal:#ff3df0;
+  --goud:#ff3df0;
+  --vak1:#ff3df0;
+  --ned:#ff3df0;
+  --paars:#a24bff;
+  --gram:#a24bff;
+  --nietmetaal:#a24bff;
+  --vak2:#a24bff;
+  --ned2:#a24bff;
+  --werkw:#ff8ac0;
+  --edelgas:#ff8ac0;
+  --vak3:#ff8ac0;
+  --ned3:#ff8ac0;
+  --zin:#63e8ff;
+  --vak4:#63e8ff;
+  --ok:#38f5b0;
+  --bad:#ff4f6e;
+}
+:root[data-thema="magenta"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="vuur"]{
+  color-scheme:dark;
+  --ink:#120503;
+  --ink2:#1a0906;
+  --surface:#260d08;
+  --surface2:#32120c;
+  --line:#451a12;
+  --line2:#62281b;
+  --text:#ffece2;
+  --muted:#d1a091;
+  --muted2:#9c7365;
+  --hub:#ff6a1a;
+  --cyan:#ff6a1a;
+  --voc:#ff6a1a;
+  --metaal:#ff6a1a;
+  --goud:#ff6a1a;
+  --vak1:#ff6a1a;
+  --ned:#ff6a1a;
+  --paars:#ff3d9e;
+  --gram:#ff3d9e;
+  --nietmetaal:#ff3d9e;
+  --vak2:#ff3d9e;
+  --ned2:#ff3d9e;
+  --werkw:#ffc53d;
+  --edelgas:#ffc53d;
+  --vak3:#ffc53d;
+  --ned3:#ffc53d;
+  --zin:#ffa06b;
+  --vak4:#ffa06b;
+  --ok:#4ade80;
+  --bad:#ff2e2e;
+}
+:root[data-thema="vuur"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="terminal"]{
+  color-scheme:dark;
+  --ink:#000000;
+  --ink2:#050a05;
+  --surface:#0a120a;
+  --surface2:#0f1a0f;
+  --line:#1b2e1b;
+  --line2:#2c452c;
+  --text:#b9ffb9;
+  --muted:#5fa85f;
+  --muted2:#3d6f3d;
+  --hub:#39ff5f;
+  --cyan:#39ff5f;
+  --voc:#39ff5f;
+  --metaal:#39ff5f;
+  --goud:#39ff5f;
+  --vak1:#39ff5f;
+  --ned:#39ff5f;
+  --paars:#8affa8;
+  --gram:#8affa8;
+  --nietmetaal:#8affa8;
+  --vak2:#8affa8;
+  --ned2:#8affa8;
+  --werkw:#00e6c3;
+  --edelgas:#00e6c3;
+  --vak3:#00e6c3;
+  --ned3:#00e6c3;
+  --zin:#c8ff3f;
+  --vak4:#c8ff3f;
+  --ok:#00ffa0;
+  --bad:#ff5f56;
+}
+:root[data-thema="terminal"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="middernacht"]{
+  color-scheme:dark;
+  --ink:#000000;
+  --ink2:#0a0a0c;
+  --surface:#131317;
+  --surface2:#1a1b20;
+  --line:#27272e;
+  --line2:#3b3b46;
+  --text:#ededf1;
+  --muted:#8f8f99;
+  --muted2:#62626d;
+  --hub:#8ab4ff;
+  --cyan:#8ab4ff;
+  --voc:#8ab4ff;
+  --metaal:#8ab4ff;
+  --goud:#8ab4ff;
+  --vak1:#8ab4ff;
+  --ned:#8ab4ff;
+  --paars:#c79bff;
+  --gram:#c79bff;
+  --nietmetaal:#c79bff;
+  --vak2:#c79bff;
+  --ned2:#c79bff;
+  --werkw:#6fe3c4;
+  --edelgas:#6fe3c4;
+  --vak3:#6fe3c4;
+  --ned3:#6fe3c4;
+  --zin:#ffb86b;
+  --vak4:#ffb86b;
+  --ok:#4ade80;
+  --bad:#ff6b6b;
+}
+:root[data-thema="middernacht"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="middernacht"] .glow{display:none}
+:root[data-thema="middernacht"] .grid-bg{opacity:.12}
+:root[data-thema="middernacht"] .sym,
+:root[data-thema="middernacht"] .nm,
+:root[data-thema="middernacht"] .woord,
+:root[data-thema="middernacht"] .done h2{text-shadow:none}
+:root[data-thema="middernacht"] .mark,
+:root[data-thema="middernacht"] .mark.tijdelijk,
+:root[data-thema="middernacht"] .mark:hover,
+:root[data-thema="middernacht"] .merk,
+:root[data-thema="middernacht"] .bar,
+:root[data-thema="middernacht"] .btn.pri,
+:root[data-thema="middernacht"] .btn.ok,
+:root[data-thema="middernacht"] .btn.bad,
+:root[data-thema="middernacht"] .kklaar,
+:root[data-thema="middernacht"] .knoop.nu,
+:root[data-thema="middernacht"] .kroontjes i.aan,
+:root[data-thema="middernacht"] .legend i,
+:root[data-thema="middernacht"] .chip[aria-pressed="true"],
+:root[data-thema="middernacht"] .gear[aria-expanded="true"],
+:root[data-thema="middernacht"] .tab[aria-selected="true"],
+:root[data-thema="middernacht"] .mt.sel,
+:root[data-thema="middernacht"] .opt.good,
+:root[data-thema="middernacht"] .score,
+:root[data-thema="middernacht"] .install,
+:root[data-thema="middernacht"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="leisteen"]{
+  color-scheme:dark;
+  --ink:#14171c;
+  --ink2:#191d24;
+  --surface:#21262f;
+  --surface2:#29303a;
+  --line:#343c48;
+  --line2:#47515f;
+  --text:#e4e8ee;
+  --muted:#97a1af;
+  --muted2:#6c7683;
+  --hub:#6f9bc9;
+  --cyan:#6f9bc9;
+  --voc:#6f9bc9;
+  --metaal:#6f9bc9;
+  --goud:#6f9bc9;
+  --vak1:#6f9bc9;
+  --ned:#6f9bc9;
+  --paars:#a08cc0;
+  --gram:#a08cc0;
+  --nietmetaal:#a08cc0;
+  --vak2:#a08cc0;
+  --ned2:#a08cc0;
+  --werkw:#79b09a;
+  --edelgas:#79b09a;
+  --vak3:#79b09a;
+  --ned3:#79b09a;
+  --zin:#c9a37a;
+  --vak4:#c9a37a;
+  --ok:#6aab7e;
+  --bad:#cc7b7b;
+}
+:root[data-thema="leisteen"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="leisteen"] .glow{display:none}
+:root[data-thema="leisteen"] .grid-bg{opacity:.12}
+:root[data-thema="leisteen"] .sym,
+:root[data-thema="leisteen"] .nm,
+:root[data-thema="leisteen"] .woord,
+:root[data-thema="leisteen"] .done h2{text-shadow:none}
+:root[data-thema="leisteen"] .mark,
+:root[data-thema="leisteen"] .mark.tijdelijk,
+:root[data-thema="leisteen"] .mark:hover,
+:root[data-thema="leisteen"] .merk,
+:root[data-thema="leisteen"] .bar,
+:root[data-thema="leisteen"] .btn.pri,
+:root[data-thema="leisteen"] .btn.ok,
+:root[data-thema="leisteen"] .btn.bad,
+:root[data-thema="leisteen"] .kklaar,
+:root[data-thema="leisteen"] .knoop.nu,
+:root[data-thema="leisteen"] .kroontjes i.aan,
+:root[data-thema="leisteen"] .legend i,
+:root[data-thema="leisteen"] .chip[aria-pressed="true"],
+:root[data-thema="leisteen"] .gear[aria-expanded="true"],
+:root[data-thema="leisteen"] .tab[aria-selected="true"],
+:root[data-thema="leisteen"] .mt.sel,
+:root[data-thema="leisteen"] .opt.good,
+:root[data-thema="leisteen"] .score,
+:root[data-thema="leisteen"] .install,
+:root[data-thema="leisteen"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="indigo"]{
+  color-scheme:light;
+  --ink:#f6f7fb;
+  --ink2:#eceef6;
+  --surface:#ffffff;
+  --surface2:#fafbfd;
+  --line:#dde1ed;
+  --line2:#bfc7db;
+  --text:#0a092d;
+  --muted:#565f7e;
+  --muted2:#7c86a0;
+  --hub:#4255ff;
+  --cyan:#4255ff;
+  --voc:#4255ff;
+  --metaal:#4255ff;
+  --goud:#4255ff;
+  --vak1:#4255ff;
+  --ned:#4255ff;
+  --paars:#9333ea;
+  --gram:#9333ea;
+  --nietmetaal:#9333ea;
+  --vak2:#9333ea;
+  --ned2:#9333ea;
+  --werkw:#0d9488;
+  --edelgas:#0d9488;
+  --vak3:#0d9488;
+  --ned3:#0d9488;
+  --zin:#db2777;
+  --vak4:#db2777;
+  --ok:#15a163;
+  --bad:#dc2626;
+}
+:root[data-thema="indigo"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="indigo"] .glow{display:none}
+:root[data-thema="indigo"] .grid-bg{opacity:.12}
+:root[data-thema="indigo"] .sym,
+:root[data-thema="indigo"] .nm,
+:root[data-thema="indigo"] .woord,
+:root[data-thema="indigo"] .done h2{text-shadow:none}
+:root[data-thema="indigo"] .mark,
+:root[data-thema="indigo"] .mark.tijdelijk,
+:root[data-thema="indigo"] .mark:hover,
+:root[data-thema="indigo"] .merk,
+:root[data-thema="indigo"] .bar,
+:root[data-thema="indigo"] .btn.pri,
+:root[data-thema="indigo"] .btn.ok,
+:root[data-thema="indigo"] .btn.bad,
+:root[data-thema="indigo"] .kklaar,
+:root[data-thema="indigo"] .knoop.nu,
+:root[data-thema="indigo"] .kroontjes i.aan,
+:root[data-thema="indigo"] .legend i,
+:root[data-thema="indigo"] .chip[aria-pressed="true"],
+:root[data-thema="indigo"] .gear[aria-expanded="true"],
+:root[data-thema="indigo"] .tab[aria-selected="true"],
+:root[data-thema="indigo"] .mt.sel,
+:root[data-thema="indigo"] .opt.good,
+:root[data-thema="indigo"] .score,
+:root[data-thema="indigo"] .install,
+:root[data-thema="indigo"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="indigonacht"]{
+  color-scheme:dark;
+  --ink:#0a092d;
+  --ink2:#111038;
+  --surface:#1a1947;
+  --surface2:#232159;
+  --line:#2f2d6b;
+  --line2:#423f8c;
+  --text:#f2f3fb;
+  --muted:#a2a5cc;
+  --muted2:#7477a3;
+  --hub:#6b7bff;
+  --cyan:#6b7bff;
+  --voc:#6b7bff;
+  --metaal:#6b7bff;
+  --goud:#6b7bff;
+  --vak1:#6b7bff;
+  --ned:#6b7bff;
+  --paars:#b566ff;
+  --gram:#b566ff;
+  --nietmetaal:#b566ff;
+  --vak2:#b566ff;
+  --ned2:#b566ff;
+  --werkw:#22d3c5;
+  --edelgas:#22d3c5;
+  --vak3:#22d3c5;
+  --ned3:#22d3c5;
+  --zin:#ff6fae;
+  --vak4:#ff6fae;
+  --ok:#34d399;
+  --bad:#ff5a5a;
+}
+:root[data-thema="indigonacht"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="indigonacht"] .glow{display:none}
+:root[data-thema="indigonacht"] .grid-bg{opacity:.12}
+:root[data-thema="indigonacht"] .sym,
+:root[data-thema="indigonacht"] .nm,
+:root[data-thema="indigonacht"] .woord,
+:root[data-thema="indigonacht"] .done h2{text-shadow:none}
+:root[data-thema="indigonacht"] .mark,
+:root[data-thema="indigonacht"] .mark.tijdelijk,
+:root[data-thema="indigonacht"] .mark:hover,
+:root[data-thema="indigonacht"] .merk,
+:root[data-thema="indigonacht"] .bar,
+:root[data-thema="indigonacht"] .btn.pri,
+:root[data-thema="indigonacht"] .btn.ok,
+:root[data-thema="indigonacht"] .btn.bad,
+:root[data-thema="indigonacht"] .kklaar,
+:root[data-thema="indigonacht"] .knoop.nu,
+:root[data-thema="indigonacht"] .kroontjes i.aan,
+:root[data-thema="indigonacht"] .legend i,
+:root[data-thema="indigonacht"] .chip[aria-pressed="true"],
+:root[data-thema="indigonacht"] .gear[aria-expanded="true"],
+:root[data-thema="indigonacht"] .tab[aria-selected="true"],
+:root[data-thema="indigonacht"] .mt.sel,
+:root[data-thema="indigonacht"] .opt.good,
+:root[data-thema="indigonacht"] .score,
+:root[data-thema="indigonacht"] .install,
+:root[data-thema="indigonacht"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="mist"]{
+  color-scheme:light;
+  --ink:#eef1f4;
+  --ink2:#e5e9ee;
+  --surface:#ffffff;
+  --surface2:#f7f9fb;
+  --line:#d7dde4;
+  --line2:#b6c0cb;
+  --text:#1f242b;
+  --muted:#5d6773;
+  --muted2:#838e9b;
+  --hub:#3f6d99;
+  --cyan:#3f6d99;
+  --voc:#3f6d99;
+  --metaal:#3f6d99;
+  --goud:#3f6d99;
+  --vak1:#3f6d99;
+  --ned:#3f6d99;
+  --paars:#7a5f9e;
+  --gram:#7a5f9e;
+  --nietmetaal:#7a5f9e;
+  --vak2:#7a5f9e;
+  --ned2:#7a5f9e;
+  --werkw:#3f8a72;
+  --edelgas:#3f8a72;
+  --vak3:#3f8a72;
+  --ned3:#3f8a72;
+  --zin:#9a6b3a;
+  --vak4:#9a6b3a;
+  --ok:#2f7d52;
+  --bad:#b04242;
+}
+:root[data-thema="mist"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="mist"] .glow{display:none}
+:root[data-thema="mist"] .grid-bg{opacity:.12}
+:root[data-thema="mist"] .sym,
+:root[data-thema="mist"] .nm,
+:root[data-thema="mist"] .woord,
+:root[data-thema="mist"] .done h2{text-shadow:none}
+:root[data-thema="mist"] .mark,
+:root[data-thema="mist"] .mark.tijdelijk,
+:root[data-thema="mist"] .mark:hover,
+:root[data-thema="mist"] .merk,
+:root[data-thema="mist"] .bar,
+:root[data-thema="mist"] .btn.pri,
+:root[data-thema="mist"] .btn.ok,
+:root[data-thema="mist"] .btn.bad,
+:root[data-thema="mist"] .kklaar,
+:root[data-thema="mist"] .knoop.nu,
+:root[data-thema="mist"] .kroontjes i.aan,
+:root[data-thema="mist"] .legend i,
+:root[data-thema="mist"] .chip[aria-pressed="true"],
+:root[data-thema="mist"] .gear[aria-expanded="true"],
+:root[data-thema="mist"] .tab[aria-selected="true"],
+:root[data-thema="mist"] .mt.sel,
+:root[data-thema="mist"] .opt.good,
+:root[data-thema="mist"] .score,
+:root[data-thema="mist"] .install,
+:root[data-thema="mist"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="grasgroen"]{
+  color-scheme:light;
+  --ink:#ffffff;
+  --ink2:#f7f7f7;
+  --surface:#ffffff;
+  --surface2:#fbfbfb;
+  --line:#e5e5e5;
+  --line2:#cfcfcf;
+  --text:#3c3c3c;
+  --muted:#777777;
+  --muted2:#a3a3a3;
+  --hub:#58a700;
+  --cyan:#58a700;
+  --voc:#58a700;
+  --metaal:#58a700;
+  --goud:#58a700;
+  --vak1:#58a700;
+  --ned:#58a700;
+  --paars:#1899d6;
+  --gram:#1899d6;
+  --nietmetaal:#1899d6;
+  --vak2:#1899d6;
+  --ned2:#1899d6;
+  --werkw:#8549ba;
+  --edelgas:#8549ba;
+  --vak3:#8549ba;
+  --ned3:#8549ba;
+  --zin:#e07b00;
+  --vak4:#e07b00;
+  --ok:#17803d;
+  --bad:#ea2b2b;
+}
+:root[data-thema="grasgroen"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="grasgroen"] .glow{display:none}
+:root[data-thema="grasgroen"] .grid-bg{opacity:.12}
+:root[data-thema="grasgroen"] .sym,
+:root[data-thema="grasgroen"] .nm,
+:root[data-thema="grasgroen"] .woord,
+:root[data-thema="grasgroen"] .done h2{text-shadow:none}
+:root[data-thema="grasgroen"] .mark,
+:root[data-thema="grasgroen"] .mark.tijdelijk,
+:root[data-thema="grasgroen"] .mark:hover,
+:root[data-thema="grasgroen"] .merk,
+:root[data-thema="grasgroen"] .bar,
+:root[data-thema="grasgroen"] .btn.pri,
+:root[data-thema="grasgroen"] .btn.ok,
+:root[data-thema="grasgroen"] .btn.bad,
+:root[data-thema="grasgroen"] .kklaar,
+:root[data-thema="grasgroen"] .knoop.nu,
+:root[data-thema="grasgroen"] .kroontjes i.aan,
+:root[data-thema="grasgroen"] .legend i,
+:root[data-thema="grasgroen"] .chip[aria-pressed="true"],
+:root[data-thema="grasgroen"] .gear[aria-expanded="true"],
+:root[data-thema="grasgroen"] .tab[aria-selected="true"],
+:root[data-thema="grasgroen"] .mt.sel,
+:root[data-thema="grasgroen"] .opt.good,
+:root[data-thema="grasgroen"] .score,
+:root[data-thema="grasgroen"] .install,
+:root[data-thema="grasgroen"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="notitieblok"]{
+  color-scheme:light;
+  --ink:#f7f3e8;
+  --ink2:#efe9da;
+  --surface:#fffdf7;
+  --surface2:#f8f4ea;
+  --line:#ded5c0;
+  --line2:#bfb49b;
+  --text:#2b2a26;
+  --muted:#6d6659;
+  --muted2:#938a78;
+  --hub:#2d5bd7;
+  --cyan:#2d5bd7;
+  --voc:#2d5bd7;
+  --metaal:#2d5bd7;
+  --goud:#2d5bd7;
+  --vak1:#2d5bd7;
+  --ned:#2d5bd7;
+  --paars:#8e44ad;
+  --gram:#8e44ad;
+  --nietmetaal:#8e44ad;
+  --vak2:#8e44ad;
+  --ned2:#8e44ad;
+  --werkw:#0e7490;
+  --edelgas:#0e7490;
+  --vak3:#0e7490;
+  --ned3:#0e7490;
+  --zin:#b7791f;
+  --vak4:#b7791f;
+  --ok:#1f7a4d;
+  --bad:#c0392b;
+}
+:root[data-thema="notitieblok"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="notitieblok"] .glow{display:none}
+:root[data-thema="notitieblok"] .grid-bg{opacity:.12}
+:root[data-thema="notitieblok"] .sym,
+:root[data-thema="notitieblok"] .nm,
+:root[data-thema="notitieblok"] .woord,
+:root[data-thema="notitieblok"] .done h2{text-shadow:none}
+:root[data-thema="notitieblok"] .mark,
+:root[data-thema="notitieblok"] .mark.tijdelijk,
+:root[data-thema="notitieblok"] .mark:hover,
+:root[data-thema="notitieblok"] .merk,
+:root[data-thema="notitieblok"] .bar,
+:root[data-thema="notitieblok"] .btn.pri,
+:root[data-thema="notitieblok"] .btn.ok,
+:root[data-thema="notitieblok"] .btn.bad,
+:root[data-thema="notitieblok"] .kklaar,
+:root[data-thema="notitieblok"] .knoop.nu,
+:root[data-thema="notitieblok"] .kroontjes i.aan,
+:root[data-thema="notitieblok"] .legend i,
+:root[data-thema="notitieblok"] .chip[aria-pressed="true"],
+:root[data-thema="notitieblok"] .gear[aria-expanded="true"],
+:root[data-thema="notitieblok"] .tab[aria-selected="true"],
+:root[data-thema="notitieblok"] .mt.sel,
+:root[data-thema="notitieblok"] .opt.good,
+:root[data-thema="notitieblok"] .score,
+:root[data-thema="notitieblok"] .install,
+:root[data-thema="notitieblok"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="sepia"]{
+  color-scheme:light;
+  --ink:#ece3d6;
+  --ink2:#e3d8c7;
+  --surface:#f7f1e6;
+  --surface2:#efe7d9;
+  --line:#d4c7b0;
+  --line2:#b6a68b;
+  --text:#2f2920;
+  --muted:#6f6350;
+  --muted2:#948570;
+  --hub:#96591f;
+  --cyan:#96591f;
+  --voc:#96591f;
+  --metaal:#96591f;
+  --goud:#96591f;
+  --vak1:#96591f;
+  --ned:#96591f;
+  --paars:#7d4f6b;
+  --gram:#7d4f6b;
+  --nietmetaal:#7d4f6b;
+  --vak2:#7d4f6b;
+  --ned2:#7d4f6b;
+  --werkw:#3f6b63;
+  --edelgas:#3f6b63;
+  --vak3:#3f6b63;
+  --ned3:#3f6b63;
+  --zin:#8a6f2c;
+  --vak4:#8a6f2c;
+  --ok:#4a7a4a;
+  --bad:#a8452f;
+}
+:root[data-thema="sepia"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="sepia"] .glow{display:none}
+:root[data-thema="sepia"] .grid-bg{opacity:.12}
+:root[data-thema="sepia"] .sym,
+:root[data-thema="sepia"] .nm,
+:root[data-thema="sepia"] .woord,
+:root[data-thema="sepia"] .done h2{text-shadow:none}
+:root[data-thema="sepia"] .mark,
+:root[data-thema="sepia"] .mark.tijdelijk,
+:root[data-thema="sepia"] .mark:hover,
+:root[data-thema="sepia"] .merk,
+:root[data-thema="sepia"] .bar,
+:root[data-thema="sepia"] .btn.pri,
+:root[data-thema="sepia"] .btn.ok,
+:root[data-thema="sepia"] .btn.bad,
+:root[data-thema="sepia"] .kklaar,
+:root[data-thema="sepia"] .knoop.nu,
+:root[data-thema="sepia"] .kroontjes i.aan,
+:root[data-thema="sepia"] .legend i,
+:root[data-thema="sepia"] .chip[aria-pressed="true"],
+:root[data-thema="sepia"] .gear[aria-expanded="true"],
+:root[data-thema="sepia"] .tab[aria-selected="true"],
+:root[data-thema="sepia"] .mt.sel,
+:root[data-thema="sepia"] .opt.good,
+:root[data-thema="sepia"] .score,
+:root[data-thema="sepia"] .install,
+:root[data-thema="sepia"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="zonsopgang"]{
+  color-scheme:light;
+  --ink:#fff6ee;
+  --ink2:#fbe9da;
+  --surface:#ffffff;
+  --surface2:#fffaf5;
+  --line:#f0dbc8;
+  --line2:#d8bda4;
+  --text:#2a1f18;
+  --muted:#7a6455;
+  --muted2:#a08b79;
+  --hub:#d24d14;
+  --cyan:#d24d14;
+  --voc:#d24d14;
+  --metaal:#d24d14;
+  --goud:#d24d14;
+  --vak1:#d24d14;
+  --ned:#d24d14;
+  --paars:#b02a5f;
+  --gram:#b02a5f;
+  --nietmetaal:#b02a5f;
+  --vak2:#b02a5f;
+  --ned2:#b02a5f;
+  --werkw:#0f7b8a;
+  --edelgas:#0f7b8a;
+  --vak3:#0f7b8a;
+  --ned3:#0f7b8a;
+  --zin:#8a5cd6;
+  --vak4:#8a5cd6;
+  --ok:#157f4f;
+  --bad:#c0281e;
+}
+:root[data-thema="zonsopgang"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="zonsopgang"] .glow{display:none}
+:root[data-thema="zonsopgang"] .grid-bg{opacity:.12}
+:root[data-thema="zonsopgang"] .sym,
+:root[data-thema="zonsopgang"] .nm,
+:root[data-thema="zonsopgang"] .woord,
+:root[data-thema="zonsopgang"] .done h2{text-shadow:none}
+:root[data-thema="zonsopgang"] .mark,
+:root[data-thema="zonsopgang"] .mark.tijdelijk,
+:root[data-thema="zonsopgang"] .mark:hover,
+:root[data-thema="zonsopgang"] .merk,
+:root[data-thema="zonsopgang"] .bar,
+:root[data-thema="zonsopgang"] .btn.pri,
+:root[data-thema="zonsopgang"] .btn.ok,
+:root[data-thema="zonsopgang"] .btn.bad,
+:root[data-thema="zonsopgang"] .kklaar,
+:root[data-thema="zonsopgang"] .knoop.nu,
+:root[data-thema="zonsopgang"] .kroontjes i.aan,
+:root[data-thema="zonsopgang"] .legend i,
+:root[data-thema="zonsopgang"] .chip[aria-pressed="true"],
+:root[data-thema="zonsopgang"] .gear[aria-expanded="true"],
+:root[data-thema="zonsopgang"] .tab[aria-selected="true"],
+:root[data-thema="zonsopgang"] .mt.sel,
+:root[data-thema="zonsopgang"] .opt.good,
+:root[data-thema="zonsopgang"] .score,
+:root[data-thema="zonsopgang"] .install,
+:root[data-thema="zonsopgang"] input[type=text]:focus{box-shadow:none}
+
+.themabalk{position:relative; z-index:1; max-width:760px; margin:0 auto;
+  padding:18px 20px 4px; display:flex; flex-wrap:wrap; align-items:center;
+  justify-content:center; gap:9px}
+.themabalk .tlabel{font-family:var(--fm); font-size:10px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--muted2); margin-right:3px}
+.themaknop{width:28px; height:28px; padding:0; border-radius:50%; cursor:pointer;
+  border:1px solid var(--line2); position:relative; overflow:hidden;
+  transition:transform .16s ease; background:var(--tb)}
+.themaknop::after{content:""; position:absolute; inset:0;
+  background:linear-gradient(135deg,var(--ts) 0 48%,transparent 48%)}
+.themaknop:hover{transform:scale(1.12)}
+.themaknop[aria-pressed="true"]{outline:2px solid var(--text); outline-offset:2px}
+.themaknop:focus-visible{outline:2px solid var(--text); outline-offset:2px}
+.tsplit{width:1px; height:20px; background:var(--line2); opacity:.7; margin:0 2px}
+.themanaam{font-family:var(--fm); font-size:10px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted); min-width:104px; text-align:center}
+.themabalk.inline{max-width:none; margin:0; padding:0; justify-content:flex-start;
+  gap:10px}
+.themabalk.inline .themanaam{min-width:0; margin-left:2px; text-align:left}
+@media print{.themabalk{display:none}}
+/*thema-css-eind*/
+</style>
+<!--thema-kop-start-->
+<script>
+/* Het thema staat in localStorage; alle apps op deze map delen die opslag. */
+(function(){
+  try{
+    var t=localStorage.getItem("leren-thema");
+    if(t&&t!=="standaard")document.documentElement.setAttribute("data-thema",t);
+  }catch(e){}
+})();
+</script>
+<!--thema-kop-eind-->
+</head>
+<body>
+<div class="statusbar"></div>
+<div class="glow" id="glow"></div>
+
+<div class="app">
+  <header class="top">
+    <a class="terug" href="../" aria-label="Terug naar het hoofdmenu" title="Hoofdmenu">←</a>
+    <div class="mark">Nl</div>
+    <div class="tt">
+      <h1>Woordkracht</h1>
+      <p id="subkop">Gevorderde woordenschat</p>
+    </div>
+    <button class="gear" id="gear" aria-expanded="false" aria-controls="panel" aria-label="Instellingen">⚙</button>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Oefenmodus">
+    <button class="tab" role="tab" data-m="kaarten" aria-selected="true">Kaarten</button>
+    <button class="tab" role="tab" data-m="betekenis" aria-selected="false">Betekenis</button>
+    <button class="tab" role="tab" data-m="synoniem" aria-selected="false">Synoniemen</button>
+    <button class="tab" role="tab" data-m="zin" aria-selected="false">In een zin</button>
+    <button class="tab" role="tab" data-m="schrijven" aria-selected="false">Schrijven</button>
+    <button class="tab" role="tab" data-m="matchen" aria-selected="false">Matchen</button>
+    <button class="tab" role="tab" data-m="toets" aria-selected="false">Toets</button>
+    <button class="tab" role="tab" data-m="voortgang" aria-selected="false">Voortgang</button>
+    <button class="tab" role="tab" data-m="samenvatting" aria-selected="false">Samenvatting</button>
+  </nav>
+
+  <div class="panel" id="panel" hidden><!--thema-balk-start-->
+  <div class="fset">
+    <span class="flabel">Thema van de site</span>
+  <div class="themabalk inline" id="themabalk">
+    <button class="themaknop" type="button" data-thema="standaard" style="--tb:#0b0d18; --ts:#b9c3ff" title="Neon — zoals de app bedoeld is" aria-label="Thema Neon"></button>
+    <button class="themaknop" type="button" data-thema="synthwave" style="--tb:#0d0420; --ts:#ff2e97" title="Synthwave — neon roze en cyaan op paars" aria-label="Thema Synthwave"></button>
+    <button class="themaknop" type="button" data-thema="neonijs" style="--tb:#020813; --ts:#22e6ff" title="Neon ijs — fel cyaan op diepblauw" aria-label="Thema Neon ijs"></button>
+    <button class="themaknop" type="button" data-thema="gifgroen" style="--tb:#060a04; --ts:#aaff1a" title="Gifgroen — fel limoen op zwart" aria-label="Thema Gifgroen"></button>
+    <button class="themaknop" type="button" data-thema="magenta" style="--tb:#0f0413; --ts:#ff3df0" title="Magenta — neon roze en violet" aria-label="Thema Magenta"></button>
+    <button class="themaknop" type="button" data-thema="vuur" style="--tb:#120503; --ts:#ff6a1a" title="Vuur — neon oranje en rood" aria-label="Thema Vuur"></button>
+    <button class="themaknop" type="button" data-thema="terminal" style="--tb:#000000; --ts:#39ff5f" title="Terminal — zwart met groen, zoals een shell" aria-label="Thema Terminal"></button>
+    <span class="tsplit" aria-hidden="true"></span>
+    <button class="themaknop" type="button" data-thema="middernacht" style="--tb:#000000; --ts:#8ab4ff" title="Middernacht — diep zwart, rustig" aria-label="Thema Middernacht"></button>
+    <button class="themaknop" type="button" data-thema="leisteen" style="--tb:#14171c; --ts:#6f9bc9" title="Leisteen — donkergrijs, gedempte kleuren" aria-label="Thema Leisteen"></button>
+    <button class="themaknop" type="button" data-thema="indigo" style="--tb:#f6f7fb; --ts:#4255ff" title="Indigo — licht en strak, blauwpaars" aria-label="Thema Indigo"></button>
+    <button class="themaknop" type="button" data-thema="indigonacht" style="--tb:#0a092d; --ts:#6b7bff" title="Indigo nacht — hetzelfde, maar donker" aria-label="Thema Indigo nacht"></button>
+    <button class="themaknop" type="button" data-thema="mist" style="--tb:#eef1f4; --ts:#3f6d99" title="Mist — licht grijsblauw, heel rustig" aria-label="Thema Mist"></button>
+    <button class="themaknop" type="button" data-thema="grasgroen" style="--tb:#ffffff; --ts:#58cc02" title="Grasgroen — licht en vrolijk, groen" aria-label="Thema Grasgroen"></button>
+    <button class="themaknop" type="button" data-thema="notitieblok" style="--tb:#f7f3e8; --ts:#2d5bd7" title="Notitieblok — papier met balpen" aria-label="Thema Notitieblok"></button>
+    <button class="themaknop" type="button" data-thema="sepia" style="--tb:#ece3d6; --ts:#96591f" title="Sepia — oud papier, gedempt warm" aria-label="Thema Sepia"></button>
+    <button class="themaknop" type="button" data-thema="zonsopgang" style="--tb:#fff6ee; --ts:#e2571d" title="Zonsopgang — warm licht, oranje" aria-label="Thema Zonsopgang"></button>
+    <span class="themanaam" id="themanaam"></span>
+  </div>
+  </div>
+<!--thema-balk-eind-->
+
+    <div class="fset">
+      <span class="flabel">Groepen</span>
+      <div class="chips" id="groepChips"></div>
+    </div>
+    <button class="reset" id="btnReset">Voortgang wissen</button>
+  </div>
+
+  <section class="view in" id="v-kaarten" role="tabpanel">
+    <div class="meta"><span class="counter"><b id="kPos">1</b> / <span id="kTot">30</span></span>
+      <button class="mini" id="kSchud">⇄ schudden</button></div>
+    <div class="kaartwrap" id="kWrap"></div>
+    <div class="row2">
+      <button class="btn" id="kNog" style="--c:var(--bad)">Nog leren</button>
+      <button class="btn" id="kKen" style="--c:var(--ok)">Ik ken dit</button>
+    </div>
+    <p class="hint">Tik op de kaart om te draaien</p>
+  </section>
+
+  <section class="view" id="v-betekenis" role="tabpanel" hidden>
+    <div class="meta"><span class="counter"><b id="bPos">1</b> · goed <b id="bGoed">0</b></span>
+      <button class="mini" id="bNieuw">ander woord</button></div>
+    <div id="bBody"></div>
+  </section>
+
+  <section class="view" id="v-synoniem" role="tabpanel" hidden>
+    <div class="meta"><span class="counter"><b id="sPos">1</b> · goed <b id="sGoed">0</b></span>
+      <button class="mini" id="sNieuw">ander woord</button></div>
+    <div id="sBody"></div>
+  </section>
+
+  <section class="view" id="v-zin" role="tabpanel" hidden>
+    <div class="meta"><span class="counter"><b id="zPos">1</b> · goed <b id="zGoed">0</b></span>
+      <button class="mini" id="zNieuw">andere zin</button></div>
+    <div id="zBody"></div>
+  </section>
+
+  <section class="view" id="v-schrijven" role="tabpanel" hidden>
+    <div class="meta"><span class="counter"><b id="wPos">1</b> · goed <b id="wGoed">0</b></span>
+      <button class="mini" id="wNieuw">ander woord</button></div>
+    <div id="wBody"></div>
+  </section>
+
+  <section class="view" id="v-matchen" role="tabpanel" hidden>
+    <div class="meta"><span class="counter">koppel het woord aan zijn betekenis</span>
+      <button class="mini" id="mNieuw">opnieuw</button></div>
+    <div id="mBody"></div>
+  </section>
+
+  <section class="view" id="v-toets" role="tabpanel" hidden>
+    <div class="meta"><span class="counter"><b id="tPos">1</b> / <span id="tTot">15</span> · goed <b id="tGoed">0</b></span>
+      <button class="mini" id="tNieuw">nieuwe toets</button></div>
+    <div class="track"><div class="bar" id="tBar"></div></div>
+    <div id="tBody"></div>
+  </section>
+
+  <section class="view" id="v-voortgang" role="tabpanel" hidden>
+    <div id="vBody"></div>
+  </section>
+
+  <section class="view" id="v-samenvatting" role="tabpanel" hidden>
+    <div class="meta"><span class="counter" id="svInfo">samenvatting</span>
+      <button class="mini" id="btnPrint">afdrukken</button></div>
+    <div id="svBody"></div>
+  </section>
+</div>
+
+<div class="bijwerkvoet">Laatst bijgewerkt <b data-bijgewerkt>28 september 2026 · 23:00</b></div>
+
+<script>
+var WOORDEN=[
+ {
+  "woord": "elimineren",
+  "groep": "groep 21",
+  "soort": "werkwoord",
+  "betekenis": "uitschakelen of wegwerken, zodat iets of iemand niet meer meedoet",
+  "syn": [
+   "uitschakelen",
+   "wegwerken",
+   "verwijderen"
+  ],
+  "tegen": [],
+  "zin": "In de halve finale werd onze ploeg geëlimineerd door de titelverdediger.",
+  "zinVoor": "Om de fout te vinden moet je alle andere mogelijkheden eerst ",
+  "gat": "elimineren",
+  "zinNa": "."
+ },
+ {
+  "woord": "polsen",
+  "groep": "groep 21",
+  "soort": "werkwoord",
+  "betekenis": "voorzichtig vragen hoe iemand ergens over denkt, voor je het echt vraagt",
+  "syn": [
+   "aftasten",
+   "informeren",
+   "voorzichtig navragen"
+  ],
+  "tegen": [],
+  "zin": "Ik ga bij de leerkracht polsen of we de toets mogen verzetten.",
+  "zinVoor": "Voor hij haar uitnodigde, ging hij eerst bij haar vriendin ",
+  "gat": "polsen",
+  "zinNa": "."
+ },
+ {
+  "woord": "toelichten",
+  "groep": "groep 21",
+  "soort": "werkwoord",
+  "betekenis": "uitleg geven bij iets, zodat het duidelijk wordt",
+  "syn": [
+   "verduidelijken",
+   "uitleggen",
+   "verklaren"
+  ],
+  "tegen": [
+   "verzwijgen"
+  ],
+  "zin": "De directeur kwam de nieuwe regels toelichten in elke klas.",
+  "zinVoor": "Kan je je antwoord kort ",
+  "gat": "toelichten",
+  "zinNa": ", want ik volg je niet helemaal."
+ },
+ {
+  "woord": "signaleren",
+  "groep": "groep 21",
+  "soort": "werkwoord",
+  "betekenis": "iets opmerken en het melden aan anderen",
+  "syn": [
+   "opmerken",
+   "melden",
+   "waarnemen"
+  ],
+  "tegen": [
+   "negeren"
+  ],
+  "zin": "De buurtbewoners signaleren al weken overlast in het park.",
+  "zinVoor": "De leerkracht wil problemen vroeg ",
+  "gat": "signaleren",
+  "zinNa": ", voor ze te groot worden."
+ },
+ {
+  "woord": "ondervinden",
+  "groep": "groep 21",
+  "soort": "werkwoord",
+  "betekenis": "zelf aan den lijve meemaken, aan den lijve merken",
+  "syn": [
+   "ervaren",
+   "meemaken",
+   "merken"
+  ],
+  "tegen": [],
+  "zin": "Wie te laat vertrekt, zal hinder ondervinden van de file.",
+  "zinVoor": "Pas toen hij alleen woonde, ging hij ",
+  "gat": "ondervinden",
+  "zinNa": " hoe duur alles is."
+ },
+ {
+  "woord": "doelgericht",
+  "groep": "groep 21",
+  "soort": "bijvoeglijk naamwoord",
+  "betekenis": "recht op het doel af, met een duidelijk resultaat voor ogen",
+  "syn": [
+   "gericht",
+   "planmatig",
+   "efficiënt"
+  ],
+  "tegen": [
+   "doelloos",
+   "zonder plan"
+  ],
+  "zin": "Ze werkt heel doelgericht: ze weet precies wat ze wil bereiken.",
+  "zinVoor": "Studeer ",
+  "gat": "doelgericht",
+  "zinNa": ": maak eerst een planning en volg die dan."
+ },
+ {
+  "woord": "fataal",
+  "groep": "groep 21",
+  "soort": "bijvoeglijk naamwoord",
+  "betekenis": "noodlottig, met een dodelijke of rampzalige afloop",
+  "syn": [
+   "noodlottig",
+   "rampzalig",
+   "dodelijk"
+  ],
+  "tegen": [
+   "onschuldig",
+   "ongevaarlijk"
+  ],
+  "zin": "Die ene fout bleek fataal voor de afloop van de wedstrijd.",
+  "zinVoor": "Een seconde onoplettendheid kan in het verkeer ",
+  "gat": "fataal",
+  "zinNa": " zijn."
+ },
+ {
+  "woord": "maatschappelijk",
+  "groep": "groep 21",
+  "soort": "bijvoeglijk naamwoord",
+  "betekenis": "wat met de samenleving te maken heeft",
+  "syn": [
+   "sociaal",
+   "van de samenleving"
+  ],
+  "tegen": [
+   "persoonlijk",
+   "privé"
+  ],
+  "zin": "Vrijwilligerswerk heeft een grote maatschappelijke waarde.",
+  "zinVoor": "Klimaatverandering is niet alleen een wetenschappelijk maar ook een ",
+  "gat": "maatschappelijk",
+  "zinNa": " probleem."
+ },
+ {
+  "woord": "communicatief",
+  "groep": "groep 21",
+  "soort": "bijvoeglijk naamwoord",
+  "betekenis": "goed in contact leggen en informatie overbrengen",
+  "syn": [
+   "spraakzaam",
+   "mededeelzaam",
+   "sociaal vaardig"
+  ],
+  "tegen": [
+   "gesloten",
+   "zwijgzaam"
+  ],
+  "zin": "Voor die job zoeken ze iemand die communicatief sterk is.",
+  "zinVoor": "Hij is technisch heel goed, maar ",
+  "gat": "communicatief",
+  "zinNa": " nog wat onzeker."
+ },
+ {
+  "woord": "concreet",
+  "groep": "groep 21",
+  "soort": "bijvoeglijk naamwoord",
+  "betekenis": "tastbaar en duidelijk, niet vaag of algemeen",
+  "syn": [
+   "tastbaar",
+   "duidelijk",
+   "specifiek"
+  ],
+  "tegen": [
+   "abstract",
+   "vaag"
+  ],
+  "zin": "Geef eens een concreet voorbeeld in plaats van algemene praat.",
+  "zinVoor": "Wat is nu je ",
+  "gat": "concrete",
+  "zinNa": " voorstel? Zeg gewoon wat je wil doen."
+ },
+ {
+  "woord": "aanleiding",
+  "groep": "groep 22",
+  "soort": "zelfstandig naamwoord",
+  "betekenis": "de directe reden waardoor iets in gang wordt gezet",
+  "syn": [
+   "reden",
+   "oorzaak",
+   "motief"
+  ],
+  "tegen": [],
+  "zin": "De ruzie op de speelplaats was de aanleiding voor het gesprek met de directeur.",
+  "zinVoor": "De ",
+  "gat": "aanleiding",
+  "zinNa": " voor de staking was een aangekondigde loonsverlaging."
+ },
+ {
+  "woord": "scenario",
+  "groep": "groep 22",
+  "soort": "zelfstandig naamwoord",
+  "betekenis": "een draaiboek, of de manier waarop iets zou kunnen verlopen",
+  "syn": [
+   "draaiboek",
+   "script",
+   "verloop"
+  ],
+  "tegen": [],
+  "zin": "De regisseur schreef het scenario van de film helemaal zelf.",
+  "zinVoor": "In het slechtste ",
+  "gat": "scenario",
+  "zinNa": " moeten we de reis helemaal afzeggen."
+ },
+ {
+  "woord": "mythe",
+  "groep": "groep 22",
+  "soort": "zelfstandig naamwoord",
+  "betekenis": "een oud verhaal over goden en helden; ook iets dat veel mensen geloven maar niet waar is",
+  "syn": [
+   "sage",
+   "fabel",
+   "hardnekkig verzinsel"
+  ],
+  "tegen": [
+   "feit",
+   "waarheid"
+  ],
+  "zin": "De mythe van Icarus gaat over iemand die te dicht bij de zon vloog.",
+  "zinVoor": "Dat je maar tien procent van je hersenen gebruikt, is een hardnekkige ",
+  "gat": "mythe",
+  "zinNa": "."
+ },
+ {
+  "woord": "stabiliteit",
+  "groep": "groep 22",
+  "soort": "zelfstandig naamwoord",
+  "betekenis": "de toestand waarin iets stevig blijft staan en niet verandert",
+  "syn": [
+   "evenwicht",
+   "vastheid",
+   "bestendigheid"
+  ],
+  "tegen": [
+   "instabiliteit",
+   "wankelheid"
+  ],
+  "zin": "Na de verkiezingen keerde de politieke stabiliteit terug.",
+  "zinVoor": "Een brede voet geeft de lamp meer ",
+  "gat": "stabiliteit",
+  "zinNa": "."
+ },
+ {
+  "woord": "democratie",
+  "groep": "groep 22",
+  "soort": "zelfstandig naamwoord",
+  "betekenis": "een staatsvorm waarin het volk beslist, via verkiezingen",
+  "syn": [
+   "volksregering"
+  ],
+  "tegen": [
+   "dictatuur"
+  ],
+  "zin": "In een democratie kiezen de burgers zelf hun vertegenwoordigers.",
+  "zinVoor": "Het recht om te stemmen is de kern van een ",
+  "gat": "democratie",
+  "zinNa": "."
+ },
+ {
+  "woord": "verifiëren",
+  "groep": "groep 22",
+  "soort": "werkwoord",
+  "betekenis": "nagaan of iets echt klopt",
+  "syn": [
+   "controleren",
+   "natrekken",
+   "checken"
+  ],
+  "tegen": [
+   "zomaar aannemen"
+  ],
+  "zin": "De journalist kon de bron van het bericht niet verifiëren.",
+  "zinVoor": "Je moet informatie van sociale media altijd ",
+  "gat": "verifiëren",
+  "zinNa": " voor je ze deelt."
+ },
+ {
+  "woord": "analyseren",
+  "groep": "groep 22",
+  "soort": "werkwoord",
+  "betekenis": "iets in stukken uit elkaar halen om het te onderzoeken",
+  "syn": [
+   "onderzoeken",
+   "ontleden",
+   "uitpluizen"
+  ],
+  "tegen": [
+   "oppervlakkig bekijken"
+  ],
+  "zin": "De trainer liet de hele wedstrijd beeld per beeld analyseren.",
+  "zinVoor": "We gaan het gedicht regel per regel ",
+  "gat": "analyseren",
+  "zinNa": "."
+ },
+ {
+  "woord": "structureren",
+  "groep": "groep 22",
+  "soort": "werkwoord",
+  "betekenis": "ordenen en een duidelijke opbouw geven",
+  "syn": [
+   "ordenen",
+   "indelen",
+   "opbouwen"
+  ],
+  "tegen": [
+   "door elkaar gooien"
+  ],
+  "zin": "Met tussentitels kan je een lange tekst beter structureren.",
+  "zinVoor": "Probeer je betoog te ",
+  "gat": "structureren",
+  "zinNa": ": inleiding, midden en slot."
+ },
+ {
+  "woord": "illustreren",
+  "groep": "groep 22",
+  "soort": "werkwoord",
+  "betekenis": "met een voorbeeld of een afbeelding duidelijk maken",
+  "syn": [
+   "verduidelijken",
+   "aantonen",
+   "verbeelden"
+  ],
+  "tegen": [],
+  "zin": "Die grafiek illustreert perfect hoe snel de prijzen stegen.",
+  "zinVoor": "Kan je dat met een voorbeeld ",
+  "gat": "illustreren",
+  "zinNa": "?"
+ },
+ {
+  "woord": "typeren",
+  "groep": "groep 22",
+  "soort": "werkwoord",
+  "betekenis": "kenmerkend zijn voor iemand of iets; iets in het kort beschrijven",
+  "syn": [
+   "kenmerken",
+   "karakteriseren",
+   "kenschetsen"
+  ],
+  "tegen": [],
+  "zin": "Die droge humor typeert hem helemaal.",
+  "zinVoor": "In één woord: hoe zou jij die film ",
+  "gat": "typeren",
+  "zinNa": "?"
+ },
+ {
+  "woord": "factor",
+  "groep": "groep 23",
+  "soort": "zelfstandig naamwoord",
+  "betekenis": "een omstandigheid die meespeelt in een resultaat",
+  "syn": [
+   "element",
+   "invloed",
+   "omstandigheid"
+  ],
+  "tegen": [],
+  "zin": "Geluk was een belangrijke factor in hun overwinning.",
+  "zinVoor": "Tijdsdruk is een ",
+  "gat": "factor",
+  "zinNa": " die je niet mag onderschatten."
+ },
+ {
+  "woord": "reputatie",
+  "groep": "groep 23",
+  "soort": "zelfstandig naamwoord",
+  "betekenis": "de naam die iemand of iets bij anderen heeft",
+  "syn": [
+   "naam",
+   "faam",
+   "aanzien"
+  ],
+  "tegen": [],
+  "zin": "Het restaurant heeft een uitstekende reputatie in de streek.",
+  "zinVoor": "Eén schandaal kan een jarenlange ",
+  "gat": "reputatie",
+  "zinNa": " kapotmaken."
+ },
+ {
+  "woord": "richtlijn",
+  "groep": "groep 23",
+  "soort": "zelfstandig naamwoord",
+  "betekenis": "een voorschrift dat aangeeft hoe je iets moet doen",
+  "syn": [
+   "voorschrift",
+   "regel",
+   "instructie"
+  ],
+  "tegen": [],
+  "zin": "De school volgt de richtlijnen van de overheid.",
+  "zinVoor": "Lees eerst de ",
+  "gat": "richtlijn",
+  "zinNa": " voor je aan de opdracht begint."
+ },
+ {
+  "woord": "herkomst",
+  "groep": "groep 23",
+  "soort": "zelfstandig naamwoord",
+  "betekenis": "de plaats of de bron waar iets of iemand vandaan komt",
+  "syn": [
+   "afkomst",
+   "oorsprong",
+   "bron"
+  ],
+  "tegen": [],
+  "zin": "Op het etiket staat de herkomst van de koffiebonen.",
+  "zinVoor": "De ",
+  "gat": "herkomst",
+  "zinNa": " van dat woord ligt in het Latijn."
+ },
+ {
+  "woord": "infrastructuur",
+  "groep": "groep 23",
+  "soort": "zelfstandig naamwoord",
+  "betekenis": "alle wegen, leidingen en gebouwen die een land laten werken",
+  "syn": [
+   "basisvoorzieningen",
+   "wegen- en leidingennet"
+  ],
+  "tegen": [],
+  "zin": "Na de overstroming moest de hele infrastructuur hersteld worden.",
+  "zinVoor": "Zonder goede ",
+  "gat": "infrastructuur",
+  "zinNa": " raakt niemand op tijd op zijn werk."
+ },
+ {
+  "woord": "gestructureerd",
+  "groep": "groep 23",
+  "soort": "bijvoeglijk naamwoord",
+  "betekenis": "met een duidelijke opbouw, netjes geordend",
+  "syn": [
+   "geordend",
+   "overzichtelijk",
+   "systematisch"
+  ],
+  "tegen": [
+   "chaotisch",
+   "rommelig"
+  ],
+  "zin": "Ze studeert heel gestructureerd: elke dag op een vast uur.",
+  "zinVoor": "Zijn verslag was helder en ",
+  "gat": "gestructureerd",
+  "zinNa": ": je vond alles meteen terug."
+ },
+ {
+  "woord": "complex",
+  "groep": "groep 23",
+  "soort": "bijvoeglijk naamwoord",
+  "betekenis": "ingewikkeld, uit veel onderdelen die op elkaar inwerken",
+  "syn": [
+   "ingewikkeld",
+   "samengesteld",
+   "moeilijk"
+  ],
+  "tegen": [
+   "eenvoudig",
+   "simpel"
+  ],
+  "zin": "Het probleem is te complex voor een snelle oplossing.",
+  "zinVoor": "De regels van dat spel zijn te ",
+  "gat": "complex",
+  "zinNa": " om in vijf minuten uit te leggen."
+ },
+ {
+  "woord": "primair",
+  "groep": "groep 23",
+  "soort": "bijvoeglijk naamwoord",
+  "betekenis": "in de eerste plaats, het belangrijkst",
+  "syn": [
+   "voornaamst",
+   "eerst",
+   "hoofdzakelijk"
+  ],
+  "tegen": [
+   "secundair",
+   "bijkomstig"
+  ],
+  "zin": "Veiligheid is op een werf de primaire zorg.",
+  "zinVoor": "Ons ",
+  "gat": "primaire",
+  "zinNa": " doel is dat iedereen mee is; snelheid komt later."
+ },
+ {
+  "woord": "hysterisch",
+  "groep": "groep 23",
+  "soort": "bijvoeglijk naamwoord",
+  "betekenis": "overdreven opgewonden, helemaal buiten zichzelf",
+  "syn": [
+   "overspannen",
+   "panisch",
+   "door het dolle heen"
+  ],
+  "tegen": [
+   "kalm",
+   "beheerst"
+  ],
+  "zin": "Het publiek reageerde hysterisch toen de zanger het podium op kwam.",
+  "zinVoor": "Word nu niet ",
+  "gat": "hysterisch",
+  "zinNa": ", we lossen dit rustig op."
+ },
+ {
+  "woord": "veranderlijk",
+  "groep": "groep 23",
+  "soort": "bijvoeglijk naamwoord",
+  "betekenis": "vaak wisselend, niet constant",
+  "syn": [
+   "wisselend",
+   "onbestendig",
+   "wispelturig"
+  ],
+  "tegen": [
+   "constant",
+   "stabiel"
+  ],
+  "zin": "Het weer is in april erg veranderlijk.",
+  "zinVoor": "Zijn humeur is ",
+  "gat": "veranderlijk",
+  "zinNa": ": het ene moment vrolijk, het andere stil."
+ }
+];
+var GROEPEN=[{"naam": "groep 21", "aantal": 10}, {"naam": "groep 22", "aantal": 10}, {"naam": "groep 23", "aantal": 10}];
+
+/* ---------- kleine helpers ---------- */
+function $(s){return document.querySelector(s)}
+function $$(s){return [].slice.call(document.querySelectorAll(s))}
+function el(tag,klas,tekst){
+  var n=document.createElement(tag);
+  if(klas)n.className=klas;
+  if(tekst!=null)n.textContent=tekst;
+  return n;
+}
+function rnd(n){return Math.floor(Math.random()*n)}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=rnd(i+1);var t=a[i];a[i]=a[j];a[j]=t}return a}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function kaal(s){
+  return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/[^a-z0-9' ]/g," ").replace(/\s+/g," ").trim();
+}
+
+/* ---------- bewaarde toestand ---------- */
+var SLEUTEL="woordkracht-v1";
+function standaard(){
+  var g={}; GROEPEN.forEach(function(x){g[x.naam]=1});
+  return {mode:"kaarten", groepen:g, prog:{}, kOrde:null, kPos:0};
+}
+var S=standaard();
+try{
+  var bewaard=localStorage.getItem(SLEUTEL);
+  if(bewaard){
+    var b=JSON.parse(bewaard);
+    for(var k in b)if(k in S)S[k]=b[k];
+    GROEPEN.forEach(function(x){if(!(x.naam in S.groepen))S.groepen[x.naam]=1});
+  }
+}catch(e){}
+function save(){try{localStorage.setItem(SLEUTEL,JSON.stringify(S))}catch(e){}}
+
+/* ---------- welke woorden doen mee ---------- */
+function pool(){
+  var uit=WOORDEN.filter(function(w){return S.groepen[w.groep]});
+  return uit.length?uit:WOORDEN;
+}
+function P(w){
+  if(!S.prog[w.woord])S.prog[w.woord]={b:0};
+  return S.prog[w.woord];
+}
+function merk(w,goed){
+  var p=P(w);
+  p.b=goed?Math.min(5,p.b+1):Math.max(0,p.b-1);
+  save();
+  if(S.mode==="voortgang")tekenVoortgang();
+}
+function andere(w,n,veld){
+  var rest=shuffle(WOORDEN.filter(function(x){return x.woord!==w.woord}));
+  var uit=[], gezien={};
+  for(var i=0;i<rest.length&&uit.length<n;i++){
+    var v=veld(rest[i]);
+    if(!v||gezien[kaal(v)])continue;
+    gezien[kaal(v)]=1; uit.push(v);
+  }
+  return uit;
+}
+function gloed(kleur){$("#glow").style.setProperty("--c",kleur)}
+
+/* ---------- meerkeuzevraag ---------- */
+function meerkeuze(cfg){
+  /* cfg: {kop, woord, onder, vraag, juist, fout[], kleur, uitleg, na} */
+  var wrap=el("div"); wrap.style.display="grid"; wrag(wrap,cfg.kleur);
+  var tg=el("div","tegel"); tg.style.setProperty("--c",cfg.kleur);
+  tg.innerHTML='<span class="badge">'+esc(cfg.kop)+'</span>'+
+    '<div class="woord">'+esc(cfg.woord)+'</div>'+
+    (cfg.onder?'<div class="onder">'+esc(cfg.onder)+'</div>':"");
+  wrap.appendChild(tg);
+  wrap.appendChild(el("p","vraag",cfg.vraag));
+
+  var opties=shuffle([cfg.juist].concat(cfg.fout));
+  var doos=el("div","opts"), af=false;
+  opties.forEach(function(o,i){
+    var b=el("button","opt"); b.type="button";
+    b.appendChild(el("i",null,String.fromCharCode(65+i)));
+    b.appendChild(el("span",null,o));
+    b.addEventListener("click",function(){
+      if(af)return; af=true;
+      var goed=o===cfg.juist;
+      $$(".opts .opt").forEach(function(x){
+        x.disabled=true;
+        var t=x.querySelector("span").textContent;
+        if(t===cfg.juist)x.classList.add("good");
+        else if(x===b)x.classList.add("wrong");
+      });
+      cfg.na(goed, wrap);
+    });
+    doos.appendChild(b);
+  });
+  wrap.appendChild(doos);
+  return wrap;
+}
+function wrag(n,kleur){n.style.gap="13px"; n.style.setProperty("--c",kleur)}
+function terugkoppeling(wrap,goed,uitleg,knoptekst,volgende){
+  var fb=el("div","fb "+(goed?"g":"b"));
+  fb.appendChild(el("div","fbt",goed?"Juist":"Fout"));
+  if(uitleg){var u=el("div","fbs"); u.innerHTML=uitleg; fb.appendChild(u)}
+  var nx=el("button","btn",knoptekst); nx.type="button";
+  nx.addEventListener("click",volgende);
+  fb.appendChild(nx);
+  wrap.appendChild(fb);
+}
+
+/* ---------- kaarten ---------- */
+var K={om:false};
+function kaartenStart(){
+  gloed("var(--ned)");
+  var lijst=pool();
+  if(!S.kOrde||S.kOrde.length!==lijst.length){
+    S.kOrde=shuffle(lijst.map(function(w){return w.woord})); S.kPos=0; save();
+  }
+  kaartTeken();
+}
+function huidigeKaart(){
+  var lijst=pool();
+  var naam=S.kOrde[S.kPos%S.kOrde.length];
+  var w=null;
+  lijst.forEach(function(x){if(x.woord===naam)w=x});
+  return w||lijst[0];
+}
+function kaartTeken(){
+  var wrap=$("#kWrap"); wrap.innerHTML="";
+  var w=huidigeKaart();
+  $("#kPos").textContent=(S.kPos%S.kOrde.length)+1;
+  $("#kTot").textContent=pool().length;
+  K.om=false;
+  var kaart=el("div","kaart");
+  var voor=el("div","vlak");
+  voor.appendChild(el("div","groot",w.woord));
+  voor.appendChild(el("div","soortje",w.soort));
+  var achter=el("div","vlak b");
+  achter.appendChild(el("div","uitleg",w.betekenis));
+  var syn=el("div","synrij");
+  w.syn.forEach(function(s){syn.appendChild(el("span",null,s))});
+  achter.appendChild(syn);
+  kaart.appendChild(voor); kaart.appendChild(achter);
+  kaart.addEventListener("click",function(){
+    K.om=!K.om; kaart.classList.toggle("om",K.om);
+  });
+  wrap.appendChild(kaart);
+}
+function kaartVolgende(goed){
+  merk(huidigeKaart(),goed);
+  S.kPos=(S.kPos+1)%S.kOrde.length; save(); kaartTeken();
+}
+$("#kKen").addEventListener("click",function(){kaartVolgende(true)});
+$("#kNog").addEventListener("click",function(){kaartVolgende(false)});
+$("#kSchud").addEventListener("click",function(){
+  S.kOrde=shuffle(pool().map(function(w){return w.woord})); S.kPos=0; save(); kaartTeken();
+});
+
+/* ---------- betekenis ---------- */
+var B={n:0,goed:0};
+function betekenisStart(){
+  gloed("var(--ned)");
+  var body=$("#bBody"); body.innerHTML="";
+  $("#bPos").textContent=B.n+1; $("#bGoed").textContent=B.goed;
+  var lijst=pool(), w=lijst[rnd(lijst.length)];
+  body.appendChild(meerkeuze({
+    kop:"betekenis", woord:w.woord, onder:w.soort,
+    vraag:"Wat betekent dit woord?", kleur:"var(--ned)",
+    juist:w.betekenis, fout:andere(w,3,function(x){return x.betekenis}),
+    na:function(goed,wrap){
+      if(goed)B.goed++;
+      merk(w,goed);
+      terugkoppeling(wrap,goed,
+        "<b>"+esc(w.woord)+"</b> — "+esc(w.betekenis)+
+        "<br><span style=\"color:var(--muted2)\">"+esc(w.zin)+"</span>",
+        "Volgende", function(){B.n++; betekenisStart()});
+    }
+  }));
+}
+$("#bNieuw").addEventListener("click",betekenisStart);
+
+/* ---------- synoniemen ---------- */
+var Y={n:0,goed:0};
+function synoniemStart(){
+  gloed("var(--ned2)");
+  var body=$("#sBody"); body.innerHTML="";
+  $("#sPos").textContent=Y.n+1; $("#sGoed").textContent=Y.goed;
+  var lijst=pool(), w=lijst[rnd(lijst.length)];
+  var juist=w.syn[rnd(w.syn.length)];
+  var fout=andere(w,3,function(x){return x.syn[rnd(x.syn.length)]});
+  body.appendChild(meerkeuze({
+    kop:"synoniem", woord:w.woord, onder:w.soort,
+    vraag:"Welk woord betekent ongeveer hetzelfde?", kleur:"var(--ned2)",
+    juist:juist, fout:fout,
+    na:function(goed,wrap){
+      if(goed)Y.goed++;
+      merk(w,goed);
+      var extra=w.syn.length>1?"Ook goed: "+w.syn.filter(function(s){return s!==juist}).join(", ")+".":"";
+      if(w.tegen&&w.tegen.length)extra+=(extra?" ":"")+"Het tegenovergestelde: "+w.tegen.join(", ")+".";
+      terugkoppeling(wrap,goed,
+        "<b>"+esc(w.woord)+"</b> = "+esc(juist)+(extra?"<br>"+esc(extra):""),
+        "Volgende", function(){Y.n++; synoniemStart()});
+    }
+  }));
+}
+$("#sNieuw").addEventListener("click",synoniemStart);
+
+/* ---------- in een zin ---------- */
+var Z={n:0,goed:0};
+function zinStart(){
+  gloed("var(--ned3)");
+  var body=$("#zBody"); body.innerHTML="";
+  $("#zPos").textContent=Z.n+1; $("#zGoed").textContent=Z.goed;
+  var lijst=pool(), w=lijst[rnd(lijst.length)];
+  var wrap=el("div"); wrag(wrap,"var(--ned3)");
+
+  var vak=el("div","zinvak");
+  vak.innerHTML=esc(w.zinVoor)+'<span class="gat leeg" id="gat">?</span>'+esc(w.zinNa);
+  wrap.appendChild(vak);
+  wrap.appendChild(el("p","vraag","Welk woord hoort in het gat?"));
+
+  var juist=w.gat;
+  var opties=shuffle([juist].concat(andere(w,3,function(x){return x.gat})));
+  var doos=el("div","opts"), af=false;
+  opties.forEach(function(o,i){
+    var b=el("button","opt"); b.type="button";
+    b.appendChild(el("i",null,String.fromCharCode(65+i)));
+    b.appendChild(el("span",null,o));
+    b.addEventListener("click",function(){
+      if(af)return; af=true;
+      var goed=o===juist;
+      var g=document.getElementById("gat");
+      g.textContent=juist; g.classList.remove("leeg");
+      $$("#zBody .opt").forEach(function(x){
+        x.disabled=true;
+        var t=x.querySelector("span").textContent;
+        if(t===juist)x.classList.add("good");
+        else if(x===b)x.classList.add("wrong");
+      });
+      if(goed)Z.goed++;
+      merk(w,goed);
+      terugkoppeling(wrap,goed,
+        "<b>"+esc(w.woord)+"</b> — "+esc(w.betekenis),
+        "Volgende", function(){Z.n++; zinStart()});
+    });
+    doos.appendChild(b);
+  });
+  wrap.appendChild(doos);
+  body.appendChild(wrap);
+}
+$("#zNieuw").addEventListener("click",zinStart);
+
+/* ---------- schrijven ---------- */
+var W2={n:0,goed:0};
+function schrijvenStart(){
+  gloed("var(--ned)");
+  var body=$("#wBody"); body.innerHTML="";
+  $("#wPos").textContent=W2.n+1; $("#wGoed").textContent=W2.goed;
+  var lijst=pool(), w=lijst[rnd(lijst.length)];
+  var wrap=el("div"); wrag(wrap,"var(--ned)");
+
+  var tg=el("div","tegel"); tg.style.setProperty("--c","var(--ned)");
+  tg.innerHTML='<span class="badge">schrijven</span>'+
+    '<div class="onder" style="font-size:16px; color:var(--text)">'+esc(w.betekenis)+'</div>'+
+    '<div class="soortje">'+esc(w.soort)+' · synoniem: '+esc(w.syn[0])+'</div>';
+  wrap.appendChild(tg);
+  wrap.appendChild(el("p","vraag","Welk woord is dit?"));
+
+  var tw=el("div","typewrap"), af=false;
+  var inp=document.createElement("input"); inp.type="text";
+  inp.placeholder="het woord"; inp.setAttribute("autocapitalize","off");
+  inp.setAttribute("autocorrect","off"); inp.setAttribute("autocomplete","off");
+  inp.setAttribute("spellcheck","false"); inp.setAttribute("aria-label","Het woord");
+  var go=el("button","btn","Nakijken"); go.type="button";
+  var wn=el("button","linkbtn","Weet ik niet"); wn.type="button";
+  function toon(goed){
+    af=true; inp.disabled=true; go.remove(); wn.remove();
+    inp.classList.add(goed?"goed":"fout");
+    if(!goed){inp.classList.add("shake"); inp.value=w.woord}
+    if(goed)W2.goed++;
+    merk(w,goed);
+    terugkoppeling(wrap,goed,
+      "<b>"+esc(w.woord)+"</b> — "+esc(w.betekenis)+
+      "<br><span style=\"color:var(--muted2)\">"+esc(w.zin)+"</span>",
+      "Volgende", function(){W2.n++; schrijvenStart()});
+  }
+  function nakijk(){
+    if(af)return;
+    var v=inp.value.trim(); if(!v)return;
+    toon(kaal(v)===kaal(w.woord));
+  }
+  go.addEventListener("click",nakijk);
+  inp.addEventListener("keydown",function(e){if(e.key==="Enter")nakijk()});
+  wn.addEventListener("click",function(){if(!af)toon(false)});
+  tw.appendChild(inp); tw.appendChild(go); tw.appendChild(wn);
+  wrap.appendChild(tw);
+  body.appendChild(wrap);
+  setTimeout(function(){inp.focus()},220);
+}
+$("#wNieuw").addEventListener("click",schrijvenStart);
+
+/* ---------- matchen ---------- */
+var M={sel:null,over:0};
+function matchenStart(){
+  gloed("var(--ned2)");
+  var body=$("#mBody"); body.innerHTML="";
+  var lijst=shuffle(pool()).slice(0,6);
+  M.sel=null; M.over=lijst.length;
+  var tegels=[];
+  lijst.forEach(function(w){
+    tegels.push({sleutel:w.woord, tekst:w.woord, soort:"w"});
+    tegels.push({sleutel:w.woord, tekst:w.syn[0], soort:"s"});
+  });
+  var grid=el("div","mgrid");
+  shuffle(tegels).forEach(function(t){
+    var b=el("button","mt",t.tekst); b.type="button"; b.dataset.k=t.sleutel;
+    b.addEventListener("click",function(){
+      if(b.classList.contains("weg"))return;
+      if(!M.sel){M.sel=b; b.classList.add("sel"); return}
+      if(M.sel===b){b.classList.remove("sel"); M.sel=null; return}
+      if(M.sel.dataset.k===b.dataset.k){
+        var a=M.sel; a.classList.remove("sel");
+        a.classList.add("weg"); b.classList.add("weg");
+        M.sel=null; M.over--;
+        if(!M.over)setTimeout(matchKlaar,350);
+      } else {
+        b.classList.add("wrong");
+        var a2=M.sel; a2.classList.remove("sel");
+        setTimeout(function(){b.classList.remove("wrong")},420);
+        M.sel=null;
+      }
+    });
+    grid.appendChild(b);
+  });
+  body.appendChild(grid);
+}
+function matchKlaar(){
+  var body=$("#mBody");
+  var fb=el("div","fb g");
+  fb.appendChild(el("div","fbt","Alles gekoppeld"));
+  fb.appendChild(el("div","fbs","Zes woorden aan hun synoniem. Nog een ronde?"));
+  var nx=el("button","btn","Nieuwe ronde"); nx.type="button";
+  nx.addEventListener("click",matchenStart);
+  fb.appendChild(nx);
+  body.appendChild(fb);
+}
+$("#mNieuw").addEventListener("click",matchenStart);
+
+/* ---------- toets ---------- */
+var T={rij:[],i:0,goed:0};
+function toetsStart(){
+  gloed("var(--ned)");
+  var lijst=shuffle(pool()).slice(0,15);
+  T.rij=lijst.map(function(w){return {w:w, type:["betekenis","synoniem","zin"][rnd(3)]}});
+  T.i=0; T.goed=0;
+  $("#tTot").textContent=T.rij.length;
+  toetsVraag();
+}
+function toetsVraag(){
+  var body=$("#tBody"); body.innerHTML="";
+  $("#tPos").textContent=Math.min(T.i+1,T.rij.length);
+  $("#tGoed").textContent=T.goed;
+  $("#tBar").style.width=(T.i/T.rij.length*100)+"%";
+  if(T.i>=T.rij.length){toetsKlaar(); return}
+  var q=T.rij[T.i], w=q.w;
+
+  if(q.type==="zin"){
+    var wrap=el("div"); wrag(wrap,"var(--ned3)");
+    var vak=el("div","zinvak");
+    vak.innerHTML=esc(w.zinVoor)+'<span class="gat leeg" id="tgat">?</span>'+esc(w.zinNa);
+    wrap.appendChild(vak);
+    wrap.appendChild(el("p","vraag","Welk woord hoort in het gat?"));
+    var juist=w.gat, af=false;
+    var doos=el("div","opts");
+    shuffle([juist].concat(andere(w,3,function(x){return x.gat}))).forEach(function(o,i){
+      var b=el("button","opt"); b.type="button";
+      b.appendChild(el("i",null,String.fromCharCode(65+i)));
+      b.appendChild(el("span",null,o));
+      b.addEventListener("click",function(){
+        if(af)return; af=true;
+        var goed=o===juist;
+        document.getElementById("tgat").textContent=juist;
+        document.getElementById("tgat").classList.remove("leeg");
+        $$("#tBody .opt").forEach(function(x){
+          x.disabled=true;
+          var t=x.querySelector("span").textContent;
+          if(t===juist)x.classList.add("good"); else if(x===b)x.classList.add("wrong");
+        });
+        if(goed)T.goed++;
+        merk(w,goed);
+        terugkoppeling(wrap,goed,"<b>"+esc(w.woord)+"</b> — "+esc(w.betekenis),
+          "Volgende", function(){T.i++; toetsVraag()});
+      });
+      doos.appendChild(b);
+    });
+    wrap.appendChild(doos);
+    body.appendChild(wrap);
+    return;
+  }
+
+  var isBet=q.type==="betekenis";
+  var juist2=isBet?w.betekenis:w.syn[rnd(w.syn.length)];
+  var fout2=isBet?andere(w,3,function(x){return x.betekenis})
+                 :andere(w,3,function(x){return x.syn[rnd(x.syn.length)]});
+  body.appendChild(meerkeuze({
+    kop:isBet?"betekenis":"synoniem", woord:w.woord, onder:w.soort,
+    vraag:isBet?"Wat betekent dit woord?":"Welk woord betekent ongeveer hetzelfde?",
+    kleur:isBet?"var(--ned)":"var(--ned2)",
+    juist:juist2, fout:fout2,
+    na:function(goed,wrap){
+      if(goed)T.goed++;
+      merk(w,goed);
+      terugkoppeling(wrap,goed,"<b>"+esc(w.woord)+"</b> — "+esc(w.betekenis),
+        "Volgende", function(){T.i++; toetsVraag()});
+    }
+  }));
+}
+function toetsKlaar(){
+  var body=$("#tBody");
+  $("#tBar").style.width="100%";
+  var pct=Math.round(T.goed/T.rij.length*100);
+  var fb=el("div","fb "+(pct>=70?"g":"b"));
+  fb.appendChild(el("div","fbt",T.goed+" van de "+T.rij.length+" juist"));
+  fb.appendChild(el("div","fbs",pct>=90?"Dat zit erin."
+    :pct>=70?"Bijna. Neem de fouten nog eens door bij Kaarten."
+    :"Nog even oefenen met Betekenis en Synoniemen."));
+  var nx=el("button","btn","Nieuwe toets"); nx.type="button";
+  nx.addEventListener("click",toetsStart);
+  fb.appendChild(nx);
+  body.appendChild(fb);
+}
+$("#tNieuw").addEventListener("click",toetsStart);
+
+/* ---------- voortgang ---------- */
+function tekenVoortgang(){
+  gloed("var(--ned)");
+  var body=$("#vBody"); body.innerHTML="";
+  var lijst=pool();
+  var vol=0, bezig=0, niet=0;
+  lijst.forEach(function(w){
+    var b=P(w).b;
+    if(b>=5)vol++; else if(b>0)bezig++; else niet++;
+  });
+  var stats=el("div","stats");
+  [[vol,"gekend"],[bezig,"bezig"],[niet,"nog niet"]].forEach(function(p){
+    var s=el("div","stat");
+    s.appendChild(el("b",null,String(p[0])));
+    s.appendChild(el("span",null,p[1]));
+    stats.appendChild(s);
+  });
+  body.appendChild(stats);
+
+  var grid=el("div","pgrid"); grid.style.marginTop="12px";
+  lijst.forEach(function(w){
+    var c=el("div","pcel");
+    var vul=el("i"); vul.style.height=(P(w).b/5*100)+"%";
+    c.appendChild(vul);
+    c.appendChild(el("span",null,w.woord));
+    c.title=w.woord+" — "+P(w).b+"/5";
+    grid.appendChild(c);
+  });
+  body.appendChild(grid);
+
+  var note=el("p","hint","Elk vakje vult zich als je het woord goed beantwoordt. "
+    +"Vijf keer goed is vol; fout zet het een stap terug.");
+  note.style.marginTop="10px";
+  body.appendChild(note);
+}
+
+/* ---------- samenvatting ---------- */
+function tekenSamenvatting(){
+  gloed("var(--ned3)");
+  var body=$("#svBody"); body.innerHTML="";
+  var lijst=pool();
+  $("#svInfo").textContent=lijst.length+" woorden · "+
+    GROEPEN.filter(function(g){return S.groepen[g.naam]}).length+" groepen";
+  var wrap=el("div","slijst");
+  GROEPEN.forEach(function(g){
+    if(!S.groepen[g.naam])return;
+    var eigen=lijst.filter(function(w){return w.groep===g.naam});
+    if(!eigen.length)return;
+    var vak=el("div","svak"); vak.style.setProperty("--c","var(--ned)");
+    var kop=el("div","skop");
+    kop.appendChild(el("b",null,g.naam));
+    kop.appendChild(el("span",null,eigen.length+" woorden"));
+    vak.appendChild(kop);
+    eigen.forEach(function(w){
+      var r=el("div","srij");
+      var wd=el("div","w",w.woord);
+      var em=el("em",null,w.soort); wd.appendChild(em);
+      r.appendChild(wd);
+      r.appendChild(el("div","b",w.betekenis));
+      var s="synoniem: "+w.syn.join(", ");
+      if(w.tegen&&w.tegen.length)s+=" · tegenover: "+w.tegen.join(", ");
+      r.appendChild(el("div","s",s));
+      r.appendChild(el("div","z",w.zin));
+      vak.appendChild(r);
+    });
+    wrap.appendChild(vak);
+  });
+  body.appendChild(wrap);
+}
+$("#btnPrint").addEventListener("click",function(){window.print()});
+
+/* ---------- groepen aan en uit ---------- */
+function tekenGroepChips(){
+  var box=$("#groepChips"); box.innerHTML="";
+  GROEPEN.forEach(function(g){
+    var b=el("button","chip",g.naam+" ("+g.aantal+")"); b.type="button";
+    b.setAttribute("aria-pressed",String(!!S.groepen[g.naam]));
+    b.addEventListener("click",function(){
+      var aan=!S.groepen[g.naam];
+      var n=0; GROEPEN.forEach(function(x){if(S.groepen[x.naam])n++});
+      if(!aan&&n<=1)return;            /* minstens één groep blijft aan */
+      S.groepen[g.naam]=aan?1:0;
+      b.setAttribute("aria-pressed",String(aan));
+      S.kOrde=null; save(); zetModus(S.mode);
+    });
+    box.appendChild(b);
+  });
+}
+$("#gear").addEventListener("click",function(){
+  var open=$("#panel").hidden;
+  $("#panel").hidden=!open;
+  this.setAttribute("aria-expanded",String(open));
+});
+$("#btnReset").addEventListener("click",function(){
+  if(!confirm("Alle voortgang wissen?"))return;
+  S.prog={}; save(); zetModus(S.mode);
+});
+
+/* ---------- tabbladen ---------- */
+var START={kaarten:kaartenStart, betekenis:betekenisStart, synoniem:synoniemStart,
+           zin:zinStart, schrijven:schrijvenStart, matchen:matchenStart,
+           toets:toetsStart, voortgang:tekenVoortgang, samenvatting:tekenSamenvatting};
+function zetModus(m){
+  if(!START[m])m="kaarten";
+  S.mode=m; save();
+  $$(".tab").forEach(function(t){
+    t.setAttribute("aria-selected",String(t.dataset.m===m));
+  });
+  $$(".view").forEach(function(v){
+    var aan=v.id==="v-"+m;
+    v.hidden=!aan;
+    v.classList.toggle("in",aan);
+  });
+  START[m]();
+}
+$$(".tab").forEach(function(t){
+  t.addEventListener("click",function(){zetModus(t.dataset.m)});
+});
+
+/* ---------- start ---------- */
+$("#subkop").textContent="Gevorderde woordenschat · "+WOORDEN.length+" woorden";
+tekenGroepChips();
+zetModus(S.mode&&START[S.mode]?S.mode:"kaarten");
+</script>
+<!--thema-js-start-->
+<script>
+/* ---------- themakiezer ---------- */
+(function(){
+  var NAMEN={"standaard":"Neon", "synthwave":"Synthwave", "neonijs":"Neon ijs", "gifgroen":"Gifgroen", "magenta":"Magenta", "vuur":"Vuur", "terminal":"Terminal", "middernacht":"Middernacht", "leisteen":"Leisteen", "indigo":"Indigo", "indigonacht":"Indigo nacht", "mist":"Mist", "grasgroen":"Grasgroen", "notitieblok":"Notitieblok", "sepia":"Sepia", "zonsopgang":"Zonsopgang"};
+  var balk=document.getElementById("themabalk");
+  if(!balk)return;
+  var knoppen=[].slice.call(balk.querySelectorAll(".themaknop"));
+  var naamvak=document.getElementById("themanaam");
+
+  function huidig(){
+    try{return localStorage.getItem("leren-thema")||"standaard"}catch(e){return "standaard"}
+  }
+  function toon(t){
+    if(t==="standaard")document.documentElement.removeAttribute("data-thema");
+    else document.documentElement.setAttribute("data-thema",t);
+    var meta=document.querySelector('meta[name="theme-color"]');
+    if(meta){
+      var kleur=getComputedStyle(document.documentElement)
+        .getPropertyValue("--ink").trim();
+      if(kleur)meta.setAttribute("content",kleur);
+    }
+    knoppen.forEach(function(b){
+      b.setAttribute("aria-pressed",String(b.dataset.thema===t));
+    });
+    if(naamvak)naamvak.textContent=NAMEN[t]||"";
+  }
+  function kies(t){
+    try{localStorage.setItem("leren-thema",t)}catch(e){}
+    toon(t);
+  }
+  knoppen.forEach(function(b){
+    b.addEventListener("click",function(){kies(b.dataset.thema)});
+  });
+  /* een andere tab of app in dezelfde map heeft het thema gewijzigd */
+  window.addEventListener("storage",function(e){
+    if(e.key==="leren-thema")toon(huidig());
+  });
+  toon(huidig());
+})();
+</script>
+<!--thema-js-eind-->
+</body>
+</html>

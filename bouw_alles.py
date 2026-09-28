@@ -18,6 +18,7 @@ VAKKEN = [
     ("chemie/toets",     os.path.join(BRON, "chemie-toets")),
     ("frans",            os.path.join(BRON, "frans")),
     ("duits",            os.path.join(BRON, "duits")),
+    ("nederlands",       os.path.join(BRON, "nederlands")),
 ]
 
 BESTANDEN = ["index.html", "manifest.webmanifest", "sw.js", "icon-180.png", "icon-512.png"]
