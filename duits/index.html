@@ -338,6 +338,42 @@ input.goed{border-color:var(--ok); color:var(--ok)} input.fout{border-color:var(
   .mgrid{grid-template-columns:repeat(4,1fr)}
   .lidknoppen{grid-template-columns:repeat(3,1fr)}
 }
+
+/* ---------- wereldkiezer en vervoegen ---------- */
+.mark{cursor:pointer; transition:transform .16s var(--sp)}
+.mark:active{transform:scale(.94)}
+.mark.tijdelijk{color:var(--der); border-color:color-mix(in srgb,var(--der) 50%,transparent);
+  background:linear-gradient(150deg,color-mix(in srgb,var(--der) 20%,var(--surface)),var(--surface));
+  box-shadow:0 0 22px -7px var(--der)}
+.bkaart{display:grid; gap:9px; align-content:start; padding:15px; border-radius:14px;
+  border:1px solid var(--line); background:var(--ink2)}
+.bkaart.actief{border-color:color-mix(in srgb,var(--ok) 40%,transparent);
+  background:linear-gradient(155deg,color-mix(in srgb,var(--ok) 7%,var(--ink2)),var(--ink2))}
+.btitel{display:flex; align-items:center; flex-wrap:wrap; gap:8px}
+.btitel b{font-family:var(--fd); font-size:17px; font-weight:700; line-height:1.2}
+.bsub{font-family:var(--fm); font-size:10px; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--muted2)}
+.bdatum{font-family:var(--fm); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--der); border:1px solid color-mix(in srgb,var(--der) 45%,transparent);
+  background:color-mix(in srgb,var(--der) 12%,transparent); border-radius:7px; padding:3px 8px}
+.bnu{font-family:var(--fm); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--ok)}
+.bmeta{font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums}
+.bswitch{font-family:var(--fu); font-size:13px; font-weight:700; padding:12px; border-radius:10px;
+  cursor:pointer; color:var(--ink); background:var(--goud); border:0}
+.bswitch.uit{background:transparent; color:var(--muted2); border:1px solid var(--line);
+  cursor:default}
+.onder{font-size:13px; color:var(--muted); line-height:1.5}
+.vervoeg{display:grid; gap:7px}
+.vrij{display:grid; grid-template-columns:1fr 1.3fr; gap:10px; align-items:center}
+.vrij .nl{font-family:var(--fm); font-size:12px; color:var(--muted); letter-spacing:.06em}
+.vrij input{width:100%; font-family:var(--fu); font-size:15px; padding:10px 12px;
+  border-radius:10px; border:1px solid var(--line); background:var(--surface); color:var(--text)}
+.vrij input:focus{outline:none; border-color:var(--goud)}
+.vrij input.goed{border-color:var(--ok); color:var(--ok)}
+.vrij input.fout{border-color:var(--bad); color:var(--bad)}
+.vrij .vast{font-size:15px; font-weight:600; color:var(--muted2); padding:10px 12px;
+  border:1px dashed var(--line); border-radius:10px}
 /*thema-css-start*/
 /* de thema's van de site: neutralen en accenten in één keer */
 :root[data-thema="synthwave"]{
@@ -1111,7 +1147,8 @@ input.goed{border-color:var(--ok); color:var(--ok)} input.fout{border-color:var(
 <div class="app">
   <header class="top">
     <a class="terug" href="../" aria-label="Terug naar het hoofdmenu" title="Hoofdmenu">←</a>
-    <div class="mark">W</div>
+    <button class="mark" id="btnWereld" type="button" aria-label="Kies wat je oefent"
+      title="Kies wat je oefent">W</button>
     <div class="tt">
       <h1>Wortschatz</h1>
       <p id="subkop">Duits · woordenschat</p>
@@ -1125,6 +1162,7 @@ input.goed{border-color:var(--ok); color:var(--ok)} input.fout{border-color:var(
     <button class="tab" role="tab" data-m="schrijven" aria-selected="false">Schrijven</button>
     <button class="tab" role="tab" data-m="lidwoord" aria-selected="false">der/die/das</button>
     <button class="tab" role="tab" data-m="meervoud" aria-selected="false">Meervoud</button>
+    <button class="tab" role="tab" data-m="vervoegen" aria-selected="false">Vervoegen</button>
     <button class="tab" role="tab" data-m="matchen" aria-selected="false">Matchen</button>
     <button class="tab" role="tab" data-m="toets" aria-selected="false">Toets</button>
     <button class="tab" role="tab" data-m="voortgang" aria-selected="false">Voortgang</button>
@@ -1243,6 +1281,12 @@ input.goed{border-color:var(--ok); color:var(--ok)} input.fout{border-color:var(
     <div id="pBody"></div>
   </section>
 
+  <section class="view" id="v-vervoegen" role="tabpanel" hidden>
+    <div class="meta"><span class="counter" id="vgTitel">Indikativ Präsens</span>
+      <button class="mini" id="vgNieuw">ander werkwoord</button></div>
+    <div id="vgBody"></div>
+  </section>
+
   <section class="view" id="v-matchen" role="tabpanel" hidden>
     <div class="meta"><span class="counter">tijd <b id="mTijd">0.0</b>s · record <b id="mBest">–</b></span>
       <button class="mini" id="btnMNieuw">nieuw spel</button></div>
@@ -1290,6 +1334,16 @@ input.goed{border-color:var(--ok); color:var(--ok)} input.fout{border-color:var(
   </div>
 </div>
 
+<div class="kiezer" id="wkiezer" hidden>
+  <div class="kbox">
+    <div class="kkop"><h2>Wat oefen je?</h2>
+      <button class="kklaar" id="wKlaar" type="button">Sluiten</button></div>
+    <p class="note">Twee versies met elk hun eigen woorden en hun eigen voortgang.
+      Wisselen kan altijd; je verliest niets.</p>
+    <div class="klijst" id="wLijst" style="background:transparent; border:0; gap:11px; padding:2px"></div>
+  </div>
+</div>
+
 <div class="kiezer" id="kiezer" hidden>
   <div class="kbox">
     <div class="kkop"><h2>Wat wil je oefenen?</h2><button class="kklaar" id="kKlaar">Klaar</button></div>
@@ -1302,40 +1356,670 @@ input.goed{border-color:var(--ok); color:var(--ok)} input.fout{border-color:var(
   </div>
 </div>
 
-<div class="bijwerkvoet">Laatst bijgewerkt <b data-bijgewerkt>28 september 2026 · 23:00</b></div>
+<div class="bijwerkvoet">Laatst bijgewerkt <b data-bijgewerkt>30 september 2026 · 21:21</b></div>
 
 <script>
-/* woord, nederlands, lidwoord ("" = geen zelfstandig naamwoord), meervoud */
-var DATA=[
- {t:"A · die Identität", w:[
-  ["Name","de naam","der","die Namen",""],
-  ["Familienname","de familienaam","der","die Familiennamen",""],
-  ["Vorname","de voornaam","der","die Vornamen",""]
- ]},
- {t:"B1 · der Wohnort", w:[
-  ["Belgien","België","","",""],
-  ["Deutschland","Duitsland","","",""],
-  ["Frankreich","Frankrijk","","",""],
-  ["Land","het land","das","die Länder",""],
-  ["Stadt","de stad","die","die Städte",""]
- ]},
- {t:"C · die Sprache", w:[
-  ["Deutsch","Duits","","",""],
-  ["Englisch","Engels","","",""],
-  ["Französisch","Frans","","",""],
-  ["Niederländisch","Nederlands","","",""],
-  ["Muttersprache","de moedertaal","die","die Muttersprachen",""],
-  ["Sprache","de taal","die","die Sprachen",""]
- ]},
- {t:"I · Fragewörter", w:[
-  ["was","wat","","","Was sagst du?"],
-  ["wer","wie","","","Wer ist das?"],
-  ["wie","hoe","","","Wie alt bist du?"],
-  ["wo","waar","","","Wo wohnt dein Freund?"],
-  ["woher","waar... vandaan","","","Woher kommt deine Freundin?"],
-  ["wohin","waar... naartoe","","","Wohin fährst du?"]
- ]}
+/*data-start*/
+var WERELDEN=[
+ {
+  "id": "kapitel1",
+  "naam": "Kapitel 1",
+  "datum": "",
+  "onder": "De reeksen A, B1, C en I",
+  "pre": "g",
+  "groepen": [
+   {
+    "t": "A · die Identität",
+    "w": [
+     [
+      "Name",
+      "de naam",
+      "der",
+      "die Namen",
+      ""
+     ],
+     [
+      "Familienname",
+      "de familienaam",
+      "der",
+      "die Familiennamen",
+      ""
+     ],
+     [
+      "Vorname",
+      "de voornaam",
+      "der",
+      "die Vornamen",
+      ""
+     ]
+    ]
+   },
+   {
+    "t": "B1 · der Wohnort",
+    "w": [
+     [
+      "Belgien",
+      "België",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Deutschland",
+      "Duitsland",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Frankreich",
+      "Frankrijk",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Land",
+      "het land",
+      "das",
+      "die Länder",
+      ""
+     ],
+     [
+      "Stadt",
+      "de stad",
+      "die",
+      "die Städte",
+      ""
+     ]
+    ]
+   },
+   {
+    "t": "C · die Sprache",
+    "w": [
+     [
+      "Deutsch",
+      "Duits",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Englisch",
+      "Engels",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Französisch",
+      "Frans",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Niederländisch",
+      "Nederlands",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Muttersprache",
+      "de moedertaal",
+      "die",
+      "die Muttersprachen",
+      ""
+     ],
+     [
+      "Sprache",
+      "de taal",
+      "die",
+      "die Sprachen",
+      ""
+     ]
+    ]
+   },
+   {
+    "t": "I · Fragewörter",
+    "w": [
+     [
+      "was",
+      "wat",
+      "",
+      "",
+      "Was sagst du?"
+     ],
+     [
+      "wer",
+      "wie",
+      "",
+      "",
+      "Wer ist das?"
+     ],
+     [
+      "wie",
+      "hoe",
+      "",
+      "",
+      "Wie alt bist du?"
+     ],
+     [
+      "wo",
+      "waar",
+      "",
+      "",
+      "Wo wohnt dein Freund?"
+     ],
+     [
+      "woher",
+      "waar… vandaan",
+      "",
+      "",
+      "Woher kommt deine Freundin?"
+     ],
+     [
+      "wohin",
+      "waar… naartoe",
+      "",
+      "",
+      "Wohin fährst du?"
+     ]
+    ]
+   }
+  ],
+  "verben": []
+ },
+ {
+  "id": "toets1okt",
+  "naam": "Tijdelijk",
+  "datum": "Toets 01/10",
+  "onder": "Woordenschat B2, D, H en K · Indikativ Präsens",
+  "pre": "t",
+  "groepen": [
+   {
+    "t": "B2 · der Wohnort",
+    "w": [
+     [
+      "Adresse",
+      "het adres",
+      "die",
+      "die Adressen",
+      ""
+     ],
+     [
+      "Wohnort",
+      "de woonplaats",
+      "der",
+      "die Wohnorte",
+      ""
+     ],
+     [
+      "Zimmer",
+      "de kamer",
+      "das",
+      "die Zimmer",
+      ""
+     ]
+    ]
+   },
+   {
+    "t": "D · die Familie",
+    "w": [
+     [
+      "Bruder",
+      "de broer",
+      "der",
+      "die Brüder",
+      ""
+     ],
+     [
+      "Familie",
+      "de familie",
+      "die",
+      "die Familien",
+      ""
+     ],
+     [
+      "Großmutter",
+      "de grootmoeder",
+      "die",
+      "die Großmütter",
+      ""
+     ],
+     [
+      "Großvater",
+      "de grootvader",
+      "der",
+      "die Großväter",
+      ""
+     ],
+     [
+      "Kind",
+      "het kind",
+      "das",
+      "die Kinder",
+      ""
+     ],
+     [
+      "Mutter",
+      "de moeder",
+      "die",
+      "die Mütter",
+      ""
+     ],
+     [
+      "Schwester",
+      "de zus",
+      "die",
+      "die Schwestern",
+      ""
+     ],
+     [
+      "Sohn",
+      "de zoon",
+      "der",
+      "die Söhne",
+      ""
+     ],
+     [
+      "Tochter",
+      "de dochter",
+      "die",
+      "die Töchter",
+      ""
+     ],
+     [
+      "Vater",
+      "de vader",
+      "der",
+      "die Väter",
+      ""
+     ],
+     [
+      "Eltern",
+      "de ouders",
+      "die",
+      "",
+      "Meine Eltern kommen aus Italien."
+     ],
+     [
+      "Geschwister",
+      "de broers en zussen",
+      "die",
+      "",
+      "Habt ihr Geschwister?"
+     ],
+     [
+      "Großeltern",
+      "de grootouders",
+      "die",
+      "",
+      ""
+     ]
+    ]
+   },
+   {
+    "t": "H · Verben",
+    "w": [
+     [
+      "besuchen",
+      "bezoeken",
+      "",
+      "",
+      "Wann besucht ihr Berlin?"
+     ],
+     [
+      "bleiben",
+      "blijven",
+      "",
+      "",
+      "Er bleibt eine Woche in München."
+     ],
+     [
+      "haben",
+      "hebben",
+      "",
+      "",
+      "Habt ihr Geschwister?"
+     ],
+     [
+      "heißen",
+      "heten",
+      "",
+      "",
+      "Meine Freundin heißt Nena."
+     ],
+     [
+      "hören",
+      "luisteren naar, horen",
+      "",
+      "",
+      "Hörst du gerne Musik?"
+     ],
+     [
+      "kochen",
+      "koken",
+      "",
+      "",
+      "Mein Vater kann gut kochen."
+     ],
+     [
+      "kommen",
+      "komen",
+      "",
+      "",
+      "Meine Eltern kommen aus Italien."
+     ],
+     [
+      "schreiben",
+      "schrijven",
+      "",
+      "",
+      "Wie schreibt man 'Jentsch'?"
+     ],
+     [
+      "sein",
+      "zijn",
+      "",
+      "",
+      "Das ist mein Großvater."
+     ],
+     [
+      "sprechen",
+      "spreken",
+      "",
+      "",
+      "Du sprichst gut Deutsch."
+     ],
+     [
+      "suchen",
+      "zoeken",
+      "",
+      "",
+      "Ich suche mein Handy."
+     ],
+     [
+      "wohnen",
+      "wonen",
+      "",
+      "",
+      "Meine Freundin wohnt in Köln."
+     ]
+    ]
+   },
+   {
+    "t": "K · Deutsch im Alltag",
+    "w": [
+     [
+      "Angenehm!",
+      "Aangenaam!",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Auf Wiedersehen!",
+      "Tot ziens!",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Entschuldigung!",
+      "Excuseer!",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Guten Tag!",
+      "Goeiedag!",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Tschüss!",
+      "Tot ziens!",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Vielen Dank!",
+      "Dank je wel! / Dank u wel!",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Wie bitte?",
+      "Wat zeg je? / Wat zegt u?",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Wie geht's?",
+      "Hoe gaat het?",
+      "",
+      "",
+      "Ook: Wie geht's dir? · Wie geht's Ihnen?"
+     ]
+    ]
+   },
+   {
+    "t": "I · Fragewörter (herhaling)",
+    "w": [
+     [
+      "was",
+      "wat",
+      "",
+      "",
+      "Was sagst du?"
+     ],
+     [
+      "wer",
+      "wie",
+      "",
+      "",
+      "Wer ist das?"
+     ],
+     [
+      "wie",
+      "hoe",
+      "",
+      "",
+      "Wie alt bist du?"
+     ],
+     [
+      "wo",
+      "waar",
+      "",
+      "",
+      "Wo wohnt dein Freund?"
+     ],
+     [
+      "woher",
+      "waar… vandaan",
+      "",
+      "",
+      "Woher kommt deine Freundin?"
+     ],
+     [
+      "wohin",
+      "waar… naartoe",
+      "",
+      "",
+      "Wohin fährst du?"
+     ]
+    ]
+   }
+  ],
+  "verben": [
+   {
+    "inf": "besuchen",
+    "nl": "bezoeken",
+    "vormen": [
+     "besuche",
+     "besuchst",
+     "besucht",
+     "besuchen",
+     "besucht",
+     "besuchen"
+    ],
+    "notitie": ""
+   },
+   {
+    "inf": "bleiben",
+    "nl": "blijven",
+    "vormen": [
+     "bleibe",
+     "bleibst",
+     "bleibt",
+     "bleiben",
+     "bleibt",
+     "bleiben"
+    ],
+    "notitie": ""
+   },
+   {
+    "inf": "haben",
+    "nl": "hebben",
+    "vormen": [
+     "habe",
+     "hast",
+     "hat",
+     "haben",
+     "habt",
+     "haben"
+    ],
+    "notitie": "onregelmatig, vanbuiten kennen"
+   },
+   {
+    "inf": "heißen",
+    "nl": "heten",
+    "vormen": [
+     "heiße",
+     "heißt",
+     "heißt",
+     "heißen",
+     "heißt",
+     "heißen"
+    ],
+    "notitie": "de stam eindigt op een s-klank, dus du krijgt alleen -t"
+   },
+   {
+    "inf": "hören",
+    "nl": "luisteren naar, horen",
+    "vormen": [
+     "höre",
+     "hörst",
+     "hört",
+     "hören",
+     "hört",
+     "hören"
+    ],
+    "notitie": ""
+   },
+   {
+    "inf": "kochen",
+    "nl": "koken",
+    "vormen": [
+     "koche",
+     "kochst",
+     "kocht",
+     "kochen",
+     "kocht",
+     "kochen"
+    ],
+    "notitie": ""
+   },
+   {
+    "inf": "kommen",
+    "nl": "komen",
+    "vormen": [
+     "komme",
+     "kommst",
+     "kommt",
+     "kommen",
+     "kommt",
+     "kommen"
+    ],
+    "notitie": ""
+   },
+   {
+    "inf": "schreiben",
+    "nl": "schrijven",
+    "vormen": [
+     "schreibe",
+     "schreibst",
+     "schreibt",
+     "schreiben",
+     "schreibt",
+     "schreiben"
+    ],
+    "notitie": ""
+   },
+   {
+    "inf": "sein",
+    "nl": "zijn",
+    "vormen": [
+     "bin",
+     "bist",
+     "ist",
+     "sind",
+     "seid",
+     "sind"
+    ],
+    "notitie": "onregelmatig, vanbuiten kennen"
+   },
+   {
+    "inf": "sprechen",
+    "nl": "spreken",
+    "vormen": [
+     "spreche",
+     "sprichst",
+     "spricht",
+     "sprechen",
+     "sprecht",
+     "sprechen"
+    ],
+    "notitie": "sterk werkwoord: bij du en er/sie/es wordt de e een i"
+   },
+   {
+    "inf": "suchen",
+    "nl": "zoeken",
+    "vormen": [
+     "suche",
+     "suchst",
+     "sucht",
+     "suchen",
+     "sucht",
+     "suchen"
+    ],
+    "notitie": ""
+   },
+   {
+    "inf": "wohnen",
+    "nl": "wonen",
+    "vormen": [
+     "wohne",
+     "wohnst",
+     "wohnt",
+     "wohnen",
+     "wohnt",
+     "wohnen"
+    ],
+    "notitie": ""
+   }
+  ]
+ }
 ];
+var PERSONEN=["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"];
+/*data-eind*/
 </script>
 <script>
 (function(){
@@ -1343,20 +2027,36 @@ var DATA=[
 var $=function(s,r){return (r||document).querySelector(s)};
 var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
 
-var SETS=DATA.map(function(g,i){
-  return {id:"g"+i, titel:g.t, items:g.w.map(function(w){
-    return {de:w[0], nl:w[1], lid:w[2], mv:w[3], vb:w[4]||""};
-  })};
-});
+/* De app draait op één wereld tegelijk. De id's van de reeksen verschillen per
+   wereld (g0, g1, … tegenover t0, t1, …), zodat de voortgang gescheiden blijft. */
+var SETS=[];
+function wereldNu(){
+  var w=WERELDEN[0];
+  WERELDEN.forEach(function(x){if(x.id===S.wereld)w=x});
+  return w;
+}
+function bouwSets(){
+  var w=wereldNu();
+  SETS=w.groepen.map(function(g,i){
+    return {id:w.pre+i, titel:g.t, items:g.w.map(function(x){
+      return {de:x[0], nl:x[1], lid:x[2], mv:x[3], vb:x[4]||""};
+    })};
+  });
+  S.sel=(S.wereld in S.sels)?S.sels[S.wereld]:null;
+}
 
 /* ---------- opslag ---------- */
 var KEY="wortschatz-v1";
-function def(){return {mode:"kaarten",richting:"de",lidEis:"ja",sel:null,prog:{},best:null}}
+function def(){return {mode:"kaarten",richting:"de",lidEis:"ja",sel:null,sels:{},
+  wereld:"kapitel1",prog:{},best:null}}
 var S=def();
 try{var r=JSON.parse(localStorage.getItem(KEY)||"null");
   if(r&&typeof r==="object"){S=Object.assign(def(),r); S.prog=r.prog||{}}
 }catch(e){}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function save(){
+  S.sels[S.wereld]=S.sel;
+  try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}
+}
 
 /* ---------- hulp ---------- */
 function rnd(n){return Math.floor(Math.random()*n)}
@@ -1957,7 +2657,10 @@ function werkSelbarBij(){
   $("#selTitel").textContent=(!S.sel||st.length===SETS.length)?"Alle thema's"
     :(st.length===1?st[0].titel:st.length+" thema's gekozen");
   $("#selAantal").textContent=n+" woorden · "+st.length+" thema"+(st.length===1?"":"'s");
-  $("#subkop").textContent="Duits · "+n+" woorden";
+  var w=wereldNu();
+  $("#subkop").textContent=(w.datum?w.datum+" · ":"Duits · ")+n+" woorden"
+    +(w.verben.length?" · "+w.verben.length+" werkwoorden":"");
+  $("#btnWereld").classList.toggle("tijdelijk",S.wereld!=="kapitel1");
 }
 $("#btnKiezer").addEventListener("click",function(){$("#kiezer").hidden=false; tekenKiezer()});
 $("#kKlaar").addEventListener("click",function(){$("#kiezer").hidden=true; save(); ververs()});
@@ -1972,9 +2675,109 @@ $("#kZwak").addEventListener("click",function(){
   save(); tekenKiezer();
 });
 
+/* ---------- werelden ---------- */
+function tekenWerelden(){
+  var lijst=$("#wLijst"); lijst.innerHTML="";
+  WERELDEN.forEach(function(w){
+    var actief=(w.id===S.wereld);
+    var kaart=el("div","bkaart"+(actief?" actief":""));
+    var titelrij=el("div","btitel");
+    titelrij.appendChild(el("b",null,w.naam));
+    if(w.datum)titelrij.appendChild(el("span","bdatum",w.datum));
+    if(actief)titelrij.appendChild(el("span","bnu","nu actief"));
+    kaart.appendChild(titelrij);
+    kaart.appendChild(el("span","bsub",w.onder));
+    var n=0; w.groepen.forEach(function(g){n+=g.w.length});
+    var stuk=[n+" woorden", w.groepen.length+" reeksen"];
+    if(w.verben.length)stuk.push(w.verben.length+" werkwoorden");
+    kaart.appendChild(el("div","bmeta",stuk.join(" · ")));
+    var knop=el("button",null,actief?"Je oefent dit nu":"Hierop overschakelen");
+    knop.type="button"; knop.className="bswitch"+(actief?" uit":"");
+    knop.addEventListener("click",function(){
+      if(actief)return;
+      S.sels[S.wereld]=S.sel;
+      S.wereld=w.id; bouwSets(); save();
+      $("#wkiezer").hidden=true;
+      werkSelbarBij();
+      zetModus(START[S.mode]?S.mode:"kaarten");
+    });
+    kaart.appendChild(knop);
+    lijst.appendChild(kaart);
+  });
+}
+$("#btnWereld").addEventListener("click",function(){$("#wkiezer").hidden=false; tekenWerelden()});
+$("#wKlaar").addEventListener("click",function(){$("#wkiezer").hidden=true});
+$("#wkiezer").addEventListener("click",function(e){if(e.target===this)this.hidden=true});
+
+/* ---------- vervoegen ---------- */
+var VG={i:0};
+function vervoegenStart(){
+  var body=$("#vgBody"); body.innerHTML="";
+  var lijst=wereldNu().verben;
+  if(!lijst.length){
+    body.appendChild(leegBlok("In deze versie zitten geen werkwoorden. "
+      +"Schakel bij het logo linksboven over naar de toets van 01/10."));
+    $("#vgTitel").textContent="Indikativ Präsens";
+    return;
+  }
+  var v=lijst[rnd(lijst.length)];
+  $("#vgTitel").textContent=v.inf+" — "+v.nl;
+  var wrap=el("div"); wrap.style.display="grid"; wrap.style.gap="12px";
+
+  var tg=el("div","tegel"); tg.style.textAlign="center";
+  tg.innerHTML='<span class="badge">indikativ präsens</span>'
+    +'<div class="woord">'+esc(v.inf)+'</div>'
+    +'<div class="onder">'+esc(v.nl)+(v.notitie?' · '+esc(v.notitie):'')+'</div>';
+  wrap.appendChild(tg);
+  wrap.appendChild(el("p","vraag","Vul de vervoeging aan"));
+
+  /* twee vormen krijg je cadeau, de rest typ je */
+  var cadeau={};
+  shuffle([0,1,2,3,4,5]).slice(0,2).forEach(function(i){cadeau[i]=1});
+  var grid=el("div","vervoeg"), velden=[];
+  PERSONEN.forEach(function(pers,i){
+    var rij=el("div","vrij");
+    rij.appendChild(el("div","nl",pers));
+    if(cadeau[i]){rij.appendChild(el("div","vast",v.vormen[i]))}
+    else{
+      var inp=document.createElement("input"); inp.type="text";
+      inp.setAttribute("autocapitalize","off"); inp.setAttribute("autocorrect","off");
+      inp.setAttribute("autocomplete","off"); inp.setAttribute("spellcheck","false");
+      inp.placeholder="…"; inp.setAttribute("aria-label",pers);
+      rij.appendChild(inp); velden.push({inp:inp, juist:v.vormen[i]});
+    }
+    grid.appendChild(rij);
+  });
+  wrap.appendChild(grid);
+
+  var knop=el("button","btn pri","Nakijken"); knop.type="button";
+  knop.addEventListener("click",function(){
+    var goed=0;
+    velden.forEach(function(f){
+      var u=omzet(f.inp.value)===omzet(f.juist);
+      f.inp.classList.add(u?"goed":"fout"); f.inp.disabled=true;
+      if(!u)f.inp.value=f.juist; else goed++;
+    });
+    knop.remove();
+    var alles=goed===velden.length;
+    var fb=el("div","fb "+(alles?"g":"b"));
+    fb.appendChild(el("div","fbt",alles?"Alles juist":goed+" van de "+velden.length+" juist"));
+    fb.appendChild(el("div","fbs",alles?"Die zit erin."
+      :"De ontbrekende vormen staan nu ingevuld — lees ze even hardop."));
+    var nx=el("button","btn pri","Ander werkwoord"); nx.type="button";
+    nx.addEventListener("click",vervoegenStart);
+    fb.appendChild(nx);
+    wrap.appendChild(fb);
+  });
+  wrap.appendChild(knop);
+  body.appendChild(wrap);
+}
+$("#vgNieuw").addEventListener("click",vervoegenStart);
+
 /* ---------- modus ---------- */
 var START={kaarten:function(){kaartenStart(false)},leren:lerenStart,schrijven:schrijvenStart,
-  lidwoord:lidStart,meervoud:mvStart,matchen:matchenStart,toets:toetsStart,
+  lidwoord:lidStart,meervoud:mvStart,vervoegen:vervoegenStart,
+  matchen:matchenStart,toets:toetsStart,
   voortgang:tekenVoortgang,samenvatting:tekenSamenvatting};
 function leegBlok(tekst){
   var d=el("div","tegel klaar");
@@ -2049,8 +2852,17 @@ document.addEventListener("keydown",function(e){
 /* ---------- start ---------- */
 $$("#richting button").forEach(function(x){x.setAttribute("aria-pressed",String(x.dataset.d===S.richting))});
 $$("#lidEis button").forEach(function(x){x.setAttribute("aria-pressed",String(x.dataset.l===S.lidEis))});
+if(!WERELDEN.some(function(w){return w.id===S.wereld}))S.wereld=WERELDEN[0].id;
+bouwSets();
 werkSelbarBij();
 zetModus(S.mode&&START[S.mode]?S.mode:"kaarten");
+/* bij het openen eerst laten kiezen, net als bij Frans en chemie */
+var eerder=false;
+try{
+  eerder=!!sessionStorage.getItem("wortschatz-gekozen");
+  sessionStorage.setItem("wortschatz-gekozen","1");
+}catch(e){}
+if(!eerder){$("#wkiezer").hidden=false; tekenWerelden()}
 })();
 </script>
 <script>
