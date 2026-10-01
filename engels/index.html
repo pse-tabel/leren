@@ -1,0 +1,4937 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06070d">
+<meta name="description" content="Engels oefenen: woordenschat, onregelmatige werkwoorden, tijden, woordvolgorde en de klassieke valkuilen.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="On Track">
+<title>On Track</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --ink:#06070d; --ink2:#0a0c16; --surface:#10131f; --surface2:#171b2b;
+  --line:#242a44; --line2:#333b60;
+  --text:#e2e6f5; --muted:#848ba8; --muted2:#5c6382;
+  --ok:#31ffb0; --bad:#ff3d5e;
+  --eng:#ff5d73; --eng2:#5b8cff; --eng3:#ffc24d;
+  --fd:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --fu:"Manrope",ui-sans-serif,system-ui,sans-serif;
+  --fm:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;
+  --sp:cubic-bezier(.2,.9,.25,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ink); color:var(--text); font-family:var(--fu); min-height:100dvh;
+  -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent; overflow-x:hidden}
+[hidden]{display:none!important}
+button{font-family:inherit}
+.glow{position:fixed; inset:-28% -20% auto -20%; height:70vh; z-index:0; pointer-events:none;
+  background:radial-gradient(42% 38% at 26% 22%, color-mix(in srgb,var(--c,var(--eng)) 18%,transparent) 0%, transparent 70%),
+             radial-gradient(34% 30% at 78% 8%, color-mix(in srgb,var(--eng2) 12%,transparent) 0%, transparent 70%);
+  filter:blur(34px); transition:background .5s var(--sp)}
+.statusbar{position:fixed; top:0; left:0; right:0; height:env(safe-area-inset-top); z-index:20;
+  pointer-events:none; background:color-mix(in srgb,var(--ink) 78%,transparent);
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px)}
+.app{position:relative; z-index:1; max-width:560px; margin:0 auto; min-height:100dvh;
+  display:flex; flex-direction:column; gap:14px;
+  padding:calc(18px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right))
+          calc(24px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left));}
+
+.top{display:flex; align-items:center; gap:10px}
+.terug{width:40px; height:40px; flex:none; display:grid; place-items:center; border-radius:12px;
+  border:1px solid var(--line); background:var(--surface); color:var(--muted); font-size:18px;
+  text-decoration:none; transition:.2s var(--sp)}
+.terug:hover{color:var(--eng); border-color:color-mix(in srgb,var(--eng) 50%,transparent)}
+.mark{width:40px; height:40px; flex:none; display:grid; place-items:center; border-radius:12px;
+  border:1px solid color-mix(in srgb,var(--eng) 45%,transparent);
+  background:linear-gradient(150deg,color-mix(in srgb,var(--eng) 18%,var(--surface)),var(--surface));
+  box-shadow:0 0 18px -6px var(--eng); cursor:pointer;
+  font-family:var(--fd); font-weight:700; font-size:16px; color:var(--eng);
+  transition:transform .16s var(--sp)}
+.mark:active{transform:scale(.94)}
+.mark.tijdelijk{color:var(--eng3); border-color:color-mix(in srgb,var(--eng3) 50%,transparent);
+  background:linear-gradient(150deg,color-mix(in srgb,var(--eng3) 20%,var(--surface)),var(--surface));
+  box-shadow:0 0 22px -7px var(--eng3)}
+.tt{flex:1; min-width:0}
+.tt h1{font-family:var(--fd); font-size:21px; font-weight:700; margin:0; line-height:1.1}
+.tt p{margin:2px 0 0; font-family:var(--fm); font-size:10px; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--muted2)}
+.gear{width:40px; height:40px; flex:none; border-radius:12px; border:1px solid var(--line);
+  background:var(--surface); color:var(--muted); font-size:16px; cursor:pointer}
+.gear[aria-expanded="true"]{color:var(--eng); border-color:color-mix(in srgb,var(--eng) 50%,transparent)}
+
+.tabs{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; margin:0 -16px; padding:1px 16px 3px;
+  -webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 30px),transparent);
+  mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 30px),transparent)}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none; font-size:13px; font-weight:600; padding:8px 13px; border-radius:99px;
+  border:1px solid var(--line); background:var(--ink2); color:var(--muted); cursor:pointer;
+  transition:.22s var(--sp); white-space:nowrap}
+.tab:hover{color:var(--text)}
+.tab[aria-selected="true"]{color:var(--ink); background:var(--text); border-color:var(--text)}
+
+.selbar{display:flex; align-items:center; flex-wrap:wrap; gap:10px; padding:10px 12px;
+  border-radius:12px; border:1px solid var(--line); background:var(--ink2)}
+.selbar .info{flex:1 1 100%; min-width:0}
+.selbar .info b{display:block; font-size:13px; font-weight:600}
+.selbar .info span{font-family:var(--fm); font-size:10px; color:var(--muted2);
+  letter-spacing:.08em; text-transform:uppercase}
+.selbar button{flex:none; font-size:12px; font-weight:600; color:var(--eng);
+  background:color-mix(in srgb,var(--eng) 12%,transparent);
+  border:1px solid color-mix(in srgb,var(--eng) 40%,transparent);
+  border-radius:9px; padding:8px 12px; cursor:pointer}
+@media (min-width:520px){.selbar .info{flex:1 1 0}}
+
+.panel{display:grid; gap:12px; padding:14px; border-radius:14px; border:1px solid var(--line);
+  background:var(--ink2)}
+.fset{display:grid; gap:7px}
+.flabel{font-family:var(--fm); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--muted2)}
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{font-size:12px; font-weight:600; padding:7px 11px; border-radius:8px; border:1px solid var(--line);
+  background:var(--surface); color:var(--muted); cursor:pointer; transition:.2s var(--sp)}
+.chip[aria-pressed="true"]{color:var(--eng); border-color:color-mix(in srgb,var(--eng) 55%,transparent);
+  background:color-mix(in srgb,var(--eng) 13%,var(--surface))}
+.seg{display:flex; border:1px solid var(--line); border-radius:10px; overflow:hidden;
+  background:var(--surface)}
+.seg button{flex:1; font-size:12px; font-weight:600; padding:9px 5px; border:0;
+  background:transparent; color:var(--muted); cursor:pointer}
+.seg button[aria-pressed="true"]{background:color-mix(in srgb,var(--eng) 16%,transparent);
+  color:var(--eng)}
+.reset{justify-self:start; font-size:12px; color:var(--bad); background:transparent;
+  border:1px solid color-mix(in srgb,var(--bad) 35%,transparent); border-radius:9px;
+  padding:7px 12px; cursor:pointer}
+
+.view{display:flex; flex-direction:column; gap:13px; flex:1}
+.view.in{animation:vin .34s var(--sp) both}
+@keyframes vin{from{opacity:0; transform:translateY(9px)}to{opacity:1; transform:none}}
+.meta{display:flex; align-items:center; justify-content:space-between; gap:10px}
+.counter{font-family:var(--fm); font-size:11px; color:var(--muted2); letter-spacing:.08em}
+.counter b{color:var(--text)}
+.mini{font-size:12px; color:var(--muted); background:transparent; border:1px solid var(--line);
+  border-radius:8px; padding:6px 10px; cursor:pointer}
+.mini:hover{color:var(--text)}
+.track{height:4px; border-radius:99px; background:var(--surface); overflow:hidden}
+.bar{height:100%; width:0; border-radius:99px; background:var(--c,var(--eng));
+  box-shadow:0 0 12px -2px var(--c,var(--eng)); transition:width .3s var(--sp)}
+
+.tegel{border-radius:16px; padding:20px 18px;
+  border:1px solid color-mix(in srgb,var(--c,var(--eng)) 32%,transparent);
+  background:linear-gradient(158deg,color-mix(in srgb,var(--c,var(--eng)) 10%,var(--surface)) 0%,var(--surface) 62%,var(--ink2) 100%);
+  box-shadow:0 22px 50px -34px var(--c,var(--eng)); display:grid; gap:9px; text-align:center}
+.badge{font-family:var(--fm); font-size:9.5px; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--muted2)}
+.woord{font-family:var(--fd); font-size:clamp(22px,5.6vw,32px); font-weight:700; line-height:1.2;
+  color:var(--c,var(--eng)); word-break:break-word}
+.woord.klein{font-size:clamp(17px,4.2vw,22px); line-height:1.35}
+.onder{font-size:13px; color:var(--muted); line-height:1.5}
+.vraag{margin:0; text-align:center; font-family:var(--fm); font-size:10.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted2)}
+
+.opts{display:grid; gap:9px}
+.opt{text-align:left; font-size:14.5px; font-weight:600; padding:13px 15px; border-radius:12px;
+  border:1px solid var(--line); background:var(--ink2); color:var(--text); cursor:pointer;
+  transition:.18s var(--sp); display:flex; gap:11px; align-items:center}
+.opt:hover:not(:disabled){border-color:var(--line2); background:var(--surface)}
+.opt i{flex:none; width:22px; height:22px; border-radius:7px; display:grid; place-items:center;
+  font-style:normal; font-family:var(--fm); font-size:11px; color:var(--muted2);
+  border:1px solid var(--line)}
+.opt.good{border-color:color-mix(in srgb,var(--ok) 55%,transparent);
+  background:color-mix(in srgb,var(--ok) 12%,var(--ink2)); color:var(--ok)}
+.opt.wrong{border-color:color-mix(in srgb,var(--bad) 55%,transparent);
+  background:color-mix(in srgb,var(--bad) 12%,var(--ink2)); color:var(--bad)}
+
+.typewrap{display:grid; gap:9px}
+.typewrap input{width:100%; font-family:var(--fu); font-size:16px; padding:13px 15px; border-radius:12px;
+  border:1px solid var(--line); background:var(--surface); color:var(--text)}
+.typewrap input:focus{outline:none; border-color:var(--c,var(--eng))}
+.typewrap input.goed{border-color:var(--ok); color:var(--ok)}
+.typewrap input.fout{border-color:var(--bad); color:var(--bad)}
+.shake{animation:shake .32s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.btn{font-size:14px; font-weight:700; padding:13px; border-radius:11px; border:0; cursor:pointer;
+  color:var(--ink); background:var(--c,var(--eng)); transition:transform .16s var(--sp)}
+.btn:active{transform:scale(.98)}
+.linkbtn{font-size:12.5px; color:var(--muted2); background:transparent; border:0; cursor:pointer;
+  text-decoration:underline; padding:4px}
+.row2{display:grid; grid-template-columns:1fr 1fr; gap:9px}
+
+.fb{display:grid; gap:9px; padding:15px; border-radius:13px; border:1px solid var(--line);
+  background:var(--ink2)}
+.fb.g{border-color:color-mix(in srgb,var(--ok) 40%,transparent)}
+.fb.b{border-color:color-mix(in srgb,var(--bad) 40%,transparent)}
+.fbt{font-family:var(--fd); font-size:17px; font-weight:700}
+.fb.g .fbt{color:var(--ok)} .fb.b .fbt{color:var(--bad)}
+.fbs{font-size:13.5px; color:var(--muted); line-height:1.6}
+.fbs b{color:var(--text)}
+
+.kaartwrap{flex:1; min-height:250px; max-height:min(56dvh,440px); display:grid; touch-action:pan-y}
+.kaart{position:relative; width:100%; height:100%; min-height:250px; transform-style:preserve-3d;
+  transition:transform .55s var(--sp); cursor:pointer}
+.kaart.om{transform:rotateY(180deg)}
+.vlak{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  border-radius:18px; padding:22px; display:flex; flex-direction:column; justify-content:center;
+  gap:11px; text-align:center; overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--c,var(--eng)) 30%,transparent);
+  background:linear-gradient(158deg,color-mix(in srgb,var(--c,var(--eng)) 9%,var(--surface)) 0%,var(--surface) 60%,var(--ink2) 100%);
+  box-shadow:0 24px 56px -34px var(--c,var(--eng))}
+.vlak.b{transform:rotateY(180deg)}
+.vlak .groot{font-family:var(--fd); font-size:clamp(20px,5.2vw,30px); font-weight:700; line-height:1.25;
+  color:var(--c,var(--eng))}
+.vlak .groot.klein{font-size:clamp(16px,3.8vw,21px)}
+.vlak .uitleg{font-size:15px; color:var(--text); line-height:1.55}
+.vlak .extra{font-family:var(--fm); font-size:12px; color:var(--muted2)}
+.hint{margin:0; text-align:center; font-size:11.5px; color:var(--muted2)}
+
+/* onregelmatige werkwoorden */
+.vrij{display:grid; grid-template-columns:1fr 1.4fr; gap:10px; align-items:center}
+.vrij .nl{font-family:var(--fm); font-size:11.5px; color:var(--muted); letter-spacing:.06em}
+.vrij input{width:100%; font-family:var(--fu); font-size:15px; padding:10px 12px; border-radius:10px;
+  border:1px solid var(--line); background:var(--surface); color:var(--text)}
+.vrij input:focus{outline:none; border-color:var(--eng)}
+.vrij input.goed{border-color:var(--ok); color:var(--ok)}
+.vrij input.fout{border-color:var(--bad); color:var(--bad)}
+.vervoeg{display:grid; gap:8px}
+
+/* woordvolgorde */
+.zinvak{min-height:62px; border-radius:13px; border:1px dashed var(--line2); background:var(--ink2);
+  padding:12px; display:flex; flex-wrap:wrap; gap:7px; align-content:flex-start}
+.zinvak.leeg::before{content:"Tik de woorden in de juiste volgorde";
+  font-size:12.5px; color:var(--muted2)}
+.bank{display:flex; flex-wrap:wrap; gap:7px}
+.wtegel{font-size:14px; font-weight:600; padding:9px 12px; border-radius:10px;
+  border:1px solid var(--line); background:var(--surface); color:var(--text); cursor:pointer;
+  transition:.15s var(--sp)}
+.wtegel:hover{border-color:var(--line2)}
+.wtegel.weg{display:none}
+.zinvak .wtegel{background:color-mix(in srgb,var(--eng2) 15%,var(--surface));
+  border-color:color-mix(in srgb,var(--eng2) 45%,transparent)}
+
+/* matchen */
+.mgrid{display:grid; grid-template-columns:repeat(2,1fr); gap:7px}
+.mt{font-size:12.5px; font-weight:600; padding:12px 8px; border-radius:10px; border:1px solid var(--line);
+  background:var(--ink2); color:var(--text); cursor:pointer; min-height:62px; line-height:1.35;
+  transition:.16s var(--sp)}
+.mt.sel{border-color:var(--eng); box-shadow:0 0 18px -8px var(--eng)}
+.mt.weg{opacity:0; pointer-events:none}
+.mt.wrong{border-color:var(--bad)}
+
+/* voortgang */
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:8px}
+.stat{padding:13px 10px; border-radius:12px; border:1px solid var(--line); background:var(--ink2);
+  text-align:center}
+.stat b{display:block; font-family:var(--fd); font-size:22px; font-weight:700}
+.stat span{font-family:var(--fm); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--muted2)}
+.pgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(52px,1fr)); gap:6px}
+.pcel{height:34px; border-radius:8px; border:1px solid var(--line); background:var(--ink2);
+  display:grid; place-items:center; font-size:9px; color:var(--muted2); overflow:hidden;
+  position:relative}
+.pcel i{position:absolute; inset:auto 0 0 0; background:var(--eng); opacity:.5}
+.pcel span{position:relative; z-index:1; padding:0 3px; text-align:center; line-height:1.1;
+  word-break:break-word}
+
+/* wereldkiezer */
+.kiezer{position:fixed; inset:0; z-index:40; overflow-y:auto;
+  background:color-mix(in srgb,var(--ink) 94%,transparent);
+  -webkit-backdrop-filter:blur(9px); backdrop-filter:blur(9px); display:flex; flex-direction:column;
+  animation:fade .25s var(--sp) both}
+.kiezer[hidden]{display:none}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.kbox{width:100%; max-width:520px; margin:auto; display:grid; gap:12px;
+  padding:calc(20px + env(safe-area-inset-top)) 18px calc(20px + env(safe-area-inset-bottom))}
+.kkop{display:flex; align-items:center; justify-content:space-between; gap:10px}
+.kkop h2{font-family:var(--fd); font-size:20px; margin:0; font-weight:700}
+.kklaar{font-size:13px; font-weight:700; color:var(--ink); background:var(--eng); border:0;
+  border-radius:10px; padding:10px 16px; cursor:pointer}
+.note{margin:0; font-size:13px; color:var(--muted); line-height:1.6}
+.bkaart{display:grid; gap:9px; padding:16px; border-radius:15px; border:1px solid var(--line);
+  background:var(--ink2)}
+.bkaart.actief{border-color:color-mix(in srgb,var(--ok) 38%,transparent);
+  background:linear-gradient(155deg,color-mix(in srgb,var(--ok) 8%,var(--ink2)),var(--ink2))}
+.btitel{display:flex; align-items:center; flex-wrap:wrap; gap:9px}
+.btitel b{font-family:var(--fd); font-size:18px; font-weight:700; line-height:1.15}
+.bsub{font-family:var(--fm); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted2)}
+.bdatum{font-family:var(--fm); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--eng3); border:1px solid color-mix(in srgb,var(--eng3) 45%,transparent);
+  background:color-mix(in srgb,var(--eng3) 12%,transparent); border-radius:7px; padding:3px 8px}
+.bnu{font-family:var(--fm); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--ok)}
+.bmeta{font-size:12.5px; color:var(--muted); line-height:1.5}
+.bswitch{font-size:13.5px; font-weight:700; padding:12px; border-radius:10px; cursor:pointer;
+  color:var(--ink); background:var(--eng); border:0}
+.bswitch.uit{background:transparent; color:var(--muted2); border:1px solid var(--line);
+  cursor:default}
+
+/* het korte overzicht op de samenvatting */
+.okaart{padding:12px 14px; border-bottom:1px solid var(--line); display:grid; gap:5px}
+.okaart:last-child{border-bottom:0}
+.okaart b{font-family:var(--fd); font-size:15px; font-weight:700; color:var(--c,var(--eng))}
+.orij{display:grid; grid-template-columns:76px 1fr; gap:10px; font-size:13px; line-height:1.5}
+.orij i{font-style:normal; font-family:var(--fm); font-size:9.5px; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--muted2); padding-top:3px}
+.orij span{color:var(--text)}
+.orij.vb span{color:var(--muted); font-style:italic}
+
+/* samenvatting */
+.slijst{display:grid; gap:12px}
+.svak{border:1px solid var(--line); border-radius:13px; overflow:hidden; background:var(--ink2)}
+.skop{padding:11px 14px; background:color-mix(in srgb,var(--c,var(--eng)) 10%,transparent);
+  border-bottom:1px solid var(--line); display:flex; justify-content:space-between;
+  align-items:baseline; gap:10px}
+.skop b{font-family:var(--fd); font-size:15px; font-weight:700}
+.skop span{font-family:var(--fm); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted2)}
+.srij{padding:10px 14px; border-bottom:1px solid var(--line); display:grid;
+  grid-template-columns:1fr 1.25fr; gap:12px}
+.srij:last-child{border-bottom:0}
+.srij .l{font-weight:600; font-size:13.5px; color:var(--c,var(--eng))}
+.srij .r{font-size:13.5px; color:var(--text); line-height:1.5}
+.srij .r em{display:block; font-style:normal; font-family:var(--fm); font-size:11px;
+  color:var(--muted2); margin-top:2px}
+.svak.drie .srij{grid-template-columns:1fr 1fr 1fr}
+
+@media (min-width:660px){
+  .app{max-width:720px; padding-left:26px; padding-right:26px}
+  .tabs{flex-wrap:wrap; overflow:visible; margin:0; padding:0; -webkit-mask-image:none; mask-image:none}
+  .opts{grid-template-columns:1fr 1fr}
+  .mgrid{grid-template-columns:repeat(4,1fr)}
+  .kaartwrap{min-height:290px}
+  .kaart{min-height:290px}
+}
+@media (min-width:980px){
+  .app{max-width:1080px; display:grid; gap:16px 30px;
+    grid-template-columns:262px minmax(0,1fr);
+    grid-template-rows:auto auto auto auto 1fr;
+    grid-template-areas:"kop kop" "sel hoofd" "nav hoofd" "pan hoofd" "vul hoofd";
+    padding:28px 32px calc(30px + env(safe-area-inset-bottom))}
+  .top{grid-area:kop; padding-bottom:11px; border-bottom:1px solid var(--line)}
+  .selbar{grid-area:sel; flex-direction:column; align-items:stretch}
+  .tabs{grid-area:nav; flex-direction:column; gap:4px; align-self:start; overflow:visible;
+    margin:0; padding:0; -webkit-mask-image:none; mask-image:none}
+  .panel{grid-area:pan}
+  .view{grid-area:hoofd; min-width:0}
+  .tab{width:100%; text-align:left; border-radius:10px; padding:11px 14px; font-size:14px;
+    background:transparent; border-color:transparent; white-space:normal}
+  .tab:hover{background:var(--ink2)}
+  .tab[aria-selected="true"]{background:var(--surface); border-color:var(--line2); color:var(--text)}
+  .tt h1{font-size:26px}
+  .kaartwrap{min-height:360px; max-height:min(54dvh,440px)}
+  .opts{grid-template-columns:1fr 1fr}
+  .mgrid{grid-template-columns:repeat(4,1fr)}
+  #svBody>div{grid-template-columns:1fr 1fr; align-items:start}
+}
+@media print{
+  .glow,.statusbar,.tabs,.panel,.selbar,.top .terug,.top .gear,.top .mark,.meta,.kiezer{display:none!important}
+  body{background:#fff; color:#000}
+  .app{max-width:none; padding:0}
+  .svak{break-inside:avoid; border:1px solid #bbb; background:#fff; margin:0 0 10px}
+  .skop{background:#f2f2f2}
+  .srij .l{color:#000}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important; transition-duration:.01ms!important}}
+/*thema-css-start*/
+/* de thema's van de site: neutralen en accenten in één keer */
+:root[data-thema="synthwave"]{
+  color-scheme:dark;
+  --ink:#0d0420;
+  --ink2:#140a2e;
+  --surface:#1c1040;
+  --surface2:#241553;
+  --line:#33206b;
+  --line2:#4a2f91;
+  --text:#f7e9ff;
+  --muted:#b49ad6;
+  --muted2:#7f6aa3;
+  --hub:#ff2e97;
+  --cyan:#ff2e97;
+  --voc:#ff2e97;
+  --metaal:#ff2e97;
+  --goud:#ff2e97;
+  --vak1:#ff2e97;
+  --ned:#ff2e97;
+  --eng:#ff2e97;
+  --paars:#b14bff;
+  --gram:#b14bff;
+  --nietmetaal:#b14bff;
+  --vak2:#b14bff;
+  --ned2:#b14bff;
+  --eng2:#b14bff;
+  --werkw:#23e0ff;
+  --edelgas:#23e0ff;
+  --vak3:#23e0ff;
+  --ned3:#23e0ff;
+  --eng3:#23e0ff;
+  --zin:#ffd23f;
+  --vak4:#ffd23f;
+  --vak5:#ffd23f;
+  --ok:#2bf5a0;
+  --bad:#ff3b5c;
+}
+:root[data-thema="synthwave"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="neonijs"]{
+  color-scheme:dark;
+  --ink:#020813;
+  --ink2:#05101f;
+  --surface:#0a1a2e;
+  --surface2:#0f2340;
+  --line:#163455;
+  --line2:#204a78;
+  --text:#e6f6ff;
+  --muted:#86b6d6;
+  --muted2:#5d859f;
+  --hub:#22e6ff;
+  --cyan:#22e6ff;
+  --voc:#22e6ff;
+  --metaal:#22e6ff;
+  --goud:#22e6ff;
+  --vak1:#22e6ff;
+  --ned:#22e6ff;
+  --eng:#22e6ff;
+  --paars:#63b3ff;
+  --gram:#63b3ff;
+  --nietmetaal:#63b3ff;
+  --vak2:#63b3ff;
+  --ned2:#63b3ff;
+  --eng2:#63b3ff;
+  --werkw:#9df0ff;
+  --edelgas:#9df0ff;
+  --vak3:#9df0ff;
+  --ned3:#9df0ff;
+  --eng3:#9df0ff;
+  --zin:#c6a8ff;
+  --vak4:#c6a8ff;
+  --vak5:#c6a8ff;
+  --ok:#3df5c0;
+  --bad:#ff5c7a;
+}
+:root[data-thema="neonijs"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="gifgroen"]{
+  color-scheme:dark;
+  --ink:#060a04;
+  --ink2:#0b1207;
+  --surface:#111c0c;
+  --surface2:#182611;
+  --line:#21351a;
+  --line2:#304c26;
+  --text:#eaffd9;
+  --muted:#9dc27e;
+  --muted2:#6d8c56;
+  --hub:#aaff1a;
+  --cyan:#aaff1a;
+  --voc:#aaff1a;
+  --metaal:#aaff1a;
+  --goud:#aaff1a;
+  --vak1:#aaff1a;
+  --ned:#aaff1a;
+  --eng:#aaff1a;
+  --paars:#4fe3ff;
+  --gram:#4fe3ff;
+  --nietmetaal:#4fe3ff;
+  --vak2:#4fe3ff;
+  --ned2:#4fe3ff;
+  --eng2:#4fe3ff;
+  --werkw:#ffe83d;
+  --edelgas:#ffe83d;
+  --vak3:#ffe83d;
+  --ned3:#ffe83d;
+  --eng3:#ffe83d;
+  --zin:#c77dff;
+  --vak4:#c77dff;
+  --vak5:#c77dff;
+  --ok:#3dff88;
+  --bad:#ff4d4d;
+}
+:root[data-thema="gifgroen"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="magenta"]{
+  color-scheme:dark;
+  --ink:#0f0413;
+  --ink2:#17081d;
+  --surface:#200c2a;
+  --surface2:#2a1136;
+  --line:#3a1a4a;
+  --line2:#532768;
+  --text:#ffe9fb;
+  --muted:#c898d6;
+  --muted2:#8f6b9d;
+  --hub:#ff3df0;
+  --cyan:#ff3df0;
+  --voc:#ff3df0;
+  --metaal:#ff3df0;
+  --goud:#ff3df0;
+  --vak1:#ff3df0;
+  --ned:#ff3df0;
+  --eng:#ff3df0;
+  --paars:#a24bff;
+  --gram:#a24bff;
+  --nietmetaal:#a24bff;
+  --vak2:#a24bff;
+  --ned2:#a24bff;
+  --eng2:#a24bff;
+  --werkw:#ff8ac0;
+  --edelgas:#ff8ac0;
+  --vak3:#ff8ac0;
+  --ned3:#ff8ac0;
+  --eng3:#ff8ac0;
+  --zin:#63e8ff;
+  --vak4:#63e8ff;
+  --vak5:#63e8ff;
+  --ok:#38f5b0;
+  --bad:#ff4f6e;
+}
+:root[data-thema="magenta"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="vuur"]{
+  color-scheme:dark;
+  --ink:#120503;
+  --ink2:#1a0906;
+  --surface:#260d08;
+  --surface2:#32120c;
+  --line:#451a12;
+  --line2:#62281b;
+  --text:#ffece2;
+  --muted:#d1a091;
+  --muted2:#9c7365;
+  --hub:#ff6a1a;
+  --cyan:#ff6a1a;
+  --voc:#ff6a1a;
+  --metaal:#ff6a1a;
+  --goud:#ff6a1a;
+  --vak1:#ff6a1a;
+  --ned:#ff6a1a;
+  --eng:#ff6a1a;
+  --paars:#ff3d9e;
+  --gram:#ff3d9e;
+  --nietmetaal:#ff3d9e;
+  --vak2:#ff3d9e;
+  --ned2:#ff3d9e;
+  --eng2:#ff3d9e;
+  --werkw:#ffc53d;
+  --edelgas:#ffc53d;
+  --vak3:#ffc53d;
+  --ned3:#ffc53d;
+  --eng3:#ffc53d;
+  --zin:#ffa06b;
+  --vak4:#ffa06b;
+  --vak5:#ffa06b;
+  --ok:#4ade80;
+  --bad:#ff2e2e;
+}
+:root[data-thema="vuur"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="terminal"]{
+  color-scheme:dark;
+  --ink:#000000;
+  --ink2:#050a05;
+  --surface:#0a120a;
+  --surface2:#0f1a0f;
+  --line:#1b2e1b;
+  --line2:#2c452c;
+  --text:#b9ffb9;
+  --muted:#5fa85f;
+  --muted2:#3d6f3d;
+  --hub:#39ff5f;
+  --cyan:#39ff5f;
+  --voc:#39ff5f;
+  --metaal:#39ff5f;
+  --goud:#39ff5f;
+  --vak1:#39ff5f;
+  --ned:#39ff5f;
+  --eng:#39ff5f;
+  --paars:#8affa8;
+  --gram:#8affa8;
+  --nietmetaal:#8affa8;
+  --vak2:#8affa8;
+  --ned2:#8affa8;
+  --eng2:#8affa8;
+  --werkw:#00e6c3;
+  --edelgas:#00e6c3;
+  --vak3:#00e6c3;
+  --ned3:#00e6c3;
+  --eng3:#00e6c3;
+  --zin:#c8ff3f;
+  --vak4:#c8ff3f;
+  --vak5:#c8ff3f;
+  --ok:#00ffa0;
+  --bad:#ff5f56;
+}
+:root[data-thema="terminal"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="middernacht"]{
+  color-scheme:dark;
+  --ink:#000000;
+  --ink2:#0a0a0c;
+  --surface:#131317;
+  --surface2:#1a1b20;
+  --line:#27272e;
+  --line2:#3b3b46;
+  --text:#ededf1;
+  --muted:#8f8f99;
+  --muted2:#62626d;
+  --hub:#8ab4ff;
+  --cyan:#8ab4ff;
+  --voc:#8ab4ff;
+  --metaal:#8ab4ff;
+  --goud:#8ab4ff;
+  --vak1:#8ab4ff;
+  --ned:#8ab4ff;
+  --eng:#8ab4ff;
+  --paars:#c79bff;
+  --gram:#c79bff;
+  --nietmetaal:#c79bff;
+  --vak2:#c79bff;
+  --ned2:#c79bff;
+  --eng2:#c79bff;
+  --werkw:#6fe3c4;
+  --edelgas:#6fe3c4;
+  --vak3:#6fe3c4;
+  --ned3:#6fe3c4;
+  --eng3:#6fe3c4;
+  --zin:#ffb86b;
+  --vak4:#ffb86b;
+  --vak5:#ffb86b;
+  --ok:#4ade80;
+  --bad:#ff6b6b;
+}
+:root[data-thema="middernacht"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="middernacht"] .glow{display:none}
+:root[data-thema="middernacht"] .grid-bg{opacity:.12}
+:root[data-thema="middernacht"] .sym,
+:root[data-thema="middernacht"] .nm,
+:root[data-thema="middernacht"] .woord,
+:root[data-thema="middernacht"] .done h2{text-shadow:none}
+:root[data-thema="middernacht"] .mark,
+:root[data-thema="middernacht"] .mark.tijdelijk,
+:root[data-thema="middernacht"] .mark:hover,
+:root[data-thema="middernacht"] .merk,
+:root[data-thema="middernacht"] .bar,
+:root[data-thema="middernacht"] .btn.pri,
+:root[data-thema="middernacht"] .btn.ok,
+:root[data-thema="middernacht"] .btn.bad,
+:root[data-thema="middernacht"] .kklaar,
+:root[data-thema="middernacht"] .knoop.nu,
+:root[data-thema="middernacht"] .kroontjes i.aan,
+:root[data-thema="middernacht"] .legend i,
+:root[data-thema="middernacht"] .chip[aria-pressed="true"],
+:root[data-thema="middernacht"] .gear[aria-expanded="true"],
+:root[data-thema="middernacht"] .tab[aria-selected="true"],
+:root[data-thema="middernacht"] .mt.sel,
+:root[data-thema="middernacht"] .opt.good,
+:root[data-thema="middernacht"] .score,
+:root[data-thema="middernacht"] .install,
+:root[data-thema="middernacht"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="leisteen"]{
+  color-scheme:dark;
+  --ink:#14171c;
+  --ink2:#191d24;
+  --surface:#21262f;
+  --surface2:#29303a;
+  --line:#343c48;
+  --line2:#47515f;
+  --text:#e4e8ee;
+  --muted:#97a1af;
+  --muted2:#6c7683;
+  --hub:#6f9bc9;
+  --cyan:#6f9bc9;
+  --voc:#6f9bc9;
+  --metaal:#6f9bc9;
+  --goud:#6f9bc9;
+  --vak1:#6f9bc9;
+  --ned:#6f9bc9;
+  --eng:#6f9bc9;
+  --paars:#a08cc0;
+  --gram:#a08cc0;
+  --nietmetaal:#a08cc0;
+  --vak2:#a08cc0;
+  --ned2:#a08cc0;
+  --eng2:#a08cc0;
+  --werkw:#79b09a;
+  --edelgas:#79b09a;
+  --vak3:#79b09a;
+  --ned3:#79b09a;
+  --eng3:#79b09a;
+  --zin:#c9a37a;
+  --vak4:#c9a37a;
+  --vak5:#c9a37a;
+  --ok:#6aab7e;
+  --bad:#cc7b7b;
+}
+:root[data-thema="leisteen"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="leisteen"] .glow{display:none}
+:root[data-thema="leisteen"] .grid-bg{opacity:.12}
+:root[data-thema="leisteen"] .sym,
+:root[data-thema="leisteen"] .nm,
+:root[data-thema="leisteen"] .woord,
+:root[data-thema="leisteen"] .done h2{text-shadow:none}
+:root[data-thema="leisteen"] .mark,
+:root[data-thema="leisteen"] .mark.tijdelijk,
+:root[data-thema="leisteen"] .mark:hover,
+:root[data-thema="leisteen"] .merk,
+:root[data-thema="leisteen"] .bar,
+:root[data-thema="leisteen"] .btn.pri,
+:root[data-thema="leisteen"] .btn.ok,
+:root[data-thema="leisteen"] .btn.bad,
+:root[data-thema="leisteen"] .kklaar,
+:root[data-thema="leisteen"] .knoop.nu,
+:root[data-thema="leisteen"] .kroontjes i.aan,
+:root[data-thema="leisteen"] .legend i,
+:root[data-thema="leisteen"] .chip[aria-pressed="true"],
+:root[data-thema="leisteen"] .gear[aria-expanded="true"],
+:root[data-thema="leisteen"] .tab[aria-selected="true"],
+:root[data-thema="leisteen"] .mt.sel,
+:root[data-thema="leisteen"] .opt.good,
+:root[data-thema="leisteen"] .score,
+:root[data-thema="leisteen"] .install,
+:root[data-thema="leisteen"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="indigo"]{
+  color-scheme:light;
+  --ink:#f6f7fb;
+  --ink2:#eceef6;
+  --surface:#ffffff;
+  --surface2:#fafbfd;
+  --line:#dde1ed;
+  --line2:#bfc7db;
+  --text:#0a092d;
+  --muted:#565f7e;
+  --muted2:#7c86a0;
+  --hub:#4255ff;
+  --cyan:#4255ff;
+  --voc:#4255ff;
+  --metaal:#4255ff;
+  --goud:#4255ff;
+  --vak1:#4255ff;
+  --ned:#4255ff;
+  --eng:#4255ff;
+  --paars:#9333ea;
+  --gram:#9333ea;
+  --nietmetaal:#9333ea;
+  --vak2:#9333ea;
+  --ned2:#9333ea;
+  --eng2:#9333ea;
+  --werkw:#0d9488;
+  --edelgas:#0d9488;
+  --vak3:#0d9488;
+  --ned3:#0d9488;
+  --eng3:#0d9488;
+  --zin:#db2777;
+  --vak4:#db2777;
+  --vak5:#db2777;
+  --ok:#15a163;
+  --bad:#dc2626;
+}
+:root[data-thema="indigo"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="indigo"] .glow{display:none}
+:root[data-thema="indigo"] .grid-bg{opacity:.12}
+:root[data-thema="indigo"] .sym,
+:root[data-thema="indigo"] .nm,
+:root[data-thema="indigo"] .woord,
+:root[data-thema="indigo"] .done h2{text-shadow:none}
+:root[data-thema="indigo"] .mark,
+:root[data-thema="indigo"] .mark.tijdelijk,
+:root[data-thema="indigo"] .mark:hover,
+:root[data-thema="indigo"] .merk,
+:root[data-thema="indigo"] .bar,
+:root[data-thema="indigo"] .btn.pri,
+:root[data-thema="indigo"] .btn.ok,
+:root[data-thema="indigo"] .btn.bad,
+:root[data-thema="indigo"] .kklaar,
+:root[data-thema="indigo"] .knoop.nu,
+:root[data-thema="indigo"] .kroontjes i.aan,
+:root[data-thema="indigo"] .legend i,
+:root[data-thema="indigo"] .chip[aria-pressed="true"],
+:root[data-thema="indigo"] .gear[aria-expanded="true"],
+:root[data-thema="indigo"] .tab[aria-selected="true"],
+:root[data-thema="indigo"] .mt.sel,
+:root[data-thema="indigo"] .opt.good,
+:root[data-thema="indigo"] .score,
+:root[data-thema="indigo"] .install,
+:root[data-thema="indigo"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="indigonacht"]{
+  color-scheme:dark;
+  --ink:#0a092d;
+  --ink2:#111038;
+  --surface:#1a1947;
+  --surface2:#232159;
+  --line:#2f2d6b;
+  --line2:#423f8c;
+  --text:#f2f3fb;
+  --muted:#a2a5cc;
+  --muted2:#7477a3;
+  --hub:#6b7bff;
+  --cyan:#6b7bff;
+  --voc:#6b7bff;
+  --metaal:#6b7bff;
+  --goud:#6b7bff;
+  --vak1:#6b7bff;
+  --ned:#6b7bff;
+  --eng:#6b7bff;
+  --paars:#b566ff;
+  --gram:#b566ff;
+  --nietmetaal:#b566ff;
+  --vak2:#b566ff;
+  --ned2:#b566ff;
+  --eng2:#b566ff;
+  --werkw:#22d3c5;
+  --edelgas:#22d3c5;
+  --vak3:#22d3c5;
+  --ned3:#22d3c5;
+  --eng3:#22d3c5;
+  --zin:#ff6fae;
+  --vak4:#ff6fae;
+  --vak5:#ff6fae;
+  --ok:#34d399;
+  --bad:#ff5a5a;
+}
+:root[data-thema="indigonacht"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="indigonacht"] .glow{display:none}
+:root[data-thema="indigonacht"] .grid-bg{opacity:.12}
+:root[data-thema="indigonacht"] .sym,
+:root[data-thema="indigonacht"] .nm,
+:root[data-thema="indigonacht"] .woord,
+:root[data-thema="indigonacht"] .done h2{text-shadow:none}
+:root[data-thema="indigonacht"] .mark,
+:root[data-thema="indigonacht"] .mark.tijdelijk,
+:root[data-thema="indigonacht"] .mark:hover,
+:root[data-thema="indigonacht"] .merk,
+:root[data-thema="indigonacht"] .bar,
+:root[data-thema="indigonacht"] .btn.pri,
+:root[data-thema="indigonacht"] .btn.ok,
+:root[data-thema="indigonacht"] .btn.bad,
+:root[data-thema="indigonacht"] .kklaar,
+:root[data-thema="indigonacht"] .knoop.nu,
+:root[data-thema="indigonacht"] .kroontjes i.aan,
+:root[data-thema="indigonacht"] .legend i,
+:root[data-thema="indigonacht"] .chip[aria-pressed="true"],
+:root[data-thema="indigonacht"] .gear[aria-expanded="true"],
+:root[data-thema="indigonacht"] .tab[aria-selected="true"],
+:root[data-thema="indigonacht"] .mt.sel,
+:root[data-thema="indigonacht"] .opt.good,
+:root[data-thema="indigonacht"] .score,
+:root[data-thema="indigonacht"] .install,
+:root[data-thema="indigonacht"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="mist"]{
+  color-scheme:light;
+  --ink:#eef1f4;
+  --ink2:#e5e9ee;
+  --surface:#ffffff;
+  --surface2:#f7f9fb;
+  --line:#d7dde4;
+  --line2:#b6c0cb;
+  --text:#1f242b;
+  --muted:#5d6773;
+  --muted2:#838e9b;
+  --hub:#3f6d99;
+  --cyan:#3f6d99;
+  --voc:#3f6d99;
+  --metaal:#3f6d99;
+  --goud:#3f6d99;
+  --vak1:#3f6d99;
+  --ned:#3f6d99;
+  --eng:#3f6d99;
+  --paars:#7a5f9e;
+  --gram:#7a5f9e;
+  --nietmetaal:#7a5f9e;
+  --vak2:#7a5f9e;
+  --ned2:#7a5f9e;
+  --eng2:#7a5f9e;
+  --werkw:#3f8a72;
+  --edelgas:#3f8a72;
+  --vak3:#3f8a72;
+  --ned3:#3f8a72;
+  --eng3:#3f8a72;
+  --zin:#9a6b3a;
+  --vak4:#9a6b3a;
+  --vak5:#9a6b3a;
+  --ok:#2f7d52;
+  --bad:#b04242;
+}
+:root[data-thema="mist"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="mist"] .glow{display:none}
+:root[data-thema="mist"] .grid-bg{opacity:.12}
+:root[data-thema="mist"] .sym,
+:root[data-thema="mist"] .nm,
+:root[data-thema="mist"] .woord,
+:root[data-thema="mist"] .done h2{text-shadow:none}
+:root[data-thema="mist"] .mark,
+:root[data-thema="mist"] .mark.tijdelijk,
+:root[data-thema="mist"] .mark:hover,
+:root[data-thema="mist"] .merk,
+:root[data-thema="mist"] .bar,
+:root[data-thema="mist"] .btn.pri,
+:root[data-thema="mist"] .btn.ok,
+:root[data-thema="mist"] .btn.bad,
+:root[data-thema="mist"] .kklaar,
+:root[data-thema="mist"] .knoop.nu,
+:root[data-thema="mist"] .kroontjes i.aan,
+:root[data-thema="mist"] .legend i,
+:root[data-thema="mist"] .chip[aria-pressed="true"],
+:root[data-thema="mist"] .gear[aria-expanded="true"],
+:root[data-thema="mist"] .tab[aria-selected="true"],
+:root[data-thema="mist"] .mt.sel,
+:root[data-thema="mist"] .opt.good,
+:root[data-thema="mist"] .score,
+:root[data-thema="mist"] .install,
+:root[data-thema="mist"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="grasgroen"]{
+  color-scheme:light;
+  --ink:#ffffff;
+  --ink2:#f7f7f7;
+  --surface:#ffffff;
+  --surface2:#fbfbfb;
+  --line:#e5e5e5;
+  --line2:#cfcfcf;
+  --text:#3c3c3c;
+  --muted:#777777;
+  --muted2:#a3a3a3;
+  --hub:#58a700;
+  --cyan:#58a700;
+  --voc:#58a700;
+  --metaal:#58a700;
+  --goud:#58a700;
+  --vak1:#58a700;
+  --ned:#58a700;
+  --eng:#58a700;
+  --paars:#1899d6;
+  --gram:#1899d6;
+  --nietmetaal:#1899d6;
+  --vak2:#1899d6;
+  --ned2:#1899d6;
+  --eng2:#1899d6;
+  --werkw:#8549ba;
+  --edelgas:#8549ba;
+  --vak3:#8549ba;
+  --ned3:#8549ba;
+  --eng3:#8549ba;
+  --zin:#e07b00;
+  --vak4:#e07b00;
+  --vak5:#e07b00;
+  --ok:#17803d;
+  --bad:#ea2b2b;
+}
+:root[data-thema="grasgroen"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="grasgroen"] .glow{display:none}
+:root[data-thema="grasgroen"] .grid-bg{opacity:.12}
+:root[data-thema="grasgroen"] .sym,
+:root[data-thema="grasgroen"] .nm,
+:root[data-thema="grasgroen"] .woord,
+:root[data-thema="grasgroen"] .done h2{text-shadow:none}
+:root[data-thema="grasgroen"] .mark,
+:root[data-thema="grasgroen"] .mark.tijdelijk,
+:root[data-thema="grasgroen"] .mark:hover,
+:root[data-thema="grasgroen"] .merk,
+:root[data-thema="grasgroen"] .bar,
+:root[data-thema="grasgroen"] .btn.pri,
+:root[data-thema="grasgroen"] .btn.ok,
+:root[data-thema="grasgroen"] .btn.bad,
+:root[data-thema="grasgroen"] .kklaar,
+:root[data-thema="grasgroen"] .knoop.nu,
+:root[data-thema="grasgroen"] .kroontjes i.aan,
+:root[data-thema="grasgroen"] .legend i,
+:root[data-thema="grasgroen"] .chip[aria-pressed="true"],
+:root[data-thema="grasgroen"] .gear[aria-expanded="true"],
+:root[data-thema="grasgroen"] .tab[aria-selected="true"],
+:root[data-thema="grasgroen"] .mt.sel,
+:root[data-thema="grasgroen"] .opt.good,
+:root[data-thema="grasgroen"] .score,
+:root[data-thema="grasgroen"] .install,
+:root[data-thema="grasgroen"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="notitieblok"]{
+  color-scheme:light;
+  --ink:#f7f3e8;
+  --ink2:#efe9da;
+  --surface:#fffdf7;
+  --surface2:#f8f4ea;
+  --line:#ded5c0;
+  --line2:#bfb49b;
+  --text:#2b2a26;
+  --muted:#6d6659;
+  --muted2:#938a78;
+  --hub:#2d5bd7;
+  --cyan:#2d5bd7;
+  --voc:#2d5bd7;
+  --metaal:#2d5bd7;
+  --goud:#2d5bd7;
+  --vak1:#2d5bd7;
+  --ned:#2d5bd7;
+  --eng:#2d5bd7;
+  --paars:#8e44ad;
+  --gram:#8e44ad;
+  --nietmetaal:#8e44ad;
+  --vak2:#8e44ad;
+  --ned2:#8e44ad;
+  --eng2:#8e44ad;
+  --werkw:#0e7490;
+  --edelgas:#0e7490;
+  --vak3:#0e7490;
+  --ned3:#0e7490;
+  --eng3:#0e7490;
+  --zin:#b7791f;
+  --vak4:#b7791f;
+  --vak5:#b7791f;
+  --ok:#1f7a4d;
+  --bad:#c0392b;
+}
+:root[data-thema="notitieblok"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="notitieblok"] .glow{display:none}
+:root[data-thema="notitieblok"] .grid-bg{opacity:.12}
+:root[data-thema="notitieblok"] .sym,
+:root[data-thema="notitieblok"] .nm,
+:root[data-thema="notitieblok"] .woord,
+:root[data-thema="notitieblok"] .done h2{text-shadow:none}
+:root[data-thema="notitieblok"] .mark,
+:root[data-thema="notitieblok"] .mark.tijdelijk,
+:root[data-thema="notitieblok"] .mark:hover,
+:root[data-thema="notitieblok"] .merk,
+:root[data-thema="notitieblok"] .bar,
+:root[data-thema="notitieblok"] .btn.pri,
+:root[data-thema="notitieblok"] .btn.ok,
+:root[data-thema="notitieblok"] .btn.bad,
+:root[data-thema="notitieblok"] .kklaar,
+:root[data-thema="notitieblok"] .knoop.nu,
+:root[data-thema="notitieblok"] .kroontjes i.aan,
+:root[data-thema="notitieblok"] .legend i,
+:root[data-thema="notitieblok"] .chip[aria-pressed="true"],
+:root[data-thema="notitieblok"] .gear[aria-expanded="true"],
+:root[data-thema="notitieblok"] .tab[aria-selected="true"],
+:root[data-thema="notitieblok"] .mt.sel,
+:root[data-thema="notitieblok"] .opt.good,
+:root[data-thema="notitieblok"] .score,
+:root[data-thema="notitieblok"] .install,
+:root[data-thema="notitieblok"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="sepia"]{
+  color-scheme:light;
+  --ink:#ece3d6;
+  --ink2:#e3d8c7;
+  --surface:#f7f1e6;
+  --surface2:#efe7d9;
+  --line:#d4c7b0;
+  --line2:#b6a68b;
+  --text:#2f2920;
+  --muted:#6f6350;
+  --muted2:#948570;
+  --hub:#96591f;
+  --cyan:#96591f;
+  --voc:#96591f;
+  --metaal:#96591f;
+  --goud:#96591f;
+  --vak1:#96591f;
+  --ned:#96591f;
+  --eng:#96591f;
+  --paars:#7d4f6b;
+  --gram:#7d4f6b;
+  --nietmetaal:#7d4f6b;
+  --vak2:#7d4f6b;
+  --ned2:#7d4f6b;
+  --eng2:#7d4f6b;
+  --werkw:#3f6b63;
+  --edelgas:#3f6b63;
+  --vak3:#3f6b63;
+  --ned3:#3f6b63;
+  --eng3:#3f6b63;
+  --zin:#8a6f2c;
+  --vak4:#8a6f2c;
+  --vak5:#8a6f2c;
+  --ok:#4a7a4a;
+  --bad:#a8452f;
+}
+:root[data-thema="sepia"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="sepia"] .glow{display:none}
+:root[data-thema="sepia"] .grid-bg{opacity:.12}
+:root[data-thema="sepia"] .sym,
+:root[data-thema="sepia"] .nm,
+:root[data-thema="sepia"] .woord,
+:root[data-thema="sepia"] .done h2{text-shadow:none}
+:root[data-thema="sepia"] .mark,
+:root[data-thema="sepia"] .mark.tijdelijk,
+:root[data-thema="sepia"] .mark:hover,
+:root[data-thema="sepia"] .merk,
+:root[data-thema="sepia"] .bar,
+:root[data-thema="sepia"] .btn.pri,
+:root[data-thema="sepia"] .btn.ok,
+:root[data-thema="sepia"] .btn.bad,
+:root[data-thema="sepia"] .kklaar,
+:root[data-thema="sepia"] .knoop.nu,
+:root[data-thema="sepia"] .kroontjes i.aan,
+:root[data-thema="sepia"] .legend i,
+:root[data-thema="sepia"] .chip[aria-pressed="true"],
+:root[data-thema="sepia"] .gear[aria-expanded="true"],
+:root[data-thema="sepia"] .tab[aria-selected="true"],
+:root[data-thema="sepia"] .mt.sel,
+:root[data-thema="sepia"] .opt.good,
+:root[data-thema="sepia"] .score,
+:root[data-thema="sepia"] .install,
+:root[data-thema="sepia"] input[type=text]:focus{box-shadow:none}
+:root[data-thema="zonsopgang"]{
+  color-scheme:light;
+  --ink:#fff6ee;
+  --ink2:#fbe9da;
+  --surface:#ffffff;
+  --surface2:#fffaf5;
+  --line:#f0dbc8;
+  --line2:#d8bda4;
+  --text:#2a1f18;
+  --muted:#7a6455;
+  --muted2:#a08b79;
+  --hub:#d24d14;
+  --cyan:#d24d14;
+  --voc:#d24d14;
+  --metaal:#d24d14;
+  --goud:#d24d14;
+  --vak1:#d24d14;
+  --ned:#d24d14;
+  --eng:#d24d14;
+  --paars:#b02a5f;
+  --gram:#b02a5f;
+  --nietmetaal:#b02a5f;
+  --vak2:#b02a5f;
+  --ned2:#b02a5f;
+  --eng2:#b02a5f;
+  --werkw:#0f7b8a;
+  --edelgas:#0f7b8a;
+  --vak3:#0f7b8a;
+  --ned3:#0f7b8a;
+  --eng3:#0f7b8a;
+  --zin:#8a5cd6;
+  --vak4:#8a5cd6;
+  --vak5:#8a5cd6;
+  --ok:#157f4f;
+  --bad:#c0281e;
+}
+:root[data-thema="zonsopgang"] body{background:var(--ink); color:var(--text)}
+:root[data-thema="zonsopgang"] .glow{display:none}
+:root[data-thema="zonsopgang"] .grid-bg{opacity:.12}
+:root[data-thema="zonsopgang"] .sym,
+:root[data-thema="zonsopgang"] .nm,
+:root[data-thema="zonsopgang"] .woord,
+:root[data-thema="zonsopgang"] .done h2{text-shadow:none}
+:root[data-thema="zonsopgang"] .mark,
+:root[data-thema="zonsopgang"] .mark.tijdelijk,
+:root[data-thema="zonsopgang"] .mark:hover,
+:root[data-thema="zonsopgang"] .merk,
+:root[data-thema="zonsopgang"] .bar,
+:root[data-thema="zonsopgang"] .btn.pri,
+:root[data-thema="zonsopgang"] .btn.ok,
+:root[data-thema="zonsopgang"] .btn.bad,
+:root[data-thema="zonsopgang"] .kklaar,
+:root[data-thema="zonsopgang"] .knoop.nu,
+:root[data-thema="zonsopgang"] .kroontjes i.aan,
+:root[data-thema="zonsopgang"] .legend i,
+:root[data-thema="zonsopgang"] .chip[aria-pressed="true"],
+:root[data-thema="zonsopgang"] .gear[aria-expanded="true"],
+:root[data-thema="zonsopgang"] .tab[aria-selected="true"],
+:root[data-thema="zonsopgang"] .mt.sel,
+:root[data-thema="zonsopgang"] .opt.good,
+:root[data-thema="zonsopgang"] .score,
+:root[data-thema="zonsopgang"] .install,
+:root[data-thema="zonsopgang"] input[type=text]:focus{box-shadow:none}
+
+.themabalk{position:relative; z-index:1; max-width:760px; margin:0 auto;
+  padding:18px 20px 4px; display:flex; flex-wrap:wrap; align-items:center;
+  justify-content:center; gap:9px}
+.themabalk .tlabel{font-family:var(--fm); font-size:10px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--muted2); margin-right:3px}
+.themaknop{width:28px; height:28px; padding:0; border-radius:50%; cursor:pointer;
+  border:1px solid var(--line2); position:relative; overflow:hidden;
+  transition:transform .16s ease; background:var(--tb)}
+.themaknop::after{content:""; position:absolute; inset:0;
+  background:linear-gradient(135deg,var(--ts) 0 48%,transparent 48%)}
+.themaknop:hover{transform:scale(1.12)}
+.themaknop[aria-pressed="true"]{outline:2px solid var(--text); outline-offset:2px}
+.themaknop:focus-visible{outline:2px solid var(--text); outline-offset:2px}
+.tsplit{width:1px; height:20px; background:var(--line2); opacity:.7; margin:0 2px}
+.themanaam{font-family:var(--fm); font-size:10px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted); min-width:104px; text-align:center}
+.themabalk.inline{max-width:none; margin:0; padding:0; justify-content:flex-start;
+  gap:10px}
+.themabalk.inline .themanaam{min-width:0; margin-left:2px; text-align:left}
+@media print{.themabalk{display:none}}
+/*thema-css-eind*/
+</style>
+<!--thema-kop-start-->
+<script>
+/* Het thema staat in localStorage; alle apps op deze map delen die opslag. */
+(function(){
+  try{
+    var t=localStorage.getItem("leren-thema");
+    if(t&&t!=="standaard")document.documentElement.setAttribute("data-thema",t);
+  }catch(e){}
+})();
+</script>
+<!--thema-kop-eind-->
+</head>
+<body>
+<div class="statusbar"></div>
+<div class="glow" id="glow"></div>
+
+<div class="kiezer" id="wkiezer" hidden>
+  <div class="kbox">
+    <div class="kkop"><h2>Wat oefen je?</h2>
+      <button class="kklaar" id="wKlaar" type="button">Sluiten</button></div>
+    <p class="note">Twee delen met elk hun eigen voortgang. Wisselen kan altijd;
+      je verliest niets.</p>
+    <div id="wLijst" style="display:grid; gap:11px"></div>
+  </div>
+</div>
+
+<div class="app">
+  <header class="top">
+    <a class="terug" href="../" aria-label="Terug naar het hoofdmenu" title="Hoofdmenu">←</a>
+    <button class="mark" id="btnWereld" type="button" aria-label="Kies wat je oefent"
+      title="Kies wat je oefent">En</button>
+    <div class="tt">
+      <h1>On Track</h1>
+      <p id="subkop">Engels</p>
+    </div>
+    <button class="gear" id="gear" aria-expanded="false" aria-controls="panel" aria-label="Instellingen">⚙</button>
+  </header>
+
+  <div class="selbar">
+    <div class="info"><b id="selTitel">Alles</b><span id="selAantal">—</span></div>
+    <div class="seg" id="soortSeg">
+      <button type="button" data-s="alles" aria-pressed="true">Alles</button>
+      <button type="button" data-s="voc">Woorden</button>
+      <button type="button" data-s="regel">Grammatica</button>
+    </div>
+  </div>
+
+  <nav class="tabs" role="tablist" aria-label="Oefenmodus">
+    <button class="tab" role="tab" data-m="kaarten" aria-selected="true">Kaarten</button>
+    <button class="tab" role="tab" data-m="keuze" aria-selected="false">Meerkeuze</button>
+    <button class="tab" role="tab" data-m="schrijven" aria-selected="false">Schrijven</button>
+    <button class="tab" role="tab" data-m="verbs" aria-selected="false">Irregular verbs</button>
+    <button class="tab" role="tab" data-m="volgorde" aria-selected="false">Word order</button>
+    <button class="tab" role="tab" data-m="matchen" aria-selected="false">Matchen</button>
+    <button class="tab" role="tab" data-m="toets" aria-selected="false">Toets</button>
+    <button class="tab" role="tab" data-m="voortgang" aria-selected="false">Voortgang</button>
+    <button class="tab" role="tab" data-m="samenvatting" aria-selected="false">Samenvatting</button>
+  </nav>
+
+  <div class="panel" id="panel" hidden><!--thema-balk-start-->
+  <div class="fset">
+    <span class="flabel">Thema van de site</span>
+  <div class="themabalk inline" id="themabalk">
+    <button class="themaknop" type="button" data-thema="standaard" style="--tb:#0b0d18; --ts:#b9c3ff" title="Neon — zoals de app bedoeld is" aria-label="Thema Neon"></button>
+    <button class="themaknop" type="button" data-thema="synthwave" style="--tb:#0d0420; --ts:#ff2e97" title="Synthwave — neon roze en cyaan op paars" aria-label="Thema Synthwave"></button>
+    <button class="themaknop" type="button" data-thema="neonijs" style="--tb:#020813; --ts:#22e6ff" title="Neon ijs — fel cyaan op diepblauw" aria-label="Thema Neon ijs"></button>
+    <button class="themaknop" type="button" data-thema="gifgroen" style="--tb:#060a04; --ts:#aaff1a" title="Gifgroen — fel limoen op zwart" aria-label="Thema Gifgroen"></button>
+    <button class="themaknop" type="button" data-thema="magenta" style="--tb:#0f0413; --ts:#ff3df0" title="Magenta — neon roze en violet" aria-label="Thema Magenta"></button>
+    <button class="themaknop" type="button" data-thema="vuur" style="--tb:#120503; --ts:#ff6a1a" title="Vuur — neon oranje en rood" aria-label="Thema Vuur"></button>
+    <button class="themaknop" type="button" data-thema="terminal" style="--tb:#000000; --ts:#39ff5f" title="Terminal — zwart met groen, zoals een shell" aria-label="Thema Terminal"></button>
+    <span class="tsplit" aria-hidden="true"></span>
+    <button class="themaknop" type="button" data-thema="middernacht" style="--tb:#000000; --ts:#8ab4ff" title="Middernacht — diep zwart, rustig" aria-label="Thema Middernacht"></button>
+    <button class="themaknop" type="button" data-thema="leisteen" style="--tb:#14171c; --ts:#6f9bc9" title="Leisteen — donkergrijs, gedempte kleuren" aria-label="Thema Leisteen"></button>
+    <button class="themaknop" type="button" data-thema="indigo" style="--tb:#f6f7fb; --ts:#4255ff" title="Indigo — licht en strak, blauwpaars" aria-label="Thema Indigo"></button>
+    <button class="themaknop" type="button" data-thema="indigonacht" style="--tb:#0a092d; --ts:#6b7bff" title="Indigo nacht — hetzelfde, maar donker" aria-label="Thema Indigo nacht"></button>
+    <button class="themaknop" type="button" data-thema="mist" style="--tb:#eef1f4; --ts:#3f6d99" title="Mist — licht grijsblauw, heel rustig" aria-label="Thema Mist"></button>
+    <button class="themaknop" type="button" data-thema="grasgroen" style="--tb:#ffffff; --ts:#58cc02" title="Grasgroen — licht en vrolijk, groen" aria-label="Thema Grasgroen"></button>
+    <button class="themaknop" type="button" data-thema="notitieblok" style="--tb:#f7f3e8; --ts:#2d5bd7" title="Notitieblok — papier met balpen" aria-label="Thema Notitieblok"></button>
+    <button class="themaknop" type="button" data-thema="sepia" style="--tb:#ece3d6; --ts:#96591f" title="Sepia — oud papier, gedempt warm" aria-label="Thema Sepia"></button>
+    <button class="themaknop" type="button" data-thema="zonsopgang" style="--tb:#fff6ee; --ts:#e2571d" title="Zonsopgang — warm licht, oranje" aria-label="Thema Zonsopgang"></button>
+    <span class="themanaam" id="themanaam"></span>
+  </div>
+  </div>
+<!--thema-balk-eind-->
+
+    <div class="fset">
+      <span class="flabel">Onderdelen</span>
+      <div class="chips" id="groepChips"></div>
+    </div>
+    <div class="fset">
+      <span class="flabel">Vraagrichting bij woorden</span>
+      <div class="seg" id="richting">
+        <button type="button" data-d="en" aria-pressed="true">Engels → Nederlands</button>
+        <button type="button" data-d="nl" aria-pressed="false">Nederlands → Engels</button>
+      </div>
+    </div>
+    <button class="reset" id="btnReset">Voortgang wissen</button>
+  </div>
+
+  <section class="view in" id="v-kaarten" role="tabpanel">
+    <div class="meta"><span class="counter"><b id="kPos">1</b> / <span id="kTot">0</span></span>
+      <button class="mini" id="kSchud">⇄ schudden</button></div>
+    <div class="kaartwrap" id="kWrap"></div>
+    <div class="row2">
+      <button class="btn" id="kNog" style="--c:var(--bad)">Nog leren</button>
+      <button class="btn" id="kKen" style="--c:var(--ok)">Ik ken dit</button>
+    </div>
+    <p class="hint">Tik op de kaart om te draaien</p>
+  </section>
+
+  <section class="view" id="v-keuze" role="tabpanel" hidden>
+    <div class="meta"><span class="counter"><b id="qPos">1</b> · goed <b id="qGoed">0</b></span>
+      <button class="mini" id="qNieuw">andere vraag</button></div>
+    <div id="qBody"></div>
+  </section>
+
+  <section class="view" id="v-schrijven" role="tabpanel" hidden>
+    <div class="meta"><span class="counter"><b id="wPos">1</b> · goed <b id="wGoed">0</b></span>
+      <button class="mini" id="wNieuw">andere vraag</button></div>
+    <div id="wBody"></div>
+  </section>
+
+  <section class="view" id="v-verbs" role="tabpanel" hidden>
+    <div class="meta"><span class="counter" id="vbTitel">irregular verbs</span>
+      <button class="mini" id="vbNieuw">ander werkwoord</button></div>
+    <div id="vbBody"></div>
+  </section>
+
+  <section class="view" id="v-volgorde" role="tabpanel" hidden>
+    <div class="meta"><span class="counter"><b id="oPos">1</b> · goed <b id="oGoed">0</b></span>
+      <button class="mini" id="oNieuw">andere zin</button></div>
+    <div id="oBody"></div>
+  </section>
+
+  <section class="view" id="v-matchen" role="tabpanel" hidden>
+    <div class="meta"><span class="counter">koppel de twee helften</span>
+      <button class="mini" id="mNieuw">opnieuw</button></div>
+    <div id="mBody"></div>
+  </section>
+
+  <section class="view" id="v-toets" role="tabpanel" hidden>
+    <div class="meta"><span class="counter"><b id="tPos">1</b> / <span id="tTot">15</span> · goed <b id="tGoed">0</b></span>
+      <button class="mini" id="tNieuw">nieuwe toets</button></div>
+    <div class="track"><div class="bar" id="tBar"></div></div>
+    <div id="tBody"></div>
+  </section>
+
+  <section class="view" id="v-voortgang" role="tabpanel" hidden>
+    <div id="vgBody"></div>
+  </section>
+
+  <section class="view" id="v-samenvatting" role="tabpanel" hidden>
+    <div class="meta"><span class="counter" id="svInfo">samenvatting</span>
+      <button class="mini" id="btnPrint">afdrukken</button></div>
+    <div id="svBody"></div>
+  </section>
+</div>
+
+<div class="bijwerkvoet">Laatst bijgewerkt <b data-bijgewerkt>1 oktober 2026 · 19:38</b></div>
+
+<script>
+var WERELDEN=[
+ {
+  "id": "woorden",
+  "naam": "Woordenschat",
+  "datum": "",
+  "onder": "De werkwoordenlijst en de onregelmatige werkwoorden",
+  "pre": "w",
+  "groepen": [
+   {
+    "t": "Werkwoordenlijst",
+    "soort": "voc",
+    "w": [
+     [
+      "to add",
+      "toevoegen",
+      ""
+     ],
+     [
+      "to achieve",
+      "bereiken",
+      ""
+     ],
+     [
+      "to answer",
+      "(be)antwoorden",
+      ""
+     ],
+     [
+      "to ask",
+      "vragen",
+      ""
+     ],
+     [
+      "to associate",
+      "linken, associëren",
+      ""
+     ],
+     [
+      "to be",
+      "zijn",
+      "was/were · been"
+     ],
+     [
+      "to become",
+      "worden",
+      "became · become"
+     ],
+     [
+      "to begin",
+      "beginnen",
+      "began · begun"
+     ],
+     [
+      "to break",
+      "breken",
+      "broke · broken"
+     ],
+     [
+      "to call",
+      "bellen, roepen",
+      ""
+     ],
+     [
+      "can",
+      "kunnen, mogen",
+      "could"
+     ],
+     [
+      "to choose",
+      "kiezen",
+      "chose · chosen"
+     ],
+     [
+      "to come",
+      "komen",
+      "came · come"
+     ],
+     [
+      "to complete",
+      "vervolledigen",
+      ""
+     ],
+     [
+      "to decide",
+      "beslissen",
+      ""
+     ],
+     [
+      "to describe",
+      "beschrijven",
+      ""
+     ],
+     [
+      "to develop",
+      "ontwikkelen",
+      ""
+     ],
+     [
+      "to do",
+      "doen",
+      "did · done"
+     ],
+     [
+      "to eat",
+      "eten",
+      "ate · eaten"
+     ],
+     [
+      "to explain",
+      "uitleggen",
+      ""
+     ],
+     [
+      "to feel",
+      "voelen",
+      "felt · felt"
+     ],
+     [
+      "to fill in",
+      "invullen",
+      ""
+     ],
+     [
+      "to find",
+      "vinden",
+      "found · found"
+     ],
+     [
+      "to get",
+      "krijgen, worden",
+      "got · got/gotten"
+     ],
+     [
+      "to give",
+      "geven",
+      "gave · given"
+     ],
+     [
+      "to go",
+      "gaan",
+      "went · gone"
+     ],
+     [
+      "to guess",
+      "raden",
+      ""
+     ],
+     [
+      "to hate",
+      "haten",
+      ""
+     ],
+     [
+      "to have",
+      "hebben",
+      "had · had"
+     ],
+     [
+      "to hear",
+      "horen",
+      "heard · heard"
+     ],
+     [
+      "to help",
+      "helpen",
+      ""
+     ],
+     [
+      "to hit",
+      "slaan, raken",
+      "hit · hit"
+     ],
+     [
+      "to hope",
+      "hopen",
+      ""
+     ],
+     [
+      "to invent",
+      "uitvinden",
+      ""
+     ],
+     [
+      "to keep",
+      "houden, blijven",
+      "kept · kept"
+     ],
+     [
+      "to know",
+      "weten",
+      "knew · known"
+     ],
+     [
+      "to leave",
+      "vertrekken",
+      "left · left"
+     ],
+     [
+      "to let",
+      "laten",
+      "let · let"
+     ],
+     [
+      "to like",
+      "leuk vinden",
+      ""
+     ],
+     [
+      "to listen",
+      "luisteren",
+      ""
+     ],
+     [
+      "to live",
+      "leven, wonen",
+      ""
+     ],
+     [
+      "to look",
+      "eruitzien, kijken",
+      ""
+     ],
+     [
+      "to look up sth",
+      "iets opzoeken",
+      ""
+     ],
+     [
+      "to look up to sb",
+      "opkijken naar iemand",
+      ""
+     ],
+     [
+      "to make",
+      "maken",
+      "made · made"
+     ],
+     [
+      "to mean",
+      "bedoelen",
+      "meant · meant"
+     ],
+     [
+      "to mention",
+      "vermelden",
+      ""
+     ],
+     [
+      "to move",
+      "bewegen, verhuizen",
+      ""
+     ],
+     [
+      "to need",
+      "nodig hebben, moeten",
+      ""
+     ],
+     [
+      "to organise",
+      "organiseren",
+      ""
+     ],
+     [
+      "to pay attention to",
+      "aandacht hebben voor",
+      ""
+     ],
+     [
+      "to play",
+      "spelen",
+      ""
+     ],
+     [
+      "to prepare",
+      "voorbereiden",
+      ""
+     ],
+     [
+      "to put",
+      "neerzetten, plaatsen",
+      "put · put"
+     ],
+     [
+      "to read",
+      "lezen",
+      "read · read"
+     ],
+     [
+      "to run",
+      "lopen",
+      "ran · run"
+     ],
+     [
+      "to say",
+      "zeggen",
+      "said · said"
+     ],
+     [
+      "to see",
+      "zien",
+      "saw · seen"
+     ],
+     [
+      "to seem",
+      "lijken",
+      ""
+     ],
+     [
+      "to select",
+      "selecteren",
+      ""
+     ],
+     [
+      "to separate",
+      "scheiden",
+      ""
+     ],
+     [
+      "to show",
+      "tonen, zichtbaar worden",
+      "showed · shown"
+     ],
+     [
+      "to sit down",
+      "gaan zitten",
+      "sat · sat"
+     ],
+     [
+      "to start",
+      "beginnen",
+      ""
+     ],
+     [
+      "to sum up",
+      "opsommen",
+      ""
+     ],
+     [
+      "to swallow",
+      "slikken",
+      ""
+     ],
+     [
+      "to take",
+      "nemen",
+      "took · taken"
+     ],
+     [
+      "to talk",
+      "praten",
+      ""
+     ],
+     [
+      "to tell",
+      "zeggen, vertellen",
+      "told · told"
+     ],
+     [
+      "to think",
+      "denken",
+      "thought · thought"
+     ],
+     [
+      "to touch",
+      "aanraken",
+      ""
+     ],
+     [
+      "to try",
+      "proberen",
+      ""
+     ],
+     [
+      "to turn",
+      "draaien",
+      ""
+     ],
+     [
+      "to understand",
+      "begrijpen",
+      "understood · understood"
+     ],
+     [
+      "to use",
+      "gebruiken",
+      ""
+     ],
+     [
+      "to want",
+      "willen",
+      ""
+     ],
+     [
+      "to watch",
+      "bekijken, kijken",
+      ""
+     ],
+     [
+      "will",
+      "zullen",
+      "would"
+     ],
+     [
+      "to work",
+      "werken",
+      ""
+     ],
+     [
+      "to write",
+      "schrijven",
+      "wrote · written"
+     ]
+    ]
+   }
+  ],
+  "verbs": [
+   [
+    "arise",
+    "arose",
+    "arisen"
+   ],
+   [
+    "be (auxiliary)",
+    "was/were",
+    "been"
+   ],
+   [
+    "bear",
+    "bore",
+    "born/borne"
+   ],
+   [
+    "beat",
+    "beat",
+    "beaten"
+   ],
+   [
+    "become",
+    "became",
+    "become"
+   ],
+   [
+    "begin",
+    "began",
+    "begun"
+   ],
+   [
+    "bend",
+    "bent",
+    "bent"
+   ],
+   [
+    "bet",
+    "bet",
+    "bet"
+   ],
+   [
+    "bid",
+    "bid/bade",
+    "bid/bidden"
+   ],
+   [
+    "bite",
+    "bit",
+    "bitten"
+   ],
+   [
+    "blow",
+    "blew",
+    "blown"
+   ],
+   [
+    "break",
+    "broke",
+    "broken"
+   ],
+   [
+    "bring",
+    "brought",
+    "brought"
+   ],
+   [
+    "build",
+    "built",
+    "built"
+   ],
+   [
+    "burst",
+    "burst",
+    "burst"
+   ],
+   [
+    "buy",
+    "bought",
+    "bought"
+   ],
+   [
+    "cast",
+    "cast",
+    "cast"
+   ],
+   [
+    "catch",
+    "caught",
+    "caught"
+   ],
+   [
+    "choose",
+    "chose",
+    "chosen"
+   ],
+   [
+    "come",
+    "came",
+    "come"
+   ],
+   [
+    "cost",
+    "cost",
+    "cost"
+   ],
+   [
+    "cut",
+    "cut",
+    "cut"
+   ],
+   [
+    "deal",
+    "dealt",
+    "dealt"
+   ],
+   [
+    "dig",
+    "dug",
+    "dug"
+   ],
+   [
+    "do",
+    "did",
+    "done"
+   ],
+   [
+    "draw",
+    "drew",
+    "drawn"
+   ],
+   [
+    "drink",
+    "drank",
+    "drunk"
+   ],
+   [
+    "drive",
+    "drove",
+    "driven"
+   ],
+   [
+    "eat",
+    "ate",
+    "eaten"
+   ],
+   [
+    "fall",
+    "fell",
+    "fallen"
+   ],
+   [
+    "feed",
+    "fed",
+    "fed"
+   ],
+   [
+    "feel",
+    "felt",
+    "felt"
+   ],
+   [
+    "fight",
+    "fought",
+    "fought"
+   ],
+   [
+    "find",
+    "found",
+    "found"
+   ],
+   [
+    "fly",
+    "flew",
+    "flown"
+   ],
+   [
+    "forget",
+    "forgot",
+    "forgotten"
+   ],
+   [
+    "forgive",
+    "forgave",
+    "forgiven"
+   ],
+   [
+    "freeze",
+    "froze",
+    "frozen"
+   ],
+   [
+    "get",
+    "got",
+    "got/gotten"
+   ],
+   [
+    "give",
+    "gave",
+    "given"
+   ],
+   [
+    "go",
+    "went",
+    "gone"
+   ],
+   [
+    "grow",
+    "grew",
+    "grown"
+   ],
+   [
+    "hang",
+    "hanged/hung",
+    "hanged/hung"
+   ],
+   [
+    "have",
+    "had",
+    "had"
+   ],
+   [
+    "hear",
+    "heard",
+    "heard"
+   ],
+   [
+    "hide",
+    "hid",
+    "hidden"
+   ],
+   [
+    "hit",
+    "hit",
+    "hit"
+   ],
+   [
+    "hold",
+    "held",
+    "held"
+   ],
+   [
+    "hurt",
+    "hurt",
+    "hurt"
+   ],
+   [
+    "keep",
+    "kept",
+    "kept"
+   ],
+   [
+    "know",
+    "knew",
+    "known"
+   ],
+   [
+    "lay",
+    "laid",
+    "laid"
+   ],
+   [
+    "lead",
+    "led",
+    "led"
+   ],
+   [
+    "leave",
+    "left",
+    "left"
+   ],
+   [
+    "lend",
+    "lent",
+    "lent"
+   ],
+   [
+    "let",
+    "let",
+    "let"
+   ],
+   [
+    "lie",
+    "lay",
+    "lain"
+   ],
+   [
+    "light",
+    "lit/lighted",
+    "lit/lighted"
+   ],
+   [
+    "lose",
+    "lost",
+    "lost"
+   ],
+   [
+    "make",
+    "made",
+    "made"
+   ],
+   [
+    "mean",
+    "meant",
+    "meant"
+   ],
+   [
+    "meet",
+    "met",
+    "met"
+   ],
+   [
+    "pay",
+    "paid",
+    "paid"
+   ],
+   [
+    "prove",
+    "proved",
+    "proved/proven"
+   ],
+   [
+    "put",
+    "put",
+    "put"
+   ],
+   [
+    "quit",
+    "quit",
+    "quit"
+   ],
+   [
+    "read",
+    "read",
+    "read"
+   ],
+   [
+    "ride",
+    "rode",
+    "ridden"
+   ],
+   [
+    "ring",
+    "rang",
+    "rung"
+   ],
+   [
+    "rise",
+    "rose",
+    "risen"
+   ],
+   [
+    "run",
+    "ran",
+    "run"
+   ],
+   [
+    "say",
+    "said",
+    "said"
+   ],
+   [
+    "see",
+    "saw",
+    "seen"
+   ],
+   [
+    "seek",
+    "sought",
+    "sought"
+   ],
+   [
+    "sell",
+    "sold",
+    "sold"
+   ],
+   [
+    "send",
+    "sent",
+    "sent"
+   ],
+   [
+    "set",
+    "set",
+    "set"
+   ],
+   [
+    "shake",
+    "shook",
+    "shaken"
+   ],
+   [
+    "shine",
+    "shone/shined",
+    "shone/shined"
+   ],
+   [
+    "shoot",
+    "shot",
+    "shot"
+   ],
+   [
+    "show",
+    "showed",
+    "shown"
+   ],
+   [
+    "shut",
+    "shut",
+    "shut"
+   ],
+   [
+    "sing",
+    "sang",
+    "sung"
+   ],
+   [
+    "sink",
+    "sank",
+    "sunk"
+   ],
+   [
+    "sit",
+    "sat",
+    "sat"
+   ],
+   [
+    "sleep",
+    "slept",
+    "slept"
+   ],
+   [
+    "slide",
+    "slid",
+    "slid"
+   ],
+   [
+    "speak",
+    "spoke",
+    "spoken"
+   ],
+   [
+    "spend",
+    "spent",
+    "spent"
+   ],
+   [
+    "split",
+    "split",
+    "split"
+   ],
+   [
+    "spread",
+    "spread",
+    "spread"
+   ],
+   [
+    "stand",
+    "stood",
+    "stood"
+   ],
+   [
+    "steal",
+    "stole",
+    "stolen"
+   ],
+   [
+    "stick",
+    "stuck",
+    "stuck"
+   ],
+   [
+    "strike",
+    "struck",
+    "struck"
+   ],
+   [
+    "swear",
+    "swore",
+    "sworn"
+   ],
+   [
+    "swim",
+    "swam",
+    "swum"
+   ],
+   [
+    "take",
+    "took",
+    "taken"
+   ],
+   [
+    "teach",
+    "taught",
+    "taught"
+   ],
+   [
+    "tear",
+    "tore",
+    "torn"
+   ],
+   [
+    "tell",
+    "told",
+    "told"
+   ],
+   [
+    "think",
+    "thought",
+    "thought"
+   ],
+   [
+    "throw",
+    "threw",
+    "thrown"
+   ],
+   [
+    "understand",
+    "understood",
+    "understood"
+   ],
+   [
+    "undertake",
+    "undertook",
+    "undertaken"
+   ],
+   [
+    "upset",
+    "upset",
+    "upset"
+   ],
+   [
+    "wake",
+    "woke",
+    "woken"
+   ],
+   [
+    "wear",
+    "wore",
+    "worn"
+   ],
+   [
+    "win",
+    "won",
+    "won"
+   ],
+   [
+    "wind",
+    "wound",
+    "wound"
+   ],
+   [
+    "write",
+    "wrote",
+    "written"
+   ]
+  ],
+  "volgorde": [],
+  "overzicht": []
+ },
+ {
+  "id": "toets210",
+  "naam": "Tijdelijk",
+  "datum": "Toets 02/10",
+  "onder": "Revision basic grammar · alle onderdelen van het herhalingsblad",
+  "pre": "t",
+  "groepen": [
+   {
+    "t": "Kort overzicht",
+    "soort": "regel",
+    "w": [
+     [
+      "Present Simple — wanneer, hoe, voorbeeld",
+      "Wanneer? Gewoontes, feiten en dingen die regelmatig gebeuren. Hoe? I/you/we/they + werkwoord. He/she/it + werkwoord + s. Voorbeeld: I play football every week. / He plays football every week."
+     ],
+     [
+      "Present Continuous — wanneer, hoe, voorbeeld",
+      "Wanneer? Iets dat nu bezig is of tijdelijk gebeurt. Hoe? am/is/are + werkwoord-ing. Voorbeeld: I am studying now."
+     ],
+     [
+      "Past Simple — wanneer, hoe, voorbeeld",
+      "Wanneer? Iets dat in het verleden gebeurde en volledig afgelopen is. Hoe? Regelmatig: werkwoord + ed. Onregelmatig: een aparte vorm, bv. go wordt went. Voorbeeld: I played football yesterday. / I went to school."
+     ],
+     [
+      "Past Continuous — wanneer, hoe, voorbeeld",
+      "Wanneer? Iets dat op een bepaald moment in het verleden bezig was. Hoe? was/were + werkwoord-ing. Voorbeeld: I was studying when you called."
+     ],
+     [
+      "Future Simple — wanneer, hoe, voorbeeld",
+      "Wanneer? Voorspellingen, spontane beslissingen, beloftes en wat je denkt dat zal gebeuren. Hoe? will + infinitive. Voorbeeld: I think it will rain tomorrow."
+     ],
+     [
+      "Present Perfect Simple — wanneer, hoe, voorbeeld",
+      "Wanneer? Iets gebeurde in het verleden maar heeft nog een link met nu; het resultaat telt. Hoe? have/has + past participle. Voorbeeld: I have lost my keys."
+     ],
+     [
+      "Present Perfect Continuous — wanneer, hoe, voorbeeld",
+      "Wanneer? Iets begon in het verleden en duurt nog voort; de nadruk ligt op hoelang. Hoe? have/has + been + werkwoord-ing. Voorbeeld: I have been studying for two hours."
+     ],
+     [
+      "Adjectives en adverbs — wanneer, hoe, voorbeeld",
+      "Wanneer? Een adjective beschrijft een persoon of ding. Een adverb zegt meestal hoe iets gebeurt. Hoe? Adjective: bij een noun. Adverb: vaak adjective + ly. Voorbeeld: a slow car / He drives slowly."
+     ],
+     [
+      "Comparatives en superlatives — wanneer, hoe, voorbeeld",
+      "Wanneer? Comparative vergelijkt er twee. Superlative vergelijkt met een hele groep. Hoe? Kort woord: -er / -est. Lang woord: more / most. Voorbeeld: Tom is taller than Sam. / Tom is the tallest."
+     ],
+     [
+      "Word order — wanneer, hoe, voorbeeld",
+      "Wanneer? Om de woorden in de juiste volgorde in een Engelse zin te zetten. Hoe? Subject + verb + object + place + time. Voorbeeld: I play football at school every Friday."
+     ],
+     [
+      "Pronouns — wanneer, hoe, voorbeeld",
+      "Wanneer? Om namen of personen en dingen te vervangen, en om bezit of zichzelf aan te geven. Hoe? I/me/my/mine/myself · he/him/his/his/himself · she/her/her/hers/herself · we/us/our/ours/ourselves · they/them/their/theirs/themselves. Voorbeeld: This is my book. It is mine."
+     ],
+     [
+      "Plural of nouns — wanneer, hoe, voorbeeld",
+      "Wanneer? Wanneer er meer dan één persoon of ding is. Hoe? Meestal + s. Na s/x/ch/sh vaak + es. Medeklinker + y wordt ies. Voorbeeld: book wordt books / baby wordt babies."
+     ],
+     [
+      "Quantities — wanneer, hoe, voorbeeld",
+      "Wanneer? Om aan te geven hoeveel er van iets is. Hoe? many = telbaar · much = ontelbaar · a few = enkele telbare · a little = een beetje ontelbaar · some/any = allebei. Voorbeeld: many books / much water."
+     ]
+    ]
+   },
+   {
+    "t": "Tenses · present",
+    "soort": "regel",
+    "w": [
+     [
+      "Hoe vorm je de present simple?",
+      "het hele werkwoord; bij he/she/it komt er een -s bij — I work, she works"
+     ],
+     [
+      "Wanneer gebruik je de present simple?",
+      "gewoontes, feiten en dingen die altijd gelden — I go to school every day"
+     ],
+     [
+      "Signaalwoorden van de present simple",
+      "always, usually, often, sometimes, never, every day, on Mondays"
+     ],
+     [
+      "Wanneer krijgt de present simple -es in plaats van -s?",
+      "na s, ss, sh, ch, x en o — he watches, she goes, it misses"
+     ],
+     [
+      "Wat gebeurt er met een medeklinker + y?",
+      "y wordt ies — study wordt he studies, maar play blijft he plays"
+     ],
+     [
+      "Wat wordt have bij he, she en it?",
+      "have wordt has — he has a car"
+     ],
+     [
+      "Verbeter: Does he plays football?",
+      "Does he play football? — na does blijft het werkwoord kaal"
+     ],
+     [
+      "Hoe maak je een vraag in de present simple?",
+      "do of does vooraan, en het werkwoord blijft kaal — Does she work here?"
+     ],
+     [
+      "Hoe maak je een ontkenning in de present simple?",
+      "don't of doesn't + het kale werkwoord — He doesn't want to go"
+     ],
+     [
+      "Hoe vorm je de present continuous?",
+      "am, is of are + het werkwoord met -ing — I am working"
+     ],
+     [
+      "Wanneer gebruik je de present continuous?",
+      "iets dat nu bezig is, of een tijdelijke situatie — She is studying right now"
+     ],
+     [
+      "Signaalwoorden van de present continuous",
+      "now, at the moment, right now, today, look!, listen!"
+     ],
+     [
+      "Welke werkwoorden gebruik je niet in de continuous?",
+      "werkwoorden van gevoel en denken: like, love, hate, know, understand, want"
+     ],
+     [
+      "Wat gebeurt er met de spelling bij -ing?",
+      "stomme e valt weg (make → making) en een korte klinker verdubbelt de medeklinker (sit → sitting)"
+     ]
+    ]
+   },
+   {
+    "t": "Tenses · past",
+    "soort": "regel",
+    "w": [
+     [
+      "Hoe vorm je de past simple van een regelmatig werkwoord?",
+      "+ -ed — I walked, she played"
+     ],
+     [
+      "Hoe vorm je de past simple van een onregelmatig werkwoord?",
+      "met de tweede kolom van de lijst — I ate, she wrote (On Track p. 178-180)"
+     ],
+     [
+      "Wanneer gebruik je de past simple?",
+      "een afgelopen handeling op een bepaald moment in het verleden"
+     ],
+     [
+      "Signaalwoorden van de past simple",
+      "yesterday, last week, in 2019, two days ago, when I was young"
+     ],
+     [
+      "Hoe maak je een vraag in de past simple?",
+      "did vooraan en het werkwoord weer kaal — Did he pass the test?"
+     ],
+     [
+      "Hoe maak je een ontkenning in de past simple?",
+      "didn't + het kale werkwoord — He didn't pass the test (niet: didn't passed)"
+     ],
+     [
+      "Wat is de spellingregel bij -ed?",
+      "stomme e: alleen -d (live → lived); medeklinker + y: -ied (study → studied); korte klinker: medeklinker verdubbelt (stop → stopped)"
+     ],
+     [
+      "Hoe vorm je de past continuous?",
+      "was of were + het werkwoord met -ing — I was working, they were playing"
+     ],
+     [
+      "Wanneer gebruik je de past continuous?",
+      "iets dat bezig was in het verleden, vaak onderbroken door een past simple — I was reading when he called"
+     ],
+     [
+      "Signaalwoorden van de past continuous",
+      "while, when, at that moment, all day"
+     ]
+    ]
+   },
+   {
+    "t": "Tenses · future en perfect",
+    "soort": "regel",
+    "w": [
+     [
+      "Hoe vorm je de future simple?",
+      "will + het kale werkwoord — I will help you"
+     ],
+     [
+      "Hoe maak je de future simple ontkennend?",
+      "will not of won't — She won't come"
+     ],
+     [
+      "Wanneer gebruik je de future simple?",
+      "een voorspelling, een belofte of een beslissing die je nu neemt"
+     ],
+     [
+      "Signaalwoorden van de future simple",
+      "tomorrow, next week, in a few days, soon, I think, probably"
+     ],
+     [
+      "Hoe vorm je de present perfect simple?",
+      "have of has + het past participle — I have worked, she has written"
+     ],
+     [
+      "Wanneer gebruik je de present perfect simple?",
+      "iets uit het verleden dat nu nog meespeelt, of waarvan de tijd niet telt"
+     ],
+     [
+      "Signaalwoorden van de present perfect",
+      "ever, never, just, already, yet, since, for, recently, so far"
+     ],
+     [
+      "Wat is het verschil tussen since en for?",
+      "since + een beginpunt (since 2019), for + een duur (for three years)"
+     ],
+     [
+      "Hoe vorm je de present perfect continuous?",
+      "have of has + been + het werkwoord met -ing — I have been waiting"
+     ],
+     [
+      "Wanneer gebruik je de present perfect continuous?",
+      "iets dat begon in het verleden en nog bezig is, met nadruk op de duur — She has been studying for two hours"
+     ],
+     [
+      "Waar staat yet in de zin?",
+      "achteraan, en alleen in een vraag of een ontkenning — Have you finished yet?"
+     ],
+     [
+      "Waar staan just en already?",
+      "tussen have/has en het past participle — I have just arrived"
+     ]
+    ]
+   },
+   {
+    "t": "Past participle",
+    "soort": "regel",
+    "w": [
+     [
+      "She has never ___ a speed boat before. (drive)",
+      "driven"
+     ],
+     [
+      "Ella had ___ all of the vegetables on her plate. (eat)",
+      "eaten"
+     ],
+     [
+      "We have ___ each other since we were very young. (know)",
+      "known"
+     ],
+     [
+      "Peter has ___ a letter to his favorite author. (write)",
+      "written"
+     ],
+     [
+      "Kara was ___ by mosquitoes. (bite)",
+      "bitten"
+     ],
+     [
+      "Thomas has ___ the most delicious tomatoes in town. (grow)",
+      "grown"
+     ],
+     [
+      "Have you ___ on a horse without a saddle before? (ride)",
+      "ridden"
+     ],
+     [
+      "The thief had ___ all of the expensive jewelry. (take)",
+      "taken"
+     ],
+     [
+      "Hoe vorm je het past participle van een regelmatig werkwoord?",
+      "+ -ed — I had walked to the restaurant"
+     ],
+     [
+      "Waarom zijn onregelmatige werkwoorden lastiger?",
+      "ze krijgen geen -ed; het hele woord verandert — eat, ate, eaten"
+     ]
+    ]
+   },
+   {
+    "t": "Adjectives en adverbs",
+    "soort": "regel",
+    "w": [
+     [
+      "Wat doet een adjective?",
+      "het zegt iets over een zelfstandig naamwoord — a quick runner"
+     ],
+     [
+      "Wat doet een adverb?",
+      "het zegt iets over een werkwoord, een adjective of een andere adverb — he runs quickly"
+     ],
+     [
+      "Hoe maak je van een adjective een adverb?",
+      "+ -ly — quick wordt quickly"
+     ],
+     [
+      "Wat gebeurt er bij een adjective op -y?",
+      "y wordt ily — happy wordt happily"
+     ],
+     [
+      "Wat gebeurt er bij een adjective op -le?",
+      "de e valt weg — simple wordt simply"
+     ],
+     [
+      "Welke adverb is onregelmatig?",
+      "good wordt well — she is a good singer, she sings well"
+     ],
+     [
+      "Welke woorden blijven hetzelfde?",
+      "fast, hard, late, early en high — he works hard, he runs fast"
+     ],
+     [
+      "Wat betekent hardly dan?",
+      "nauwelijks — dat is iets heel anders dan hard (= hard)"
+     ],
+     [
+      "Na welke werkwoorden staat een adjective en geen adverb?",
+      "na be, look, feel, seem, sound, taste en smell — it looks good, niet it looks well"
+     ]
+    ]
+   },
+   {
+    "t": "Comparatives en superlatives",
+    "soort": "regel",
+    "w": [
+     [
+      "Hoe maak je de trappen van een kort adjective?",
+      "-er en -est — cheap, cheaper, the cheapest"
+     ],
+     [
+      "Hoe maak je de trappen van een lang adjective?",
+      "more en most — expensive, more expensive, the most expensive"
+     ],
+     [
+      "Wanneer gebruik je -er of more?",
+      "één lettergreep en veel tweelettergrepige op -y: -er. Twee of meer lettergrepen: more"
+     ],
+     [
+      "Wat gebeurt er bij een korte klinker?",
+      "de medeklinker verdubbelt — big, bigger, the biggest"
+     ],
+     [
+      "Wat gebeurt er bij een adjective op -y?",
+      "y wordt i — happy, happier, the happiest"
+     ],
+     [
+      "De trappen van good",
+      "good, better, the best"
+     ],
+     [
+      "De trappen van bad",
+      "bad, worse, the worst"
+     ],
+     [
+      "De trappen van far",
+      "far, further/farther, the furthest/farthest"
+     ],
+     [
+      "De trappen van little",
+      "little, less, the least"
+     ],
+     [
+      "De trappen van many en much",
+      "many/much, more, the most"
+     ],
+     [
+      "Welk woordje hoort bij de vergrotende trap?",
+      "than — she is taller than me"
+     ],
+     [
+      "Welk woordje hoort bij de overtreffende trap?",
+      "the — he is the tallest of us all"
+     ],
+     [
+      "Hoe zeg je dat twee dingen gelijk zijn?",
+      "as … as — she is as tall as her brother"
+     ],
+     [
+      "En als ze niet gelijk zijn?",
+      "not as … as — he is not as fast as she is"
+     ]
+    ]
+   },
+   {
+    "t": "Word order",
+    "soort": "regel",
+    "w": [
+     [
+      "De basisvolgorde van een Engelse zin",
+      "subject + verb + indirect object + direct object + place + time"
+     ],
+     [
+      "Waar staat het meewerkend voorwerp?",
+      "voor het lijdend voorwerp — I will tell her the story"
+     ],
+     [
+      "In welke volgorde staan bijwoorden achteraan?",
+      "manner, place, time — They met by chance in England in 2012"
+     ],
+     [
+      "En als er een werkwoord van beweging in staat?",
+      "place, manner, time — I'm going to school by bike today"
+     ],
+     [
+      "Waar staat een adverb of time meestal?",
+      "achteraan, maar hij mag ook vooraan voor de nadruk"
+     ],
+     [
+      "Waar staat een adverb of frequency?",
+      "in het midden: vóór het hoofdwerkwoord, maar ná to be en ná een hulpwerkwoord"
+     ],
+     [
+      "Geef een voorbeeld met to be en frequency",
+      "She is always late — na is, niet ervoor"
+     ],
+     [
+      "Geef een voorbeeld met een hulpwerkwoord",
+      "He can sometimes be very stubborn — na can"
+     ],
+     [
+      "Waar staat een comment adverb?",
+      "vooraan — Unfortunately, he missed the train (ook: obviously, luckily, honestly)"
+     ],
+     [
+      "Wat mag je nooit doen met een adverb?",
+      "hem tussen het werkwoord en het lijdend voorwerp zetten — niet 'He can play very well football' maar 'He can play football very well'"
+     ],
+     [
+      "Hoe bouw je een vraag?",
+      "question word + hulpwerkwoord + subject + werkwoord — When does the train leave?"
+     ],
+     [
+      "Wanneer gebruik je géén hulpwerkwoord in een vraag?",
+      "als het vraagwoord zelf het onderwerp is — Who went to Canada last year?"
+     ],
+     [
+      "Wat verandert er in een ontkennende zin?",
+      "niets aan de volgorde; je hebt alleen een hulpwerkwoord nodig — I did not see him at the disco last night"
+     ]
+    ]
+   },
+   {
+    "t": "Pronouns",
+    "soort": "regel",
+    "w": [
+     [
+      "De personal pronouns als onderwerp",
+      "I · you · he · she · it · we · you · they"
+     ],
+     [
+      "De personal pronouns als voorwerp",
+      "me · you · him · her · it · us · you · them"
+     ],
+     [
+      "De possessive adjectives",
+      "my · your · his · her · its · our · your · their"
+     ],
+     [
+      "De possessive pronouns",
+      "mine · yours · his · hers · its · ours · yours · theirs"
+     ],
+     [
+      "De hele ketting voor ik",
+      "I · me · my · mine · myself"
+     ],
+     [
+      "De hele ketting voor hij",
+      "he · him · his · his · himself"
+     ],
+     [
+      "De hele ketting voor zij (enkelvoud)",
+      "she · her · her · hers · herself"
+     ],
+     [
+      "De hele ketting voor wij",
+      "we · us · our · ours · ourselves"
+     ],
+     [
+      "De hele ketting voor zij (meervoud)",
+      "they · them · their · theirs · themselves"
+     ],
+     [
+      "Wat is het verschil tussen my en mine?",
+      "my staat vóór een naamwoord (my parents), mine staat alleen (they are mine)"
+     ],
+     [
+      "De negen reflexive pronouns",
+      "myself · yourself · himself · herself · itself · oneself · ourselves · yourselves · themselves"
+     ],
+     [
+      "Wanneer gebruik je een reflexive pronoun?",
+      "als het onderwerp en het voorwerp dezelfde zijn — I believe in myself"
+     ],
+     [
+      "Hoe schrijf je het meervoud van -self?",
+      "-selves — themselves, niet themselfs"
+     ],
+     [
+      "Hoe maak je de possessive form van een enkelvoud?",
+      "'s — Frank's dad, Joy's boyfriend"
+     ],
+     [
+      "En van een meervoud dat al op -s eindigt?",
+      "alleen een apostrof — his parents' opinion"
+     ]
+    ]
+   },
+   {
+    "t": "The plural of nouns",
+    "soort": "regel",
+    "w": [
+     [
+      "Het gewone meervoud",
+      "+ -s — book wordt books"
+     ],
+     [
+      "Wanneer komt er -es bij?",
+      "na s, ss, sh, ch, x en z — bus wordt buses, watch wordt watches"
+     ],
+     [
+      "Wat gebeurt er bij een medeklinker + y?",
+      "y wordt ies — city wordt cities, maar boy blijft boys"
+     ],
+     [
+      "Wat gebeurt er bij -f of -fe?",
+      "meestal ves — knife wordt knives, leaf wordt leaves"
+     ],
+     [
+      "Wat gebeurt er bij -o?",
+      "vaak -oes — potato wordt potatoes, tomato wordt tomatoes, hero wordt heroes"
+     ],
+     [
+      "Het meervoud van man en woman",
+      "men en women"
+     ],
+     [
+      "Het meervoud van child",
+      "children"
+     ],
+     [
+      "Het meervoud van foot en tooth",
+      "feet en teeth"
+     ],
+     [
+      "Het meervoud van mouse en goose",
+      "mice en geese"
+     ],
+     [
+      "Het meervoud van person",
+      "people"
+     ],
+     [
+      "Welke woorden veranderen niet?",
+      "sheep, fish, deer en series"
+     ],
+     [
+      "Welke woorden bestaan alleen in het meervoud?",
+      "trousers, glasses, scissors, clothes — en police is altijd meervoud"
+     ]
+    ]
+   },
+   {
+    "t": "Quantities",
+    "soort": "regel",
+    "w": [
+     [
+      "Wat is een countable noun?",
+      "iets dat je kan tellen — one apple, two apples"
+     ],
+     [
+      "Wat is een uncountable noun?",
+      "iets dat je niet telt — water, money, information, advice, news"
+     ],
+     [
+      "Welk vraagwoord bij countable?",
+      "how many — How many books do you have?"
+     ],
+     [
+      "Welk vraagwoord bij uncountable?",
+      "how much — How much time do we have?"
+     ],
+     [
+      "Veel bij countable",
+      "many — many friends"
+     ],
+     [
+      "Veel bij uncountable",
+      "much — much money"
+     ],
+     [
+      "Welk woord past bij allebei?",
+      "a lot of en lots of — a lot of friends, a lot of money"
+     ],
+     [
+      "Een beetje bij countable",
+      "a few — a few minutes"
+     ],
+     [
+      "Een beetje bij uncountable",
+      "a little — a little sugar"
+     ],
+     [
+      "Wanneer gebruik je some?",
+      "in een bevestigende zin, en in een vraag die iets aanbiedt"
+     ],
+     [
+      "Wanneer gebruik je any?",
+      "in een vraag en in een ontkenning — Do you have any money?"
+     ],
+     [
+      "Is news enkelvoud of meervoud?",
+      "enkelvoud — the news is good"
+     ]
+    ]
+   },
+   {
+    "t": "Modal auxiliary verbs",
+    "soort": "regel",
+    "w": [
+     [
+      "Welk modaal werkwoord gebruik je als de spreker wil dat je iets doet?",
+      "must — don't tell them what you think they must do"
+     ],
+     [
+      "Welk modaal werkwoord gebruik je om raad te geven?",
+      "should — you should always try to be there for your friends"
+     ],
+     [
+      "Welk modaal werkwoord gebruik je als een regel of wet het zegt?",
+      "have to — a therapist has to listen to you without judgement"
+     ],
+     [
+      "Hoe zeg je dat iets algemeen verboden is?",
+      "can't — you can't tell your friends what to think"
+     ],
+     [
+      "Hoe zeg je dat de spreker iets verbiedt?",
+      "mustn't — you mustn't tell anyone what I said"
+     ],
+     [
+      "Hoe geef je raad in de ontkennende vorm?",
+      "shouldn't — you shouldn't try and solve all your friends' problems"
+     ],
+     [
+      "Hoe zeg je dat iets een algemene waarheid of grote kans is?",
+      "can — genuine care and concern can make a real difference"
+     ],
+     [
+      "Hoe zeg je dat iets mogelijk maar niet zeker is?",
+      "may (formeel), of might/could — you may have anxiety · you might feel better"
+     ],
+     [
+      "Hoe geef je een bevel zonder modaal werkwoord?",
+      "met de imperatief — Take your friends' concerns seriously"
+     ],
+     [
+      "En een verbod zonder modaal werkwoord?",
+      "met de ontkennende imperatief — Don't compare your own situation to that of others"
+     ]
+    ]
+   },
+   {
+    "t": "No more common mistakes",
+    "soort": "regel",
+    "w": [
+     [
+      "Verbeter: He do got his phone back.",
+      "He did get his phone back — na did blijft het werkwoord kaal"
+     ],
+     [
+      "Verbeter: He did not passed the test.",
+      "He did not pass the test"
+     ],
+     [
+      "Verbeter: He don't want to defy his parents.",
+      "He doesn't want to — he/she/it krijgt does"
+     ],
+     [
+      "Verbeter: She putted a chocolate on their pillow.",
+      "She put a chocolate — put is onregelmatig"
+     ],
+     [
+      "Verbeter: He gived the phone back.",
+      "He gave the phone back"
+     ],
+     [
+      "Verbeter: Eight years old is to young.",
+      "too young — to hoort bij een infinitief of is een voorzetsel, too betekent te of ook"
+     ],
+     [
+      "Verbeter: Its a good way to make friends.",
+      "It's a good way — it's = it is, its is bezittelijk"
+     ],
+     [
+      "Verbeter: They kept themselfs bizzy.",
+      "themselves busy"
+     ],
+     [
+      "Verbeter: Your much more independent.",
+      "You're much more independent — you're = you are, your is bezittelijk"
+     ],
+     [
+      "Verbeter: … but there feeling alright now.",
+      "they're feeling — there is een plaats, their is bezittelijk, they're = they are"
+     ],
+     [
+      "Verbeter: They where both feeling homesick.",
+      "They were — where is een vraagwoord, were is de verleden tijd van to be"
+     ],
+     [
+      "Wat betekent wear dan?",
+      "dragen — I hate to wear my uniform"
+     ],
+     [
+      "Verbeter: She can do whatever she wants with her live.",
+      "with her life — life is het naamwoord, to live is het werkwoord"
+     ],
+     [
+      "Verbeter: I think it is quiet difficult.",
+      "quite difficult — quiet is stil, quite is nogal of helemaal"
+     ],
+     [
+      "Verbeter: Franks dad doesn't want him to marry.",
+      "Frank's dad"
+     ],
+     [
+      "Verbeter: His parents opinion matters to him.",
+      "His parents' opinion — meervoud op -s krijgt alleen een apostrof"
+     ],
+     [
+      "Verbeter: Why are mine parents so strict?",
+      "my parents — mine staat alleen, my staat voor een naamwoord"
+     ],
+     [
+      "Verbeter: It would be a wonderfull experience.",
+      "wonderful — -ful als achtervoegsel heeft één l, full als los woord twee"
+     ],
+     [
+      "Verbeter: It depends on how the child is.",
+      "It depends on what the child is like — dat is een Nederlandse zinsbouw"
+     ],
+     [
+      "Verbeter: Frank's dad want that Frank marries a Korean girl.",
+      "Frank's dad wants him to marry a Korean girl"
+     ],
+     [
+      "Verbeter: The story plays in America.",
+      "The story is set in Southern California"
+     ],
+     [
+      "Verbeter: She don't wanna go.",
+      "She doesn't want to go — wanna is te informeel"
+     ]
+    ]
+   },
+   {
+    "t": "Werkwoordenlijst",
+    "soort": "voc",
+    "w": [
+     [
+      "to add",
+      "toevoegen",
+      ""
+     ],
+     [
+      "to achieve",
+      "bereiken",
+      ""
+     ],
+     [
+      "to answer",
+      "(be)antwoorden",
+      ""
+     ],
+     [
+      "to ask",
+      "vragen",
+      ""
+     ],
+     [
+      "to associate",
+      "linken, associëren",
+      ""
+     ],
+     [
+      "to be",
+      "zijn",
+      "was/were · been"
+     ],
+     [
+      "to become",
+      "worden",
+      "became · become"
+     ],
+     [
+      "to begin",
+      "beginnen",
+      "began · begun"
+     ],
+     [
+      "to break",
+      "breken",
+      "broke · broken"
+     ],
+     [
+      "to call",
+      "bellen, roepen",
+      ""
+     ],
+     [
+      "can",
+      "kunnen, mogen",
+      "could"
+     ],
+     [
+      "to choose",
+      "kiezen",
+      "chose · chosen"
+     ],
+     [
+      "to come",
+      "komen",
+      "came · come"
+     ],
+     [
+      "to complete",
+      "vervolledigen",
+      ""
+     ],
+     [
+      "to decide",
+      "beslissen",
+      ""
+     ],
+     [
+      "to describe",
+      "beschrijven",
+      ""
+     ],
+     [
+      "to develop",
+      "ontwikkelen",
+      ""
+     ],
+     [
+      "to do",
+      "doen",
+      "did · done"
+     ],
+     [
+      "to eat",
+      "eten",
+      "ate · eaten"
+     ],
+     [
+      "to explain",
+      "uitleggen",
+      ""
+     ],
+     [
+      "to feel",
+      "voelen",
+      "felt · felt"
+     ],
+     [
+      "to fill in",
+      "invullen",
+      ""
+     ],
+     [
+      "to find",
+      "vinden",
+      "found · found"
+     ],
+     [
+      "to get",
+      "krijgen, worden",
+      "got · got/gotten"
+     ],
+     [
+      "to give",
+      "geven",
+      "gave · given"
+     ],
+     [
+      "to go",
+      "gaan",
+      "went · gone"
+     ],
+     [
+      "to guess",
+      "raden",
+      ""
+     ],
+     [
+      "to hate",
+      "haten",
+      ""
+     ],
+     [
+      "to have",
+      "hebben",
+      "had · had"
+     ],
+     [
+      "to hear",
+      "horen",
+      "heard · heard"
+     ],
+     [
+      "to help",
+      "helpen",
+      ""
+     ],
+     [
+      "to hit",
+      "slaan, raken",
+      "hit · hit"
+     ],
+     [
+      "to hope",
+      "hopen",
+      ""
+     ],
+     [
+      "to invent",
+      "uitvinden",
+      ""
+     ],
+     [
+      "to keep",
+      "houden, blijven",
+      "kept · kept"
+     ],
+     [
+      "to know",
+      "weten",
+      "knew · known"
+     ],
+     [
+      "to leave",
+      "vertrekken",
+      "left · left"
+     ],
+     [
+      "to let",
+      "laten",
+      "let · let"
+     ],
+     [
+      "to like",
+      "leuk vinden",
+      ""
+     ],
+     [
+      "to listen",
+      "luisteren",
+      ""
+     ],
+     [
+      "to live",
+      "leven, wonen",
+      ""
+     ],
+     [
+      "to look",
+      "eruitzien, kijken",
+      ""
+     ],
+     [
+      "to look up sth",
+      "iets opzoeken",
+      ""
+     ],
+     [
+      "to look up to sb",
+      "opkijken naar iemand",
+      ""
+     ],
+     [
+      "to make",
+      "maken",
+      "made · made"
+     ],
+     [
+      "to mean",
+      "bedoelen",
+      "meant · meant"
+     ],
+     [
+      "to mention",
+      "vermelden",
+      ""
+     ],
+     [
+      "to move",
+      "bewegen, verhuizen",
+      ""
+     ],
+     [
+      "to need",
+      "nodig hebben, moeten",
+      ""
+     ],
+     [
+      "to organise",
+      "organiseren",
+      ""
+     ],
+     [
+      "to pay attention to",
+      "aandacht hebben voor",
+      ""
+     ],
+     [
+      "to play",
+      "spelen",
+      ""
+     ],
+     [
+      "to prepare",
+      "voorbereiden",
+      ""
+     ],
+     [
+      "to put",
+      "neerzetten, plaatsen",
+      "put · put"
+     ],
+     [
+      "to read",
+      "lezen",
+      "read · read"
+     ],
+     [
+      "to run",
+      "lopen",
+      "ran · run"
+     ],
+     [
+      "to say",
+      "zeggen",
+      "said · said"
+     ],
+     [
+      "to see",
+      "zien",
+      "saw · seen"
+     ],
+     [
+      "to seem",
+      "lijken",
+      ""
+     ],
+     [
+      "to select",
+      "selecteren",
+      ""
+     ],
+     [
+      "to separate",
+      "scheiden",
+      ""
+     ],
+     [
+      "to show",
+      "tonen, zichtbaar worden",
+      "showed · shown"
+     ],
+     [
+      "to sit down",
+      "gaan zitten",
+      "sat · sat"
+     ],
+     [
+      "to start",
+      "beginnen",
+      ""
+     ],
+     [
+      "to sum up",
+      "opsommen",
+      ""
+     ],
+     [
+      "to swallow",
+      "slikken",
+      ""
+     ],
+     [
+      "to take",
+      "nemen",
+      "took · taken"
+     ],
+     [
+      "to talk",
+      "praten",
+      ""
+     ],
+     [
+      "to tell",
+      "zeggen, vertellen",
+      "told · told"
+     ],
+     [
+      "to think",
+      "denken",
+      "thought · thought"
+     ],
+     [
+      "to touch",
+      "aanraken",
+      ""
+     ],
+     [
+      "to try",
+      "proberen",
+      ""
+     ],
+     [
+      "to turn",
+      "draaien",
+      ""
+     ],
+     [
+      "to understand",
+      "begrijpen",
+      "understood · understood"
+     ],
+     [
+      "to use",
+      "gebruiken",
+      ""
+     ],
+     [
+      "to want",
+      "willen",
+      ""
+     ],
+     [
+      "to watch",
+      "bekijken, kijken",
+      ""
+     ],
+     [
+      "will",
+      "zullen",
+      "would"
+     ],
+     [
+      "to work",
+      "werken",
+      ""
+     ],
+     [
+      "to write",
+      "schrijven",
+      "wrote · written"
+     ]
+    ]
+   }
+  ],
+  "verbs": [
+   [
+    "arise",
+    "arose",
+    "arisen"
+   ],
+   [
+    "be (auxiliary)",
+    "was/were",
+    "been"
+   ],
+   [
+    "bear",
+    "bore",
+    "born/borne"
+   ],
+   [
+    "beat",
+    "beat",
+    "beaten"
+   ],
+   [
+    "become",
+    "became",
+    "become"
+   ],
+   [
+    "begin",
+    "began",
+    "begun"
+   ],
+   [
+    "bend",
+    "bent",
+    "bent"
+   ],
+   [
+    "bet",
+    "bet",
+    "bet"
+   ],
+   [
+    "bid",
+    "bid/bade",
+    "bid/bidden"
+   ],
+   [
+    "bite",
+    "bit",
+    "bitten"
+   ],
+   [
+    "blow",
+    "blew",
+    "blown"
+   ],
+   [
+    "break",
+    "broke",
+    "broken"
+   ],
+   [
+    "bring",
+    "brought",
+    "brought"
+   ],
+   [
+    "build",
+    "built",
+    "built"
+   ],
+   [
+    "burst",
+    "burst",
+    "burst"
+   ],
+   [
+    "buy",
+    "bought",
+    "bought"
+   ],
+   [
+    "cast",
+    "cast",
+    "cast"
+   ],
+   [
+    "catch",
+    "caught",
+    "caught"
+   ],
+   [
+    "choose",
+    "chose",
+    "chosen"
+   ],
+   [
+    "come",
+    "came",
+    "come"
+   ],
+   [
+    "cost",
+    "cost",
+    "cost"
+   ],
+   [
+    "cut",
+    "cut",
+    "cut"
+   ],
+   [
+    "deal",
+    "dealt",
+    "dealt"
+   ],
+   [
+    "dig",
+    "dug",
+    "dug"
+   ],
+   [
+    "do",
+    "did",
+    "done"
+   ],
+   [
+    "draw",
+    "drew",
+    "drawn"
+   ],
+   [
+    "drink",
+    "drank",
+    "drunk"
+   ],
+   [
+    "drive",
+    "drove",
+    "driven"
+   ],
+   [
+    "eat",
+    "ate",
+    "eaten"
+   ],
+   [
+    "fall",
+    "fell",
+    "fallen"
+   ],
+   [
+    "feed",
+    "fed",
+    "fed"
+   ],
+   [
+    "feel",
+    "felt",
+    "felt"
+   ],
+   [
+    "fight",
+    "fought",
+    "fought"
+   ],
+   [
+    "find",
+    "found",
+    "found"
+   ],
+   [
+    "fly",
+    "flew",
+    "flown"
+   ],
+   [
+    "forget",
+    "forgot",
+    "forgotten"
+   ],
+   [
+    "forgive",
+    "forgave",
+    "forgiven"
+   ],
+   [
+    "freeze",
+    "froze",
+    "frozen"
+   ],
+   [
+    "get",
+    "got",
+    "got/gotten"
+   ],
+   [
+    "give",
+    "gave",
+    "given"
+   ],
+   [
+    "go",
+    "went",
+    "gone"
+   ],
+   [
+    "grow",
+    "grew",
+    "grown"
+   ],
+   [
+    "hang",
+    "hanged/hung",
+    "hanged/hung"
+   ],
+   [
+    "have",
+    "had",
+    "had"
+   ],
+   [
+    "hear",
+    "heard",
+    "heard"
+   ],
+   [
+    "hide",
+    "hid",
+    "hidden"
+   ],
+   [
+    "hit",
+    "hit",
+    "hit"
+   ],
+   [
+    "hold",
+    "held",
+    "held"
+   ],
+   [
+    "hurt",
+    "hurt",
+    "hurt"
+   ],
+   [
+    "keep",
+    "kept",
+    "kept"
+   ],
+   [
+    "know",
+    "knew",
+    "known"
+   ],
+   [
+    "lay",
+    "laid",
+    "laid"
+   ],
+   [
+    "lead",
+    "led",
+    "led"
+   ],
+   [
+    "leave",
+    "left",
+    "left"
+   ],
+   [
+    "lend",
+    "lent",
+    "lent"
+   ],
+   [
+    "let",
+    "let",
+    "let"
+   ],
+   [
+    "lie",
+    "lay",
+    "lain"
+   ],
+   [
+    "light",
+    "lit/lighted",
+    "lit/lighted"
+   ],
+   [
+    "lose",
+    "lost",
+    "lost"
+   ],
+   [
+    "make",
+    "made",
+    "made"
+   ],
+   [
+    "mean",
+    "meant",
+    "meant"
+   ],
+   [
+    "meet",
+    "met",
+    "met"
+   ],
+   [
+    "pay",
+    "paid",
+    "paid"
+   ],
+   [
+    "prove",
+    "proved",
+    "proved/proven"
+   ],
+   [
+    "put",
+    "put",
+    "put"
+   ],
+   [
+    "quit",
+    "quit",
+    "quit"
+   ],
+   [
+    "read",
+    "read",
+    "read"
+   ],
+   [
+    "ride",
+    "rode",
+    "ridden"
+   ],
+   [
+    "ring",
+    "rang",
+    "rung"
+   ],
+   [
+    "rise",
+    "rose",
+    "risen"
+   ],
+   [
+    "run",
+    "ran",
+    "run"
+   ],
+   [
+    "say",
+    "said",
+    "said"
+   ],
+   [
+    "see",
+    "saw",
+    "seen"
+   ],
+   [
+    "seek",
+    "sought",
+    "sought"
+   ],
+   [
+    "sell",
+    "sold",
+    "sold"
+   ],
+   [
+    "send",
+    "sent",
+    "sent"
+   ],
+   [
+    "set",
+    "set",
+    "set"
+   ],
+   [
+    "shake",
+    "shook",
+    "shaken"
+   ],
+   [
+    "shine",
+    "shone/shined",
+    "shone/shined"
+   ],
+   [
+    "shoot",
+    "shot",
+    "shot"
+   ],
+   [
+    "show",
+    "showed",
+    "shown"
+   ],
+   [
+    "shut",
+    "shut",
+    "shut"
+   ],
+   [
+    "sing",
+    "sang",
+    "sung"
+   ],
+   [
+    "sink",
+    "sank",
+    "sunk"
+   ],
+   [
+    "sit",
+    "sat",
+    "sat"
+   ],
+   [
+    "sleep",
+    "slept",
+    "slept"
+   ],
+   [
+    "slide",
+    "slid",
+    "slid"
+   ],
+   [
+    "speak",
+    "spoke",
+    "spoken"
+   ],
+   [
+    "spend",
+    "spent",
+    "spent"
+   ],
+   [
+    "split",
+    "split",
+    "split"
+   ],
+   [
+    "spread",
+    "spread",
+    "spread"
+   ],
+   [
+    "stand",
+    "stood",
+    "stood"
+   ],
+   [
+    "steal",
+    "stole",
+    "stolen"
+   ],
+   [
+    "stick",
+    "stuck",
+    "stuck"
+   ],
+   [
+    "strike",
+    "struck",
+    "struck"
+   ],
+   [
+    "swear",
+    "swore",
+    "sworn"
+   ],
+   [
+    "swim",
+    "swam",
+    "swum"
+   ],
+   [
+    "take",
+    "took",
+    "taken"
+   ],
+   [
+    "teach",
+    "taught",
+    "taught"
+   ],
+   [
+    "tear",
+    "tore",
+    "torn"
+   ],
+   [
+    "tell",
+    "told",
+    "told"
+   ],
+   [
+    "think",
+    "thought",
+    "thought"
+   ],
+   [
+    "throw",
+    "threw",
+    "thrown"
+   ],
+   [
+    "understand",
+    "understood",
+    "understood"
+   ],
+   [
+    "undertake",
+    "undertook",
+    "undertaken"
+   ],
+   [
+    "upset",
+    "upset",
+    "upset"
+   ],
+   [
+    "wake",
+    "woke",
+    "woken"
+   ],
+   [
+    "wear",
+    "wore",
+    "worn"
+   ],
+   [
+    "win",
+    "won",
+    "won"
+   ],
+   [
+    "wind",
+    "wound",
+    "wound"
+   ],
+   [
+    "write",
+    "wrote",
+    "written"
+   ]
+  ],
+  "volgorde": [
+   [
+    "they / flowers / are / picking / in the park",
+    "They are picking flowers in the park."
+   ],
+   [
+    "bought / a new car / we / yesterday",
+    "We bought a new car yesterday."
+   ],
+   [
+    "you / see / me / can / tomorrow evening",
+    "You can see me tomorrow evening."
+   ],
+   [
+    "buy / a laptop / he / wants to / there",
+    "He wants to buy a laptop there."
+   ],
+   [
+    "sister / is / my / late / always",
+    "My sister is always late."
+   ],
+   [
+    "must / the book / read / you",
+    "You must read the book."
+   ],
+   [
+    "she / me / tell / has to / truth / the / now",
+    "She has to tell me the truth now."
+   ],
+   [
+    "never / they / to the cinema / go",
+    "They never go to the cinema."
+   ],
+   [
+    "he / English / very well / speaks",
+    "He speaks English very well."
+   ],
+   [
+    "to France / we / are / next week / going",
+    "We are going to France next week."
+   ],
+   [
+    "my brother / to Canada / went / last year",
+    "My brother went to Canada last year."
+   ],
+   [
+    "the girl / English / speaks / fluently",
+    "The girl speaks English fluently."
+   ],
+   [
+    "the dog / impatiently / by the door / was waiting / this morning",
+    "The dog was waiting impatiently by the door this morning."
+   ],
+   [
+    "swims / enthusiastically / in the pool / every morning / she",
+    "She swims enthusiastically in the pool every morning."
+   ],
+   [
+    "they / go / to France / every summer / by train",
+    "They go to France by train every summer."
+   ],
+   [
+    "did / I / him / see / not / last night / at the disco",
+    "I did not see him at the disco last night."
+   ],
+   [
+    "to a party / not / we / tonight / going / are",
+    "We are not going to a party tonight."
+   ],
+   [
+    "will / a letter / not / next week / send / you / she",
+    "She will not send you a letter next week."
+   ],
+   [
+    "not / the truth / did / he / tell / you",
+    "He did not tell you the truth."
+   ],
+   [
+    "to the cinema / we / want / do / this evening / not / to go",
+    "We do not want to go to the cinema this evening."
+   ],
+   [
+    "play / in the bar / did / he / last week / not / the piano",
+    "He did not play the piano in the bar last week."
+   ],
+   [
+    "not / now / she / in England / is",
+    "She is not in England now."
+   ],
+   [
+    "eat / in winter / ice-cream / do / not / I",
+    "I do not eat ice-cream in winter."
+   ],
+   [
+    "we / did / her / see / there / not",
+    "We did not see her there."
+   ],
+   [
+    "you / coffee / do / like",
+    "Do you like coffee?"
+   ],
+   [
+    "speak / she / English / does / well",
+    "Does she speak English well?"
+   ],
+   [
+    "who / to Canada / went / last year",
+    "Who went to Canada last year?"
+   ],
+   [
+    "play / every / you / Wednesday / do / tennis",
+    "Do you play tennis every Wednesday?"
+   ],
+   [
+    "see / last night / him / you / did / there",
+    "Did you see him there last night?"
+   ],
+   [
+    "the train / when / leave / does",
+    "When does the train leave?"
+   ],
+   [
+    "angrily / why / you / were / shouting / yesterday / at the party",
+    "Why were you shouting angrily at the party yesterday?"
+   ],
+   [
+    "she / always / late / is",
+    "Is she always late?"
+   ]
+  ],
+  "overzicht": [
+   [
+    "Present Simple",
+    "Gewoontes, feiten en dingen die regelmatig gebeuren.",
+    "I/you/we/they + werkwoord. He/she/it + werkwoord + s.",
+    "I play football every week. / He plays football every week."
+   ],
+   [
+    "Present Continuous",
+    "Iets dat nu bezig is of tijdelijk gebeurt.",
+    "am/is/are + werkwoord-ing.",
+    "I am studying now."
+   ],
+   [
+    "Past Simple",
+    "Iets dat in het verleden gebeurde en volledig afgelopen is.",
+    "Regelmatig: werkwoord + ed. Onregelmatig: een aparte vorm, bv. go wordt went.",
+    "I played football yesterday. / I went to school."
+   ],
+   [
+    "Past Continuous",
+    "Iets dat op een bepaald moment in het verleden bezig was.",
+    "was/were + werkwoord-ing.",
+    "I was studying when you called."
+   ],
+   [
+    "Future Simple",
+    "Voorspellingen, spontane beslissingen, beloftes en wat je denkt dat zal gebeuren.",
+    "will + infinitive.",
+    "I think it will rain tomorrow."
+   ],
+   [
+    "Present Perfect Simple",
+    "Iets gebeurde in het verleden maar heeft nog een link met nu; het resultaat telt.",
+    "have/has + past participle.",
+    "I have lost my keys."
+   ],
+   [
+    "Present Perfect Continuous",
+    "Iets begon in het verleden en duurt nog voort; de nadruk ligt op hoelang.",
+    "have/has + been + werkwoord-ing.",
+    "I have been studying for two hours."
+   ],
+   [
+    "Adjectives en adverbs",
+    "Een adjective beschrijft een persoon of ding. Een adverb zegt meestal hoe iets gebeurt.",
+    "Adjective: bij een noun. Adverb: vaak adjective + ly.",
+    "a slow car / He drives slowly."
+   ],
+   [
+    "Comparatives en superlatives",
+    "Comparative vergelijkt er twee. Superlative vergelijkt met een hele groep.",
+    "Kort woord: -er / -est. Lang woord: more / most.",
+    "Tom is taller than Sam. / Tom is the tallest."
+   ],
+   [
+    "Word order",
+    "Om de woorden in de juiste volgorde in een Engelse zin te zetten.",
+    "Subject + verb + object + place + time.",
+    "I play football at school every Friday."
+   ],
+   [
+    "Pronouns",
+    "Om namen of personen en dingen te vervangen, en om bezit of zichzelf aan te geven.",
+    "I/me/my/mine/myself · he/him/his/his/himself · she/her/her/hers/herself · we/us/our/ours/ourselves · they/them/their/theirs/themselves.",
+    "This is my book. It is mine."
+   ],
+   [
+    "Plural of nouns",
+    "Wanneer er meer dan één persoon of ding is.",
+    "Meestal + s. Na s/x/ch/sh vaak + es. Medeklinker + y wordt ies.",
+    "book wordt books / baby wordt babies."
+   ],
+   [
+    "Quantities",
+    "Om aan te geven hoeveel er van iets is.",
+    "many = telbaar · much = ontelbaar · a few = enkele telbare · a little = een beetje ontelbaar · some/any = allebei.",
+    "many books / much water."
+   ]
+  ]
+ }
+];
+
+/* ---------- helpers ---------- */
+function $(s){return document.querySelector(s)}
+function $$(s){return [].slice.call(document.querySelectorAll(s))}
+function el(t,c,x){var n=document.createElement(t); if(c)n.className=c; if(x!=null)n.textContent=x; return n}
+function rnd(n){return Math.floor(Math.random()*n)}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=rnd(i+1);var t=a[i];a[i]=a[j];a[j]=t}return a}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function kaal(s){
+  return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/[’']/g,"'").replace(/[^a-z0-9' ]/g," ").replace(/\s+/g," ").trim();
+}
+
+/* ---------- toestand ---------- */
+var SLEUTEL="ontrack-v1";
+function standaard(){return {mode:"kaarten", wereld:WERELDEN[0].id, richting:"en",
+  soort:"alles", groepen:{}, sels:{}, prog:{}, kOrde:null, kPos:0}}
+var S=standaard();
+try{
+  var b=JSON.parse(localStorage.getItem(SLEUTEL)||"null");
+  if(b&&typeof b==="object")for(var k in b)if(k in S)S[k]=b[k];
+}catch(e){}
+function save(){
+  S.sels[S.wereld]=S.groepen;
+  try{localStorage.setItem(SLEUTEL,JSON.stringify(S))}catch(e){}
+}
+
+/* ---------- wereld en sets ---------- */
+var SETS=[];
+function wereldNu(){
+  var w=WERELDEN[0];
+  WERELDEN.forEach(function(x){if(x.id===S.wereld)w=x});
+  return w;
+}
+function bouwSets(){
+  var w=wereldNu();
+  SETS=w.groepen.map(function(g,i){
+    return {id:w.pre+i, titel:g.t, soort:g.soort, items:g.w};
+  });
+  var bewaard=S.sels[S.wereld];
+  S.groepen={};
+  SETS.forEach(function(st){
+    S.groepen[st.id]=(bewaard&&st.id in bewaard)?bewaard[st.id]:1;
+  });
+}
+function gekozenSets(){
+  var uit=SETS.filter(function(s){
+    if(!S.groepen[s.id])return false;
+    if(S.soort!=="alles"&&s.soort!==S.soort)return false;
+    return true;
+  });
+  if(uit.length)return uit;
+  var terug=SETS.filter(function(s){return S.soort==="alles"||s.soort===S.soort});
+  return terug.length?terug:SETS;
+}
+function paren(){
+  var uit=[];
+  gekozenSets().forEach(function(s){
+    s.items.forEach(function(p){
+      uit.push({sid:s.id, titel:s.titel, soort:s.soort,
+                a:p[0], b:p[1], extra:p[2]||""});
+    });
+  });
+  return uit;
+}
+function P(k){var id=k.sid+"|"+k.a; if(!S.prog[id])S.prog[id]={b:0}; return S.prog[id]}
+function merk(k,goed){
+  var p=P(k); p.b=goed?Math.min(5,p.b+1):Math.max(0,p.b-1); save();
+  if(S.mode==="voortgang")tekenVoortgang();
+}
+function gloed(c){$("#glow").style.setProperty("--c",c)}
+function vraagKant(k){return (k.soort==="regel"||S.richting==="en")?k.a:k.b}
+function antwoordKant(k){return (k.soort==="regel"||S.richting==="en")?k.b:k.a}
+function andere(k,n){
+  var rest=shuffle(paren().filter(function(x){
+    return x.a!==k.a && x.soort===k.soort;
+  }));
+  var uit=[], gezien={};
+  for(var i=0;i<rest.length&&uit.length<n;i++){
+    var v=antwoordKant(rest[i]);
+    if(!v||gezien[kaal(v)])continue;
+    gezien[kaal(v)]=1; uit.push(v);
+  }
+  var alle=shuffle(paren());
+  for(var j=0;j<alle.length&&uit.length<n;j++){
+    var v2=antwoordKant(alle[j]);
+    if(!v2||gezien[kaal(v2)]||alle[j].a===k.a)continue;
+    gezien[kaal(v2)]=1; uit.push(v2);
+  }
+  return uit;
+}
+function kort(t){return String(t).length>42}
+
+/* ---------- meerkeuze ---------- */
+function meerkeuze(cfg){
+  var wrap=el("div"); wrap.style.display="grid"; wrap.style.gap="13px";
+  wrap.style.setProperty("--c",cfg.kleur);
+  var tg=el("div","tegel"); tg.style.setProperty("--c",cfg.kleur);
+  tg.innerHTML='<span class="badge">'+esc(cfg.kop)+'</span>'+
+    '<div class="woord'+(kort(cfg.woord)?" klein":"")+'">'+esc(cfg.woord)+'</div>'+
+    (cfg.onder?'<div class="onder">'+esc(cfg.onder)+'</div>':"");
+  wrap.appendChild(tg);
+  wrap.appendChild(el("p","vraag",cfg.vraag));
+  var doos=el("div","opts"), af=false;
+  shuffle([cfg.juist].concat(cfg.fout)).forEach(function(o,i){
+    var b=el("button","opt"); b.type="button";
+    b.appendChild(el("i",null,String.fromCharCode(65+i)));
+    b.appendChild(el("span",null,o));
+    b.addEventListener("click",function(){
+      if(af)return; af=true;
+      $$(".opts .opt").forEach(function(x){
+        x.disabled=true;
+        var t=x.querySelector("span").textContent;
+        if(t===cfg.juist)x.classList.add("good");
+        else if(x===b)x.classList.add("wrong");
+      });
+      cfg.na(o===cfg.juist, wrap);
+    });
+    doos.appendChild(b);
+  });
+  wrap.appendChild(doos);
+  return wrap;
+}
+function fb(wrap,goed,uitleg,knop,volgende){
+  var d=el("div","fb "+(goed?"g":"b"));
+  d.appendChild(el("div","fbt",goed?"Juist":"Fout"));
+  if(uitleg){var u=el("div","fbs"); u.innerHTML=uitleg; d.appendChild(u)}
+  var nx=el("button","btn",knop); nx.type="button";
+  nx.addEventListener("click",volgende);
+  d.appendChild(nx); wrap.appendChild(d);
+}
+function leegBlok(tekst){
+  var d=el("div","tegel");
+  d.appendChild(el("div","woord","Niets te oefenen"));
+  d.appendChild(el("div","onder",tekst));
+  return d;
+}
+
+/* ---------- kaarten ---------- */
+function kaartenStart(){
+  gloed("var(--eng)");
+  var lijst=paren();
+  if(!lijst.length){$("#kWrap").innerHTML=""; $("#kWrap").appendChild(leegBlok("Zet een onderdeel aan bij het tandwiel.")); return}
+  if(!S.kOrde||S.kOrde.length!==lijst.length){
+    S.kOrde=shuffle(lijst.map(function(k){return k.sid+"|"+k.a})); S.kPos=0; save();
+  }
+  kaartTeken();
+}
+function huidigeKaart(){
+  var lijst=paren(), sleutel=S.kOrde[S.kPos%S.kOrde.length], k=null;
+  lijst.forEach(function(x){if(x.sid+"|"+x.a===sleutel)k=x});
+  return k||lijst[0];
+}
+function kaartTeken(){
+  var wrap=$("#kWrap"); wrap.innerHTML="";
+  var k=huidigeKaart(); if(!k)return;
+  $("#kPos").textContent=(S.kPos%S.kOrde.length)+1;
+  $("#kTot").textContent=paren().length;
+  var kaart=el("div","kaart");
+  var voor=el("div","vlak");
+  var v=vraagKant(k);
+  voor.appendChild(el("div","groot"+(kort(v)?" klein":""),v));
+  voor.appendChild(el("div","extra",k.titel));
+  var achter=el("div","vlak b");
+  achter.appendChild(el("div","uitleg",antwoordKant(k)));
+  if(k.extra)achter.appendChild(el("div","extra",k.extra));
+  kaart.appendChild(voor); kaart.appendChild(achter);
+  var om=false;
+  kaart.addEventListener("click",function(){om=!om; kaart.classList.toggle("om",om)});
+  wrap.appendChild(kaart);
+}
+function kaartVolgende(goed){
+  var k=huidigeKaart(); if(k)merk(k,goed);
+  S.kPos=(S.kPos+1)%S.kOrde.length; save(); kaartTeken();
+}
+$("#kKen").addEventListener("click",function(){kaartVolgende(true)});
+$("#kNog").addEventListener("click",function(){kaartVolgende(false)});
+$("#kSchud").addEventListener("click",function(){
+  S.kOrde=shuffle(paren().map(function(k){return k.sid+"|"+k.a})); S.kPos=0; save(); kaartTeken();
+});
+
+/* ---------- meerkeuze-tab ---------- */
+var Q={n:0,goed:0};
+function keuzeStart(){
+  gloed("var(--eng)");
+  var body=$("#qBody"); body.innerHTML="";
+  $("#qPos").textContent=Q.n+1; $("#qGoed").textContent=Q.goed;
+  var lijst=paren();
+  if(!lijst.length){body.appendChild(leegBlok("Zet een onderdeel aan bij het tandwiel.")); return}
+  var k=lijst[rnd(lijst.length)];
+  var fout=andere(k,3);
+  if(fout.length<2){body.appendChild(leegBlok("Te weinig items voor een meerkeuzevraag.")); return}
+  body.appendChild(meerkeuze({
+    kop:k.soort==="regel"?"grammatica":"woordenschat",
+    woord:vraagKant(k), onder:k.titel,
+    vraag:k.soort==="regel"?"Wat is het juiste antwoord?":"Wat betekent dit?",
+    kleur:k.soort==="regel"?"var(--eng2)":"var(--eng)",
+    juist:antwoordKant(k), fout:fout,
+    na:function(goed,wrap){
+      if(goed)Q.goed++;
+      merk(k,goed);
+      fb(wrap,goed,"<b>"+esc(vraagKant(k))+"</b> — "+esc(antwoordKant(k))
+        +(k.extra?"<br><span style=\"color:var(--muted2)\">"+esc(k.extra)+"</span>":""),
+        "Volgende", function(){Q.n++; keuzeStart()});
+    }
+  }));
+}
+$("#qNieuw").addEventListener("click",keuzeStart);
+
+/* ---------- schrijven ---------- */
+var W2={n:0,goed:0};
+function schrijvenStart(){
+  gloed("var(--eng)");
+  var body=$("#wBody"); body.innerHTML="";
+  $("#wPos").textContent=W2.n+1; $("#wGoed").textContent=W2.goed;
+  var lijst=paren().filter(function(k){return k.soort==="voc"});
+  if(!lijst.length)lijst=paren();
+  if(!lijst.length){body.appendChild(leegBlok("Zet een onderdeel aan bij het tandwiel.")); return}
+  var k=lijst[rnd(lijst.length)];
+  var wrap=el("div"); wrap.style.display="grid"; wrap.style.gap="13px";
+  var tg=el("div","tegel");
+  tg.innerHTML='<span class="badge">schrijven</span>'+
+    '<div class="woord'+(kort(vraagKant(k))?" klein":"")+'">'+esc(vraagKant(k))+'</div>'+
+    '<div class="onder">'+esc(k.titel)+'</div>';
+  wrap.appendChild(tg);
+  wrap.appendChild(el("p","vraag","Typ het antwoord"));
+  var tw=el("div","typewrap"), af=false;
+  var inp=document.createElement("input"); inp.type="text";
+  inp.placeholder="…"; inp.setAttribute("autocapitalize","off");
+  inp.setAttribute("autocorrect","off"); inp.setAttribute("autocomplete","off");
+  inp.setAttribute("spellcheck","false"); inp.setAttribute("aria-label","Antwoord");
+  var go=el("button","btn","Nakijken"); go.type="button";
+  var wn=el("button","linkbtn","Weet ik niet"); wn.type="button";
+  function toon(goed){
+    af=true; inp.disabled=true; go.remove(); wn.remove();
+    inp.classList.add(goed?"goed":"fout");
+    if(!goed){inp.classList.add("shake"); inp.value=antwoordKant(k)}
+    if(goed)W2.goed++;
+    merk(k,goed);
+    fb(wrap,goed,"<b>"+esc(vraagKant(k))+"</b> — "+esc(antwoordKant(k))
+      +(k.extra?"<br><span style=\"color:var(--muted2)\">"+esc(k.extra)+"</span>":""),
+      "Volgende", function(){W2.n++; schrijvenStart()});
+  }
+  function nakijk(){
+    if(af)return; var v=inp.value.trim(); if(!v)return;
+    var juist=antwoordKant(k);
+    var ok=kaal(v)===kaal(juist);
+    if(!ok)ok=juist.split(/,|·|\//).some(function(d){return kaal(d)&&kaal(d)===kaal(v)});
+    toon(ok);
+  }
+  go.addEventListener("click",nakijk);
+  inp.addEventListener("keydown",function(e){if(e.key==="Enter")nakijk()});
+  wn.addEventListener("click",function(){if(!af)toon(false)});
+  tw.appendChild(inp); tw.appendChild(go); tw.appendChild(wn);
+  wrap.appendChild(tw); body.appendChild(wrap);
+  setTimeout(function(){inp.focus()},220);
+}
+$("#wNieuw").addEventListener("click",schrijvenStart);
+
+/* ---------- irregular verbs ---------- */
+function verbsStart(){
+  gloed("var(--eng3)");
+  var body=$("#vbBody"); body.innerHTML="";
+  var lijst=wereldNu().verbs;
+  if(!lijst.length){body.appendChild(leegBlok("Deze versie heeft geen werkwoordenlijst.")); return}
+  var v=lijst[rnd(lijst.length)];
+  $("#vbTitel").textContent=v[0];
+  var wrap=el("div"); wrap.style.display="grid"; wrap.style.gap="13px";
+  wrap.style.setProperty("--c","var(--eng3)");
+  var tg=el("div","tegel"); tg.style.setProperty("--c","var(--eng3)");
+  tg.innerHTML='<span class="badge">irregular verb</span>'
+    +'<div class="woord">'+esc(v[0])+'</div>'
+    +'<div class="onder">base form</div>';
+  wrap.appendChild(tg);
+  wrap.appendChild(el("p","vraag","Past simple en past participle"));
+  var grid=el("div","vervoeg"), velden=[];
+  [["past simple",v[1]],["past participle",v[2]]].forEach(function(p){
+    var rij=el("div","vrij");
+    rij.appendChild(el("div","nl",p[0]));
+    var inp=document.createElement("input"); inp.type="text";
+    inp.setAttribute("autocapitalize","off"); inp.setAttribute("autocorrect","off");
+    inp.setAttribute("autocomplete","off"); inp.setAttribute("spellcheck","false");
+    inp.placeholder="…"; inp.setAttribute("aria-label",p[0]);
+    rij.appendChild(inp); velden.push({inp:inp, juist:p[1]});
+    grid.appendChild(rij);
+  });
+  wrap.appendChild(grid);
+  var knop=el("button","btn","Nakijken"); knop.type="button";
+  knop.addEventListener("click",function(){
+    var goed=0;
+    velden.forEach(function(f){
+      var mag=f.juist.split("/").map(kaal);
+      var u=mag.indexOf(kaal(f.inp.value))>=0;
+      f.inp.classList.add(u?"goed":"fout"); f.inp.disabled=true;
+      if(!u)f.inp.value=f.juist; else goed++;
+    });
+    knop.remove();
+    var alles=goed===velden.length;
+    fb(wrap,alles,"<b>"+esc(v[0])+"</b> · "+esc(v[1])+" · "+esc(v[2]),
+      "Ander werkwoord", verbsStart);
+  });
+  wrap.appendChild(knop);
+  body.appendChild(wrap);
+}
+$("#vbNieuw").addEventListener("click",verbsStart);
+
+/* ---------- word order ---------- */
+var O={n:0,goed:0};
+function volgordeStart(){
+  gloed("var(--eng2)");
+  var body=$("#oBody"); body.innerHTML="";
+  $("#oPos").textContent=O.n+1; $("#oGoed").textContent=O.goed;
+  var lijst=wereldNu().volgorde;
+  if(!lijst.length){
+    body.appendChild(leegBlok("Deze versie heeft geen zinsoefeningen. "
+      +"Schakel bij het logo linksboven over naar de toets."));
+    return;
+  }
+  var z=lijst[rnd(lijst.length)];
+  var wrap=el("div"); wrap.style.display="grid"; wrap.style.gap="13px";
+  wrap.style.setProperty("--c","var(--eng2)");
+  wrap.appendChild(el("p","vraag","Zet de zin in de juiste volgorde"));
+  var vak=el("div","zinvak leeg");
+  var bank=el("div","bank");
+  var gekozen=[];
+  function ververs(){
+    vak.classList.toggle("leeg",!gekozen.length);
+  }
+  shuffle(z[0].split(" / ")).forEach(function(stuk){
+    var b=el("button","wtegel",stuk); b.type="button";
+    b.addEventListener("click",function(){
+      if(b.classList.contains("weg"))return;
+      b.classList.add("weg");
+      var c=el("button","wtegel",stuk); c.type="button";
+      c.addEventListener("click",function(){
+        c.remove(); b.classList.remove("weg");
+        gekozen=gekozen.filter(function(x){return x!==c}); ververs();
+      });
+      vak.appendChild(c); gekozen.push(c); ververs();
+    });
+    bank.appendChild(b);
+  });
+  wrap.appendChild(vak);
+  wrap.appendChild(bank);
+  var knop=el("button","btn","Nakijken"); knop.type="button";
+  knop.addEventListener("click",function(){
+    if(!gekozen.length)return;
+    var mijn=gekozen.map(function(c){return c.textContent}).join(" ");
+    var goed=kaal(mijn)===kaal(z[1]);
+    if(goed)O.goed++;
+    knop.remove();
+    fb(wrap,goed,"<b>"+esc(z[1])+"</b>"+(goed?"":"<br>Jij schreef: "+esc(mijn)),
+      "Volgende", function(){O.n++; volgordeStart()});
+  });
+  wrap.appendChild(knop);
+  body.appendChild(wrap);
+}
+$("#oNieuw").addEventListener("click",volgordeStart);
+
+/* ---------- matchen ---------- */
+var M={sel:null,over:0};
+function matchenStart(){
+  gloed("var(--eng)");
+  var body=$("#mBody"); body.innerHTML="";
+  var lijst=shuffle(paren()).slice(0,6);
+  if(lijst.length<2){body.appendChild(leegBlok("Te weinig items om te matchen.")); return}
+  M.sel=null; M.over=lijst.length;
+  var tegels=[];
+  lijst.forEach(function(k){
+    tegels.push({k:k.sid+"|"+k.a, t:vraagKant(k)});
+    tegels.push({k:k.sid+"|"+k.a, t:antwoordKant(k)});
+  });
+  var grid=el("div","mgrid");
+  shuffle(tegels).forEach(function(x){
+    var b=el("button","mt",x.t); b.type="button"; b.dataset.k=x.k;
+    b.addEventListener("click",function(){
+      if(b.classList.contains("weg"))return;
+      if(!M.sel){M.sel=b; b.classList.add("sel"); return}
+      if(M.sel===b){b.classList.remove("sel"); M.sel=null; return}
+      if(M.sel.dataset.k===b.dataset.k){
+        M.sel.classList.remove("sel"); M.sel.classList.add("weg"); b.classList.add("weg");
+        M.sel=null; M.over--;
+        if(!M.over)setTimeout(function(){
+          var d=el("div","fb g");
+          d.appendChild(el("div","fbt","Alles gekoppeld"));
+          var nx=el("button","btn","Nieuwe ronde"); nx.type="button";
+          nx.addEventListener("click",matchenStart);
+          d.appendChild(nx); body.appendChild(d);
+        },320);
+      } else {
+        b.classList.add("wrong"); M.sel.classList.remove("sel");
+        setTimeout(function(){b.classList.remove("wrong")},420);
+        M.sel=null;
+      }
+    });
+    grid.appendChild(b);
+  });
+  body.appendChild(grid);
+}
+$("#mNieuw").addEventListener("click",matchenStart);
+
+/* ---------- toets ---------- */
+var T={rij:[],i:0,goed:0};
+function toetsStart(){
+  gloed("var(--eng)");
+  var lijst=shuffle(paren()).slice(0,15);
+  T.rij=lijst; T.i=0; T.goed=0;
+  $("#tTot").textContent=T.rij.length;
+  toetsVraag();
+}
+function toetsVraag(){
+  var body=$("#tBody"); body.innerHTML="";
+  $("#tPos").textContent=Math.min(T.i+1,T.rij.length);
+  $("#tGoed").textContent=T.goed;
+  $("#tBar").style.width=(T.rij.length?T.i/T.rij.length*100:0)+"%";
+  if(!T.rij.length){body.appendChild(leegBlok("Zet een onderdeel aan bij het tandwiel.")); return}
+  if(T.i>=T.rij.length){
+    $("#tBar").style.width="100%";
+    var pct=Math.round(T.goed/T.rij.length*100);
+    var d=el("div","fb "+(pct>=70?"g":"b"));
+    d.appendChild(el("div","fbt",T.goed+" van de "+T.rij.length+" juist"));
+    d.appendChild(el("div","fbs",pct>=90?"Dat zit erin."
+      :pct>=70?"Bijna. Neem de fouten nog eens door bij Kaarten."
+      :"Nog even oefenen met Kaarten en Meerkeuze."));
+    var nx=el("button","btn","Nieuwe toets"); nx.type="button";
+    nx.addEventListener("click",toetsStart);
+    d.appendChild(nx); body.appendChild(d);
+    return;
+  }
+  var k=T.rij[T.i], fout=andere(k,3);
+  if(fout.length<2){T.i++; toetsVraag(); return}
+  body.appendChild(meerkeuze({
+    kop:k.soort==="regel"?"grammatica":"woordenschat",
+    woord:vraagKant(k), onder:k.titel,
+    vraag:k.soort==="regel"?"Wat is het juiste antwoord?":"Wat betekent dit?",
+    kleur:k.soort==="regel"?"var(--eng2)":"var(--eng)",
+    juist:antwoordKant(k), fout:fout,
+    na:function(goed,wrap){
+      if(goed)T.goed++;
+      merk(k,goed);
+      fb(wrap,goed,"<b>"+esc(vraagKant(k))+"</b> — "+esc(antwoordKant(k)),
+        "Volgende", function(){T.i++; toetsVraag()});
+    }
+  }));
+}
+$("#tNieuw").addEventListener("click",toetsStart);
+
+/* ---------- voortgang ---------- */
+function tekenVoortgang(){
+  gloed("var(--eng)");
+  var body=$("#vgBody"); body.innerHTML="";
+  var lijst=paren();
+  var vol=0,bezig=0,niet=0;
+  lijst.forEach(function(k){var b=P(k).b; if(b>=5)vol++; else if(b>0)bezig++; else niet++});
+  var stats=el("div","stats");
+  [[vol,"gekend"],[bezig,"bezig"],[niet,"nog niet"]].forEach(function(p){
+    var s=el("div","stat");
+    s.appendChild(el("b",null,String(p[0])));
+    s.appendChild(el("span",null,p[1]));
+    stats.appendChild(s);
+  });
+  body.appendChild(stats);
+  var grid=el("div","pgrid"); grid.style.marginTop="12px";
+  lijst.forEach(function(k){
+    var c=el("div","pcel");
+    var vul=el("i"); vul.style.height=(P(k).b/5*100)+"%"; c.appendChild(vul);
+    c.appendChild(el("span",null,k.a.length>16?k.a.slice(0,15)+"…":k.a));
+    c.title=k.a+" — "+P(k).b+"/5";
+    grid.appendChild(c);
+  });
+  body.appendChild(grid);
+  var note=el("p","hint","Vijf keer goed is vol; fout zet het een stap terug.");
+  note.style.marginTop="10px"; body.appendChild(note);
+}
+
+/* ---------- samenvatting ---------- */
+function tekenSamenvatting(){
+  gloed("var(--eng2)");
+  var body=$("#svBody"); body.innerHTML="";
+  var sets=gekozenSets(), n=0;
+  sets.forEach(function(s){n+=s.items.length});
+  var w=wereldNu();
+  $("#svInfo").textContent=sets.length+" onderdelen · "+n+" items"
+    +(w.verbs.length?" · "+w.verbs.length+" werkwoorden":"")
+    +(w.volgorde.length?" · "+w.volgorde.length+" zinnen":"");
+  var wrap=el("div","slijst");
+  /* het korte overzicht krijgt de vorm van het blad zelf */
+  if(w.overzicht&&w.overzicht.length){
+    var ov=el("div","svak"); ov.style.setProperty("--c","var(--eng2)");
+    var ok=el("div","skop");
+    ok.appendChild(el("b",null,"Kort overzicht"));
+    ok.appendChild(el("span",null,w.overzicht.length+" onderwerpen"));
+    ov.appendChild(ok);
+    w.overzicht.forEach(function(o){
+      var k=el("div","okaart"); k.style.setProperty("--c","var(--eng2)");
+      k.appendChild(el("b",null,o[0]));
+      [["wanneer",o[1],""],["hoe",o[2],""],["voorbeeld",o[3],"vb"]].forEach(function(r){
+        var rij=el("div","orij"+(r[2]?" "+r[2]:""));
+        rij.appendChild(el("i",null,r[0]));
+        rij.appendChild(el("span",null,r[1]));
+        k.appendChild(rij);
+      });
+      ov.appendChild(k);
+    });
+    wrap.appendChild(ov);
+  }
+  sets.forEach(function(st){
+    if(w.overzicht&&w.overzicht.length&&st.titel==="Kort overzicht")return;
+    var vak=el("div","svak");
+    vak.style.setProperty("--c",st.soort==="regel"?"var(--eng2)":"var(--eng)");
+    var kop=el("div","skop");
+    kop.appendChild(el("b",null,st.titel));
+    kop.appendChild(el("span",null,st.items.length+" items"));
+    vak.appendChild(kop);
+    st.items.forEach(function(p){
+      var r=el("div","srij");
+      r.appendChild(el("div","l",p[0]));
+      var rechts=el("div","r",p[1]);
+      if(p[2])rechts.appendChild(el("em",null,p[2]));
+      r.appendChild(rechts);
+      vak.appendChild(r);
+    });
+    wrap.appendChild(vak);
+  });
+  if(w.verbs.length){
+    var vv=el("div","svak drie"); vv.style.setProperty("--c","var(--eng3)");
+    var vk=el("div","skop");
+    vk.appendChild(el("b",null,"Irregular verbs"));
+    vk.appendChild(el("span",null,w.verbs.length+" werkwoorden"));
+    vv.appendChild(vk);
+    w.verbs.forEach(function(v){
+      var r=el("div","srij");
+      r.appendChild(el("div","l",v[0]));
+      r.appendChild(el("div","r",v[1]));
+      r.appendChild(el("div","r",v[2]));
+      vv.appendChild(r);
+    });
+    wrap.appendChild(vv);
+  }
+  if(w.volgorde.length){
+    var zv=el("div","svak"); zv.style.setProperty("--c","var(--eng2)");
+    var zk=el("div","skop");
+    zk.appendChild(el("b",null,"Word order"));
+    zk.appendChild(el("span",null,w.volgorde.length+" zinnen"));
+    zv.appendChild(zk);
+    w.volgorde.forEach(function(z){
+      var r=el("div","srij");
+      r.appendChild(el("div","l",z[0]));
+      r.appendChild(el("div","r",z[1]));
+      zv.appendChild(r);
+    });
+    wrap.appendChild(zv);
+  }
+  body.appendChild(wrap);
+}
+$("#btnPrint").addEventListener("click",function(){window.print()});
+
+/* ---------- werelden, onderdelen, richting ---------- */
+function tekenWerelden(){
+  var lijst=$("#wLijst"); lijst.innerHTML="";
+  WERELDEN.forEach(function(w){
+    var actief=(w.id===S.wereld);
+    var kaart=el("div","bkaart"+(actief?" actief":""));
+    var t=el("div","btitel");
+    t.appendChild(el("b",null,w.naam));
+    if(w.datum)t.appendChild(el("span","bdatum",w.datum));
+    if(actief)t.appendChild(el("span","bnu","nu actief"));
+    kaart.appendChild(t);
+    kaart.appendChild(el("span","bsub",w.onder));
+    var n=0; w.groepen.forEach(function(g){n+=g.w.length});
+    var stuk=[n+" items", w.groepen.length+" onderdelen"];
+    if(w.verbs.length)stuk.push(w.verbs.length+" werkwoorden");
+    if(w.volgorde.length)stuk.push(w.volgorde.length+" zinnen");
+    kaart.appendChild(el("div","bmeta",stuk.join(" · ")));
+    var knop=el("button",null,actief?"Je oefent dit nu":"Hierop overschakelen");
+    knop.type="button"; knop.className="bswitch"+(actief?" uit":"");
+    knop.addEventListener("click",function(){
+      if(actief)return;
+      S.sels[S.wereld]=S.groepen;
+      S.wereld=w.id; bouwSets(); S.kOrde=null; save();
+      $("#wkiezer").hidden=true;
+      tekenGroepChips(); werkSelbarBij(); zetModus(S.mode);
+    });
+    kaart.appendChild(knop);
+    lijst.appendChild(kaart);
+  });
+}
+$("#btnWereld").addEventListener("click",function(){$("#wkiezer").hidden=false; tekenWerelden()});
+$("#wKlaar").addEventListener("click",function(){$("#wkiezer").hidden=true});
+$("#wkiezer").addEventListener("click",function(e){if(e.target===this)this.hidden=true});
+
+function tekenGroepChips(){
+  var box=$("#groepChips"); box.innerHTML="";
+  SETS.forEach(function(st){
+    var b=el("chip"==="x"?"span":"button","chip",st.titel+" ("+st.items.length+")");
+    b.type="button";
+    b.setAttribute("aria-pressed",String(!!S.groepen[st.id]));
+    b.addEventListener("click",function(){
+      var aan=!S.groepen[st.id];
+      var n=0; SETS.forEach(function(x){if(S.groepen[x.id])n++});
+      if(!aan&&n<=1)return;
+      S.groepen[st.id]=aan?1:0;
+      b.setAttribute("aria-pressed",String(aan));
+      S.kOrde=null; save(); werkSelbarBij(); zetModus(S.mode);
+    });
+    box.appendChild(b);
+  });
+}
+function werkSelbarBij(){
+  var st=gekozenSets(), n=0;
+  st.forEach(function(s){n+=s.items.length});
+  var w=wereldNu();
+  $("#selTitel").textContent=(st.length===SETS.length)?"Alle onderdelen"
+    :(st.length===1?st[0].titel:st.length+" onderdelen");
+  $("#selAantal").textContent=n+" items · "+st.length+(st.length===1?" onderdeel":" onderdelen");
+  $("#subkop").textContent=(w.datum?w.datum+" · ":"Engels · ")+n+" items";
+  $("#btnWereld").classList.toggle("tijdelijk",w.id!==WERELDEN[0].id);
+  $$("#soortSeg button").forEach(function(b){
+    b.setAttribute("aria-pressed",String(b.dataset.s===S.soort));
+  });
+  $$("#richting button").forEach(function(b){
+    b.setAttribute("aria-pressed",String(b.dataset.d===S.richting));
+  });
+}
+$$("#soortSeg button").forEach(function(b){
+  b.addEventListener("click",function(){
+    S.soort=b.dataset.s; S.kOrde=null; save(); werkSelbarBij(); zetModus(S.mode);
+  });
+});
+$$("#richting button").forEach(function(b){
+  b.addEventListener("click",function(){
+    S.richting=b.dataset.d; save(); werkSelbarBij(); zetModus(S.mode);
+  });
+});
+$("#gear").addEventListener("click",function(){
+  var open=$("#panel").hidden;
+  $("#panel").hidden=!open;
+  this.setAttribute("aria-expanded",String(open));
+});
+$("#btnReset").addEventListener("click",function(){
+  if(!confirm("Alle voortgang wissen?"))return;
+  S.prog={}; save(); zetModus(S.mode);
+});
+
+/* ---------- tabbladen ---------- */
+var START={kaarten:kaartenStart, keuze:keuzeStart, schrijven:schrijvenStart,
+  verbs:verbsStart, volgorde:volgordeStart, matchen:matchenStart,
+  toets:toetsStart, voortgang:tekenVoortgang, samenvatting:tekenSamenvatting};
+function zetModus(m){
+  if(!START[m])m="kaarten";
+  S.mode=m; save();
+  $$(".tab").forEach(function(t){t.setAttribute("aria-selected",String(t.dataset.m===m))});
+  $$(".view").forEach(function(v){
+    var aan=v.id==="v-"+m;
+    v.hidden=!aan; v.classList.toggle("in",aan);
+  });
+  START[m]();
+}
+$$(".tab").forEach(function(t){
+  t.addEventListener("click",function(){zetModus(t.dataset.m)});
+});
+
+/* ---------- start ---------- */
+if(!WERELDEN.some(function(w){return w.id===S.wereld}))S.wereld=WERELDEN[0].id;
+bouwSets();
+tekenGroepChips();
+werkSelbarBij();
+zetModus(S.mode&&START[S.mode]?S.mode:"kaarten");
+var eerder=false;
+try{
+  eerder=!!sessionStorage.getItem("ontrack-gekozen");
+  sessionStorage.setItem("ontrack-gekozen","1");
+}catch(e){}
+if(!eerder){$("#wkiezer").hidden=false; tekenWerelden()}
+</script>
+<!--thema-js-start-->
+<script>
+/* ---------- themakiezer ---------- */
+(function(){
+  var NAMEN={"standaard":"Neon", "synthwave":"Synthwave", "neonijs":"Neon ijs", "gifgroen":"Gifgroen", "magenta":"Magenta", "vuur":"Vuur", "terminal":"Terminal", "middernacht":"Middernacht", "leisteen":"Leisteen", "indigo":"Indigo", "indigonacht":"Indigo nacht", "mist":"Mist", "grasgroen":"Grasgroen", "notitieblok":"Notitieblok", "sepia":"Sepia", "zonsopgang":"Zonsopgang"};
+  var balk=document.getElementById("themabalk");
+  if(!balk)return;
+  var knoppen=[].slice.call(balk.querySelectorAll(".themaknop"));
+  var naamvak=document.getElementById("themanaam");
+
+  function huidig(){
+    try{return localStorage.getItem("leren-thema")||"standaard"}catch(e){return "standaard"}
+  }
+  function toon(t){
+    if(t==="standaard")document.documentElement.removeAttribute("data-thema");
+    else document.documentElement.setAttribute("data-thema",t);
+    var meta=document.querySelector('meta[name="theme-color"]');
+    if(meta){
+      var kleur=getComputedStyle(document.documentElement)
+        .getPropertyValue("--ink").trim();
+      if(kleur)meta.setAttribute("content",kleur);
+    }
+    knoppen.forEach(function(b){
+      b.setAttribute("aria-pressed",String(b.dataset.thema===t));
+    });
+    if(naamvak)naamvak.textContent=NAMEN[t]||"";
+  }
+  function kies(t){
+    try{localStorage.setItem("leren-thema",t)}catch(e){}
+    toon(t);
+  }
+  knoppen.forEach(function(b){
+    b.addEventListener("click",function(){kies(b.dataset.thema)});
+  });
+  /* een andere tab of app in dezelfde map heeft het thema gewijzigd */
+  window.addEventListener("storage",function(e){
+    if(e.key==="leren-thema")toon(huidig());
+  });
+  toon(huidig());
+})();
+</script>
+<!--thema-js-eind-->
+</body>
+</html>
