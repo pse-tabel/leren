@@ -20,7 +20,13 @@ VAKKEN = [
     ("duits",            os.path.join(BRON, "duits")),
     ("nederlands",       os.path.join(BRON, "nederlands")),
     ("engels",           os.path.join(BRON, "engels")),
+    ("wiskunde",         os.path.join(BRON, "wiskunde-menu")),
+    ("wiskunde/parabolen", os.path.join(BRON, "wiskunde-parabolen")),
 ]
+
+# Deze app heeft zijn eigen kleurenschema met dezelfde variabelenamen maar een
+# andere betekenis (--ink is daar de tekstkleur). De themakiezer zou hem slopen.
+ZONDER_THEMA = {"wiskunde/parabolen"}
 
 BESTANDEN = ["index.html", "manifest.webmanifest", "sw.js", "icon-180.png", "icon-512.png"]
 
@@ -55,8 +61,11 @@ for map_naam, bronmap in VAKKEN:
         extra = ""
         if naam == "index.html":
             extra = "  (datum gezet)" if stempel_erin(naar) else "  (GEEN datumregel)"
-            thema.zet_erin(naar)
-            extra += " + themakiezer"
+            if map_naam in ZONDER_THEMA:
+                extra += "  (eigen kleuren)"
+            else:
+                thema.zet_erin(naar)
+                extra += " + themakiezer"
         print("   %-24s %7d bytes%s" % (naam, os.path.getsize(naar), extra))
 
 if stempel_erin(os.path.join(HIER, "index.html")):

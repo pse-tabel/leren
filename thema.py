@@ -20,10 +20,10 @@ bouw_alles.py roept zet_erin() aan voor elke pagina die het kopieert.
 
 # Welke accentnaam in welke app hetzelfde vakje is.
 ALIAS = {
-    "prim": ["hub", "cyan", "voc", "metaal", "goud", "vak1", "ned", "eng"],
-    "twee": ["paars", "gram", "nietmetaal", "vak2", "ned2", "eng2"],
+    "prim": ["hub", "cyan", "voc", "metaal", "goud", "vak1", "ned", "eng", "wisk"],
+    "twee": ["paars", "gram", "nietmetaal", "vak2", "ned2", "eng2", "wisk2"],
     "drie": ["werkw", "edelgas", "vak3", "ned3", "eng3"],
-    "vier": ["zin", "vak4", "vak5"],
+    "vier": ["zin", "vak4", "vak5", "vak6"],
     "ok": ["ok"],
     "bad": ["bad"],
 }
