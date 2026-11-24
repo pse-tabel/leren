@@ -374,6 +374,9 @@ input.goed{border-color:var(--ok); color:var(--ok)} input.fout{border-color:var(
 .vrij input.fout{border-color:var(--bad); color:var(--bad)}
 .vrij .vast{font-size:15px; font-weight:600; color:var(--muted2); padding:10px 12px;
   border:1px dashed var(--line); border-radius:10px}
+
+/* de uitspraak tussen rechte haken, zoals in de samenvatting */
+.uitspr{font-family:var(--fm); font-size:.85em; color:var(--goud); letter-spacing:.02em}
 /*thema-css-start*/
 /* de thema's van de site: neutralen en accenten in één keer */
 :root[data-thema="synthwave"]{
@@ -1461,16 +1464,3937 @@ input.goed{border-color:var(--ok); color:var(--ok)} input.fout{border-color:var(
   </div>
 </div>
 
-<div class="bijwerkvoet">Laatst bijgewerkt <b data-bijgewerkt>5 november 2026 · 02:27</b></div>
+<div class="bijwerkvoet">Laatst bijgewerkt <b data-bijgewerkt>24 november 2026 · 18:04</b></div>
 
 <script>
 /*data-start*/
 var WERELDEN=[
  {
-  "id": "kapitel1",
-  "naam": "Kapitel 1",
+  "id": "basis",
+  "naam": "Basis",
   "datum": "",
-  "onder": "De reeksen A, B1, C en I",
+  "onder": "Kapitel 1 en 2 in acht stappen, met de uitspraak erbij",
+  "pre": "b",
+  "groepen": [
+   {
+    "t": "Het stappenplan",
+    "w": [
+     [
+      "Stap 1 · Uitspraak",
+      "Eerst leren hoe Duits klinkt. Zonder dit lees je elk nieuw woord verkeerd.  (57 items)",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Stap 2 · Lidwoorden en voornaamwoorden",
+      "der, die, das en de persoonlijke voornaamwoorden. Hier hangt de rest van af.  (34 items)",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Stap 3 · Werkwoorden in de tegenwoordige tijd",
+      "De uitgangen, de uitzonderingen op de sisklank en op -d of -t, en de zes vormen van sein en haben.  (31 items)",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Stap 4 · Getallen",
+      "Van null tot twee miljoen. Let op sechzehn, siebzehn en dreißig.  (42 items)",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Stap 5 · Jezelf voorstellen",
+      "Het kennismakingsgesprek van begin tot eind, formeel en informeel.  (39 items)",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Stap 6 · Woordenschat Kapitel 1",
+      "Alle woordenlijsten van het eerste hoofdstuk, met lidwoord, meervoud en uitspraak.  (102 items)",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Stap 7 · Tijd en afspraken",
+      "De dagen, de dagdelen, de klok en hoe je een afspraak maakt of afwijst.  (53 items)",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Stap 8 · De stad en de weg",
+      "De woordenschat van de citytrip, de weg vragen en beschrijven, en de spelling.  (100 items)",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Hoe werk je dit af?",
+      "Doe de acht stappen in volgorde. Zet bij het tandwiel alleen de stap aan waar je mee bezig bent, dan oefen je niets anders.",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Wat ken je dan?",
+      "Kapitel 1 (Ich bin wie du) en Kapitel 2 (Ein Citytrip ist toll), met de uitspraak erbij.",
+      "",
+      "",
+      "",
+      ""
+     ]
+    ],
+    "vast": "de"
+   },
+   {
+    "t": "Stap 1 · Uitspraakregels",
+    "w": [
+     [
+      "ei",
+      "klinkt als ai, de Nederlandse ij",
+      "",
+      "",
+      "nein, heißen, Wein",
+      "[nain], [HAI-sen], [vain]"
+     ],
+     [
+      "ie",
+      "klinkt als een lange ie",
+      "",
+      "",
+      "wie, Dienstag",
+      "[vie], [DIENS-taak]"
+     ],
+     [
+      "eu / äu",
+      "klinkt als oi",
+      "",
+      "",
+      "neun, heute, läuft",
+      "[noin], [HOI-te], [loift]"
+     ],
+     [
+      "au",
+      "klinkt als au, zoals in auto",
+      "",
+      "",
+      "Haus, aus",
+      "[haus], [aus]"
+     ],
+     [
+      "ä",
+      "klinkt als e: kort als pet, lang als meet",
+      "",
+      "",
+      "Mädchen, Städte",
+      "[MEET-chen], [SJTE-te]"
+     ],
+     [
+      "ö",
+      "klinkt als de Nederlandse eu van deur",
+      "",
+      "",
+      "schön, Köln",
+      "[sjeun], [keuln]"
+     ],
+     [
+      "ü",
+      "klinkt als de Nederlandse uu van uur",
+      "",
+      "",
+      "müde, Tschüss",
+      "[MUU-de], [tsjuus]"
+     ],
+     [
+      "u",
+      "klinkt als oe",
+      "",
+      "",
+      "gut, Hunger",
+      "[goet], [HOENG-a]"
+     ],
+     [
+      "z / tz",
+      "klinkt als ts",
+      "",
+      "",
+      "zwei, zehn",
+      "[tsvai], [tseen]"
+     ],
+     [
+      "w",
+      "klinkt als v",
+      "",
+      "",
+      "wir, Woche",
+      "[vier], [VO-che]"
+     ],
+     [
+      "v",
+      "klinkt meestal als f",
+      "",
+      "",
+      "Vater, vier, viel",
+      "[FAA-ta], [fier], [fiel]"
+     ],
+     [
+      "s voor een klinker",
+      "klinkt als z",
+      "",
+      "",
+      "sie, sagen",
+      "[zie], [ZAA-gen]"
+     ],
+     [
+      "s / ss / ß",
+      "klinkt als een scherpe s",
+      "",
+      "",
+      "heißen, Straße",
+      "[HAI-sen], [SJTRAA-se]"
+     ],
+     [
+      "sch",
+      "klinkt als sj",
+      "",
+      "",
+      "Schule, schreiben",
+      "[SJOE-le], [SJRAI-ben]"
+     ],
+     [
+      "sp- / st- aan het begin",
+      "klinkt als sjp en sjt",
+      "",
+      "",
+      "sprechen, Stadt",
+      "[SJPRE-chen], [sjtat]"
+     ],
+     [
+      "tsch",
+      "klinkt als tsj",
+      "",
+      "",
+      "Tschüss",
+      "[tsjuus]"
+     ],
+     [
+      "ch na a, o, u, au",
+      "een harde ch, ruwe keelklank",
+      "",
+      "",
+      "Buch, acht, machen",
+      "[boech], [acht], [MA-chen]"
+     ],
+     [
+      "ch na e, i, ä, ö, ü, l, n, r",
+      "een zachte ch",
+      "",
+      "",
+      "ich, Mädchen, München",
+      "[ich], [MEET-chen], [MUUN-chen]"
+     ],
+     [
+      "chs",
+      "klinkt als ks",
+      "",
+      "",
+      "sechs",
+      "[zeks]"
+     ],
+     [
+      "-ig op het einde",
+      "klinkt als -ich",
+      "",
+      "",
+      "zwanzig",
+      "[TSVAN-tsich]"
+     ],
+     [
+      "-er op het einde",
+      "klinkt als een zwakke a",
+      "",
+      "",
+      "Vater, Zimmer",
+      "[FAA-ta], [TSIM-ma]"
+     ],
+     [
+      "-e op het einde",
+      "klinkt als een zwakke uh",
+      "",
+      "",
+      "Adresse",
+      "[a-DRE-se]"
+     ],
+     [
+      "b, d, g op het einde",
+      "klinken als p, t, k",
+      "",
+      "",
+      "Tag, Abend, Land",
+      "[taak], [AA-bent], [lant]"
+     ],
+     [
+      "h na een klinker",
+      "blijft stom en maakt de klinker lang",
+      "",
+      "",
+      "gehen, Jahr",
+      "[GEE-en], [jaar]"
+     ],
+     [
+      "qu",
+      "klinkt als kv",
+      "",
+      "",
+      "bequem",
+      "[be-KVEEM]"
+     ],
+     [
+      "De Duitse g",
+      "is hard zoals in goal, niet de zachte Vlaamse g",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Hoe lees je de uitspraak?",
+      "HOOFDLETTERS zijn de klemtoon; een dubbele letter is een lange klank",
+      "",
+      "",
+      "",
+      ""
+     ]
+    ],
+    "vast": "de"
+   },
+   {
+    "t": "Stap 1 · Het alfabet",
+    "w": [
+     [
+      "A",
+      "de letter a",
+      "",
+      "",
+      "",
+      "[aa]"
+     ],
+     [
+      "B",
+      "de letter b",
+      "",
+      "",
+      "",
+      "[bee]"
+     ],
+     [
+      "C",
+      "de letter c",
+      "",
+      "",
+      "",
+      "[tsee]"
+     ],
+     [
+      "D",
+      "de letter d",
+      "",
+      "",
+      "",
+      "[dee]"
+     ],
+     [
+      "E",
+      "de letter e",
+      "",
+      "",
+      "",
+      "[ee]"
+     ],
+     [
+      "F",
+      "de letter f",
+      "",
+      "",
+      "",
+      "[ef]"
+     ],
+     [
+      "G",
+      "de letter g, met harde g",
+      "",
+      "",
+      "",
+      "[gee]"
+     ],
+     [
+      "H",
+      "de letter h",
+      "",
+      "",
+      "",
+      "[haa]"
+     ],
+     [
+      "I",
+      "de letter i",
+      "",
+      "",
+      "",
+      "[ie]"
+     ],
+     [
+      "J",
+      "de letter j",
+      "",
+      "",
+      "",
+      "[jot]"
+     ],
+     [
+      "K",
+      "de letter k",
+      "",
+      "",
+      "",
+      "[kaa]"
+     ],
+     [
+      "L",
+      "de letter l",
+      "",
+      "",
+      "",
+      "[el]"
+     ],
+     [
+      "M",
+      "de letter m",
+      "",
+      "",
+      "",
+      "[em]"
+     ],
+     [
+      "N",
+      "de letter n",
+      "",
+      "",
+      "",
+      "[en]"
+     ],
+     [
+      "O",
+      "de letter o",
+      "",
+      "",
+      "",
+      "[oo]"
+     ],
+     [
+      "P",
+      "de letter p",
+      "",
+      "",
+      "",
+      "[pee]"
+     ],
+     [
+      "Q",
+      "de letter q",
+      "",
+      "",
+      "",
+      "[koe]"
+     ],
+     [
+      "R",
+      "de letter r",
+      "",
+      "",
+      "",
+      "[er]"
+     ],
+     [
+      "S",
+      "de letter s",
+      "",
+      "",
+      "",
+      "[es]"
+     ],
+     [
+      "T",
+      "de letter t",
+      "",
+      "",
+      "",
+      "[tee]"
+     ],
+     [
+      "U",
+      "de letter u",
+      "",
+      "",
+      "",
+      "[oe]"
+     ],
+     [
+      "V",
+      "de letter v",
+      "",
+      "",
+      "",
+      "[fau]"
+     ],
+     [
+      "W",
+      "de letter w",
+      "",
+      "",
+      "",
+      "[vee]"
+     ],
+     [
+      "X",
+      "de letter x",
+      "",
+      "",
+      "",
+      "[iks]"
+     ],
+     [
+      "Y",
+      "de letter y",
+      "",
+      "",
+      "",
+      "[UP-si-lon]"
+     ],
+     [
+      "Z",
+      "de letter z",
+      "",
+      "",
+      "",
+      "[tset]"
+     ],
+     [
+      "Ä",
+      "de a-umlaut, open ee",
+      "",
+      "",
+      "",
+      "[ee]"
+     ],
+     [
+      "Ö",
+      "de o-umlaut",
+      "",
+      "",
+      "",
+      "[eu]"
+     ],
+     [
+      "Ü",
+      "de u-umlaut",
+      "",
+      "",
+      "",
+      "[uu]"
+     ],
+     [
+      "ß",
+      "de scharfes S, een scherpe s",
+      "",
+      "",
+      "",
+      "[es-TSET]"
+     ]
+    ],
+    "vast": "de"
+   },
+   {
+    "t": "Stap 2 · Lidwoorden",
+    "w": [
+     [
+      "der",
+      "het bepaald lidwoord bij een mannelijk woord",
+      "",
+      "",
+      "",
+      "[deer]"
+     ],
+     [
+      "die",
+      "het bepaald lidwoord bij een vrouwelijk woord",
+      "",
+      "",
+      "",
+      "[die]"
+     ],
+     [
+      "das",
+      "het bepaald lidwoord bij een onzijdig woord",
+      "",
+      "",
+      "",
+      "[das]"
+     ],
+     [
+      "die (meervoud)",
+      "het meervoud is altijd die",
+      "",
+      "",
+      "",
+      "[die]"
+     ],
+     [
+      "ein",
+      "het onbepaald lidwoord bij der en das",
+      "",
+      "",
+      "",
+      "[ain]"
+     ],
+     [
+      "eine",
+      "het onbepaald lidwoord bij die",
+      "",
+      "",
+      "",
+      "[AI-ne]"
+     ],
+     [
+      "Heeft ein een meervoud?",
+      "nee, in het meervoud staat er geen lidwoord",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "kein",
+      "geen; je verbuigt het net zoals ein",
+      "",
+      "",
+      "Lea und Ferdinand sind keine Geschwister.",
+      "[kain]"
+     ],
+     [
+      "einen",
+      "na een werkwoord met lijdend voorwerp wordt der een",
+      "",
+      "",
+      "Ich habe einen Bruder.",
+      "[AI-nen]"
+     ],
+     [
+      "Welke uitgangen zijn vrouwelijk?",
+      "-schaft, -heit, -keit, -ion en -ung krijgen die",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Wat doet -chen?",
+      "het maakt een verkleinwoord, en dat is altijd das",
+      "",
+      "",
+      "das Mädchen",
+      "[das MEET-chen]"
+     ],
+     [
+      "Wat leer je altijd mee?",
+      "het lidwoord, samen met het zelfstandig naamwoord",
+      "",
+      "",
+      "",
+      ""
+     ]
+    ],
+    "vast": "de"
+   },
+   {
+    "t": "Stap 2 · Voornaamwoorden",
+    "w": [
+     [
+      "ich",
+      "ik",
+      "",
+      "",
+      "",
+      "[ich]"
+     ],
+     [
+      "du",
+      "jij, je",
+      "",
+      "",
+      "",
+      "[doe]"
+     ],
+     [
+      "er",
+      "hij",
+      "",
+      "",
+      "",
+      "[eer]"
+     ],
+     [
+      "sie",
+      "zij",
+      "",
+      "",
+      "",
+      "[zie]"
+     ],
+     [
+      "es",
+      "het",
+      "",
+      "",
+      "",
+      "[es]"
+     ],
+     [
+      "wir",
+      "wij, we",
+      "",
+      "",
+      "",
+      "[vier]"
+     ],
+     [
+      "ihr",
+      "jullie",
+      "",
+      "",
+      "",
+      "[ier]"
+     ],
+     [
+      "sie (meervoud)",
+      "zij",
+      "",
+      "",
+      "",
+      "[zie]"
+     ],
+     [
+      "Sie",
+      "u, de beleefdheidsvorm",
+      "",
+      "",
+      "",
+      "[zie]"
+     ],
+     [
+      "dein",
+      "jouw",
+      "",
+      "",
+      "",
+      "[dain]"
+     ],
+     [
+      "Ihr",
+      "uw, altijd met hoofdletter",
+      "",
+      "",
+      "",
+      "[ier]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 2 · Sie of du?",
+    "w": [
+     [
+      "Wanneer gebruik je Sie?",
+      "tegenover onbekenden, collega's, buren en bekenden met wie je niet vertrouwelijk omgaat",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Wanneer gebruik je du?",
+      "tegenover kinderen, familie, vrienden en leeftijdsgenoten",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Hoe schrijf je Sie?",
+      "altijd met een hoofdletter",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Wat doe je bij twijfel?",
+      "kies Sie en wacht af of de ander ook de beleefdheidsvorm gebruikt",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "siezen",
+      "Sie zeggen tegen iemand",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "duzen",
+      "du zeggen tegen iemand",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Hoe combineer je Sie?",
+      "met een meervoudsvorm: u bent = Sie sind, niet Sie ist",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Wie heißt du?",
+      "Hoe heet je?",
+      "",
+      "",
+      "",
+      "[vie haist doe]"
+     ],
+     [
+      "Wie heißen Sie?",
+      "Hoe heet u?",
+      "",
+      "",
+      "",
+      "[vie HAI-sen zie]"
+     ],
+     [
+      "Wie geht's dir?",
+      "Hoe gaat het met jou?",
+      "",
+      "",
+      "",
+      "[vie geets dier]"
+     ],
+     [
+      "Wie geht's Ihnen?",
+      "Hoe gaat het met u?",
+      "",
+      "",
+      "",
+      "[vie geets IE-nen]"
+     ]
+    ],
+    "vast": "de"
+   },
+   {
+    "t": "Stap 3 · De regels",
+    "w": [
+     [
+      "De uitgangen van een gewoon werkwoord",
+      "stam + -e, -st, -t, -en, -t, -en, -en",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Wat gebeurt er bij een stam op een sisklank?",
+      "bij du komt er alleen -t bij: du heißt, du reist, du passt, du sitzt, du mixt",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Welke letters zijn een sisklank?",
+      "ß, s, z en x",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Wat gebeurt er bij een stam op -d of -t?",
+      "du krijgt -est, en er/sie/es en ihr krijgen -et: du findest, er antwortet",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Welke werkwoorden zijn sterk?",
+      "bleiben, heißen, kommen, schreiben, sein, sprechen, haben, gehen, kennen, sich treffen, beginnen, bieten, essen, finden, können, nehmen, übertreiben, bitten",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "De Präsens van sein",
+      "bin · bist · ist · sind · seid · sind",
+      "",
+      "",
+      "",
+      "[bin · bist · ist · zint · zait · zint]"
+     ],
+     [
+      "De Präsens van haben",
+      "habe · hast · hat · haben · habt · haben",
+      "",
+      "",
+      "",
+      "[HAA-be · hast · hat · HAA-ben · haapt · HAA-ben]"
+     ],
+     [
+      "De Präsens van wohnen",
+      "wohne · wohnst · wohnt · wohnen · wohnt · wohnen",
+      "",
+      "",
+      "",
+      "[VOO-ne · voonst · voont · VOO-nen · voont · VOO-nen]"
+     ],
+     [
+      "De Präsens van heißen",
+      "heiße · heißt · heißt · heißen · heißt · heißen",
+      "",
+      "",
+      "",
+      "[HAI-se · haist · haist · HAI-sen · haist · HAI-sen]"
+     ],
+     [
+      "De Präsens van finden",
+      "finde · findest · findet · finden · findet · finden",
+      "",
+      "",
+      "",
+      "[FIN-de · FIN-dest · FIN-det · FIN-den · FIN-det · FIN-den]"
+     ],
+     [
+      "De Präsens van antworten",
+      "antworte · antwortest · antwortet · antworten · antwortet · antworten",
+      "",
+      "",
+      "",
+      "[ANT-vor-te · ANT-vor-test · ANT-vor-tet · ANT-vor-ten]"
+     ],
+     [
+      "Wat schrijf je na de aanspreking in een brief?",
+      "geen hoofdletter, anders dan in het Nederlands: Lieber Malik, nun habe ich …",
+      "",
+      "",
+      "",
+      ""
+     ]
+    ],
+    "vast": "de"
+   },
+   {
+    "t": "Stap 3 · Zinnen met sein en haben",
+    "w": [
+     [
+      "ich bin groß",
+      "ik ben groot",
+      "",
+      "",
+      "",
+      "[ich bin groos]"
+     ],
+     [
+      "du bist klein",
+      "jij bent klein",
+      "",
+      "",
+      "",
+      "[doe bist klain]"
+     ],
+     [
+      "er ist alt",
+      "hij is oud",
+      "",
+      "",
+      "",
+      "[eer ist alt]"
+     ],
+     [
+      "sie ist jung",
+      "zij is jong",
+      "",
+      "",
+      "",
+      "[zie ist joeng]"
+     ],
+     [
+      "es ist schön",
+      "het is mooi",
+      "",
+      "",
+      "",
+      "[es ist sjeun]"
+     ],
+     [
+      "wir sind glücklich",
+      "wij zijn gelukkig",
+      "",
+      "",
+      "",
+      "[vier zint GLUUK-lich]"
+     ],
+     [
+      "ihr seid böse",
+      "jullie zijn boos",
+      "",
+      "",
+      "",
+      "[ier zait BEU-ze]"
+     ],
+     [
+      "sie sind müde",
+      "zij zijn moe",
+      "",
+      "",
+      "",
+      "[zie zint MUU-de]"
+     ],
+     [
+      "Sie sind unglücklich",
+      "u bent ongelukkig",
+      "",
+      "",
+      "",
+      "[zie zint OEN-gluuk-lich]"
+     ],
+     [
+      "ich habe einen Bruder",
+      "ik heb een broer",
+      "",
+      "",
+      "",
+      "[ich HAA-be AI-nen BROE-da]"
+     ],
+     [
+      "du hast ein Haus",
+      "jij hebt een huis",
+      "",
+      "",
+      "",
+      "[doe hast ain haus]"
+     ],
+     [
+      "sie hat eine Schwester",
+      "zij heeft een zus",
+      "",
+      "",
+      "",
+      "[zie hat AI-ne SJVES-ta]"
+     ],
+     [
+      "wir haben Haustiere",
+      "wij hebben huisdieren",
+      "",
+      "",
+      "",
+      "[vier HAA-ben HAUS-tie-re]"
+     ],
+     [
+      "sie haben Hunger",
+      "zij hebben honger",
+      "",
+      "",
+      "",
+      "[zie HAA-ben HOENG-a]"
+     ],
+     [
+      "Sie haben Glück",
+      "u hebt geluk",
+      "",
+      "",
+      "",
+      "[zie HAA-ben gluuk]"
+     ],
+     [
+      "Hast du Geschwister?",
+      "Heb je broers of zussen?",
+      "",
+      "",
+      "",
+      "[hast doe ge-SJVIS-ta]"
+     ],
+     [
+      "Ja, ich habe Geschwister.",
+      "Ja, ik heb broers en zussen.",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Nein, Geschwister habe ich nicht.",
+      "Nee, broers en zussen heb ik niet.",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Habt ihr Hunger?",
+      "Hebben jullie honger?",
+      "",
+      "",
+      "",
+      "[haapt ier HOENG-a]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 4 · Getallen 0 tot 20",
+    "w": [
+     [
+      "null",
+      "0",
+      "",
+      "",
+      "",
+      "[noel]"
+     ],
+     [
+      "eins",
+      "1",
+      "",
+      "",
+      "",
+      "[ains]"
+     ],
+     [
+      "zwei",
+      "2",
+      "",
+      "",
+      "",
+      "[tsvai]"
+     ],
+     [
+      "drei",
+      "3",
+      "",
+      "",
+      "",
+      "[drai]"
+     ],
+     [
+      "vier",
+      "4",
+      "",
+      "",
+      "",
+      "[fier]"
+     ],
+     [
+      "fünf",
+      "5",
+      "",
+      "",
+      "",
+      "[fuunf]"
+     ],
+     [
+      "sechs",
+      "6",
+      "",
+      "",
+      "",
+      "[zeks]"
+     ],
+     [
+      "sieben",
+      "7",
+      "",
+      "",
+      "",
+      "[ZIE-ben]"
+     ],
+     [
+      "acht",
+      "8",
+      "",
+      "",
+      "",
+      "[acht]"
+     ],
+     [
+      "neun",
+      "9",
+      "",
+      "",
+      "",
+      "[noin]"
+     ],
+     [
+      "zehn",
+      "10",
+      "",
+      "",
+      "",
+      "[tseen]"
+     ],
+     [
+      "elf",
+      "11",
+      "",
+      "",
+      "",
+      "[elf]"
+     ],
+     [
+      "zwölf",
+      "12",
+      "",
+      "",
+      "",
+      "[tsveulf]"
+     ],
+     [
+      "dreizehn",
+      "13",
+      "",
+      "",
+      "",
+      "[DRAI-tseen]"
+     ],
+     [
+      "vierzehn",
+      "14",
+      "",
+      "",
+      "",
+      "[FIER-tseen]"
+     ],
+     [
+      "fünfzehn",
+      "15",
+      "",
+      "",
+      "",
+      "[FUUNF-tseen]"
+     ],
+     [
+      "sechzehn",
+      "16",
+      "",
+      "",
+      "let op: sechs verliest de s",
+      "[ZECH-tseen]"
+     ],
+     [
+      "siebzehn",
+      "17",
+      "",
+      "",
+      "let op: sieben verliest de en",
+      "[ZIEP-tseen]"
+     ],
+     [
+      "achtzehn",
+      "18",
+      "",
+      "",
+      "",
+      "[ACH-tseen]"
+     ],
+     [
+      "neunzehn",
+      "19",
+      "",
+      "",
+      "",
+      "[NOIN-tseen]"
+     ],
+     [
+      "zwanzig",
+      "20",
+      "",
+      "",
+      "",
+      "[TSVAN-tsich]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 4 · Getallen vanaf 21",
+    "w": [
+     [
+      "einundzwanzig",
+      "21",
+      "",
+      "",
+      "eerst de eenheid, dan und, dan het tiental",
+      "[AIN-oent-TSVAN-tsich]"
+     ],
+     [
+      "zweiundzwanzig",
+      "22",
+      "",
+      "",
+      "",
+      "[TSVAI-oent-TSVAN-tsich]"
+     ],
+     [
+      "dreiundzwanzig",
+      "23",
+      "",
+      "",
+      "",
+      "[DRAI-oent-TSVAN-tsich]"
+     ],
+     [
+      "sechsundzwanzig",
+      "26",
+      "",
+      "",
+      "",
+      "[ZEKS-oent-TSVAN-tsich]"
+     ],
+     [
+      "siebenundzwanzig",
+      "27",
+      "",
+      "",
+      "",
+      "[ZIE-ben-oent-TSVAN-tsich]"
+     ],
+     [
+      "neunundzwanzig",
+      "29",
+      "",
+      "",
+      "",
+      "[NOIN-oent-TSVAN-tsich]"
+     ],
+     [
+      "dreißig",
+      "30",
+      "",
+      "",
+      "de enige met -ßig, de rest heeft -zig",
+      "[DRAI-sich]"
+     ],
+     [
+      "vierzig",
+      "40",
+      "",
+      "",
+      "",
+      "[FIR-tsich]"
+     ],
+     [
+      "fünfzig",
+      "50",
+      "",
+      "",
+      "",
+      "[FUUNF-tsich]"
+     ],
+     [
+      "sechzig",
+      "60",
+      "",
+      "",
+      "",
+      "[ZECH-tsich]"
+     ],
+     [
+      "siebzig",
+      "70",
+      "",
+      "",
+      "",
+      "[ZIEP-tsich]"
+     ],
+     [
+      "achtzig",
+      "80",
+      "",
+      "",
+      "",
+      "[ACH-tsich]"
+     ],
+     [
+      "neunzig",
+      "90",
+      "",
+      "",
+      "",
+      "[NOIN-tsich]"
+     ],
+     [
+      "hundert, einhundert",
+      "100",
+      "",
+      "",
+      "",
+      "[HOEN-dert, AIN-hoen-dert]"
+     ],
+     [
+      "(ein)hundert(und)eins",
+      "101",
+      "",
+      "",
+      "",
+      "[HOEN-dert-oent-AINS]"
+     ],
+     [
+      "zweihundert",
+      "200",
+      "",
+      "",
+      "",
+      "[TSVAI-hoen-dert]"
+     ],
+     [
+      "tausend, eintausend",
+      "1000",
+      "",
+      "",
+      "",
+      "[TAU-zent, AIN-tau-zent]"
+     ],
+     [
+      "(ein)tausend(und)eins",
+      "1001",
+      "",
+      "",
+      "",
+      "[TAU-zent-oent-AINS]"
+     ],
+     [
+      "zweitausend",
+      "2000",
+      "",
+      "",
+      "",
+      "[TSVAI-tau-zent]"
+     ],
+     [
+      "eine Million",
+      "1 000 000",
+      "",
+      "",
+      "",
+      "[AI-ne mil-JOON]"
+     ],
+     [
+      "zwei Millionen",
+      "2 000 000",
+      "",
+      "",
+      "",
+      "[tsvai mil-JOO-nen]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 5 · Kennismaken",
+    "w": [
+     [
+      "Hallo!",
+      "Hallo!",
+      "",
+      "",
+      "",
+      "[HA-lo]"
+     ],
+     [
+      "Guten Tag!",
+      "Goedendag!",
+      "",
+      "",
+      "",
+      "[GOE-ten taak]"
+     ],
+     [
+      "Wer bist du?",
+      "Wie ben jij?",
+      "",
+      "",
+      "",
+      "[veer bist doe]"
+     ],
+     [
+      "Wer sind Sie?",
+      "Wie bent u?",
+      "",
+      "",
+      "",
+      "[veer zint zie]"
+     ],
+     [
+      "Ich bin …",
+      "Ik ben …",
+      "",
+      "",
+      "",
+      "[ich bin]"
+     ],
+     [
+      "Wie heißt du?",
+      "Hoe heet je?",
+      "",
+      "",
+      "",
+      "[vie haist doe]"
+     ],
+     [
+      "Wie heißen Sie?",
+      "Hoe heet u?",
+      "",
+      "",
+      "",
+      "[vie HAI-sen zie]"
+     ],
+     [
+      "Ich heiße …",
+      "Ik heet …",
+      "",
+      "",
+      "",
+      "[ich HAI-se]"
+     ],
+     [
+      "Wie ist dein Name?",
+      "Wat is jouw naam?",
+      "",
+      "",
+      "",
+      "[vie ist dain NAA-me]"
+     ],
+     [
+      "Wie ist Ihr Name?",
+      "Wat is uw naam?",
+      "",
+      "",
+      "",
+      "[vie ist ier NAA-me]"
+     ],
+     [
+      "Mein Name ist …",
+      "Mijn naam is …",
+      "",
+      "",
+      "",
+      "[main NAA-me ist]"
+     ],
+     [
+      "Wie schreibt man das?",
+      "Hoe schrijf je dat?",
+      "",
+      "",
+      "",
+      "[vie sjraipt man das]"
+     ],
+     [
+      "Wo wohnst du?",
+      "Waar woon je?",
+      "",
+      "",
+      "",
+      "[voo voonst doe]"
+     ],
+     [
+      "Wo wohnen Sie?",
+      "Waar woont u?",
+      "",
+      "",
+      "",
+      "[voo VOO-nen zie]"
+     ],
+     [
+      "Ich wohne in …",
+      "Ik woon in …",
+      "",
+      "",
+      "",
+      "[ich VOO-ne in]"
+     ],
+     [
+      "Woher kommst du?",
+      "Waar kom je vandaan?",
+      "",
+      "",
+      "",
+      "[voo-HEER komst doe]"
+     ],
+     [
+      "Woher kommen Sie?",
+      "Waar komt u vandaan?",
+      "",
+      "",
+      "",
+      "[voo-HEER KO-men zie]"
+     ],
+     [
+      "Ich komme aus …",
+      "Ik kom uit …",
+      "",
+      "",
+      "",
+      "[ich KO-me aus]"
+     ],
+     [
+      "Wohin gehst du?",
+      "Waar ga je naartoe?",
+      "",
+      "",
+      "",
+      "[voo-HIN geest doe]"
+     ],
+     [
+      "Ich gehe nach …",
+      "Ik ga naar …",
+      "",
+      "",
+      "",
+      "[ich GEE-e naach]"
+     ],
+     [
+      "Wie geht's?",
+      "Hoe gaat het?",
+      "",
+      "",
+      "",
+      "[vie geets]"
+     ],
+     [
+      "Sehr gut.",
+      "Heel goed.",
+      "",
+      "",
+      "",
+      "[zeer goet]"
+     ],
+     [
+      "Prima!",
+      "Uitstekend!",
+      "",
+      "",
+      "",
+      "[PRIE-ma]"
+     ],
+     [
+      "Tschüss!",
+      "Tot ziens! (informeel)",
+      "",
+      "",
+      "",
+      "[tsjuus]"
+     ],
+     [
+      "Auf Wiedersehen!",
+      "Tot ziens!",
+      "",
+      "",
+      "",
+      "[auf VIE-da-ZEE-en]"
+     ],
+     [
+      "Angenehm!",
+      "Aangenaam!",
+      "",
+      "",
+      "",
+      "[AN-ge-neem]"
+     ],
+     [
+      "Entschuldigung!",
+      "Excuseer!",
+      "",
+      "",
+      "",
+      "[ent-SJOEL-di-goeng]"
+     ],
+     [
+      "Vielen Dank!",
+      "Dank je wel! / Dank u wel!",
+      "",
+      "",
+      "",
+      "[FIE-len dank]"
+     ],
+     [
+      "Wie bitte?",
+      "Wat zeg je? / Wat zegt u?",
+      "",
+      "",
+      "",
+      "[vie BI-te]"
+     ],
+     [
+      "Das macht Spaß.",
+      "Dat is leuk.",
+      "",
+      "",
+      "",
+      "[das macht sjpaas]"
+     ],
+     [
+      "Ich habe Durst.",
+      "Ik heb dorst.",
+      "",
+      "",
+      "",
+      "[ich HAA-be doerst]"
+     ],
+     [
+      "Ich habe Hunger.",
+      "Ik heb honger.",
+      "",
+      "",
+      "",
+      "[ich HAA-be HOENG-a]"
+     ],
+     [
+      "also",
+      "dus — let op, niet ook",
+      "",
+      "",
+      "",
+      "[AL-zoo]"
+     ],
+     [
+      "auch",
+      "ook",
+      "",
+      "",
+      "",
+      "[auch]"
+     ],
+     [
+      "Wie lange bleibst du in München?",
+      "Hoelang blijf je in München?",
+      "",
+      "",
+      "",
+      "[vie LANG-e blaipst doe in MUUN-chen]"
+     ],
+     [
+      "Ich bleibe eine Woche.",
+      "Ik blijf een week.",
+      "",
+      "",
+      "",
+      "[ich BLAI-be AI-ne VO-che]"
+     ],
+     [
+      "Meine Muttersprache ist Niederländisch.",
+      "Mijn moedertaal is Nederlands.",
+      "",
+      "",
+      "",
+      "[MAI-ne MOE-ta-sjpraa-che ist NIE-da-LEN-disj]"
+     ],
+     [
+      "Du sprichst aber gut Deutsch!",
+      "Wat spreek jij goed Duits!",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Wat zijn de DACH-landen?",
+      "Duitsland (D), Oostenrijk (A) en Zwitserland (CH)",
+      "",
+      "",
+      "",
+      ""
+     ]
+    ]
+   },
+   {
+    "t": "Stap 6 · Identität",
+    "w": [
+     [
+      "Name",
+      "de naam",
+      "der",
+      "die Namen",
+      "",
+      "[NAA-me, NAA-men]"
+     ],
+     [
+      "Familienname",
+      "de familienaam",
+      "der",
+      "die Familiennamen",
+      "",
+      "[fa-MIE-lien-NAA-me]"
+     ],
+     [
+      "Vorname",
+      "de voornaam",
+      "der",
+      "die Vornamen",
+      "",
+      "[FOOR-naa-me]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 6 · Wohnort",
+    "w": [
+     [
+      "Belgien",
+      "België",
+      "",
+      "",
+      "",
+      "[BEL-gi-en]"
+     ],
+     [
+      "Deutschland",
+      "Duitsland",
+      "",
+      "",
+      "",
+      "[DOITSJ-lant]"
+     ],
+     [
+      "Frankreich",
+      "Frankrijk",
+      "",
+      "",
+      "",
+      "[FRANK-raich]"
+     ],
+     [
+      "Land",
+      "het land",
+      "das",
+      "die Länder",
+      "",
+      "[lant, LEN-da]"
+     ],
+     [
+      "Stadt",
+      "de stad",
+      "die",
+      "die Städte",
+      "",
+      "[sjtat, SJTE-te]"
+     ],
+     [
+      "Adresse",
+      "het adres",
+      "die",
+      "die Adressen",
+      "",
+      "[a-DRE-se, a-DRE-sen]"
+     ],
+     [
+      "Wohnort",
+      "de woonplaats",
+      "der",
+      "die Wohnorte",
+      "",
+      "[VOON-ort, VOON-or-te]"
+     ],
+     [
+      "Zimmer",
+      "de kamer",
+      "das",
+      "die Zimmer",
+      "",
+      "[TSIM-ma]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 6 · Sprache",
+    "w": [
+     [
+      "Deutsch",
+      "Duits",
+      "",
+      "",
+      "",
+      "[doitsj]"
+     ],
+     [
+      "Englisch",
+      "Engels",
+      "",
+      "",
+      "",
+      "[ENG-lisj]"
+     ],
+     [
+      "Französisch",
+      "Frans",
+      "",
+      "",
+      "",
+      "[fran-TSEU-zisj]"
+     ],
+     [
+      "Niederländisch",
+      "Nederlands",
+      "",
+      "",
+      "",
+      "[NIE-da-LEN-disj]"
+     ],
+     [
+      "Muttersprache",
+      "de moedertaal",
+      "die",
+      "die Muttersprachen",
+      "",
+      "[MOE-ta-sjpraa-che]"
+     ],
+     [
+      "Sprache",
+      "de taal",
+      "die",
+      "die Sprachen",
+      "",
+      "[SJPRAA-che]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 6 · Familie",
+    "w": [
+     [
+      "Bruder",
+      "de broer",
+      "der",
+      "die Brüder",
+      "",
+      "[BROE-da, BRUU-da]"
+     ],
+     [
+      "Familie",
+      "de familie",
+      "die",
+      "die Familien",
+      "",
+      "[fa-MIE-lie-e, fa-MIE-lien]"
+     ],
+     [
+      "Großmutter",
+      "de grootmoeder",
+      "die",
+      "die Großmütter",
+      "",
+      "[GROOS-moe-ta, GROOS-muu-ta]"
+     ],
+     [
+      "Großvater",
+      "de grootvader",
+      "der",
+      "die Großväter",
+      "",
+      "[GROOS-faa-ta, GROOS-fee-ta]"
+     ],
+     [
+      "Kind",
+      "het kind",
+      "das",
+      "die Kinder",
+      "",
+      "[kint, KIN-da]"
+     ],
+     [
+      "Mutter",
+      "de moeder",
+      "die",
+      "die Mütter",
+      "",
+      "[MOE-ta, MUU-ta]"
+     ],
+     [
+      "Schwester",
+      "de zus",
+      "die",
+      "die Schwestern",
+      "",
+      "[SJVES-ta, SJVES-tern]"
+     ],
+     [
+      "Sohn",
+      "de zoon",
+      "der",
+      "die Söhne",
+      "",
+      "[zoon, ZEU-ne]"
+     ],
+     [
+      "Tochter",
+      "de dochter",
+      "die",
+      "die Töchter",
+      "",
+      "[TOCH-ta, TEUCH-ta]"
+     ],
+     [
+      "Vater",
+      "de vader",
+      "der",
+      "die Väter",
+      "",
+      "[FAA-ta, FEE-ta]"
+     ],
+     [
+      "Eltern",
+      "de ouders",
+      "die",
+      "",
+      "",
+      "[EL-tern]"
+     ],
+     [
+      "Geschwister",
+      "de broers en zussen",
+      "die",
+      "",
+      "",
+      "[ge-SJVIS-ta]"
+     ],
+     [
+      "Großeltern",
+      "de grootouders",
+      "die",
+      "",
+      "",
+      "[GROOS-el-tern]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 6 · Zeit",
+    "w": [
+     [
+      "Tag",
+      "de dag",
+      "der",
+      "die Tage",
+      "",
+      "[taak, TAA-ge]"
+     ],
+     [
+      "Woche",
+      "de week",
+      "die",
+      "die Wochen",
+      "",
+      "[VO-che, VO-chen]"
+     ],
+     [
+      "Jahr",
+      "het jaar",
+      "das",
+      "die Jahre",
+      "",
+      "[jaar, JAA-re]"
+     ],
+     [
+      "Zeit",
+      "de tijd",
+      "die",
+      "die Zeiten",
+      "",
+      "[tsait, TSAI-ten]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 6 · Kommunikationsmittel",
+    "w": [
+     [
+      "Handy",
+      "de gsm",
+      "das",
+      "die Handys",
+      "",
+      "[HEN-die]"
+     ],
+     [
+      "Handynummer",
+      "het gsm-nummer",
+      "die",
+      "die Handynummern",
+      "",
+      "[HEN-die-NOE-ma]"
+     ],
+     [
+      "Nummer",
+      "het nummer",
+      "die",
+      "die Nummern",
+      "",
+      "[NOE-ma, NOE-mern]"
+     ],
+     [
+      "Telefon",
+      "de telefoon",
+      "das",
+      "die Telefone",
+      "",
+      "[te-le-FOON]"
+     ],
+     [
+      "Telefonbuch",
+      "het telefoonboek",
+      "das",
+      "die Telefonbücher",
+      "",
+      "[te-le-FOON-boech, -BUU-cher]"
+     ],
+     [
+      "Telefonnummer",
+      "het telefoonnummer",
+      "die",
+      "die Telefonnummern",
+      "",
+      "[te-le-FOON-noe-ma]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 6 · Bekannten",
+    "w": [
+     [
+      "Freund",
+      "de vriend",
+      "der",
+      "die Freunde",
+      "",
+      "[froint, FROIN-de]"
+     ],
+     [
+      "Freundin",
+      "de vriendin",
+      "die",
+      "die Freundinnen",
+      "",
+      "[FROIN-din, FROIN-di-nen]"
+     ],
+     [
+      "Bewohner",
+      "de bewoner",
+      "der",
+      "die Bewohner",
+      "",
+      "[be-VOO-na]"
+     ],
+     [
+      "Bewohnerin",
+      "de bewoonster",
+      "die",
+      "die Bewohnerinnen",
+      "",
+      "[be-VOO-ne-rin]"
+     ],
+     [
+      "Mitbewohner",
+      "de medebewoner",
+      "der",
+      "die Mitbewohner",
+      "",
+      "[MIT-be-VOO-na]"
+     ],
+     [
+      "Mitbewohnerin",
+      "de medebewoonster",
+      "die",
+      "die Mitbewohnerinnen",
+      "",
+      "[MIT-be-VOO-ne-rin]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 6 · Verben",
+    "w": [
+     [
+      "besuchen",
+      "bezoeken",
+      "",
+      "",
+      "Wann besucht ihr Berlin?",
+      "[be-ZOE-chen]"
+     ],
+     [
+      "bleiben",
+      "blijven",
+      "",
+      "",
+      "Er bleibt eine Woche in München.",
+      "[BLAI-ben]"
+     ],
+     [
+      "heißen",
+      "heten",
+      "",
+      "",
+      "Meine Freundin heißt Nena.",
+      "[HAI-sen]"
+     ],
+     [
+      "kommen",
+      "komen",
+      "",
+      "",
+      "Meine Eltern kommen aus Italien.",
+      "[KO-men]"
+     ],
+     [
+      "schreiben",
+      "schrijven",
+      "",
+      "",
+      "Wie schreibt man 'Jentsch'?",
+      "[SJRAI-ben]"
+     ],
+     [
+      "sein",
+      "zijn",
+      "",
+      "",
+      "Das ist mein Großvater.",
+      "[zain]"
+     ],
+     [
+      "sprechen",
+      "spreken",
+      "",
+      "",
+      "Du sprichst gut Deutsch.",
+      "[SJPRE-chen]"
+     ],
+     [
+      "wohnen",
+      "wonen",
+      "",
+      "",
+      "Meine Freundin wohnt in Köln.",
+      "[VOO-nen]"
+     ],
+     [
+      "haben",
+      "hebben",
+      "",
+      "",
+      "Habt ihr Geschwister?",
+      "[HAA-ben]"
+     ],
+     [
+      "hören",
+      "luisteren naar, horen",
+      "",
+      "",
+      "Hörst du gerne Musik?",
+      "[HEU-ren]"
+     ],
+     [
+      "kochen",
+      "koken",
+      "",
+      "",
+      "Mein Vater kann gut kochen.",
+      "[KO-chen]"
+     ],
+     [
+      "suchen",
+      "zoeken",
+      "",
+      "",
+      "Ich suche mein Handy.",
+      "[ZOE-chen]"
+     ],
+     [
+      "begrüßen",
+      "begroeten",
+      "",
+      "",
+      "Der Schüler begrüßt seinen Lehrer.",
+      "[be-GRUU-sen]"
+     ],
+     [
+      "gehen",
+      "gaan",
+      "",
+      "",
+      "Wir gehen nach Hause.",
+      "[GEE-en]"
+     ],
+     [
+      "kennen",
+      "kennen",
+      "",
+      "",
+      "Kennst du meine Freundin?",
+      "[KE-nen]"
+     ],
+     [
+      "lernen",
+      "leren",
+      "",
+      "",
+      "Du lernst ein Gedicht auswendig.",
+      "[LER-nen]"
+     ],
+     [
+      "sagen",
+      "zeggen",
+      "",
+      "",
+      "Petra sagt: 'Guten Tag.'",
+      "[ZAA-gen]"
+     ],
+     [
+      "spielen",
+      "spelen",
+      "",
+      "",
+      "Mein Freund spielt Fußball.",
+      "[SJPIE-len]"
+     ],
+     [
+      "studieren",
+      "studeren",
+      "",
+      "",
+      "Ich studiere jeden Abend.",
+      "[sjtoe-DIE-ren]"
+     ],
+     [
+      "zuhören",
+      "luisteren",
+      "",
+      "",
+      "Hör gut zu, wenn dein Lehrer spricht!",
+      "[TSOE-heu-ren]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 6 · Fragewörter",
+    "w": [
+     [
+      "was",
+      "wat",
+      "",
+      "",
+      "Was sagst du?",
+      "[vas]"
+     ],
+     [
+      "wer",
+      "wie",
+      "",
+      "",
+      "Wer ist das?",
+      "[veer]"
+     ],
+     [
+      "wie",
+      "hoe",
+      "",
+      "",
+      "Wie alt bist du?",
+      "[vie]"
+     ],
+     [
+      "wo",
+      "waar",
+      "",
+      "",
+      "Wo wohnt dein Freund?",
+      "[voo]"
+     ],
+     [
+      "woher",
+      "waar … vandaan",
+      "",
+      "",
+      "Woher kommt deine Freundin?",
+      "[voo-HEER]"
+     ],
+     [
+      "wohin",
+      "waar … naartoe",
+      "",
+      "",
+      "Wohin fährst du?",
+      "[voo-HIN]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 6 · Sonstiges",
+    "w": [
+     [
+      "bitte",
+      "alstublieft",
+      "",
+      "",
+      "Was sagen Sie, bitte?",
+      "[BI-te]"
+     ],
+     [
+      "gut",
+      "goed",
+      "",
+      "",
+      "Du sprichst sehr gut Englisch.",
+      "[goet]"
+     ],
+     [
+      "prima",
+      "prima, uitstekend",
+      "",
+      "",
+      "Es geht mir prima.",
+      "[PRIE-ma]"
+     ],
+     [
+      "gern(e)",
+      "graag",
+      "",
+      "",
+      "Wir essen sehr gern(e) Eis.",
+      "[GER-ne]"
+     ],
+     [
+      "schon",
+      "al",
+      "",
+      "",
+      "Er wohnt schon drei Jahre hier.",
+      "[sjoon]"
+     ],
+     [
+      "eigentlich",
+      "eigenlijk",
+      "",
+      "",
+      "Wie heißt du eigentlich?",
+      "[AI-gent-lich]"
+     ],
+     [
+      "selbstverständlich",
+      "vanzelfsprekend",
+      "",
+      "",
+      "Selbstverständlich kann ich helfen.",
+      "[ZELPST-fer-SJTENT-lich]"
+     ],
+     [
+      "vielleicht",
+      "misschien",
+      "",
+      "",
+      "Weißt du vielleicht die Antwort?",
+      "[fie-LAICHT]"
+     ],
+     [
+      "zusammen",
+      "samen",
+      "",
+      "",
+      "Wir fahren zusammen nach Hause.",
+      "[tsoe-ZA-men]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 6 · Noch mehr Wörter",
+    "w": [
+     [
+      "Buch",
+      "het boek",
+      "das",
+      "die Bücher",
+      "",
+      "[boech, BUU-cher]"
+     ],
+     [
+      "Geburtstag",
+      "de verjaardag",
+      "der",
+      "die Geburtstage",
+      "",
+      "[ge-BOERTS-taak]"
+     ],
+     [
+      "Leute",
+      "de mensen",
+      "die",
+      "",
+      "bestaat alleen in het meervoud",
+      "[LOI-te]"
+     ],
+     [
+      "Mitschüler",
+      "de medeleerling",
+      "der",
+      "die Mitschüler",
+      "",
+      "[MIT-sjuu-la]"
+     ],
+     [
+      "Mitschülerin",
+      "de medeleerlinge",
+      "die",
+      "die Mitschülerinnen",
+      "",
+      "[MIT-sjuu-le-rin]"
+     ],
+     [
+      "Zahl",
+      "het getal",
+      "die",
+      "die Zahlen",
+      "",
+      "[tsaal, TSAA-len]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 6 · Landen en steden",
+    "w": [
+     [
+      "Belgien",
+      "België",
+      "",
+      "",
+      "",
+      "[BEL-gi-en]"
+     ],
+     [
+      "Brüssel",
+      "Brussel",
+      "",
+      "",
+      "",
+      "[BRUU-sel]"
+     ],
+     [
+      "Deutschland",
+      "Duitsland",
+      "",
+      "",
+      "",
+      "[DOITSJ-lant]"
+     ],
+     [
+      "Österreich",
+      "Oostenrijk",
+      "",
+      "",
+      "",
+      "[EU-ster-raich]"
+     ],
+     [
+      "Luxemburg",
+      "Luxemburg",
+      "",
+      "",
+      "",
+      "[LOEK-sem-boerk]"
+     ],
+     [
+      "Berlin",
+      "Berlijn",
+      "",
+      "",
+      "",
+      "[ber-LIEN]"
+     ],
+     [
+      "München",
+      "München",
+      "",
+      "",
+      "",
+      "[MUUN-chen]"
+     ],
+     [
+      "Wien",
+      "Wenen",
+      "",
+      "",
+      "",
+      "[vien]"
+     ],
+     [
+      "Bern",
+      "Bern",
+      "",
+      "",
+      "",
+      "[bern]"
+     ],
+     [
+      "Köln",
+      "Keulen",
+      "",
+      "",
+      "",
+      "[keuln]"
+     ],
+     [
+      "Frankfurt",
+      "Frankfurt",
+      "",
+      "",
+      "",
+      "[FRANK-foert]"
+     ],
+     [
+      "Bamberg",
+      "Bamberg",
+      "",
+      "",
+      "",
+      "[BAM-berk]"
+     ],
+     [
+      "Brasilien",
+      "Brazilië",
+      "",
+      "",
+      "",
+      "[bra-ZIE-lien]"
+     ],
+     [
+      "Italien",
+      "Italië",
+      "",
+      "",
+      "",
+      "[i-TAA-lien]"
+     ],
+     [
+      "England",
+      "Engeland",
+      "",
+      "",
+      "",
+      "[ENG-lant]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 7 · Dagen en dagdelen",
+    "w": [
+     [
+      "Montag",
+      "maandag",
+      "der",
+      "die Montage",
+      "",
+      "[MOON-taak]"
+     ],
+     [
+      "Dienstag",
+      "dinsdag",
+      "der",
+      "die Dienstage",
+      "",
+      "[DIENS-taak]"
+     ],
+     [
+      "Mittwoch",
+      "woensdag",
+      "der",
+      "die Mittwoche",
+      "",
+      "[MIT-voch]"
+     ],
+     [
+      "Donnerstag",
+      "donderdag",
+      "der",
+      "die Donnerstage",
+      "",
+      "[DO-ners-taak]"
+     ],
+     [
+      "Freitag",
+      "vrijdag",
+      "der",
+      "die Freitage",
+      "",
+      "[FRAI-taak]"
+     ],
+     [
+      "Samstag / Sonnabend",
+      "zaterdag",
+      "der",
+      "",
+      "in Noord- en Oost-Duitsland zegt men Sonnabend",
+      "[ZAMS-taak / ZON-aa-bent]"
+     ],
+     [
+      "Sonntag",
+      "zondag",
+      "der",
+      "die Sonntage",
+      "",
+      "[ZON-taak]"
+     ],
+     [
+      "sonntags",
+      "'s zondags",
+      "",
+      "",
+      "",
+      "[ZON-taaks]"
+     ],
+     [
+      "Wochenende",
+      "het weekend",
+      "das",
+      "die Wochenenden",
+      "",
+      "[VO-chen-EN-de]"
+     ],
+     [
+      "Welk geslacht hebben alle dagen?",
+      "mannelijk: der Montag, der Sonnabend, …",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Morgen",
+      "de morgen",
+      "der",
+      "",
+      "morgens = elke morgen",
+      "[MOR-gen]"
+     ],
+     [
+      "Vormittag",
+      "de voormiddag",
+      "der",
+      "",
+      "vormittags",
+      "[FOOR-mi-taak]"
+     ],
+     [
+      "Mittag",
+      "de middag",
+      "der",
+      "",
+      "mittags",
+      "[MI-taak]"
+     ],
+     [
+      "Nachmittag",
+      "de namiddag",
+      "der",
+      "",
+      "nachmittags",
+      "[NAACH-mi-taak]"
+     ],
+     [
+      "Abend",
+      "de avond",
+      "der",
+      "",
+      "abends",
+      "[AA-bent]"
+     ],
+     [
+      "Wat doet een -s achter een dag of dagdeel?",
+      "het betekent altijd op dat moment: montags = elke maandag",
+      "",
+      "",
+      "",
+      ""
+     ]
+    ]
+   },
+   {
+    "t": "Stap 7 · Hoe laat is het?",
+    "w": [
+     [
+      "Wie spät ist es?",
+      "Hoe laat is het?",
+      "",
+      "",
+      "",
+      "[vie sjpeet ist es]"
+     ],
+     [
+      "Wie viel Uhr ist es?",
+      "Hoe laat is het?",
+      "",
+      "",
+      "",
+      "[vie fiel oer ist es]"
+     ],
+     [
+      "Es ist sieben (Uhr).",
+      "7:00",
+      "",
+      "",
+      "",
+      "[es ist ZIE-ben oer]"
+     ],
+     [
+      "Es ist zehn nach sieben.",
+      "7:10",
+      "",
+      "",
+      "",
+      "[tseen naach ZIE-ben]"
+     ],
+     [
+      "Es ist Viertel nach sieben.",
+      "7:15",
+      "",
+      "",
+      "",
+      "[FIR-tel naach ZIE-ben]"
+     ],
+     [
+      "Es ist halb acht.",
+      "7:30 — net als in het Nederlands half acht",
+      "",
+      "",
+      "",
+      "[halp acht]"
+     ],
+     [
+      "Es ist zwanzig vor acht.",
+      "7:40",
+      "",
+      "",
+      "",
+      "[TSVAN-tsich foor acht]"
+     ],
+     [
+      "Es ist zehn vor acht.",
+      "7:50",
+      "",
+      "",
+      "",
+      "[tseen foor acht]"
+     ],
+     [
+      "Es ist sieben Uhr dreißig.",
+      "7:30 officieel",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Es ist neunzehn Uhr dreißig.",
+      "19:30 officieel",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Wanneer gebruik je um?",
+      "bij een uur: um halb sieben, um Viertel vor acht",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Wanneer gebruik je am?",
+      "bij een dag of een dagdeel: am Morgen, am Montag",
+      "",
+      "",
+      "",
+      ""
+     ]
+    ]
+   },
+   {
+    "t": "Stap 7 · Een afspraak maken",
+    "w": [
+     [
+      "Was machst du am Wochenende?",
+      "Wat doe je in het weekend?",
+      "",
+      "",
+      "",
+      "[vas machst doe am VO-chen-EN-de]"
+     ],
+     [
+      "Keine Ahnung.",
+      "Geen idee.",
+      "",
+      "",
+      "",
+      "[KAI-ne AA-noeng]"
+     ],
+     [
+      "Fahren wir am Samstag nach Aachen?",
+      "Gaan we zaterdag naar Aachen?",
+      "",
+      "",
+      "",
+      "[FAA-ren vier am ZAMS-taak naach AA-chen]"
+     ],
+     [
+      "Gute Idee!",
+      "Goed idee!",
+      "",
+      "",
+      "",
+      "[GOE-te i-DEE]"
+     ],
+     [
+      "Na, klar!",
+      "Natuurlijk!",
+      "",
+      "",
+      "",
+      "[na klaar]"
+     ],
+     [
+      "Ja, gerne.",
+      "Ja, graag.",
+      "",
+      "",
+      "",
+      "[jaa GER-ne]"
+     ],
+     [
+      "Toll!",
+      "Geweldig!",
+      "",
+      "",
+      "",
+      "[tol]"
+     ],
+     [
+      "Spitze!",
+      "Top!",
+      "",
+      "",
+      "",
+      "[SJPIT-se]"
+     ],
+     [
+      "Tut mir leid, ich habe keine Lust.",
+      "Het spijt me, ik heb geen zin.",
+      "",
+      "",
+      "",
+      "[toet mier lait, ich HAA-be KAI-ne loest]"
+     ],
+     [
+      "Ich kann leider nicht.",
+      "Ik kan helaas niet.",
+      "",
+      "",
+      "",
+      "[ich kan LAI-da nicht]"
+     ],
+     [
+      "Das passt mir nicht.",
+      "Dat past me niet.",
+      "",
+      "",
+      "",
+      "[das past mier nicht]"
+     ],
+     [
+      "Nein, lieber nicht.",
+      "Nee, liever niet.",
+      "",
+      "",
+      "",
+      "[nain LIE-ba nicht]"
+     ],
+     [
+      "Um wie viel Uhr treffen wir uns?",
+      "Hoe laat spreken we af?",
+      "",
+      "",
+      "",
+      "[oem vie fiel oer TRE-fen vier oens]"
+     ],
+     [
+      "Wir treffen uns um zehn Uhr.",
+      "We spreken af om tien uur.",
+      "",
+      "",
+      "",
+      "[vier TRE-fen oens oem tseen oer]"
+     ],
+     [
+      "Ich warte auf dich am Bahnhof.",
+      "Ik wacht op je aan het station.",
+      "",
+      "",
+      "",
+      "[ich VAR-te auf dich am BAAN-hoof]"
+     ],
+     [
+      "Bis Samstag!",
+      "Tot zaterdag!",
+      "",
+      "",
+      "",
+      "[bis ZAMS-taak]"
+     ],
+     [
+      "Schönen Tag noch!",
+      "Nog een fijne dag!",
+      "",
+      "",
+      "",
+      "[SJEU-nen taak noch]"
+     ],
+     [
+      "Am Sonntag haben die Geschäfte zu.",
+      "Op zondag zijn de winkels dicht.",
+      "",
+      "",
+      "",
+      "[am ZON-taak HAA-ben die ge-SJEF-te tsoe]"
+     ],
+     [
+      "Es ist nicht viel los.",
+      "Er is niet veel te doen.",
+      "",
+      "",
+      "",
+      "[es ist nicht fiel loos]"
+     ],
+     [
+      "Einverstanden!",
+      "Akkoord!",
+      "",
+      "",
+      "",
+      "[AIN-fer-SJTAN-den]"
+     ],
+     [
+      "Genau!",
+      "Precies!",
+      "",
+      "",
+      "",
+      "[ge-NAU]"
+     ],
+     [
+      "Stimmt!",
+      "Klopt!",
+      "",
+      "",
+      "",
+      "[sjtimt]"
+     ],
+     [
+      "Möchtest du …?",
+      "Zou je graag …?",
+      "",
+      "",
+      "",
+      "[MEUCH-test doe]"
+     ],
+     [
+      "Es gibt …",
+      "Er is, er zijn, er staat, er ligt …",
+      "",
+      "",
+      "",
+      "[es gipt]"
+     ],
+     [
+      "Wir gehen ins Kino.",
+      "We gaan naar de bioscoop.",
+      "",
+      "",
+      "",
+      "[vier GEE-en ins KIE-no]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 8 · In de stad",
+    "w": [
+     [
+      "Bahnhof",
+      "het station",
+      "der",
+      "die Bahnhöfe",
+      "",
+      "[BAAN-hoof, BAAN-heu-fe]"
+     ],
+     [
+      "Geschäft",
+      "de winkel, de zaak",
+      "das",
+      "die Geschäfte",
+      "",
+      "[ge-SJEFT]"
+     ],
+     [
+      "Apotheke",
+      "de apotheek",
+      "die",
+      "die Apotheken",
+      "",
+      "[a-po-TEE-ke]"
+     ],
+     [
+      "Bank",
+      "de bank",
+      "die",
+      "die Banken",
+      "",
+      "[bank]"
+     ],
+     [
+      "Besuch",
+      "het bezoek",
+      "der",
+      "die Besuche",
+      "",
+      "[be-ZOECH]"
+     ],
+     [
+      "Bibliothek",
+      "de bibliotheek",
+      "die",
+      "die Bibliotheken",
+      "",
+      "[bie-blie-o-TEEK]"
+     ],
+     [
+      "Buchhandlung",
+      "de boekhandel",
+      "die",
+      "die Buchhandlungen",
+      "",
+      "[BOECH-hand-loeng]"
+     ],
+     [
+      "Dom",
+      "de dom, de kathedraal",
+      "der",
+      "die Dome",
+      "",
+      "[doom]"
+     ],
+     [
+      "Eintrittskarte",
+      "de toegangskaart",
+      "die",
+      "die Eintrittskarten",
+      "",
+      "[AIN-trits-KAR-te]"
+     ],
+     [
+      "Hotel",
+      "het hotel",
+      "das",
+      "die Hotels",
+      "",
+      "[ho-TEL]"
+     ],
+     [
+      "Innenstadt",
+      "de binnenstad",
+      "die",
+      "die Innenstädte",
+      "",
+      "[IN-nen-sjtat]"
+     ],
+     [
+      "Kirche",
+      "de kerk",
+      "die",
+      "die Kirchen",
+      "",
+      "[KIR-che]"
+     ],
+     [
+      "Krankenhaus",
+      "het ziekenhuis",
+      "das",
+      "die Krankenhäuser",
+      "",
+      "[KRAN-ken-haus]"
+     ],
+     [
+      "Kreuzung",
+      "het kruispunt",
+      "die",
+      "die Kreuzungen",
+      "",
+      "[KROI-tsoeng]"
+     ],
+     [
+      "Marktplatz",
+      "het marktplein",
+      "der",
+      "die Marktplätze",
+      "",
+      "[MARKT-plats]"
+     ],
+     [
+      "Parkplatz",
+      "het parkeerterrein",
+      "der",
+      "die Parkplätze",
+      "",
+      "[PARK-plats]"
+     ],
+     [
+      "Postamt",
+      "het postkantoor",
+      "das",
+      "die Postämter",
+      "",
+      "[POST-amt, POST-em-ta]"
+     ],
+     [
+      "Programm",
+      "het programma",
+      "das",
+      "die Programme",
+      "",
+      "[pro-GRAM]"
+     ],
+     [
+      "Rathaus",
+      "het stadhuis",
+      "das",
+      "die Rathäuser",
+      "",
+      "[RAAT-haus]"
+     ],
+     [
+      "Restaurant",
+      "het restaurant",
+      "das",
+      "die Restaurants",
+      "",
+      "[res-to-RANG]"
+     ],
+     [
+      "Rhein",
+      "de Rijn",
+      "der",
+      "",
+      "",
+      "[rain]"
+     ],
+     [
+      "Rundgang",
+      "de rondleiding",
+      "der",
+      "die Rundgänge",
+      "",
+      "[ROENT-gang]"
+     ],
+     [
+      "S-Bahn",
+      "de tram",
+      "die",
+      "die S-Bahnen",
+      "",
+      "[ES-baan]"
+     ],
+     [
+      "Stadtmitte",
+      "het stadscentrum",
+      "die",
+      "die Stadtmitten",
+      "",
+      "[SJTAT-mi-te]"
+     ],
+     [
+      "Theater",
+      "het theater",
+      "das",
+      "die Theater",
+      "",
+      "[te-AA-ta]"
+     ],
+     [
+      "U-Bahn",
+      "de metro",
+      "die",
+      "die U-Bahnen",
+      "",
+      "[OE-baan]"
+     ],
+     [
+      "Verkehrsverein",
+      "het toerismebureau",
+      "der",
+      "die Verkehrsvereine",
+      "",
+      "[fer-KEERS-fer-ain]"
+     ],
+     [
+      "Zug",
+      "de trein",
+      "der",
+      "die Züge",
+      "",
+      "[tsoek, TSUU-ge]"
+     ],
+     [
+      "Auskunft",
+      "de inlichting",
+      "die",
+      "die Auskünfte",
+      "",
+      "[AUS-koenft]"
+     ],
+     [
+      "Brief",
+      "de brief",
+      "der",
+      "die Briefe",
+      "",
+      "[brief]"
+     ],
+     [
+      "Film",
+      "de film",
+      "der",
+      "die Filme",
+      "",
+      "[film]"
+     ],
+     [
+      "Frühstück",
+      "het ontbijt",
+      "das",
+      "die Frühstücke",
+      "",
+      "[FRUU-sjtuuk]"
+     ],
+     [
+      "Schreibtisch",
+      "de schrijftafel, het bureau",
+      "der",
+      "die Schreibtische",
+      "",
+      "[SJRAIP-tisj]"
+     ],
+     [
+      "Stunde",
+      "het uur",
+      "die",
+      "die Stunden",
+      "",
+      "[SJTOEN-de]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 8 · Verben",
+    "w": [
+     [
+      "bummeln",
+      "shoppen",
+      "",
+      "",
+      "Morgen gehen wir bummeln.",
+      "[BOE-meln]"
+     ],
+     [
+      "machen",
+      "doen",
+      "",
+      "",
+      "Was machst du am Wochenende?",
+      "[MA-chen]"
+     ],
+     [
+      "sich treffen",
+      "elkaar ontmoeten",
+      "",
+      "",
+      "Wann treffen wir uns heute?",
+      "[TRE-fen]"
+     ],
+     [
+      "warten (auf)",
+      "wachten (op)",
+      "",
+      "",
+      "Wartest du auf mich?",
+      "[VAR-ten]"
+     ],
+     [
+      "antworten",
+      "antwoorden",
+      "",
+      "",
+      "Sie antwortet auf meine Frage.",
+      "[ANT-vor-ten]"
+     ],
+     [
+      "beantworten",
+      "beantwoorden",
+      "",
+      "",
+      "Der Schüler beantwortet die Frage.",
+      "[be-ANT-vor-ten]"
+     ],
+     [
+      "beginnen",
+      "beginnen",
+      "",
+      "",
+      "Wann beginnt der Unterricht?",
+      "[be-GI-nen]"
+     ],
+     [
+      "bieten",
+      "bieden",
+      "",
+      "",
+      "Der Turm bietet einen schönen Ausblick.",
+      "[BIE-ten]"
+     ],
+     [
+      "enden",
+      "eindigen",
+      "",
+      "",
+      "Wann endet der Unterricht?",
+      "[EN-den]"
+     ],
+     [
+      "essen",
+      "eten",
+      "",
+      "",
+      "Wir essen sehr wenig.",
+      "[E-sen]"
+     ],
+     [
+      "finden",
+      "vinden",
+      "",
+      "",
+      "Er findet sein Hotel nicht.",
+      "[FIN-den]"
+     ],
+     [
+      "holen",
+      "halen",
+      "",
+      "",
+      "Ich hole die Eintrittskarten.",
+      "[HOO-len]"
+     ],
+     [
+      "können",
+      "kunnen",
+      "",
+      "",
+      "Kannst du heute noch antworten?",
+      "[KEU-nen]"
+     ],
+     [
+      "kosten",
+      "kosten",
+      "",
+      "",
+      "Wie viel kostet eine Karte?",
+      "[KOS-ten]"
+     ],
+     [
+      "läuten",
+      "luiden",
+      "",
+      "",
+      "Die Glocke läutet jede Stunde.",
+      "[LOI-ten]"
+     ],
+     [
+      "nehmen",
+      "nemen",
+      "",
+      "",
+      "Wir nehmen den Zug um vier.",
+      "[NEE-men]"
+     ],
+     [
+      "übertreiben",
+      "overdrijven",
+      "",
+      "",
+      "Du übertreibst immer.",
+      "[UU-ba-TRAI-ben]"
+     ],
+     [
+      "bitten",
+      "vragen",
+      "",
+      "",
+      "Er bittet um Ruhe.",
+      "[BI-ten]"
+     ],
+     [
+      "einschalten",
+      "aansteken, opzetten",
+      "",
+      "",
+      "Ich schalte das Radio ein.",
+      "[AIN-sjal-ten]"
+     ],
+     [
+      "frühstücken",
+      "ontbijten",
+      "",
+      "",
+      "Wir frühstücken um neun.",
+      "[FRUU-sjtuu-ken]"
+     ],
+     [
+      "Klavier spielen",
+      "pianospelen",
+      "",
+      "",
+      "Sie spielt sehr gut Klavier.",
+      "[kla-FIER SJPIE-len]"
+     ],
+     [
+      "reden",
+      "spreken",
+      "",
+      "",
+      "Sie reden viel zu viel.",
+      "[REE-den]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 8 · Sonstiges",
+    "w": [
+     [
+      "früher",
+      "vroeger",
+      "",
+      "",
+      "Kannst du früher kommen?",
+      "[FRUU-a]"
+     ],
+     [
+      "gestern",
+      "gisteren",
+      "",
+      "",
+      "Wir haben gestern Köln besucht.",
+      "[GES-tern]"
+     ],
+     [
+      "heute",
+      "vandaag",
+      "",
+      "",
+      "Wir bleiben heute zu Hause.",
+      "[HOI-te]"
+     ],
+     [
+      "morgen",
+      "morgen",
+      "",
+      "",
+      "Wir fahren morgen nach Marburg.",
+      "[MOR-gen]"
+     ],
+     [
+      "übermorgen",
+      "overmorgen",
+      "",
+      "",
+      "Fahren Sie übermorgen nach Bremen?",
+      "[UU-ba-MOR-gen]"
+     ],
+     [
+      "später",
+      "later",
+      "",
+      "",
+      "Kannst du später kommen?",
+      "[SJPEE-ta]"
+     ],
+     [
+      "auf jeden Fall",
+      "in elk geval",
+      "",
+      "",
+      "Wir kaufen ihr auf jeden Fall Blumen.",
+      "[auf JEE-den fal]"
+     ],
+     [
+      "danach",
+      "daarna",
+      "",
+      "",
+      "Erst essen wir Suppe, danach Reis.",
+      "[da-NAACH]"
+     ],
+     [
+      "dann",
+      "dan",
+      "",
+      "",
+      "Erst trinken wir Wasser, dann Wein.",
+      "[dan]"
+     ],
+     [
+      "dort",
+      "daar",
+      "",
+      "",
+      "Bleiben Sie dort stehen, bitte!",
+      "[dort]"
+     ],
+     [
+      "ein wenig",
+      "een beetje",
+      "",
+      "",
+      "Wir brauchen ein wenig Geduld.",
+      "[ain VEE-nich]"
+     ],
+     [
+      "geradeaus",
+      "rechtdoor",
+      "",
+      "",
+      "Gehen Sie immer geradeaus!",
+      "[ge-RAA-de-AUS]"
+     ],
+     [
+      "lange",
+      "lang",
+      "",
+      "",
+      "Dauert der Film lange?",
+      "[LANG-e]"
+     ],
+     [
+      "nur",
+      "slechts, maar",
+      "",
+      "",
+      "Ich bleibe nur eine Stunde.",
+      "[noer]"
+     ],
+     [
+      "schön",
+      "mooi",
+      "",
+      "",
+      "Ich finde dein Hemd sehr schön.",
+      "[sjeun]"
+     ],
+     [
+      "unbedingt",
+      "absoluut",
+      "",
+      "",
+      "Ich will das unbedingt wissen.",
+      "[OEN-be-dingt]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 8 · Een stadsbezoek plannen",
+    "w": [
+     [
+      "Was machen wir am Morgen?",
+      "Wat doen we 's morgens?",
+      "",
+      "",
+      "",
+      "[vas MA-chen vier am MOR-gen]"
+     ],
+     [
+      "Wir gehen bummeln.",
+      "We gaan shoppen.",
+      "",
+      "",
+      "",
+      "[vier GEE-en BOE-meln]"
+     ],
+     [
+      "Wir gehen etwas essen.",
+      "We gaan iets eten.",
+      "",
+      "",
+      "",
+      "[vier GEE-en ET-vas E-sen]"
+     ],
+     [
+      "Wir gehen etwas trinken.",
+      "We gaan iets drinken.",
+      "",
+      "",
+      "",
+      "[vier GEE-en ET-vas TRIN-ken]"
+     ],
+     [
+      "Wir besuchen zuerst ein Museum.",
+      "We bezoeken eerst een museum.",
+      "",
+      "",
+      "",
+      "[vier be-ZOE-chen tsoe-EERST ain moe-ZEE-oem]"
+     ],
+     [
+      "Danach gehen wir in eine Buchhandlung.",
+      "Daarna gaan we naar een boekhandel.",
+      "",
+      "",
+      "",
+      "[da-NAACH GEE-en vier in AI-ne BOECH-hand-loeng]"
+     ],
+     [
+      "Dann sehen wir uns eine Ausstellung an.",
+      "Dan bekijken we een tentoonstelling.",
+      "",
+      "",
+      "",
+      "[dan ZEE-en vier oens AI-ne AUS-sjtel-loeng an]"
+     ],
+     [
+      "Zum Schluss besuchen wir den Dom.",
+      "Tot slot bezoeken we de dom.",
+      "",
+      "",
+      "",
+      "[tsoem sjloes be-ZOE-chen vier den doom]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 8 · De weg vragen",
+    "w": [
+     [
+      "Entschuldigung, wo ist das Postamt?",
+      "Excuseer, waar is het postkantoor?",
+      "",
+      "",
+      "",
+      "[ent-SJOEL-di-goeng, voo ist das POST-amt]"
+     ],
+     [
+      "Zuerst gehen Sie die erste Straße rechts.",
+      "Eerst gaat u de eerste straat rechts.",
+      "",
+      "",
+      "",
+      "[tsoe-EERST GEE-en zie die ERS-te SJTRAA-se rechts]"
+     ],
+     [
+      "… die zweite Straße links.",
+      "… de tweede straat links.",
+      "",
+      "",
+      "",
+      "[die TSVAI-te SJTRAA-se links]"
+     ],
+     [
+      "An der Ampel gehen Sie nach rechts.",
+      "Aan het verkeerslicht gaat u naar rechts.",
+      "",
+      "",
+      "",
+      "[an da AM-pel GEE-en zie naach rechts]"
+     ],
+     [
+      "Dann überqueren Sie den Markt.",
+      "Dan steekt u de markt over.",
+      "",
+      "",
+      "",
+      "[dan uu-ba-KVEE-ren zie den markt]"
+     ],
+     [
+      "Zum Schluss gehen Sie bis an die Kreuzung.",
+      "Tot slot gaat u tot aan het kruispunt.",
+      "",
+      "",
+      "",
+      "[tsoem sjloes GEE-en zie bis an die KROI-tsoeng]"
+     ],
+     [
+      "Vielen Dank!",
+      "Hartelijk bedankt!",
+      "",
+      "",
+      "",
+      "[FIE-len dank]"
+     ],
+     [
+      "Herzlichen Dank!",
+      "Hartelijk bedankt!",
+      "",
+      "",
+      "",
+      "[HERTS-li-chen dank]"
+     ],
+     [
+      "Keine Ursache!",
+      "Graag gedaan!",
+      "",
+      "",
+      "",
+      "[KAI-ne OER-za-che]"
+     ],
+     [
+      "Gern geschehen!",
+      "Graag gedaan!",
+      "",
+      "",
+      "",
+      "[gern ge-SJEE-en]"
+     ],
+     [
+      "Nichts zu danken!",
+      "Niets te danken!",
+      "",
+      "",
+      "",
+      "[nichts tsoe DAN-ken]"
+     ]
+    ]
+   },
+   {
+    "t": "Stap 8 · Spelling: ß, ss, hoofdletters en Umlaut",
+    "w": [
+     [
+      "Wanneer schrijf je ß?",
+      "na een lange klinker of een tweeklank: Straße, Spaß, ich heiße",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Wanneer schrijf je ss?",
+      "na een korte klinker: geschlossen, Tschüss, wir essen",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Wanneer schrijf je een hoofdletter?",
+      "aan het begin van een zin, bij alle zelfstandige naamwoorden, bij eigennamen en bij de beleefdheidsvorm",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Wat is een Umlaut?",
+      "een teken dat de uitspraak van a, o, u en au verandert in ä, ö, ü en äu",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "der Vater → die Väter",
+      "het meervoud krijgt vaak een Umlaut",
+      "",
+      "",
+      "",
+      "[FAA-ta → FEE-ta]"
+     ],
+     [
+      "der Sohn → die Söhne",
+      "meervoud met Umlaut",
+      "",
+      "",
+      "",
+      "[zoon → ZEU-ne]"
+     ],
+     [
+      "die Mutter → die Mütter",
+      "meervoud met Umlaut",
+      "",
+      "",
+      "",
+      "[MOE-ta → MUU-ta]"
+     ],
+     [
+      "das Haus → die Häuser",
+      "meervoud met Umlaut",
+      "",
+      "",
+      "",
+      "[haus → HOI-za]"
+     ],
+     [
+      "der Bahnhof → die Bahnhöfe",
+      "meervoud met Umlaut",
+      "",
+      "",
+      "",
+      "[BAAN-hoof → BAAN-heu-fe]"
+     ]
+    ],
+    "vast": "de"
+   }
+  ],
+  "verben": []
+ },
+ {
+  "id": "kapitel1",
+  "naam": "Reeksen A, B1, C en I",
+  "datum": "",
+  "onder": "De eerste woordenlijstjes",
   "pre": "g",
   "groepen": [
    {
@@ -3371,7 +7295,7 @@ function bouwSets(){
   var w=wereldNu();
   SETS=w.groepen.map(function(g,i){
     return {id:w.pre+i, titel:g.t, vast:g.vast||null, items:g.w.map(function(x){
-      return {de:x[0], nl:x[1], lid:x[2], mv:x[3], vb:x[4]||""};
+      return {de:x[0], nl:x[1], lid:x[2], mv:x[3], vb:x[4]||"", uit:x[5]||""};
     })};
   });
   S.sel=(S.wereld in S.sels)?S.sels[S.wereld]:null;
@@ -3434,7 +7358,7 @@ function woorden(){
   var uit=[];
   gekozenSets().forEach(function(s){
     s.items.forEach(function(k){uit.push({sid:s.id,titel:s.titel,de:k.de,nl:k.nl,
-      lid:k.lid,mv:k.mv,vb:k.vb,vast:s.vast})});
+      lid:k.lid,mv:k.mv,vb:k.vb,uit:k.uit,vast:s.vast})});
   });
   return uit;
 }
@@ -3522,7 +7446,8 @@ function toon(wrap,q,uitslag,melding,cfg){
   var fb=el("div","fb "+(uitslag===1?"g":uitslag===2?"a":"b"));
   fb.appendChild(el("div","fbt",uitslag===1?"Juist":uitslag===2?"Bijna":"Fout"));
   var s=el("div","fbs");
-  var extra=(q.k.mv?"<br><span style=\"color:var(--muted2)\">meervoud: "+esc(q.k.mv)+"</span>":"")+
+  var extra=(q.k.uit?"<br><span class=\"uitspr\">"+esc(q.k.uit)+"</span>":"")+
+    (q.k.mv?"<br><span style=\"color:var(--muted2)\">meervoud: "+esc(q.k.mv)+"</span>":"")+
     (q.k.vb?"<br><span style=\"color:var(--muted2)\">„"+esc(q.k.vb)+"”</span>":"");
   s.innerHTML=(uitslag?(melding?esc(melding)+"<br>":""):"Het juiste antwoord is <b>"+esc(juist)+"</b>.<br>")+
     volleDuits(q.k)+" — "+esc(q.k.nl)+extra;
@@ -3566,8 +7491,11 @@ function tekenKaart(){
   $("#bbadge").textContent=q.d==="de"?"nederlands":"duits";
   var thema=k.titel.replace(/\s*\(.*$/,"");
   $("#fthema").textContent=thema; $("#bthema").textContent=thema;
-  var extra=(k.mv?"mv. "+esc(k.mv):"")+
-            (k.vb?(k.mv?"<br>":"")+"„"+esc(k.vb)+"”":"");
+  var stukjes=[];
+  if(k.uit)stukjes.push('<span class="uitspr">'+esc(k.uit)+'</span>');
+  if(k.mv)stukjes.push("mv. "+esc(k.mv));
+  if(k.vb)stukjes.push("„"+esc(k.vb)+"”");
+  var extra=stukjes.join("<br>");
   if(q.d==="de"){
     $("#fwoord").innerHTML=woordHTML(k,true); $("#fmv").innerHTML="";
     $("#bwoord").textContent=k.nl; $("#bmv").innerHTML=extra;
@@ -3949,6 +7877,7 @@ function tekenSamenvatting(){
       var r=el("div","srij");
       var de=el("span","de");
       de.innerHTML=woordHTML(k,true)+(k.mv?' <span class="mvk">· '+esc(k.mv)+'</span>':"")+
+        (k.uit?' <span class="uitspr">'+esc(k.uit)+'</span>':"")+
         (k.vb?'<br><span class="mvk">„'+esc(k.vb)+'”</span>':"");
       r.appendChild(de);
       r.appendChild(el("span","nl",k.nl));
